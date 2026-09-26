@@ -1,0 +1,34 @@
+[
+  {
+    "id": "BLG-001",
+    "title": "10 Tips for a Healthy Heart",
+    "status": "Published",
+    "publishedOn": "Sep 15, 2025",
+    "author": "Dr. Ahmed Khan",
+    "views": 1420
+  },
+  {
+    "id": "BLG-002",
+    "title": "How to Take Care of Your Skin",
+    "status": "Published",
+    "publishedOn": "Sep 12, 2025",
+    "author": "Dr. Aisha Patel",
+    "views": 980
+  },
+  {
+    "id": "BLG-003",
+    "title": "Best Exercises for Better Health",
+    "status": "Published",
+    "publishedOn": "Sep 10, 2025",
+    "author": "Dr. Robert Smith",
+    "views": 1250
+  },
+  {
+    "id": "BLG-004",
+    "title": "Mental Health Matters",
+    "status": "Published",
+    "publishedOn": "Sep 08, 2025",
+    "author": "Dr. Fatima Al-Zahra",
+    "views": 890
+  }
+]

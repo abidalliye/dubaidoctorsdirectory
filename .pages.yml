@@ -1,0 +1,266 @@
+# PagesCMS Configuration
+# https://pagescms.org
+# Connects directly to GitHub repository: abidalliye/dubaidoctorsdirectory
+
+media:
+  input: Images
+  output: Images
+
+content:
+  - name: doctors
+    label: Doctors
+    type: collection
+    path: _data/doctors.json
+    view:
+      fields: [name, specialty, clinic, area, dhaLicense, rating, appointmentsCount, status]
+      primary: name
+    fields:
+      - name: id
+        label: Doctor ID
+        type: string
+        required: true
+      - name: name
+        label: Full Name & Title
+        type: string
+        required: true
+      - name: specialty
+        label: Specialty
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options: [Cardiology, Dermatology, Orthopedics, Pediatrics, Gynecology, General Medicine, Others]
+      - name: clinic
+        label: Affiliated Clinic / Hospital
+        type: string
+      - name: area
+        label: Dubai District
+        type: string
+      - name: dhaLicense
+        label: DHA Professional License
+        type: string
+      - name: phone
+        label: Phone Number
+        type: string
+      - name: whatsapp
+        label: WhatsApp Number
+        type: string
+      - name: rating
+        label: Rating (0 - 5.0)
+        type: number
+      - name: reviewsCount
+        label: Number of Reviews
+        type: number
+      - name: appointmentsCount
+        label: Total Appointments
+        type: number
+      - name: consultationFee
+        label: Consultation Fee (AED)
+        type: number
+      - name: status
+        label: Status
+        type: select
+        options: [Active, Inactive, Pending Verification]
+
+  - name: clinics
+    label: Clinics & Hospitals
+    type: collection
+    path: _data/clinics.json
+    view:
+      fields: [name, category, area, phone, rating, status]
+      primary: name
+    fields:
+      - name: id
+        label: Clinic ID
+        type: string
+      - name: name
+        label: Facility Name
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options: [Clinic, Hospital, Diagnostic Lab]
+      - name: area
+        label: Dubai District
+        type: string
+      - name: address
+        label: Physical Address
+        type: string
+      - name: phone
+        label: Phone Number
+        type: string
+      - name: whatsapp
+        label: Direct WhatsApp
+        type: string
+      - name: website
+        label: Official Website
+        type: string
+      - name: dhaLicense
+        label: DHA Facility License
+        type: string
+      - name: rating
+        label: Rating
+        type: number
+      - name: reviewsCount
+        label: Reviews Count
+        type: number
+      - name: status
+        label: Verification Status
+        type: select
+        options: [Verified, Pending, Under Review]
+      - name: plan
+        label: Listing Plan
+        type: select
+        options: [Verified Free Listing, Featured Specialist, Clinic Showcase]
+
+  - name: appointments
+    label: Appointments
+    type: collection
+    path: _data/appointments.json
+    view:
+      fields: [patientName, doctorName, specialty, dateTime, status]
+      primary: patientName
+    fields:
+      - name: id
+        label: Appointment ID
+        type: string
+      - name: patientName
+        label: Patient Name
+        type: string
+        required: true
+      - name: doctorName
+        label: Doctor Name
+        type: string
+        required: true
+      - name: specialty
+        label: Specialty
+        type: string
+      - name: dateTime
+        label: Date & Time
+        type: string
+      - name: phone
+        label: Patient Mobile
+        type: string
+      - name: status
+        label: Appointment Status
+        type: select
+        options: [Confirmed, Pending, Cancelled]
+
+  - name: patients
+    label: Patients Registry
+    type: collection
+    path: _data/patients.json
+    view:
+      fields: [name, appointments, lastVisit, phone, email]
+      primary: name
+    fields:
+      - name: id
+        label: Patient ID
+        type: string
+      - name: name
+        label: Patient Full Name
+        type: string
+        required: true
+      - name: appointments
+        label: Total Appointments
+        type: number
+      - name: lastVisit
+        label: Last Visit Date
+        type: string
+      - name: phone
+        label: Phone Number
+        type: string
+      - name: email
+        label: Email Address
+        type: string
+
+  - name: reviews
+    label: Patient Reviews
+    type: collection
+    path: _data/reviews.json
+    view:
+      fields: [patientName, doctorName, rating, date, verified]
+      primary: patientName
+    fields:
+      - name: id
+        label: Review ID
+        type: string
+      - name: patientName
+        label: Reviewer Name
+        type: string
+      - name: doctorName
+        label: Doctor or Facility
+        type: string
+      - name: rating
+        label: Rating (Stars)
+        type: number
+      - name: comment
+        label: Review Feedback
+        type: string
+      - name: date
+        label: Date Posted
+        type: string
+      - name: verified
+        label: Verified Patient Review
+        type: boolean
+
+  - name: blogs
+    label: Blog Articles
+    type: collection
+    path: _data/blogs.json
+    view:
+      fields: [title, status, publishedOn, author, views]
+      primary: title
+    fields:
+      - name: id
+        label: Post ID
+        type: string
+      - name: title
+        label: Article Title
+        type: string
+        required: true
+      - name: status
+        label: Publication Status
+        type: select
+        options: [Published, Draft, Archived]
+      - name: publishedOn
+        label: Date Published
+        type: string
+      - name: author
+        label: Author Name
+        type: string
+      - name: views
+        label: Pageviews
+        type: number
+
+  - name: settings
+    label: Directory Settings
+    type: file
+    path: _data/settings.json
+    fields:
+      - name: siteName
+        label: Site Name
+        type: string
+      - name: adminName
+        label: Super Admin Display Name
+        type: string
+      - name: adminEmail
+        label: Admin Email
+        type: string
+      - name: contactPhone
+        label: Support Telephone
+        type: string
+      - name: defaultCurrency
+        label: Default Currency
+        type: string
+      - name: localCurrency
+        label: Local UAE Currency
+        type: string
+      - name: firebaseProjectId
+        label: Google Firebase Project ID
+        type: string
+      - name: pagesCmsRepo
+        label: GitHub Repo Path
+        type: string

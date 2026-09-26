@@ -1,0 +1,38 @@
+[
+  {
+    "id": "REV-001",
+    "patientName": "Sarah Johnson",
+    "doctorName": "Dr. Ahmed Khan",
+    "rating": 5,
+    "comment": "Excellent service and very professional. Highly recommended!",
+    "date": "2 days ago",
+    "verified": true
+  },
+  {
+    "id": "REV-002",
+    "patientName": "Michael Brown",
+    "doctorName": "Dr. Aisha Patel",
+    "rating": 5,
+    "comment": "Dr. Ahmed is amazing. Great bedside manner and care.",
+    "date": "3 days ago",
+    "verified": true
+  },
+  {
+    "id": "REV-003",
+    "patientName": "Emily Davis",
+    "doctorName": "Dr. Robert Smith",
+    "rating": 4,
+    "comment": "Good experience overall. Waiting time was a bit long.",
+    "date": "4 days ago",
+    "verified": true
+  },
+  {
+    "id": "REV-004",
+    "patientName": "James Wilson",
+    "doctorName": "Dr. Fatima Al-Zahra",
+    "rating": 5,
+    "comment": "Very helpful staff and clean facility.",
+    "date": "5 days ago",
+    "verified": true
+  }
+]

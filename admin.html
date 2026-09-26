@@ -1,0 +1,2181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard | Doctors Directory Dubai</title>
+  <meta name="description" content="Doctors Directory Dubai Admin Dashboard - Real-time management of doctors, clinics, appointments, reviews, PagesCMS and Google Firebase.">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Firebase SDKs (Compat v10 for clean script integration) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+
+  <style>
+    /* ==========================================================================
+       Doctors Directory Admin Dashboard Styles
+       Faithfully reproduces the layout, metrics, charts and UI from the dashboard
+       Adheres to Light Mode palette by default, with screenshot-theme toggle
+       ========================================================================== */
+    :root {
+      --dash-bg: #f5f7fc;
+      --dash-card: #ffffff;
+      --dash-border: #e6ebf5;
+      --dash-text: #1b254b;
+      --dash-sub: #707eae;
+      --dash-sidebar-bg: #ffffff;
+      --dash-sidebar-border: #e6ebf5;
+      --dash-sidebar-text: #68769f;
+      --dash-sidebar-hover: #f4f7fe;
+      --dash-sidebar-active: #0757d9;
+      --dash-sidebar-active-bg: #eef5ff;
+      --dash-sidebar-active-text: #0757d9;
+      --dash-accent-blue: #0757d9;
+      --dash-accent-teal: #14b8a6;
+      --dash-accent-purple: #8b5cf6;
+      --dash-accent-amber: #f59e0b;
+      --dash-accent-green: #10b981;
+      --dash-accent-red: #ef4444;
+    }
+
+    /* Screenshot Navy Sidebar Theme */
+    body.theme-navy-sidebar {
+      --dash-sidebar-bg: #102244;
+      --dash-sidebar-border: #182e59;
+      --dash-sidebar-text: #9bb2db;
+      --dash-sidebar-hover: #172d57;
+      --dash-sidebar-active: #2563eb;
+      --dash-sidebar-active-bg: #2563eb;
+      --dash-sidebar-active-text: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--dash-bg);
+      color: var(--dash-text);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Layout Structure */
+    .dash-sidebar {
+      width: 250px;
+      background: var(--dash-sidebar-bg);
+      border-right: 1px solid var(--dash-sidebar-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 100;
+      transition: all 0.25s ease;
+    }
+
+    .dash-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: var(--dash-bg);
+    }
+
+    /* Sidebar Components */
+    .sidebar-brand {
+      padding: 24px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #eef5ff;
+      color: #0757d9;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(7, 87, 217, 0.12);
+    }
+    body.theme-navy-sidebar .brand-icon {
+      background: #1c3666;
+      color: #38bdf8;
+    }
+    .brand-text {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    body.theme-navy-sidebar .brand-text {
+      color: #ffffff;
+    }
+    .brand-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dash-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    body.theme-navy-sidebar .brand-text span {
+      color: #7d96c4;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 10px 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 10px;
+      color: var(--dash-sidebar-text);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      transition: all 0.18s ease;
+    }
+    .nav-item:hover {
+      background: var(--dash-sidebar-hover);
+      color: var(--dash-text);
+    }
+    body.theme-navy-sidebar .nav-item:hover {
+      color: #ffffff;
+    }
+    .nav-item.active {
+      background: var(--dash-sidebar-active-bg);
+      color: var(--dash-sidebar-active-text);
+      font-weight: 850;
+      box-shadow: 0 4px 14px rgba(7, 87, 217, 0.12);
+    }
+    .nav-item .icon {
+      font-size: 17px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .sidebar-footer-card {
+      margin: 14px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #eef5ff;
+      border: 1px solid #d4e4fc;
+      text-align: center;
+    }
+    body.theme-navy-sidebar .sidebar-footer-card {
+      background: #15294f;
+      border-color: #1f3a6e;
+      color: #ffffff;
+    }
+    .footer-card-icon {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+    .footer-card-title {
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--dash-text);
+      line-height: 1.35;
+    }
+    body.theme-navy-sidebar .footer-card-title {
+      color: #ffffff;
+    }
+    .footer-card-sub {
+      font-size: 10px;
+      color: var(--dash-sub);
+      margin-top: 3px;
+    }
+    body.theme-navy-sidebar .footer-card-sub {
+      color: #8da4ce;
+    }
+
+    /* Top Header Bar */
+    .dash-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--dash-border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .search-wrap {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--dash-sub);
+      font-size: 15px;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border-radius: 99px;
+      border: 1px solid var(--dash-border);
+      background: #f8fafc;
+      font-size: 13px;
+      color: var(--dash-text);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .search-wrap input:focus {
+      background: #ffffff;
+      border-color: var(--dash-accent-blue);
+      box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 99px;
+      background: #e9fbf8;
+      color: #065b53;
+      border: 1px solid #9cead9;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulseDot 1.8s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--dash-border);
+      background: #ffffff;
+      color: var(--dash-text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      position: relative;
+      font-size: 16px;
+      transition: all 0.18s;
+    }
+    .icon-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .notif-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #ef4444;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 900;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 2px solid #ffffff;
+    }
+
+    .admin-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 6px 4px 10px;
+      border-radius: 99px;
+      border: 1px solid var(--dash-border);
+      background: #ffffff;
+    }
+    .admin-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #eef5ff;
+      border: 1px solid #c8defc;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+    .admin-meta {
+      font-size: 12px;
+      line-height: 1.15;
+    }
+    .admin-meta b {
+      display: block;
+      color: var(--dash-text);
+    }
+    .admin-meta small {
+      color: var(--dash-sub);
+      font-size: 10px;
+    }
+
+    /* Main Content Body */
+    .dash-content {
+      padding: 24px 28px 60px;
+      max-width: 1480px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Welcome Row */
+    .welcome-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .welcome-text h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--dash-text);
+      letter-spacing: -0.02em;
+    }
+    .welcome-text p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--dash-sub);
+    }
+    .time-selector {
+      background: #ffffff;
+      border: 1px solid var(--dash-border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--dash-text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    /* 5 Metric Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .metric-card {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 14px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+    }
+    .metric-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .metric-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--dash-sub);
+      margin-bottom: 3px;
+    }
+    .metric-val {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--dash-text);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+    .metric-change {
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .change-up { color: #10b981; }
+    .change-sub { color: var(--dash-sub); font-weight: 600; }
+
+    /* 3 Charts Grid */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.1fr 1fr;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .chart-card {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .chart-title {
+      font-size: 15px;
+      font-weight: 850;
+      color: var(--dash-text);
+    }
+    .chart-select {
+      background: #f8fafc;
+      border: 1px solid var(--dash-border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dash-sub);
+      cursor: pointer;
+    }
+
+    /* SVG Chart Canvas Styling */
+    .chart-svg-wrap {
+      flex: 1;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    svg.chart-line, svg.chart-bar {
+      width: 100%;
+      height: 180px;
+      overflow: visible;
+    }
+    .chart-donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dash-text);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .legend-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--dash-sub);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Middle Row: Appointments, Top Doctors, Reviews */
+    .middle-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+    .dash-box {
+      background: var(--dash-card);
+      border: 1px solid var(--dash-border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .box-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .box-title {
+      font-size: 15px;
+      font-weight: 850;
+      color: var(--dash-text);
+      margin: 0;
+    }
+    .view-all-link {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--dash-accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .view-all-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Data Tables inside Cards */
+    .dash-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .dash-table th {
+      text-align: left;
+      padding: 8px 10px;
+      color: var(--dash-sub);
+      font-weight: 800;
+      font-size: 11px;
+      border-bottom: 1px solid var(--dash-border);
+    }
+    .dash-table td {
+      padding: 11px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--dash-text);
+      vertical-align: middle;
+    }
+    .dash-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Status Badges */
+    .badge-status {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 850;
+    }
+    .badge-confirmed {
+      background: #e9fbf8;
+      color: #0d8a7c;
+      border: 1px solid #a3edd9;
+    }
+    .badge-pending {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .badge-cancelled {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    /* Doctor List Item */
+    .doc-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-info-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .doc-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #eef5ff;
+      border: 1px solid #d4e4fc;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+    .doc-name {
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--dash-text);
+    }
+    .doc-spec {
+      font-size: 11px;
+      color: var(--dash-sub);
+      margin: 1px 0;
+    }
+    .doc-rating {
+      font-size: 11px;
+      color: #f59e0b;
+      font-weight: 800;
+    }
+    .doc-rating span {
+      color: var(--dash-sub);
+      font-weight: 600;
+    }
+    .doc-apts {
+      font-size: 11px;
+      color: var(--dash-sub);
+      font-weight: 700;
+    }
+
+    /* Review Item */
+    .rev-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .rev-row:last-child { border-bottom: none; }
+    .rev-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .rev-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .rev-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+    }
+    .rev-stars { color: #f59e0b; font-size: 11px; }
+    .rev-time { font-size: 10px; color: var(--dash-sub); }
+    .rev-text {
+      font-size: 11px;
+      color: #4b5563;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Bottom Grid: Recent Patients, Blogs, Quick Actions */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* Quick Action Buttons */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .quick-btn {
+      border: 1px solid var(--dash-border);
+      border-radius: 10px;
+      padding: 12px 10px;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--dash-text);
+      transition: all 0.2s;
+    }
+    .quick-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .quick-btn.qa-blue { background: #f0f6ff; border-color: #bcd7ff; color: #0757d9; }
+    .quick-btn.qa-green { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
+    .quick-btn.qa-purple { background: #faf5ff; border-color: #e9d5ff; color: #9333ea; }
+    .quick-btn.qa-orange { background: #fff7ed; border-color: #fed7aa; color: #ea580c; }
+    .quick-btn.qa-teal { background: #f0fdfa; border-color: #99f6e4; color: #0d9488; }
+    .quick-btn.qa-red { background: #fef2f2; border-color: #fecaca; color: #dc2626; }
+    .quick-btn .qa-icon { font-size: 18px; }
+
+    /* Full Section Views (Toggled via Sidebar Tabs) */
+    .dash-view { display: none; }
+    .dash-view.active { display: block; animation: ffFadeSlide 0.2s ease; }
+
+    /* Modals & Dialogs */
+    .admin-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 42, 99, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .admin-modal.show { display: flex; }
+    .admin-modal-box {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid var(--dash-border);
+      max-width: 560px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 1100px) {
+      .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+      .charts-grid { grid-template-columns: 1fr; }
+      .middle-grid { grid-template-columns: 1fr; }
+      .bottom-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .dash-sidebar { position: fixed; left: -250px; }
+      .dash-sidebar.open { left: 0; }
+      .metrics-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="theme-navy-sidebar">
+
+  <!-- ========================================================================
+       Sidebar Navigation
+       ======================================================================== -->
+  <aside class="dash-sidebar" id="sidebar">
+    <a class="sidebar-brand" href="admin.html">
+      <div class="brand-icon">💙</div>
+      <div class="brand-text">
+        Doctors Directory
+        <span>Dubai Super Admin</span>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <button type="button" class="nav-item active" onclick="switchDashView('dashboard')">
+        <span class="icon">📊</span>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('profile')">
+        <span class="icon">👤</span>
+        <span>Profile</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('listings')">
+        <span class="icon">📑</span>
+        <span>Listings</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('doctors')">
+        <span class="icon">🩺</span>
+        <span>Doctors</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('patients')">
+        <span class="icon">👥</span>
+        <span>Patients</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('appointments')">
+        <span class="icon">📅</span>
+        <span>Appointments</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('reviews')">
+        <span class="icon">⭐</span>
+        <span>Reviews</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('payments')">
+        <span class="icon">💳</span>
+        <span>Payments</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('blogs')">
+        <span class="icon">📝</span>
+        <span>Blogs</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchDashView('settings')">
+        <span class="icon">⚙️</span>
+        <span>Settings & Firebase</span>
+      </button>
+      <button type="button" class="nav-item" onclick="handleAdminLogout()">
+        <span class="icon">🚪</span>
+        <span>Logout</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer-card">
+      <div class="footer-card-icon">💙</div>
+      <div class="footer-card-title">Better Healthcare for a Healthier Tomorrow</div>
+      <div class="footer-card-sub">Connected with Google Firebase</div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Main Application Canvas
+       ======================================================================== -->
+  <main class="dash-main">
+
+    <!-- Top Navigation Header -->
+    <header class="dash-header">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="globalSearch" placeholder="Search doctors, patients, appointments..." oninput="handleGlobalSearch(this.value)">
+      </div>
+
+      <div class="header-actions">
+        <!-- Theme Toggle (Light Mode vs Screenshot Navy Sidebar) -->
+        <button type="button" class="icon-btn" onclick="toggleSidebarTheme()" title="Toggle Sidebar Palette (Light Mode / Brand Navy)">
+          <span id="themeIco">☀️</span>
+        </button>
+
+        <!-- Firebase Status Pill -->
+        <div class="status-badge" onclick="openFirebaseConfigModal()" style="cursor:pointer" title="Click to configure Google Firebase Project">
+          <span class="status-dot" id="firebaseDot"></span>
+          <span id="firebaseStatusText">Firebase Active</span>
+        </div>
+
+        <!-- Notification Bell -->
+        <button type="button" class="icon-btn" onclick="toggleNotifications()" aria-label="Notifications">
+          🔔
+          <span class="notif-badge" id="notifCount">3</span>
+        </button>
+
+        <!-- Admin Profile Pill -->
+        <div class="admin-pill">
+          <div class="admin-avatar">👨‍💼</div>
+          <div class="admin-meta">
+            <b>Admin</b>
+            <small>Super Admin</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Views Container -->
+    <div class="dash-content">
+
+      <!-- ====================================================================
+           VIEW 1: DASHBOARD (Exact Replica of User's Uploaded Screenshot)
+           ==================================================================== -->
+      <section class="dash-view active" id="view-dashboard">
+        
+        <!-- Welcome Row -->
+        <div class="welcome-row">
+          <div class="welcome-text">
+            <h1>Welcome Back, Admin</h1>
+            <p>Here's what's happening with your doctors directory today.</p>
+          </div>
+          <div class="time-selector">
+            <span>📅 Last 30 Days</span>
+            <span style="font-size:10px">▼</span>
+          </div>
+        </div>
+
+        <!-- Top 5 Metric Cards -->
+        <div class="metrics-grid">
+          <!-- Card 1: Total Doctors -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#eef5ff;color:#0757d9">👨‍⚕️</div>
+            <div class="metric-info">
+              <div class="metric-label">Total Doctors</div>
+              <div class="metric-val" id="valTotalDoctors">248</div>
+              <div class="metric-change change-up">
+                <span>↑ 12%</span>
+                <span class="change-sub">vs. last 30 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Total Patients -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#eafbf4;color:#10b981">👥</div>
+            <div class="metric-info">
+              <div class="metric-label">Total Patients</div>
+              <div class="metric-val" id="valTotalPatients">1,842</div>
+              <div class="metric-change change-up">
+                <span>↑ 18%</span>
+                <span class="change-sub">vs. last 30 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Total Appointments -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#f5f0ff;color:#8b5cf6">📅</div>
+            <div class="metric-info">
+              <div class="metric-label">Total Appointments</div>
+              <div class="metric-val" id="valTotalAppointments">3,406</div>
+              <div class="metric-change change-up">
+                <span>↑ 22%</span>
+                <span class="change-sub">vs. last 30 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Total Reviews -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#fff7ed;color:#f59e0b">⭐</div>
+            <div class="metric-info">
+              <div class="metric-label">Total Reviews</div>
+              <div class="metric-val" id="valTotalReviews">1,205</div>
+              <div class="metric-change change-up">
+                <span>↑ 15%</span>
+                <span class="change-sub">vs. last 30 days</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Total Revenue -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#e6fffa;color:#0d9488">💳</div>
+            <div class="metric-info">
+              <div class="metric-label">Total Revenue</div>
+              <div class="metric-val" id="valTotalRevenue">$24,580</div>
+              <div class="metric-change change-up">
+                <span>↑ 28%</span>
+                <span class="change-sub">vs. last 30 days</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Charts Grid -->
+        <div class="charts-grid">
+          <!-- Chart 1: Appointments Overview Line Chart -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Appointments Overview</div>
+              <select class="chart-select">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>This Year</option>
+              </select>
+            </div>
+            <div class="chart-svg-wrap">
+              <svg class="chart-line" viewBox="0 0 500 160">
+                <defs>
+                  <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0757d9" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#0757d9" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+                <!-- Grid Lines -->
+                <line x1="40" y1="20" x2="480" y2="20" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="60" x2="480" y2="60" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="100" x2="480" y2="100" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="140" x2="480" y2="140" stroke="#f1f5f9" stroke-width="1" />
+                
+                <!-- Y-Axis labels -->
+                <text x="10" y="24" fill="#94a3b8" font-size="10">400</text>
+                <text x="10" y="64" fill="#94a3b8" font-size="10">300</text>
+                <text x="10" y="104" fill="#94a3b8" font-size="10">200</text>
+                <text x="10" y="144" fill="#94a3b8" font-size="10">100</text>
+
+                <!-- Gradient area fill -->
+                <path d="M 60 135 Q 120 110 180 85 T 300 95 T 370 70 T 430 75 T 470 30 L 470 145 L 60 145 Z" fill="url(#lineGrad)" />
+                <!-- Spline curve line -->
+                <path d="M 60 135 Q 120 110 180 85 T 300 95 T 370 70 T 430 75 T 470 30" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" />
+
+                <!-- Data point dots -->
+                <circle cx="60" cy="135" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="130" cy="105" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="200" cy="85" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="270" cy="95" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="340" cy="70" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="410" cy="75" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="470" cy="30" r="4.5" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+
+                <!-- X-Axis Dates -->
+                <text x="50" y="158" fill="#94a3b8" font-size="10">Sep 17</text>
+                <text x="120" y="158" fill="#94a3b8" font-size="10">Sep 18</text>
+                <text x="190" y="158" fill="#94a3b8" font-size="10">Sep 19</text>
+                <text x="260" y="158" fill="#94a3b8" font-size="10">Sep 20</text>
+                <text x="330" y="158" fill="#94a3b8" font-size="10">Sep 21</text>
+                <text x="400" y="158" fill="#94a3b8" font-size="10">Sep 22</text>
+                <text x="460" y="158" fill="#94a3b8" font-size="10">Sep 23</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Chart 2: Doctors by Specialty Donut Chart -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Doctors by Specialty</div>
+            </div>
+            <div class="chart-donut-wrap">
+              <div style="position:relative;width:130px;height:130px;flex-shrink:0">
+                <svg viewBox="0 0 36 36" style="width:100%;height:100%;transform:rotate(-90deg)">
+                  <!-- Donut Segments matching screenshot: Cardiology 28%, Derm 16%, Ortho 14%, Peds 12%, Gyn 10%, Gen 8%, Other 12% -->
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#2563eb" stroke-width="4.5" stroke-dasharray="28 72" stroke-dashoffset="0" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#06b6d4" stroke-width="4.5" stroke-dasharray="16 84" stroke-dashoffset="-28" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#f59e0b" stroke-width="4.5" stroke-dasharray="14 86" stroke-dashoffset="-44" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#8b5cf6" stroke-width="4.5" stroke-dasharray="12 88" stroke-dashoffset="-58" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#10b981" stroke-width="4.5" stroke-dasharray="10 90" stroke-dashoffset="-70" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#3b82f6" stroke-width="4.5" stroke-dasharray="8 92" stroke-dashoffset="-80" />
+                  <circle cx="18" cy="18" r="14" fill="transparent" stroke="#cbd5e1" stroke-width="4.5" stroke-dasharray="12 88" stroke-dashoffset="-88" />
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+                  <b style="font-size:15px;color:var(--dash-text)">248</b>
+                  <span style="font-size:10px;color:var(--dash-sub)">Total</span>
+                </div>
+              </div>
+
+              <!-- Donut Legend matching screenshot -->
+              <div class="donut-legend" style="flex:1">
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#2563eb"></span>Cardiology</span>
+                  <span>28%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#06b6d4"></span>Dermatology</span>
+                  <span>16%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#f59e0b"></span>Orthopedics</span>
+                  <span>14%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#8b5cf6"></span>Pediatrics</span>
+                  <span>12%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#10b981"></span>Gynecology</span>
+                  <span>10%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#3b82f6"></span>General Medicine</span>
+                  <span>8%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-label"><span class="legend-dot" style="background:#cbd5e1"></span>Others</span>
+                  <span>12%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart 3: Revenue Overview Bar Chart -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <div class="chart-title">Revenue Overview</div>
+              <select class="chart-select">
+                <option>Last 30 Days</option>
+                <option>Last 7 Days</option>
+              </select>
+            </div>
+            <div class="chart-svg-wrap">
+              <svg class="chart-bar" viewBox="0 0 320 160">
+                <text x="5" y="24" fill="#94a3b8" font-size="9">$20K</text>
+                <text x="5" y="64" fill="#94a3b8" font-size="9">$15K</text>
+                <text x="5" y="104" fill="#94a3b8" font-size="9">$10K</text>
+                <text x="5" y="144" fill="#94a3b8" font-size="9">$0</text>
+
+                <!-- Grid -->
+                <line x1="35" y1="20" x2="310" y2="20" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="35" y1="60" x2="310" y2="60" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="35" y1="100" x2="310" y2="100" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="35" y1="140" x2="310" y2="140" stroke="#f1f5f9" stroke-width="1"/>
+
+                <!-- Bars for Sep 17 to Sep 23 -->
+                <rect x="45" y="90" width="16" height="50" rx="3" fill="#3b82f6"/>
+                <rect x="85" y="80" width="16" height="60" rx="3" fill="#3b82f6"/>
+                <rect x="125" y="70" width="16" height="70" rx="3" fill="#3b82f6"/>
+                <rect x="165" y="60" width="16" height="80" rx="3" fill="#3b82f6"/>
+                <rect x="205" y="50" width="16" height="90" rx="3" fill="#3b82f6"/>
+                <rect x="245" y="40" width="16" height="100" rx="3" fill="#3b82f6"/>
+                <rect x="285" y="20" width="16" height="120" rx="3" fill="#2563eb"/>
+
+                <!-- Dates -->
+                <text x="43" y="155" fill="#94a3b8" font-size="8">Sep 17</text>
+                <text x="83" y="155" fill="#94a3b8" font-size="8">Sep 18</text>
+                <text x="123" y="155" fill="#94a3b8" font-size="8">Sep 19</text>
+                <text x="163" y="155" fill="#94a3b8" font-size="8">Sep 20</text>
+                <text x="203" y="155" fill="#94a3b8" font-size="8">Sep 21</text>
+                <text x="243" y="155" fill="#94a3b8" font-size="8">Sep 22</text>
+                <text x="283" y="155" fill="#94a3b8" font-size="8">Sep 23</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle Row (Latest Appointments, Top Doctors, Recent Reviews) -->
+        <div class="middle-grid">
+          <!-- Box 1: Latest Appointments Table -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Latest Appointments</h3>
+              <a class="view-all-link" onclick="switchDashView('appointments')">View All</a>
+            </div>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Doctor</th>
+                  <th>Specialty</th>
+                  <th>Date & Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashAppointmentsTable">
+                <!-- Dynamically populated from Firebase / pre-seed -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Box 2: Top Doctors List -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Top Doctors</h3>
+              <a class="view-all-link" onclick="switchDashView('doctors')">View All</a>
+            </div>
+            <div id="dashTopDoctorsList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Box 3: Recent Reviews List -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Recent Reviews</h3>
+              <a class="view-all-link" onclick="switchDashView('reviews')">View All</a>
+            </div>
+            <div id="dashRecentReviewsList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row (Recent Patients, Blog Posts, Quick Actions) -->
+        <div class="bottom-grid">
+          <!-- Box 1: Recent Patients Table -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Recent Patients</h3>
+              <a class="view-all-link" onclick="switchDashView('patients')">View All</a>
+            </div>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Patient Name</th>
+                  <th>Total Appointments</th>
+                  <th>Last Visit</th>
+                </tr>
+              </thead>
+              <tbody id="dashRecentPatientsTable">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Box 2: Blog Posts -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Blog Posts</h3>
+              <a class="view-all-link" onclick="switchDashView('blogs')">View All</a>
+            </div>
+            <div id="dashBlogPostsList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Box 3: Quick Actions (6 Colored Buttons) -->
+          <div class="dash-box">
+            <div class="box-head">
+              <h3 class="box-title">Quick Actions</h3>
+            </div>
+            <div class="quick-actions-grid">
+              <button type="button" class="quick-btn qa-blue" onclick="openAddDoctorModal()">
+                <span class="qa-icon">👨‍⚕️</span>
+                <span>Add Doctor</span>
+              </button>
+              <button type="button" class="quick-btn qa-green" onclick="openAddPatientModal()">
+                <span class="qa-icon">👥</span>
+                <span>Add Patient</span>
+              </button>
+              <button type="button" class="quick-btn qa-purple" onclick="openBookAppointmentModal()">
+                <span class="qa-icon">📅</span>
+                <span>Book Appointment</span>
+              </button>
+              <button type="button" class="quick-btn qa-orange" onclick="switchDashView('listings')">
+                <span class="qa-icon">📑</span>
+                <span>Manage Listings</span>
+              </button>
+              <button type="button" class="quick-btn qa-teal" onclick="openAddBlogModal()">
+                <span class="qa-icon">📝</span>
+                <span>Add Blog Post</span>
+              </button>
+              <button type="button" class="quick-btn qa-red" onclick="switchDashView('payments')">
+                <span class="qa-icon">💳</span>
+                <span>View Payments</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 2: PROFILE
+           ==================================================================== -->
+      <section class="dash-view" id="view-profile">
+        <div class="dash-box" style="max-width:700px;margin:0 auto">
+          <div class="box-head">
+            <h3 class="box-title">Super Admin Profile</h3>
+          </div>
+          <div style="display:flex;align-items:center;gap:18px;margin-bottom:24px">
+            <div style="width:68px;height:68px;border-radius:50%;background:#eef5ff;border:2px solid #bcd7ff;display:grid;place-items:center;font-size:32px">👨‍💼</div>
+            <div>
+              <h2 style="margin:0 0 4px;font-size:20px">Admin Super Admin</h2>
+              <div style="color:var(--dash-sub);font-size:13px">Role: Platform Owner & DHA Directory Administrator</div>
+              <div style="color:#0757d9;font-weight:700;font-size:12px;margin-top:2px">admin@fertifind.ae • +971 4 437 7520</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div style="background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0">
+              <b style="font-size:13px;display:block;margin-bottom:4px">Connected GitHub Repository</b>
+              <span style="font-size:12px;color:#475569">abidalliye/dubaidoctorsdirectory</span>
+            </div>
+            <div style="background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #e2e8f0">
+              <b style="font-size:13px;display:block;margin-bottom:4px">PagesCMS Integration</b>
+              <a href="https://pagescms.org/abidalliye/dubaidoctorsdirectory" target="_blank" style="font-size:12px;color:#0757d9;font-weight:800">Open PagesCMS Editor ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 3: LISTINGS (Clinics & Hospitals Management)
+           ==================================================================== -->
+      <section class="dash-view" id="view-listings">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">Clinics, Hospitals & Laboratories Registry</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Manage facility credentials, DHA licenses, and listing tiers</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddListingModal()">+ Add Facility</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Facility Name</th>
+                <th>Category</th>
+                <th>District</th>
+                <th>DHA License</th>
+                <th>Phone / WhatsApp</th>
+                <th>Plan Tier</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="listingsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 4: DOCTORS (DHA Medical Specialists)
+           ==================================================================== -->
+      <section class="dash-view" id="view-doctors">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">DHA Licensed Doctors Directory</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Manage physician profiles, ratings, consultation fees and specialties</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddDoctorModal()">+ Add Doctor</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Doctor Name</th>
+                <th>Specialty</th>
+                <th>Affiliated Facility</th>
+                <th>DHA License</th>
+                <th>Rating</th>
+                <th>Appointments</th>
+                <th>Consultation Fee</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="doctorsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 5: PATIENTS REGISTRY
+           ==================================================================== -->
+      <section class="dash-view" id="view-patients">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">Registered Patients Directory</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Patient communication, appointment tracking and direct care records</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddPatientModal()">+ Register Patient</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Patient Name</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Total Appointments</th>
+                <th>Last Visit</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="patientsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 6: APPOINTMENTS SCHEDULE
+           ==================================================================== -->
+      <section class="dash-view" id="view-appointments">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">All Appointment Bookings</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Real-time appointment schedule with status moderation</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openBookAppointmentModal()">+ New Booking</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Reference ID</th>
+                <th>Patient Name</th>
+                <th>Doctor / Specialist</th>
+                <th>Specialty / Service</th>
+                <th>Scheduled Date & Time</th>
+                <th>Status</th>
+                <th>Update Status</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 7: REVIEWS MODERATION
+           ==================================================================== -->
+      <section class="dash-view" id="view-reviews">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">Verified Patient Reviews & Feedback</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Moderate patient evaluations and verified healthcare ratings</p>
+            </div>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Doctor / Facility</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Date</th>
+                <th>DHA Verified</th>
+              </tr>
+            </thead>
+            <tbody id="reviewsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 8: PAYMENTS & SUBSCRIPTIONS
+           ==================================================================== -->
+      <section class="dash-view" id="view-payments">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">Revenue & Provider Subscription Billing</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Track clinic showcase subscriptions and featured provider payments</p>
+            </div>
+            <div style="font-size:18px;font-weight:900;color:#0757d9">Monthly Total: $24,580 (AED 90,200)</div>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Provider Name</th>
+                <th>Plan Tier</th>
+                <th>Amount (AED)</th>
+                <th>Amount (USD)</th>
+                <th>Billing Cycle</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>TXN-9021</b></td>
+                <td>Orchid Fertility Clinic</td>
+                <td>Featured Specialist</td>
+                <td>AED 1,830</td>
+                <td>$499</td>
+                <td>Monthly (Auto-renew)</td>
+                <td><span class="badge-status badge-confirmed">Paid</span></td>
+              </tr>
+              <tr>
+                <td><b>TXN-9022</b></td>
+                <td>American Hospital Dubai</td>
+                <td>Clinic Showcase</td>
+                <td>AED 5,505</td>
+                <td>$1,499</td>
+                <td>Monthly (Auto-renew)</td>
+                <td><span class="badge-status badge-confirmed">Paid</span></td>
+              </tr>
+              <tr>
+                <td><b>TXN-9023</b></td>
+                <td>First IVF Day Surgery</td>
+                <td>Featured Specialist</td>
+                <td>AED 1,830</td>
+                <td>$499</td>
+                <td>Monthly (Auto-renew)</td>
+                <td><span class="badge-status badge-confirmed">Paid</span></td>
+              </tr>
+              <tr>
+                <td><b>TXN-9024</b></td>
+                <td>Igenomix Dubai Genetics</td>
+                <td>Featured Specialist</td>
+                <td>AED 1,830</td>
+                <td>$499</td>
+                <td>Monthly (Auto-renew)</td>
+                <td><span class="badge-status badge-confirmed">Paid</span></td>
+              </tr>
+              <tr>
+                <td><b>TXN-9025</b></td>
+                <td>Fakih IVF Fertility Center</td>
+                <td>Clinic Showcase</td>
+                <td>AED 5,505</td>
+                <td>$1,499</td>
+                <td>Monthly (Auto-renew)</td>
+                <td><span class="badge-status badge-confirmed">Paid</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 9: BLOGS
+           ==================================================================== -->
+      <section class="dash-view" id="view-blogs">
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">Healthcare Articles & Medical Blogs</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Manage patient educational content and programmatic SEO articles</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddBlogModal()">+ Create Article</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Article Title</th>
+                <th>Author</th>
+                <th>Published Date</th>
+                <th>Total Views</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="blogsTableBody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
+      <!-- ====================================================================
+           VIEW 10: SETTINGS, FIREBASE & PAGESCMS
+           ==================================================================== -->
+      <section class="dash-view" id="view-settings">
+        <div class="dash-box" style="margin-bottom:20px">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">🔥 Google Firebase Firestore Database Settings</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Configure your live Google Cloud Firebase credentials for all directory collections</p>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="seedFirestoreFromDashboard()">Sync & Seed to Firestore 🚀</button>
+          </div>
+
+          <form onsubmit="handleSaveFirebaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">API Key (apiKey)</label>
+              <input type="text" id="cfgApiKey" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Project ID (projectId)</label>
+              <input type="text" id="cfgProjectId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Auth Domain (authDomain)</label>
+              <input type="text" id="cfgAuthDomain" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Storage Bucket (storageBucket)</label>
+              <input type="text" id="cfgStorageBucket" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Messaging Sender ID</label>
+              <input type="text" id="cfgSenderId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">App ID (appId)</label>
+              <input type="text" id="cfgAppId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            </div>
+            <div style="grid-column:1 / -1;display:flex;gap:12px;margin-top:8px">
+              <button type="submit" class="btn btn-primary">Save Firebase Configuration</button>
+              <button type="button" class="btn btn-outline" onclick="testFirebaseLiveConnection()">Test Live Connection</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- PagesCMS Box -->
+        <div class="dash-box">
+          <div class="box-head">
+            <div>
+              <h3 class="box-title">📄 PagesCMS Git-Based Content Management</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Manage site content via PagesCMS using <code>.pages.yml</code></p>
+            </div>
+            <a class="btn btn-outline btn-sm" href="https://pagescms.org/abidalliye/dubaidoctorsdirectory" target="_blank">Open in PagesCMS ↗</a>
+          </div>
+          <div style="font-size:13px;line-height:1.6;color:#475569">
+            <p>Your directory is equipped with <code>.pages.yml</code> configured for GitHub repository <code>abidalliye/dubaidoctorsdirectory</code>.</p>
+            <p>Collections enabled: <b>Doctors</b>, <b>Clinics & Hospitals</b>, <b>Appointments</b>, <b>Patients</b>, <b>Reviews</b>, <b>Blog Posts</b>, and <b>Settings</b>.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Interactive Modals (Add Doctor, Add Patient, Book Appointment, Add Blog)
+       ======================================================================== -->
+
+  <!-- Add Doctor Modal -->
+  <div class="admin-modal" id="modalAddDoctor">
+    <div class="admin-modal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px">Add New Doctor to Directory</h3>
+        <button class="icon-btn" onclick="closeAdminModal('modalAddDoctor')">✕</button>
+      </div>
+      <form onsubmit="handleCreateDoctor(event)" class="ff-form">
+        <div>
+          <label>Full Name & Title</label>
+          <input type="text" id="docName" required placeholder="e.g. Dr. Zaid Al Mansoor">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Specialty</label>
+            <select id="docSpec" required>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Dermatology">Dermatology</option>
+              <option value="Orthopedics">Orthopedics</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Gynecology">Gynecology / IVF</option>
+              <option value="General Medicine">General Medicine</option>
+            </select>
+          </div>
+          <div>
+            <label>DHA License Number</label>
+            <input type="text" id="docLicense" required placeholder="DHA-P-XXXXXXX">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Facility / Clinic</label>
+            <input type="text" id="docClinic" required placeholder="e.g. Orchid Fertility Clinic">
+          </div>
+          <div>
+            <label>Consultation Fee (AED)</label>
+            <input type="number" id="docFee" required placeholder="500">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Save Doctor to Firebase →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Patient Modal -->
+  <div class="admin-modal" id="modalAddPatient">
+    <div class="admin-modal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px">Register Patient in Database</h3>
+        <button class="icon-btn" onclick="closeAdminModal('modalAddPatient')">✕</button>
+      </div>
+      <form onsubmit="handleCreatePatient(event)" class="ff-form">
+        <div>
+          <label>Patient Full Name</label>
+          <input type="text" id="patName" required placeholder="e.g. Noor Al Hashimi">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Phone Number</label>
+            <input type="tel" id="patPhone" required placeholder="+971 50 XXX XXXX">
+          </div>
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="patEmail" required placeholder="patient@example.com">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Save Patient to Firebase →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Book Appointment Modal -->
+  <div class="admin-modal" id="modalBookAppointment">
+    <div class="admin-modal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px">Create Appointment Booking</h3>
+        <button class="icon-btn" onclick="closeAdminModal('modalBookAppointment')">✕</button>
+      </div>
+      <form onsubmit="handleCreateAppointment(event)" class="ff-form">
+        <div>
+          <label>Patient Name</label>
+          <input type="text" id="aptPatName" required placeholder="Patient Full Name">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Doctor / Specialist</label>
+            <input type="text" id="aptDocName" required placeholder="Dr. Ahmed Khan">
+          </div>
+          <div>
+            <label>Specialty</label>
+            <input type="text" id="aptSpecialty" required placeholder="Cardiology">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Date & Time</label>
+            <input type="text" id="aptDateTime" required placeholder="Sep 24, 2025 10:00 AM">
+          </div>
+          <div>
+            <label>Patient Mobile</label>
+            <input type="tel" id="aptPhone" required placeholder="+971 50 XXX XXXX">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Confirm & Save Booking →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Blog Modal -->
+  <div class="admin-modal" id="modalAddBlog">
+    <div class="admin-modal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px">Publish New Medical Blog Post</h3>
+        <button class="icon-btn" onclick="closeAdminModal('modalAddBlog')">✕</button>
+      </div>
+      <form onsubmit="handleCreateBlog(event)" class="ff-form">
+        <div>
+          <label>Article Title</label>
+          <input type="text" id="blgTitle" required placeholder="e.g. Understanding IVF Success Rates">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label>Author</label>
+            <input type="text" id="blgAuthor" required placeholder="Dr. Partha Sarathi Das">
+          </div>
+          <div>
+            <label>Status</label>
+            <select id="blgStatus">
+              <option value="Published">Published</option>
+              <option value="Draft">Draft</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Publish Article →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="ff-toast" id="dashToast" style="position:fixed;bottom:24px;right:24px;z-index:9999">
+    <span>✓</span>
+    <span id="dashToastMsg">Action completed</span>
+  </div>
+
+  <!-- ========================================================================
+       Dashboard Logic & Live Firebase Data Binding
+       ======================================================================== -->
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById('dashToast');
+      const text = document.getElementById('dashToastMsg');
+      if (toast && text) {
+        text.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    }
+
+    // View Switching
+    function switchDashView(viewName) {
+      document.querySelectorAll('.dash-view').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById('view-' + viewName);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.classList.toggle('active', text.includes(viewName));
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Theme Toggle (Light Mode vs Screenshot Navy Sidebar)
+    function toggleSidebarTheme() {
+      const isNavy = document.body.classList.toggle('theme-navy-sidebar');
+      const ico = document.getElementById('themeIco');
+      if (ico) ico.textContent = isNavy ? '🌙' : '☀️';
+      localStorage.setItem('ff_sidebar_theme', isNavy ? 'navy' : 'light');
+      showToast(isNavy ? 'Screenshot Navy Sidebar active' : 'Clean Light Mode active');
+    }
+
+    // Load initial theme preference
+    if (localStorage.getItem('ff_sidebar_theme') === 'light') {
+      document.body.classList.remove('theme-navy-sidebar');
+      const ico = document.getElementById('themeIco');
+      if (ico) ico.textContent = '☀️';
+    }
+
+    // Notifications toggle
+    function toggleNotifications() {
+      const notifs = [
+        "New practice submitted: Orchid Fertility Clinic (DHA-F-0038912)",
+        "New appointment requested: Sarah Johnson with Dr. Ahmed Khan",
+        "New patient review submitted: ★★★★★ 5.0 for Dr. Partha Sarathi Das"
+      ];
+      alert("🔔 Recent Notifications:\n\n• " + notifs.join("\n• "));
+    }
+
+    // Modal helpers
+    function openAdminModal(id) {
+      const m = document.getElementById(id);
+      if (m) m.classList.add('show');
+    }
+    function closeAdminModal(id) {
+      const m = document.getElementById(id);
+      if (m) m.classList.remove('show');
+    }
+    function openAddDoctorModal() { openAdminModal('modalAddDoctor'); }
+    function openAddPatientModal() { openAdminModal('modalAddPatient'); }
+    function openBookAppointmentModal() { openAdminModal('modalBookAppointment'); }
+    function openAddListingModal() { switchDashView('settings'); }
+    function openAddBlogModal() { openAdminModal('modalAddBlog'); }
+    function openFirebaseConfigModal() { switchDashView('settings'); }
+
+    // Logout
+    function handleAdminLogout() {
+      localStorage.removeItem('ff_user');
+      showToast('Logged out of Admin Dashboard');
+      setTimeout(() => { window.location.href = 'index.html'; }, 900);
+    }
+
+    // Global Search
+    function handleGlobalSearch(term) {
+      term = term.toLowerCase().trim();
+      const rows = document.querySelectorAll('#dashAppointmentsTable tr, #dashTopDoctorsList .doc-row, #dashRecentPatientsTable tr');
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        r.style.display = (!term || text.includes(term)) ? '' : 'none';
+      });
+    }
+
+    // CRUD Handlers
+    async function handleCreateDoctor(e) {
+      e.preventDefault();
+      const doc = {
+        name: document.getElementById('docName').value.trim(),
+        specialty: document.getElementById('docSpec').value,
+        category: document.getElementById('docSpec').value,
+        dhaLicense: document.getElementById('docLicense').value.trim(),
+        clinic: document.getElementById('docClinic').value.trim(),
+        consultationFee: Number(document.getElementById('docFee').value) || 500,
+        rating: 5.0,
+        reviewsCount: 1,
+        appointmentsCount: 0,
+        status: 'Active',
+        avatar: '👨‍⚕️'
+      };
+      await FertiFirebase.addDoctor(doc);
+      closeAdminModal('modalAddDoctor');
+      showToast(`Doctor ${doc.name} added successfully!`);
+      loadDashboardData();
+    }
+
+    async function handleCreatePatient(e) {
+      e.preventDefault();
+      const pat = {
+        name: document.getElementById('patName').value.trim(),
+        phone: document.getElementById('patPhone').value.trim(),
+        email: document.getElementById('patEmail').value.trim(),
+        appointments: 1,
+        lastVisit: 'Today'
+      };
+      await FertiFirebase.addPatient(pat);
+      closeAdminModal('modalAddPatient');
+      showToast(`Patient ${pat.name} registered successfully!`);
+      loadDashboardData();
+    }
+
+    async function handleCreateAppointment(e) {
+      e.preventDefault();
+      const apt = {
+        patientName: document.getElementById('aptPatName').value.trim(),
+        doctorName: document.getElementById('aptDocName').value.trim(),
+        specialty: document.getElementById('aptSpecialty').value.trim(),
+        dateTime: document.getElementById('aptDateTime').value.trim(),
+        phone: document.getElementById('aptPhone').value.trim(),
+        status: 'Confirmed'
+      };
+      await FertiFirebase.addAppointment(apt);
+      closeAdminModal('modalBookAppointment');
+      showToast(`Appointment confirmed for ${apt.patientName}!`);
+      loadDashboardData();
+    }
+
+    async function handleCreateBlog(e) {
+      e.preventDefault();
+      const blog = {
+        title: document.getElementById('blgTitle').value.trim(),
+        author: document.getElementById('blgAuthor').value.trim(),
+        status: document.getElementById('blgStatus').value,
+        publishedOn: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        views: 120
+      };
+      await FertiFirebase.addBlog(blog);
+      closeAdminModal('modalAddBlog');
+      showToast(`Article "${blog.title}" published!`);
+      loadDashboardData();
+    }
+
+    async function updateStatus(id, newStatus) {
+      await FertiFirebase.updateAppointmentStatus(id, newStatus);
+      showToast(`Appointment #${id} updated to ${newStatus}`);
+      loadDashboardData();
+    }
+
+    // Firebase Settings
+    function loadFirebaseForm() {
+      const cfg = FertiFirebase.getConfig();
+      document.getElementById('cfgApiKey').value = cfg.apiKey || '';
+      document.getElementById('cfgProjectId').value = cfg.projectId || '';
+      document.getElementById('cfgAuthDomain').value = cfg.authDomain || '';
+      document.getElementById('cfgStorageBucket').value = cfg.storageBucket || '';
+      document.getElementById('cfgSenderId').value = cfg.messagingSenderId || '';
+      document.getElementById('cfgAppId').value = cfg.appId || '';
+    }
+
+    function handleSaveFirebaseConfig(e) {
+      e.preventDefault();
+      const cfg = {
+        apiKey: document.getElementById('cfgApiKey').value.trim(),
+        projectId: document.getElementById('cfgProjectId').value.trim(),
+        authDomain: document.getElementById('cfgAuthDomain').value.trim(),
+        storageBucket: document.getElementById('cfgStorageBucket').value.trim(),
+        messagingSenderId: document.getElementById('cfgSenderId').value.trim(),
+        appId: document.getElementById('cfgAppId').value.trim()
+      };
+      FertiFirebase.saveConfig(cfg);
+    }
+
+    function testFirebaseLiveConnection() {
+      if (FertiFirebase.isLive()) {
+        showToast('✓ Connected to Google Cloud Firebase Project: ' + FertiFirebase.getConfig().projectId);
+      } else {
+        alert('Firebase is running in local fallback mode. Enter your live Firebase API Key and Project ID to connect.');
+      }
+    }
+
+    async function seedFirestoreFromDashboard() {
+      try {
+        const total = await FertiFirebase.seedToFirestore();
+        showToast(`Successfully seeded ${total} records into Google Cloud Firestore!`);
+      } catch (err) {
+        alert('Seeding status: ' + err.message);
+      }
+    }
+
+    // Load and render all tables & views
+    async function loadDashboardData() {
+      const [doctors, clinics, appointments, patients, reviews, blogs] = await Promise.all([
+        FertiFirebase.getDoctors(),
+        FertiFirebase.getClinics(),
+        FertiFirebase.getAppointments(),
+        FertiFirebase.getPatients(),
+        FertiFirebase.getReviews(),
+        FertiFirebase.getBlogs()
+      ]);
+
+      // 1. Dashboard View - Latest Appointments (matching screenshot)
+      const aptTable = document.getElementById('dashAppointmentsTable');
+      if (aptTable) {
+        aptTable.innerHTML = appointments.slice(0, 5).map(a => {
+          let badgeClass = 'badge-confirmed';
+          if (a.status === 'Pending') badgeClass = 'badge-pending';
+          else if (a.status === 'Cancelled') badgeClass = 'badge-cancelled';
+          return `
+            <tr>
+              <td><b>${a.patientName}</b></td>
+              <td>${a.doctorName}</td>
+              <td style="color:var(--dash-sub)">${a.specialty}</td>
+              <td style="font-size:11px;color:var(--dash-sub)">${a.dateTime}</td>
+              <td><span class="badge-status ${badgeClass}">${a.status}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 2. Dashboard View - Top Doctors (matching screenshot)
+      const topDocList = document.getElementById('dashTopDoctorsList');
+      if (topDocList) {
+        topDocList.innerHTML = doctors.slice(0, 4).map(d => `
+          <div class="doc-row">
+            <div class="doc-info-wrap">
+              <div class="doc-avatar">${d.avatar || '👨‍⚕️'}</div>
+              <div>
+                <div class="doc-name">${d.name}</div>
+                <div class="doc-spec">${d.specialty}</div>
+                <div class="doc-rating">★ ${d.rating} <span>(${d.reviewsCount} reviews)</span></div>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div class="doc-apts">${d.appointmentsCount} appointments</div>
+              <div style="font-size:12px;color:var(--dash-sub)">›</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 3. Dashboard View - Recent Reviews (matching screenshot)
+      const revList = document.getElementById('dashRecentReviewsList');
+      if (revList) {
+        revList.innerHTML = reviews.slice(0, 4).map(r => `
+          <div class="rev-row">
+            <div class="rev-head">
+              <div class="rev-user">
+                <div class="rev-avatar">👤</div>
+                <span>${r.patientName}</span>
+                <span class="rev-stars">${'★'.repeat(r.rating || 5)}</span>
+              </div>
+              <span class="rev-time">${r.date}</span>
+            </div>
+            <p class="rev-text">"${r.comment}"</p>
+          </div>
+        `).join('');
+      }
+
+      // 4. Dashboard View - Recent Patients (matching screenshot)
+      const patTable = document.getElementById('dashRecentPatientsTable');
+      if (patTable) {
+        patTable.innerHTML = patients.slice(0, 4).map(p => `
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="width:24px;height:24px;border-radius:50%;background:#eef5ff;display:grid;place-items:center;font-size:11px">👤</div>
+                <b>${p.name}</b>
+              </div>
+            </td>
+            <td>${p.appointments}</td>
+            <td style="color:var(--dash-sub)">${p.lastVisit}</td>
+          </tr>
+        `).join('');
+      }
+
+      // 5. Dashboard View - Blog Posts (matching screenshot)
+      const blgList = document.getElementById('dashBlogPostsList');
+      if (blgList) {
+        blgList.innerHTML = blogs.slice(0, 4).map(b => `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f1f5f9">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:34px;height:34px;border-radius:8px;background:#eef5ff;display:grid;place-items:center;font-size:16px">📰</div>
+              <div>
+                <b style="font-size:12px;color:var(--dash-text);display:block">${b.title}</b>
+                <span style="font-size:10px;color:var(--dash-sub)">${b.publishedOn}</span>
+              </div>
+            </div>
+            <span class="badge-status badge-confirmed">${b.status}</span>
+          </div>
+        `).join('');
+      }
+
+      // 6. Section Views (Full Tables)
+      const listingsBody = document.getElementById('listingsTableBody');
+      if (listingsBody) {
+        listingsBody.innerHTML = clinics.map(c => `
+          <tr>
+            <td><b>${c.name}</b><br><small style="color:var(--dash-sub)">${c.address || ''}</small></td>
+            <td><span class="badge-status badge-confirmed">${c.category}</span></td>
+            <td>${c.area}</td>
+            <td><code>${c.dhaLicense}</code></td>
+            <td>${c.phone || c.whatsapp}</td>
+            <td><b>${c.plan || 'Featured'}</b></td>
+            <td><span class="badge-status badge-confirmed">Verified</span></td>
+            <td><button class="btn btn-outline btn-xs" onclick="alert('Viewing facility: ${c.name}')">Edit</button></td>
+          </tr>
+        `).join('');
+      }
+
+      const doctorsBody = document.getElementById('doctorsTableBody');
+      if (doctorsBody) {
+        doctorsBody.innerHTML = doctors.map(d => `
+          <tr>
+            <td><b>${d.name}</b></td>
+            <td>${d.specialty}</td>
+            <td>${d.clinic || 'Dubai Partner'}</td>
+            <td><code>${d.dhaLicense}</code></td>
+            <td>★ ${d.rating} (${d.reviewsCount})</td>
+            <td>${d.appointmentsCount}</td>
+            <td>AED ${d.consultationFee || 500}</td>
+            <td><button class="btn btn-outline btn-xs" onclick="FertiFirebase.deleteDoctor('${d.id}').then(()=>loadDashboardData())">Delete</button></td>
+          </tr>
+        `).join('');
+      }
+
+      const patientsBody = document.getElementById('patientsTableBody');
+      if (patientsBody) {
+        patientsBody.innerHTML = patients.map(p => `
+          <tr>
+            <td><b>${p.name}</b></td>
+            <td>${p.phone || '+971 50 XXX XXXX'}</td>
+            <td>${p.email || 'patient@domain.ae'}</td>
+            <td>${p.appointments}</td>
+            <td>${p.lastVisit}</td>
+            <td><button class="btn btn-outline btn-xs">View History</button></td>
+          </tr>
+        `).join('');
+      }
+
+      const apptsBody = document.getElementById('appointmentsTableBody');
+      if (apptsBody) {
+        apptsBody.innerHTML = appointments.map(a => `
+          <tr>
+            <td><code>${a.id}</code></td>
+            <td><b>${a.patientName}</b></td>
+            <td>${a.doctorName}</td>
+            <td>${a.specialty}</td>
+            <td>${a.dateTime}</td>
+            <td>
+              <span class="badge-status ${a.status==='Confirmed'?'badge-confirmed':a.status==='Pending'?'badge-pending':'badge-cancelled'}">${a.status}</span>
+            </td>
+            <td>
+              <select onchange="updateStatus('${a.id}', this.value)" style="padding:4px 6px;border-radius:6px;font-size:11px">
+                <option value="Confirmed" ${a.status==='Confirmed'?'selected':''}>Confirm</option>
+                <option value="Pending" ${a.status==='Pending'?'selected':''}>Pending</option>
+                <option value="Cancelled" ${a.status==='Cancelled'?'selected':''}>Cancel</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      const revBody = document.getElementById('reviewsTableBody');
+      if (revBody) {
+        revBody.innerHTML = reviews.map(r => `
+          <tr>
+            <td><b>${r.patientName}</b></td>
+            <td>${r.doctorName}</td>
+            <td style="color:#f59e0b">${'★'.repeat(r.rating || 5)}</td>
+            <td>"${r.comment}"</td>
+            <td>${r.date}</td>
+            <td><span class="badge-status badge-confirmed">DHA Verified</span></td>
+          </tr>
+        `).join('');
+      }
+
+      const blgBody = document.getElementById('blogsTableBody');
+      if (blgBody) {
+        blgBody.innerHTML = blogs.map(b => `
+          <tr>
+            <td><b>${b.title}</b></td>
+            <td>${b.author}</td>
+            <td>${b.publishedOn}</td>
+            <td>${b.views || 0}</td>
+            <td><span class="badge-status badge-confirmed">${b.status}</span></td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Init on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadFirebaseForm();
+      loadDashboardData();
+    });
+  </script>
+</body>
+</html>

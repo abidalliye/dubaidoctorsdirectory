@@ -248,9 +248,9 @@
               <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">Log In to Account →</button>
 
               <div class="demo-auth-strip">
-                <span>Quick Demo:</span>
+                <span>Quick Access:</span>
                 <button type="button" class="btn btn-outline btn-xs" onclick="FertiFind.demoLogin('doctor')">🩺 Demo Doctor</button>
-                <button type="button" class="btn btn-outline btn-xs" onclick="FertiFind.demoLogin('patient')">👤 Demo Patient</button>
+                <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">⚡ Admin Dashboard</a>
               </div>
 
               <p style="text-align:center;font-size:12px;color:var(--muted);margin:14px 0 0">
@@ -385,8 +385,26 @@
     if (bookingForm) {
       bookingForm.onsubmit = function (e) {
         e.preventDefault();
-        FertiFind.closeModal('ffBookingModal');
         const ref = 'FF-DXB-' + Math.floor(100000 + Math.random() * 900000);
+        const name = (document.getElementById('ffBookingName') ? document.getElementById('ffBookingName').value : '') || 'Patient';
+        const provider = (document.getElementById('ffBookingProvider') ? document.getElementById('ffBookingProvider').value : '') || 'Specialist';
+        const service = (document.getElementById('ffBookingService') ? document.getElementById('ffBookingService').value : '') || 'Consultation';
+        const phone = (document.getElementById('ffBookingPhone') ? document.getElementById('ffBookingPhone').value : '');
+        const date = (document.getElementById('ffBookingDate') ? document.getElementById('ffBookingDate').value : '2025-09-24');
+
+        if (window.FertiFirebase) {
+          FertiFirebase.addAppointment({
+            id: ref,
+            patientName: name,
+            doctorName: provider,
+            specialty: service,
+            dateTime: date + ' 10:00 AM',
+            phone: phone,
+            status: 'Pending'
+          });
+        }
+
+        FertiFind.closeModal('ffBookingModal');
         FertiFind.toast(`Appointment request submitted! Reference #${ref}. The clinic coordinator will contact you.`);
         bookingForm.reset();
       };
@@ -396,6 +414,22 @@
     if (reviewForm) {
       reviewForm.onsubmit = function (e) {
         e.preventDefault();
+        const reviewer = (document.getElementById('ffReviewName') ? document.getElementById('ffReviewName').value : '') || 'Patient';
+        const provider = (document.getElementById('ffReviewProvider') ? document.getElementById('ffReviewProvider').value : '') || 'Doctor';
+        const comment = (document.getElementById('ffReviewComment') ? document.getElementById('ffReviewComment').value : '') || 'Great consultation and care.';
+        const rating = Number(document.getElementById('ffRatingValue') ? document.getElementById('ffRatingValue').value : 5) || 5;
+
+        if (window.FertiFirebase) {
+          FertiFirebase.addReview({
+            patientName: reviewer,
+            doctorName: provider,
+            rating: rating,
+            comment: comment,
+            date: 'Just now',
+            verified: true
+          });
+        }
+
         FertiFind.closeModal('ffReviewModal');
         FertiFind.toast('Thank you! Your verified patient review has been received.');
         reviewForm.reset();
@@ -628,7 +662,7 @@
       }
 
       let role = email.includes('clinic') || email.includes('dr') || email.includes('doctor') ? 'doctor' : 'patient';
-      let name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : 'Mariam Al Falasi';
+      let name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : email.split('@')[0];
 
       const user = { name, email, role, loggedInAt: new Date().toISOString() };
       localStorage.setItem('ff_user', JSON.stringify(user));
@@ -677,26 +711,16 @@
     },
 
     demoLogin: function (role) {
-      let user;
-      if (role === 'doctor') {
-        user = {
-          name: 'Dr. Partha Sarathi Das',
-          email: 'dr.das@orchidfertility.ae',
-          role: 'doctor',
-          loggedInAt: new Date().toISOString()
-        };
-      } else {
-        user = {
-          name: 'Mariam Al Falasi',
-          email: 'mariam.k@example.com',
-          role: 'patient',
-          loggedInAt: new Date().toISOString()
-        };
-      }
+      const user = {
+        name: 'Dr. Partha Sarathi Das',
+        email: 'dr.das@orchidfertility.ae',
+        role: 'doctor',
+        loggedInAt: new Date().toISOString()
+      };
       localStorage.setItem('ff_user', JSON.stringify(user));
       this.closeModal('ffAuthModal');
       this.updateAuthUI();
-      this.toast(`Logged in as ${user.name} (${user.role.toUpperCase()})`);
+      this.toast(`Logged in as ${user.name} (DOCTOR)`);
     },
 
     logout: function () {

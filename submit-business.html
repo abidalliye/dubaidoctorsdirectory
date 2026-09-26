@@ -555,6 +555,7 @@
     </div>
   </footer>
 
+  <script src="js/firebase-config.js"></script>
   <script src="js/site.js"></script>
   <script>
     // URL Parameter Auto-population (from Auth registration)
@@ -599,6 +600,19 @@
       const successEl = document.getElementById('successView');
       successEl.style.display = 'block';
       successEl.scrollIntoView({ behavior: 'smooth' });
+
+      if (window.FertiFirebase) {
+        FertiFirebase.recordSubmission({
+          name: name,
+          dhaLicense: license,
+          whatsapp: whatsapp,
+          plan: planText,
+          category: document.getElementById('bizCategory') ? document.getElementById('bizCategory').value : '',
+          area: document.getElementById('bizDistrict') ? document.getElementById('bizDistrict').value : '',
+          email: document.getElementById('bizEmail') ? document.getElementById('bizEmail').value : '',
+          ref: ref
+        });
+      }
 
       FertiFind.toast(`Practice submission received! Reference #${ref}`);
     }

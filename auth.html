@@ -137,9 +137,9 @@
             <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
 
             <div class="demo-auth-strip">
-              <span>Quick Demo:</span>
+              <span>Quick Access:</span>
               <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Demo Doctor</button>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('patient')">👤 Demo Patient</button>
+              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">⚡ Admin Dashboard</a>
             </div>
 
             <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
@@ -422,19 +422,14 @@
     }
 
     function demoLogin(role) {
-      let user = (role === 'doctor') ? {
+      const user = {
         name: 'Dr. Partha Sarathi Das',
         email: 'dr.das@orchidfertility.ae',
         role: 'doctor',
         loggedInAt: new Date().toISOString()
-      } : {
-        name: 'Mariam Al Falasi',
-        email: 'mariam.k@example.com',
-        role: 'patient',
-        loggedInAt: new Date().toISOString()
       };
       localStorage.setItem('ff_user', JSON.stringify(user));
-      FertiFind.toast(`Logged in as ${user.name} (${user.role.toUpperCase()})`);
+      FertiFind.toast(`Logged in as ${user.name} (DOCTOR)`);
       setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     }
 

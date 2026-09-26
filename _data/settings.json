@@ -1,0 +1,15 @@
+{
+  "siteName": "FertiFind Dubai Doctors Directory",
+  "adminName": "Admin Super Admin",
+  "adminEmail": "admin@fertifind.ae",
+  "contactPhone": "+971 4 437 7520",
+  "defaultCurrency": "USD",
+  "localCurrency": "AED",
+  "totalDoctors": 248,
+  "totalPatients": 1842,
+  "totalAppointments": 3406,
+  "totalReviews": 1205,
+  "totalRevenueUSD": 24580,
+  "firebaseProjectId": "dubaidoctorsdirectory-prod",
+  "pagesCmsRepo": "abidalliye/dubaidoctorsdirectory"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "PAT-001",
+    "name": "Sarah Johnson",
+    "appointments": 5,
+    "lastVisit": "Sep 20, 2025",
+    "phone": "+971 50 123 4567",
+    "email": "sarah.j@example.com"
+  },
+  {
+    "id": "PAT-002",
+    "name": "Michael Brown",
+    "appointments": 3,
+    "lastVisit": "Sep 19, 2025",
+    "phone": "+971 52 987 6543",
+    "email": "m.brown@example.com"
+  },
+  {
+    "id": "PAT-003",
+    "name": "Emily Davis",
+    "appointments": 7,
+    "lastVisit": "Sep 18, 2025",
+    "phone": "+971 55 456 7890",
+    "email": "emily.d@example.com"
+  },
+  {
+    "id": "PAT-004",
+    "name": "James Wilson",
+    "appointments": 2,
+    "lastVisit": "Sep 16, 2025",
+    "phone": "+971 50 654 3210",
+    "email": "j.wilson@example.com"
+  }
+]
