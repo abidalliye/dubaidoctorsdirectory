@@ -1,34 +1,46 @@
 [
   {
-    "id": "BLG-001",
-    "title": "10 Tips for a Healthy Heart",
-    "status": "Published",
-    "publishedOn": "Sep 15, 2025",
+    "id": "complete-guide-to-ivf-in-dubai",
+    "title": "The Complete Guide to IVF & Fertility Clinics in Dubai (2025/2026)",
+    "description": "Everything couples need to know about fertility treatments, DHA regulatory approvals, ICSI success rates, and transparent cost breakdowns in Dubai, UAE.",
+    "author": "Dr. Amal Al Maktoum",
+    "category": "IVF & Fertility Guides",
+    "publishedOn": "2025-01-15",
+    "readTime": "6 min read",
+    "views": 1420,
+    "status": "Published"
+  },
+  {
+    "id": "how-to-choose-the-best-cardiologist-in-dubai",
+    "title": "How to Choose the Best Cardiologist in Dubai: DHA Verification Guide",
+    "description": "Expert tips on evaluating cardiologist credentials, clinic hospital affiliations, diagnostic facilities, and international accreditations across Dubai.",
     "author": "Dr. Ahmed Khan",
-    "views": 1420
+    "category": "Doctor Spotlights",
+    "publishedOn": "2025-01-20",
+    "readTime": "5 min read",
+    "views": 980,
+    "status": "Published"
   },
   {
-    "id": "BLG-002",
-    "title": "How to Take Care of Your Skin",
-    "status": "Published",
-    "publishedOn": "Sep 12, 2025",
-    "author": "Dr. Aisha Patel",
-    "views": 980
+    "id": "dha-regulations-on-genetic-testing",
+    "title": "DHA Regulations on Pre-implantation Genetic Testing (PGT-A / PGT-M)",
+    "description": "An authoritative review of UAE federal law and Dubai Health Authority directives on embryo screening, family balancing, and inherited disorder prevention.",
+    "author": "Dr. David Morales",
+    "category": "DHA Compliance",
+    "publishedOn": "2025-02-01",
+    "readTime": "7 min read",
+    "views": 860,
+    "status": "Published"
   },
   {
-    "id": "BLG-003",
-    "title": "Best Exercises for Better Health",
-    "status": "Published",
-    "publishedOn": "Sep 10, 2025",
-    "author": "Dr. Robert Smith",
-    "views": 1250
-  },
-  {
-    "id": "BLG-004",
-    "title": "Mental Health Matters",
-    "status": "Published",
-    "publishedOn": "Sep 08, 2025",
-    "author": "Dr. Fatima Al-Zahra",
-    "views": 890
+    "id": "dubai-healthcare-city-fertility-hub",
+    "title": "Why Dubai Healthcare City (DHCC) Has Become the Middle East Fertility Hub",
+    "description": "Examining the medical infrastructure, multinational clinical talent, and patient-first regulations driving medical tourism into Dubai Healthcare City.",
+    "author": "Medical Tourism Editorial Board",
+    "category": "Medical Tourism",
+    "publishedOn": "2025-02-08",
+    "readTime": "4 min read",
+    "views": 740,
+    "status": "Published"
   }
 ]

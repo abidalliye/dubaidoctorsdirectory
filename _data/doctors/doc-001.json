@@ -1,0 +1,22 @@
+{
+  "id": "DOC-001",
+  "name": "Dr. Ahmed Khan",
+  "specialty": "Cardiologist",
+  "category": "Cardiology",
+  "clinic": "American Hospital Dubai",
+  "area": "Oud Metha",
+  "address": "19th St, Oud Metha, Dubai",
+  "dhaLicense": "DHA-P-0019284",
+  "phone": "+971 4 377 5500",
+  "whatsapp": "+971 50 112 3344",
+  "email": "dr.ahmed.khan@ahdubai.com",
+  "consultationFee": 550,
+  "experience": "16 years",
+  "languages": "English, Arabic, Urdu",
+  "education": "MBBS, MD Cardiology (Imperial College London)",
+  "rating": 4.9,
+  "reviewsCount": 245,
+  "appointmentsCount": 125,
+  "status": "Active",
+  "avatar": "👨‍⚕️"
+}

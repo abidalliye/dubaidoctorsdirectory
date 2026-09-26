@@ -1,0 +1,11 @@
+{
+  "id": "PAT-002",
+  "name": "Johnathan Edwards",
+  "phone": "+971 52 987 6543",
+  "email": "j.edwards@outlook.com",
+  "area": "Downtown Dubai",
+  "appointments": 2,
+  "lastVisit": "2025-01-28",
+  "primaryDoctor": "Dr. Ahmed Khan",
+  "status": "Active"
+}

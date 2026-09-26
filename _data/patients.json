@@ -1,34 +1,46 @@
 [
   {
     "id": "PAT-001",
-    "name": "Sarah Johnson",
-    "appointments": 5,
-    "lastVisit": "Sep 20, 2025",
+    "name": "Mariam Al Hashemi",
     "phone": "+971 50 123 4567",
-    "email": "sarah.j@example.com"
+    "email": "mariam.hashemi@gmail.com",
+    "area": "Jumeirah 1",
+    "appointments": 4,
+    "lastVisit": "2025-02-10",
+    "primaryDoctor": "Dr. Sara Al Maktoum",
+    "status": "Active"
   },
   {
     "id": "PAT-002",
-    "name": "Michael Brown",
-    "appointments": 3,
-    "lastVisit": "Sep 19, 2025",
+    "name": "Johnathan Edwards",
     "phone": "+971 52 987 6543",
-    "email": "m.brown@example.com"
+    "email": "j.edwards@outlook.com",
+    "area": "Downtown Dubai",
+    "appointments": 2,
+    "lastVisit": "2025-01-28",
+    "primaryDoctor": "Dr. Ahmed Khan",
+    "status": "Active"
   },
   {
     "id": "PAT-003",
-    "name": "Emily Davis",
-    "appointments": 7,
-    "lastVisit": "Sep 18, 2025",
+    "name": "Fatima Al Mansoori",
     "phone": "+971 55 456 7890",
-    "email": "emily.d@example.com"
+    "email": "f.mansoori@gmail.com",
+    "area": "Dubai Marina",
+    "appointments": 5,
+    "lastVisit": "2025-02-05",
+    "primaryDoctor": "Dr. Fatima Zahra",
+    "status": "Active"
   },
   {
     "id": "PAT-004",
-    "name": "James Wilson",
-    "appointments": 2,
-    "lastVisit": "Sep 16, 2025",
-    "phone": "+971 50 654 3210",
-    "email": "j.wilson@example.com"
+    "name": "Alexander Petrov",
+    "phone": "+971 54 321 0987",
+    "email": "alex.petrov@yahoo.com",
+    "area": "Palm Jumeirah",
+    "appointments": 3,
+    "lastVisit": "2025-01-19",
+    "primaryDoctor": "Dr. Michael Chen",
+    "status": "Active"
   }
 ]

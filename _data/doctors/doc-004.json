@@ -1,0 +1,22 @@
+{
+  "id": "DOC-004",
+  "name": "Dr. Fatima Zahra",
+  "specialty": "Obstetrician & Gynecologist",
+  "category": "Gynecology",
+  "clinic": "Fakih IVF Fertility Center",
+  "area": "Downtown Dubai",
+  "address": "Boulevard Plaza Tower 1, Downtown Dubai",
+  "dhaLicense": "DHA-P-0048192",
+  "phone": "+971 4 349 7600",
+  "whatsapp": "+971 50 234 5678",
+  "email": "dr.fatima@fakihivf.com",
+  "consultationFee": 600,
+  "experience": "20 years",
+  "languages": "English, Arabic",
+  "education": "MBBS, MRCOG, Specialist Reproductive Surgery",
+  "rating": 4.9,
+  "reviewsCount": 420,
+  "appointmentsCount": 260,
+  "status": "Active",
+  "avatar": "👩‍⚕️"
+}

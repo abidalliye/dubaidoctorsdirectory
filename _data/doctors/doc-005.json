@@ -1,0 +1,22 @@
+{
+  "id": "DOC-005",
+  "name": "Dr. Tariq Mansoor",
+  "specialty": "Orthopedic Surgeon",
+  "category": "Orthopedics",
+  "clinic": "Mediclinic City Hospital",
+  "area": "Dubai Healthcare City",
+  "address": "Building 37, DHCC, Dubai",
+  "dhaLicense": "DHA-P-0056193",
+  "phone": "+971 4 435 9999",
+  "whatsapp": "+971 50 567 8901",
+  "email": "dr.tariq@mediclinic.ae",
+  "consultationFee": 700,
+  "experience": "22 years",
+  "languages": "English, Arabic, German",
+  "education": "FRCS (Orth), European Board of Orthopaedics",
+  "rating": 4.7,
+  "reviewsCount": 164,
+  "appointmentsCount": 88,
+  "status": "Active",
+  "avatar": "👨‍⚕️"
+}

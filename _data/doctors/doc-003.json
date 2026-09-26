@@ -1,0 +1,22 @@
+{
+  "id": "DOC-003",
+  "name": "Dr. Michael Chen",
+  "specialty": "Dermatologist & Cosmetic Specialist",
+  "category": "Dermatology",
+  "clinic": "First IVF & Medical Surgery Center",
+  "area": "Jumeirah",
+  "address": "Jumeirah Beach Road, Villa 412, Jumeirah 2, Dubai",
+  "dhaLicense": "DHA-P-0034918",
+  "phone": "+971 4 700 8900",
+  "whatsapp": "+971 50 890 1234",
+  "email": "dr.chen@firstivf.ae",
+  "consultationFee": 450,
+  "experience": "14 years",
+  "languages": "English, Mandarin",
+  "education": "MD Dermatology, American Board Certified",
+  "rating": 4.8,
+  "reviewsCount": 189,
+  "appointmentsCount": 94,
+  "status": "Active",
+  "avatar": "👨‍⚕️"
+}

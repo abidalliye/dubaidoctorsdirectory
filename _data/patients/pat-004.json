@@ -1,0 +1,11 @@
+{
+  "id": "PAT-004",
+  "name": "Alexander Petrov",
+  "phone": "+971 54 321 0987",
+  "email": "alex.petrov@yahoo.com",
+  "area": "Palm Jumeirah",
+  "appointments": 3,
+  "lastVisit": "2025-01-19",
+  "primaryDoctor": "Dr. Michael Chen",
+  "status": "Active"
+}

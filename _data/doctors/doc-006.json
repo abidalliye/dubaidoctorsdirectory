@@ -1,0 +1,22 @@
+{
+  "id": "DOC-006",
+  "name": "Dr. Layla Rostami",
+  "specialty": "Pediatric Specialist",
+  "category": "Pediatrics",
+  "clinic": "Emirates Hospital Jumeirah",
+  "area": "Jumeirah",
+  "address": "Jumeirah Beach Road, Dubai",
+  "dhaLicense": "DHA-P-0061294",
+  "phone": "+971 4 349 6666",
+  "whatsapp": "+971 50 678 9012",
+  "email": "dr.layla@emirateshospital.ae",
+  "consultationFee": 400,
+  "experience": "12 years",
+  "languages": "English, Arabic, Persian",
+  "education": "MD Pediatrics, Royal College of Paediatrics (UK)",
+  "rating": 4.9,
+  "reviewsCount": 280,
+  "appointmentsCount": 142,
+  "status": "Active",
+  "avatar": "👩‍⚕️"
+}

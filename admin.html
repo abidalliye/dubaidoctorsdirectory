@@ -1638,138 +1638,81 @@
 
   <!-- Add Doctor Modal -->
   <div class="admin-modal" id="modalAddDoctor">
-    <div class="admin-modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h3 style="margin:0;font-size:18px">Add New Doctor to Directory</h3>
+    <div class="admin-modal-box" style="max-width:640px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 style="margin:0;font-size:18px;font-weight:700">Add New Doctor to Directory</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddDoctor')">✕</button>
       </div>
-      <form onsubmit="handleCreateDoctor(event)" class="ff-form">
-        <div>
-          <label>Full Name & Title</label>
-          <input type="text" id="docName" required placeholder="e.g. Dr. Zaid Al Mansoor">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Specialty</label>
-            <select id="docSpec" required>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Dermatology">Dermatology</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Pediatrics">Pediatrics</option>
-              <option value="Gynecology">Gynecology / IVF</option>
-              <option value="General Medicine">General Medicine</option>
-            </select>
-          </div>
-          <div>
-            <label>DHA License Number</label>
-            <input type="text" id="docLicense" required placeholder="DHA-P-XXXXXXX">
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Facility / Clinic</label>
-            <input type="text" id="docClinic" required placeholder="e.g. Orchid Fertility Clinic">
-          </div>
-          <div>
-            <label>Consultation Fee (AED)</label>
-            <input type="number" id="docFee" required placeholder="500">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Save Doctor to Firebase →</button>
+      <form onsubmit="handleCreateDoctor(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="docName" required placeholder="Doctor Full Name & Title (e.g. Dr. Zaid Al Mansoor)" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <select id="docSpec" required style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+          <option value="" disabled selected>Select Medical Specialty</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Dermatology">Dermatology</option>
+          <option value="Orthopedics">Orthopedics</option>
+          <option value="Pediatrics">Pediatrics</option>
+          <option value="Gynecology">Gynecology / IVF</option>
+          <option value="Reproductive Endocrinology">Reproductive Endocrinology</option>
+          <option value="Urology">Urology</option>
+          <option value="General Medicine">General Medicine</option>
+        </select>
+        <input type="text" id="docLicense" required placeholder="DHA License (e.g. DHA-P-0019284)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="docClinic" required placeholder="Affiliated Clinic / Hospital" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="number" id="docFee" required placeholder="Consultation Fee in AED (e.g. 500)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Save Doctor to Database & PagesCMS →</button>
       </form>
     </div>
   </div>
 
   <!-- Add Patient Modal -->
   <div class="admin-modal" id="modalAddPatient">
-    <div class="admin-modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h3 style="margin:0;font-size:18px">Register Patient in Database</h3>
+    <div class="admin-modal-box" style="max-width:580px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 style="margin:0;font-size:18px;font-weight:700">Register Patient in Database</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddPatient')">✕</button>
       </div>
-      <form onsubmit="handleCreatePatient(event)" class="ff-form">
-        <div>
-          <label>Patient Full Name</label>
-          <input type="text" id="patName" required placeholder="e.g. Noor Al Hashimi">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Phone Number</label>
-            <input type="tel" id="patPhone" required placeholder="+971 50 XXX XXXX">
-          </div>
-          <div>
-            <label>Email Address</label>
-            <input type="email" id="patEmail" required placeholder="patient@example.com">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Save Patient to Firebase →</button>
+      <form onsubmit="handleCreatePatient(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="patName" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="tel" id="patPhone" required placeholder="Mobile Phone (+971 50 XXX XXXX)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="email" id="patEmail" required placeholder="Email Address (patient@example.com)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Register Patient to Database →</button>
       </form>
     </div>
   </div>
 
   <!-- Book Appointment Modal -->
   <div class="admin-modal" id="modalBookAppointment">
-    <div class="admin-modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h3 style="margin:0;font-size:18px">Create Appointment Booking</h3>
+    <div class="admin-modal-box" style="max-width:640px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 style="margin:0;font-size:18px;font-weight:700">Create Appointment Booking</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalBookAppointment')">✕</button>
       </div>
-      <form onsubmit="handleCreateAppointment(event)" class="ff-form">
-        <div>
-          <label>Patient Name</label>
-          <input type="text" id="aptPatName" required placeholder="Patient Full Name">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Doctor / Specialist</label>
-            <input type="text" id="aptDocName" required placeholder="Dr. Ahmed Khan">
-          </div>
-          <div>
-            <label>Specialty</label>
-            <input type="text" id="aptSpecialty" required placeholder="Cardiology">
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Date & Time</label>
-            <input type="text" id="aptDateTime" required placeholder="Sep 24, 2025 10:00 AM">
-          </div>
-          <div>
-            <label>Patient Mobile</label>
-            <input type="tel" id="aptPhone" required placeholder="+971 50 XXX XXXX">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Confirm & Save Booking →</button>
+      <form onsubmit="handleCreateAppointment(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="aptPatName" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="aptDocName" required placeholder="Doctor / Specialist Name (e.g. Dr. Ahmed Khan)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="aptSpecialty" required placeholder="Medical Specialty (e.g. Cardiology, IVF)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="date" id="aptDateTime" required placeholder="Appointment Date" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="tel" id="aptPhone" required placeholder="Patient Mobile (+971 50 XXX XXXX)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Confirm & Save Booking to Database →</button>
       </form>
     </div>
   </div>
 
   <!-- Add Blog Modal -->
   <div class="admin-modal" id="modalAddBlog">
-    <div class="admin-modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h3 style="margin:0;font-size:18px">Publish New Medical Blog Post</h3>
+    <div class="admin-modal-box" style="max-width:600px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 style="margin:0;font-size:18px;font-weight:700">Publish New Medical Blog Post</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddBlog')">✕</button>
       </div>
-      <form onsubmit="handleCreateBlog(event)" class="ff-form">
-        <div>
-          <label>Article Title</label>
-          <input type="text" id="blgTitle" required placeholder="e.g. Understanding IVF Success Rates">
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div>
-            <label>Author</label>
-            <input type="text" id="blgAuthor" required placeholder="Dr. Partha Sarathi Das">
-          </div>
-          <div>
-            <label>Status</label>
-            <select id="blgStatus">
-              <option value="Published">Published</option>
-              <option value="Draft">Draft</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Publish Article →</button>
+      <form onsubmit="handleCreateBlog(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="blgTitle" required placeholder="Article Title (e.g. Understanding IVF Success Rates in Dubai)" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="blgAuthor" required placeholder="Author Credentials (e.g. Dr. Sara Al Maktoum)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <select id="blgStatus" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+          <option value="Published">Published</option>
+          <option value="Draft">Draft</option>
+        </select>
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Publish Article to Database →</button>
       </form>
     </div>
   </div>

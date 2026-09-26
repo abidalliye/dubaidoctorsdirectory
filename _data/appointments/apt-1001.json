@@ -1,0 +1,15 @@
+{
+  "id": "APT-1001",
+  "patientName": "Mariam Al Hashemi",
+  "doctorName": "Dr. Sara Al Maktoum",
+  "specialty": "Reproductive Endocrinology",
+  "service": "Initial IVF Consultation & Ultrasound",
+  "dateTime": "2025-02-14",
+  "timeSlot": "10:00 AM",
+  "phone": "+971 50 123 4567",
+  "email": "mariam.hashemi@gmail.com",
+  "notes": "Infertility consultation, previously completed hormone bloodwork",
+  "status": "Confirmed",
+  "source": "Online Directory",
+  "createdAt": "2025-02-10 14:32"
+}

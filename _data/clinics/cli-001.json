@@ -1,0 +1,23 @@
+{
+  "id": "CLI-001",
+  "name": "Orchid Fertility Clinic",
+  "category": "Fertility Centre",
+  "leadDoctor": "Dr. Sara Al Maktoum",
+  "yearsInDubai": "9 years",
+  "accreditations": "DHA Accredited, CAP Laboratory Certified",
+  "area": "Dubai Healthcare City",
+  "address": "Ibn Sina Building 27, Block D, Unit 201, DHCC, Dubai",
+  "parking": "Free Valet Parking Available",
+  "dhaLicense": "DHA-F-0038912",
+  "phone": "+971 4 437 7520",
+  "whatsapp": "+971 50 477 3832",
+  "email": "info@orchid-fertility.com",
+  "website": "https://orchid-fertility.com/",
+  "services": "IVF, ICSI, PGT-A Genetic Screening, Egg Freezing, Blastocyst Culture, IUI",
+  "fee": 25000,
+  "insurance": "Daman, NextCare, MetLife, AXA Gulf, Sukoon, Bupa Global",
+  "plan": "Featured Specialist",
+  "rating": 4.9,
+  "reviewsCount": 210,
+  "status": "Verified"
+}

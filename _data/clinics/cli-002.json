@@ -1,0 +1,23 @@
+{
+  "id": "CLI-002",
+  "name": "First IVF Day Surgery Center",
+  "category": "Clinic",
+  "leadDoctor": "Dr. Michael Chen",
+  "yearsInDubai": "12 years",
+  "accreditations": "DHA Licensed, ESHRE Quality Standards",
+  "area": "Jumeirah",
+  "address": "Jumeirah Beach Road, Villa 412, Jumeirah 2, Dubai",
+  "parking": "Dedicated Patient Parking Onsite",
+  "dhaLicense": "DHA-F-0041289",
+  "phone": "+971 4 700 8900",
+  "whatsapp": "+971 50 890 1234",
+  "email": "care@firstivf.ae",
+  "website": "https://firstivf.ae/",
+  "services": "IVF, Advanced Laparoscopy, Day Surgery, Embryo Banking, Andrology Lab",
+  "fee": 28000,
+  "insurance": "NextCare, AXA, Sukoon, Cigna, Allianz Worldwide Care",
+  "plan": "Featured Specialist",
+  "rating": 4.8,
+  "reviewsCount": 165,
+  "status": "Verified"
+}

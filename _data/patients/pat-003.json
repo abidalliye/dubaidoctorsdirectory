@@ -1,0 +1,11 @@
+{
+  "id": "PAT-003",
+  "name": "Fatima Al Mansoori",
+  "phone": "+971 55 456 7890",
+  "email": "f.mansoori@gmail.com",
+  "area": "Dubai Marina",
+  "appointments": 5,
+  "lastVisit": "2025-02-05",
+  "primaryDoctor": "Dr. Fatima Zahra",
+  "status": "Active"
+}

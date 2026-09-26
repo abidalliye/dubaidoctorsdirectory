@@ -1,0 +1,23 @@
+{
+  "id": "CLI-003",
+  "name": "American Hospital Dubai",
+  "category": "Hospital",
+  "leadDoctor": "Dr. Ahmed Khan",
+  "yearsInDubai": "26 years",
+  "accreditations": "JCI Accredited, CAP Laboratory, DHA Apex Hospital",
+  "area": "Oud Metha",
+  "address": "19th Street, Oud Metha, Dubai",
+  "parking": "Complimentary Valet & Multi-story Parking",
+  "dhaLicense": "DHA-H-0001004",
+  "phone": "+971 4 377 5500",
+  "whatsapp": "+971 50 112 3344",
+  "email": "contact@ahdubai.com",
+  "website": "https://www.ahdubai.com/",
+  "services": "Cardiology, IVF, Oncology, Orthopedics, Pediatrics, 24/7 Emergency",
+  "fee": 550,
+  "insurance": "All Major UAE & International Health Insurance Plans Accepted",
+  "plan": "Clinic Showcase",
+  "rating": 4.9,
+  "reviewsCount": 520,
+  "status": "Verified"
+}

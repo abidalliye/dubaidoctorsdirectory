@@ -8,27 +8,39 @@ media:
   categories: [image]
 
 content:
+  # ============================================================================
+  # 1. DOCTORS DIRECTORY (Full Table View)
+  # ============================================================================
   - name: doctors
-    label: Doctors
-    type: file
-    path: _data/doctors.json
+    label: Doctors Directory
+    type: collection
+    path: _data/doctors
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [name, specialty, category, clinic, area, dhaLicense, phone, consultationFee, rating, appointmentsCount, status]
+      primary: name
+      sort: [name, rating, appointmentsCount]
+      search: [name, specialty, category, clinic, area, dhaLicense]
     fields:
       - name: id
-        label: Doctor ID
+        label: ""
+        placeholder: "Doctor ID (e.g. DOC-001)"
         type: string
         required: true
       - name: name
-        label: Full Name & Title
+        label: ""
+        placeholder: "Doctor Full Name & Title (e.g. Dr. Ahmed Khan)"
         type: string
         required: true
       - name: specialty
-        label: Specialty
+        label: ""
+        placeholder: "Medical Specialty (e.g. Cardiologist, Reproductive Endocrinologist)"
         type: string
         required: true
       - name: category
-        label: Category
+        label: ""
+        placeholder: "Select Specialty Category"
         type: select
         options:
           values:
@@ -42,57 +54,102 @@ content:
             - General Medicine
             - Others
       - name: clinic
-        label: Affiliated Clinic / Hospital
+        label: ""
+        placeholder: "Affiliated Clinic or Hospital Name"
         type: string
       - name: area
-        label: Dubai District
+        label: ""
+        placeholder: "Dubai District / Neighborhood (e.g. Downtown Dubai, Jumeirah)"
+        type: string
+      - name: address
+        label: ""
+        placeholder: "Physical Practice Address"
         type: string
       - name: dhaLicense
-        label: DHA Professional License
+        label: ""
+        placeholder: "DHA Professional License (e.g. DHA-P-0019284)"
         type: string
       - name: phone
-        label: Phone Number
+        label: ""
+        placeholder: "Telephone (e.g. +971 4 377 5500)"
         type: string
       - name: whatsapp
-        label: WhatsApp Number
+        label: ""
+        placeholder: "WhatsApp Number (e.g. +971 50 112 3344)"
+        type: string
+      - name: email
+        label: ""
+        placeholder: "Official Email Address"
+        type: string
+      - name: consultationFee
+        label: ""
+        placeholder: "Consultation Fee in AED (e.g. 550)"
+        type: number
+      - name: experience
+        label: ""
+        placeholder: "Years of Experience (e.g. 16 years)"
+        type: string
+      - name: languages
+        label: ""
+        placeholder: "Languages Spoken (e.g. English, Arabic, French)"
+        type: string
+      - name: education
+        label: ""
+        placeholder: "Education & Qualifications (e.g. MBBS, FRCOG)"
         type: string
       - name: rating
-        label: Rating (0 - 5.0)
+        label: ""
+        placeholder: "Rating 0 - 5.0 (e.g. 4.9)"
         type: number
       - name: reviewsCount
-        label: Number of Reviews
+        label: ""
+        placeholder: "Total Patient Reviews"
         type: number
       - name: appointmentsCount
-        label: Total Appointments
-        type: number
-      - name: consultationFee
-        label: Consultation Fee (AED)
+        label: ""
+        placeholder: "Total Booked Appointments"
         type: number
       - name: status
-        label: Status
+        label: ""
+        placeholder: "Select Verification Status"
         type: select
         options:
           values:
             - Active
             - Inactive
             - Pending Verification
+      - name: avatar
+        label: ""
+        placeholder: "Avatar Emoji or Photo URL"
+        type: string
 
+  # ============================================================================
+  # 2. CLINICS & HOSPITALS (Full Table View)
+  # ============================================================================
   - name: clinics
     label: Clinics & Hospitals
-    type: file
-    path: _data/clinics.json
+    type: collection
+    path: _data/clinics
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [name, category, leadDoctor, area, dhaLicense, phone, plan, rating, status]
+      primary: name
+      sort: [name, rating, reviewsCount]
+      search: [name, category, leadDoctor, area, dhaLicense]
     fields:
       - name: id
-        label: Clinic ID
+        label: ""
+        placeholder: "Facility ID (e.g. CLI-001)"
         type: string
       - name: name
-        label: Facility Name
+        label: ""
+        placeholder: "Medical Facility Name (e.g. Orchid Fertility Clinic)"
         type: string
         required: true
       - name: category
-        label: Category
+        label: ""
+        placeholder: "Select Facility Category"
         type: select
         options:
           values:
@@ -100,79 +157,157 @@ content:
             - Hospital
             - Diagnostic Lab
             - Fertility Centre
+      - name: leadDoctor
+        label: ""
+        placeholder: "Medical Director or Lead Specialist"
+        type: string
+      - name: yearsInDubai
+        label: ""
+        placeholder: "Years Established in Dubai (e.g. 10 years)"
+        type: string
+      - name: accreditations
+        label: ""
+        placeholder: "Accreditations (e.g. DHA Licensed, JCI, CAP Laboratory)"
+        type: string
       - name: area
-        label: Dubai District
+        label: ""
+        placeholder: "Dubai District (e.g. Dubai Healthcare City, Jumeirah)"
         type: string
       - name: address
-        label: Physical Address
+        label: ""
+        placeholder: "Full Physical Street Address & Building"
         type: string
-      - name: phone
-        label: Phone Number
-        type: string
-      - name: whatsapp
-        label: Direct WhatsApp
-        type: string
-      - name: website
-        label: Official Website
+      - name: parking
+        label: ""
+        placeholder: "Parking Access (e.g. Free Valet Parking, Basement)"
         type: string
       - name: dhaLicense
-        label: DHA Facility License
+        label: ""
+        placeholder: "DHA Facility License (e.g. DHA-F-0038912)"
         type: string
-      - name: rating
-        label: Rating
+      - name: phone
+        label: ""
+        placeholder: "Telephone (e.g. +971 4 437 7520)"
+        type: string
+      - name: whatsapp
+        label: ""
+        placeholder: "Direct WhatsApp Line (e.g. +971 50 477 3832)"
+        type: string
+      - name: email
+        label: ""
+        placeholder: "Official Facility Email"
+        type: string
+      - name: website
+        label: ""
+        placeholder: "Official Website URL"
+        type: string
+      - name: services
+        label: ""
+        placeholder: "Services & Treatments Offered (Comma-separated)"
+        type: string
+      - name: fee
+        label: ""
+        placeholder: "Base Treatment or Consultation Fee (AED)"
         type: number
-      - name: reviewsCount
-        label: Reviews Count
-        type: number
-      - name: status
-        label: Verification Status
-        type: select
-        options:
-          values:
-            - Verified
-            - Pending
-            - Under Review
+      - name: insurance
+        label: ""
+        placeholder: "Accepted Health Insurance Networks"
+        type: string
       - name: plan
-        label: Listing Plan
+        label: ""
+        placeholder: "Directory Subscription Plan"
         type: select
         options:
           values:
             - Verified Free Listing
             - Featured Specialist
             - Clinic Showcase
+      - name: rating
+        label: ""
+        placeholder: "Rating 0 - 5.0"
+        type: number
+      - name: reviewsCount
+        label: ""
+        placeholder: "Total Verified Reviews"
+        type: number
+      - name: status
+        label: ""
+        placeholder: "Select Verification Status"
+        type: select
+        options:
+          values:
+            - Verified
+            - Pending
+            - Under Review
 
+  # ============================================================================
+  # 3. APPOINTMENTS QUEUE (Full Table View)
+  # ============================================================================
   - name: appointments
     label: Appointments Queue
-    type: file
-    path: _data/appointments.json
+    type: collection
+    path: _data/appointments
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [patientName, doctorName, specialty, dateTime, timeSlot, phone, status]
+      primary: patientName
+      sort: [dateTime, patientName]
+      search: [patientName, doctorName, specialty, phone, email]
     fields:
       - name: id
-        label: Appointment ID
+        label: ""
+        placeholder: "Appointment ID (e.g. APT-1001)"
         type: string
       - name: patientName
-        label: Patient Name
+        label: ""
+        placeholder: "Patient Full Name"
         type: string
         required: true
       - name: doctorName
-        label: Doctor Name
+        label: ""
+        placeholder: "Selected Doctor or Specialist"
         type: string
         required: true
       - name: specialty
-        label: Specialty
+        label: ""
+        placeholder: "Medical Specialty or Department"
+        type: string
+      - name: service
+        label: ""
+        placeholder: "Requested Service or Consultation"
         type: string
       - name: dateTime
-        label: Date & Time
+        label: ""
+        placeholder: "Appointment Date (YYYY-MM-DD)"
+        type: string
+      - name: timeSlot
+        label: ""
+        placeholder: "Time Slot (e.g. 10:00 AM)"
         type: string
       - name: phone
-        label: Patient Mobile
+        label: ""
+        placeholder: "Patient Contact Phone / WhatsApp"
         type: string
       - name: email
-        label: Patient Email
+        label: ""
+        placeholder: "Patient Email Address"
+        type: string
+      - name: notes
+        label: ""
+        placeholder: "Medical Symptoms or Visit Notes"
+        type: text
+      - name: source
+        label: ""
+        placeholder: "Booking Channel (e.g. Online Directory, WhatsApp)"
+        type: string
+      - name: createdAt
+        label: ""
+        placeholder: "Booking Timestamp"
         type: string
       - name: status
-        label: Appointment Status
+        label: ""
+        placeholder: "Select Appointment Status"
         type: select
         options:
           values:
@@ -180,115 +315,211 @@ content:
             - Pending
             - Cancelled
 
+  # ============================================================================
+  # 4. PATIENTS REGISTRY (Full Table View)
+  # ============================================================================
   - name: patients
     label: Patients Registry
-    type: file
-    path: _data/patients.json
+    type: collection
+    path: _data/patients
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [name, phone, email, area, appointments, lastVisit, primaryDoctor, status]
+      primary: name
+      sort: [appointments, lastVisit]
+      search: [name, phone, email, area]
     fields:
       - name: id
-        label: Patient ID
+        label: ""
+        placeholder: "Patient ID (e.g. PAT-001)"
         type: string
       - name: name
-        label: Patient Full Name
+        label: ""
+        placeholder: "Patient Full Name"
         type: string
         required: true
-      - name: appointments
-        label: Total Appointments
-        type: number
-      - name: lastVisit
-        label: Last Visit Date
-        type: string
       - name: phone
-        label: Phone Number
+        label: ""
+        placeholder: "Contact Mobile Number"
         type: string
       - name: email
-        label: Email Address
+        label: ""
+        placeholder: "Email Address"
         type: string
+      - name: area
+        label: ""
+        placeholder: "Residential District in Dubai"
+        type: string
+      - name: appointments
+        label: ""
+        placeholder: "Total Appointments Count"
+        type: number
+      - name: lastVisit
+        label: ""
+        placeholder: "Date of Last Consultation"
+        type: string
+      - name: primaryDoctor
+        label: ""
+        placeholder: "Primary Preferred Physician"
+        type: string
+      - name: status
+        label: ""
+        placeholder: "Select Patient Status"
+        type: select
+        options:
+          values:
+            - Active
+            - Follow-up Required
+            - Discharged
 
+  # ============================================================================
+  # 5. PATIENT REVIEWS (Full Table View)
+  # ============================================================================
   - name: reviews
     label: Patient Reviews
-    type: file
-    path: _data/reviews.json
+    type: collection
+    path: _data/reviews
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [patientName, doctorName, rating, treatment, date, verified]
+      primary: patientName
+      sort: [date, rating]
+      search: [patientName, doctorName, treatment]
     fields:
       - name: id
-        label: Review ID
+        label: ""
+        placeholder: "Review ID (e.g. REV-001)"
         type: string
       - name: patientName
-        label: Reviewer Name
+        label: ""
+        placeholder: "Reviewer Display Name"
         type: string
       - name: doctorName
-        label: Doctor or Facility
+        label: ""
+        placeholder: "Doctor or Facility Name"
         type: string
       - name: rating
-        label: Rating (Stars)
+        label: ""
+        placeholder: "Rating (1 to 5 Stars)"
         type: number
+      - name: treatment
+        label: ""
+        placeholder: "Treatment or Procedure Received"
+        type: string
       - name: comment
-        label: Review Feedback
+        label: ""
+        placeholder: "Detailed Patient Feedback & Experience"
         type: text
       - name: date
-        label: Date Posted
+        label: ""
+        placeholder: "Date Posted (YYYY-MM-DD)"
         type: string
       - name: verified
-        label: Verified Patient Review
+        label: ""
+        placeholder: "Verified Patient Status"
         type: boolean
 
+  # ============================================================================
+  # 6. BLOG ARTICLES (Full Table View)
+  # ============================================================================
   - name: blogs
-    label: Blog Articles (JSON Data)
-    type: file
-    path: _data/blogs.json
+    label: Blog Articles
+    type: collection
+    path: _data/blogs
     format: json
-    list: true
+    filename: "{fields.id}.json"
+    view:
+      fields: [title, author, category, publishedOn, views, status]
+      primary: title
+      sort: [publishedOn, views]
+      search: [title, author, category]
     fields:
       - name: id
-        label: Post ID
+        label: ""
+        placeholder: "Article Slug / ID"
         type: string
       - name: title
-        label: Article Title
+        label: ""
+        placeholder: "Article Title"
         type: string
         required: true
+      - name: description
+        label: ""
+        placeholder: "Short Meta Summary / Excerpt"
+        type: text
+      - name: author
+        label: ""
+        placeholder: "Author Name & Title"
+        type: string
+      - name: category
+        label: ""
+        placeholder: "Select Category"
+        type: select
+        options:
+          values:
+            - IVF & Fertility Guides
+            - Doctor Spotlights
+            - DHA Compliance
+            - Medical Tourism
+            - Patient Stories
+      - name: publishedOn
+        label: ""
+        placeholder: "Published Date (YYYY-MM-DD)"
+        type: string
+      - name: readTime
+        label: ""
+        placeholder: "Reading Time (e.g. 5 min read)"
+        type: string
+      - name: views
+        label: ""
+        placeholder: "Total Views Count"
+        type: number
       - name: status
-        label: Publication Status
+        label: ""
+        placeholder: "Select Publication Status"
         type: select
         options:
           values:
             - Published
             - Draft
             - Archived
-      - name: publishedOn
-        label: Date Published
-        type: string
-      - name: author
-        label: Author Name
-        type: string
-      - name: views
-        label: Pageviews
-        type: number
 
+  # ============================================================================
+  # 7. EDITORIAL ARTICLES (Markdown WYSIWYG Collection)
+  # ============================================================================
   - name: articles
-    label: Editorial Articles (Markdown Collection)
+    label: Editorial Articles (Markdown)
     type: collection
     path: content/articles
     format: yaml-frontmatter
+    view:
+      fields: [title, category, author, publishedOn]
+      primary: title
+      sort: [publishedOn]
+      search: [title, author, category]
     fields:
       - name: title
-        label: Title
+        label: ""
+        placeholder: "Editorial Article Title"
         type: string
         required: true
       - name: description
-        label: Meta Description
+        label: ""
+        placeholder: "Meta Description / Subtitle"
         type: text
       - name: publishedOn
-        label: Published Date
+        label: ""
+        placeholder: "Published Date"
         type: date
       - name: author
-        label: Author Name
+        label: ""
+        placeholder: "Author Name"
         type: string
       - name: category
-        label: Category
+        label: ""
+        placeholder: "Select Editorial Category"
         type: select
         options:
           values:
@@ -298,9 +529,13 @@ content:
             - Dubai Healthcare Tourism
             - Patient Case Studies
       - name: body
-        label: Article Content
+        label: ""
+        placeholder: "Article Body Content (Markdown / Rich-Text)..."
         type: rich-text
 
+  # ============================================================================
+  # 8. PLATFORM SETTINGS (Single File)
+  # ============================================================================
   - name: settings
     label: Platform Settings
     type: file
@@ -308,26 +543,34 @@ content:
     format: json
     fields:
       - name: siteName
-        label: Site Name
+        label: ""
+        placeholder: "Site Brand Name"
         type: string
       - name: adminName
-        label: Super Admin Display Name
+        label: ""
+        placeholder: "Super Admin Display Name"
         type: string
       - name: adminEmail
-        label: Admin Email
+        label: ""
+        placeholder: "Admin Notification Email"
         type: string
       - name: contactPhone
-        label: Support Telephone
+        label: ""
+        placeholder: "Support Telephone"
         type: string
       - name: defaultCurrency
-        label: Default Currency
+        label: ""
+        placeholder: "Default Currency (e.g. USD)"
         type: string
       - name: localCurrency
-        label: Local UAE Currency
+        label: ""
+        placeholder: "Local Currency (e.g. AED)"
         type: string
       - name: firebaseProjectId
-        label: Google Firebase Project ID
+        label: ""
+        placeholder: "Google Firebase Project ID"
         type: string
       - name: pagesCmsRepo
-        label: GitHub Repo Path
+        label: ""
+        placeholder: "GitHub Repository Path"
         type: string
