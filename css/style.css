@@ -281,6 +281,18 @@ nav.main-nav a.active::after {
   color: var(--blue);
 }
 
+.btn-whatsapp, .btn.whatsapp {
+  background: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.22);
+}
+
+.btn-whatsapp:hover, .btn.whatsapp:hover {
+  background: #20bd5a;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .badge, .pill {
   display: inline-flex;
   align-items: center;

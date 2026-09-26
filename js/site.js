@@ -289,9 +289,30 @@
       document.getElementById('ffReviewModal').classList.add('show');
     },
 
-    openListBusiness: function () {
+    openListBusiness: function (prefillName) {
       initGlobalModals();
-      document.getElementById('ffListBusinessModal').classList.add('show');
+      const modal = document.getElementById('ffListBusinessModal');
+      if (modal) {
+        if (prefillName) {
+          const input = modal.querySelector('input[type="text"]');
+          if (input) input.value = prefillName;
+        }
+        modal.classList.add('show');
+      }
+    },
+
+    openClaimProfile: function (providerName) {
+      this.openListBusiness(providerName);
+      const title = document.querySelector('#ffListBusinessModal h3');
+      if (title && providerName) {
+        title.textContent = `Claim Profile: ${providerName}`;
+      }
+    },
+
+    openWhatsApp: function (phone, providerName) {
+      const cleanPhone = (phone || '971504773832').replace(/[^0-9]/g, '');
+      const msg = encodeURIComponent(`Hello, I found ${providerName || 'your practice'} on FertiFind Dubai and would like to inquire about booking a specialist consultation.`);
+      window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
     },
 
     closeModal: function (modalId) {

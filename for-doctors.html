@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>For Doctors & Clinics | List Practice & Generate Patient Leads in Dubai | FertiFind</title>
+  <meta name="description" content="Join Dubai's verified doctor and fertility directory. List your medical practice, claim your DHA-verified profile, receive direct WhatsApp inquiries, and attract private patients without high agency ad fees.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* For Doctors B2B Landing Page Styles */
+    .b2b-hero {
+      background: radial-gradient(circle at 85% 15%, #dff5ff 0%, transparent 40%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 50%, #eafbf8 100%);
+      padding: 55px 0 45px;
+      border-bottom: 1px solid var(--line);
+    }
+    .b2b-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .b2b-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eef5ff;
+      color: var(--blue);
+      border: 1px solid #cbdcf7;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .b2b-hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+      margin: 16px 0 14px;
+    }
+    .b2b-hero h1 span {
+      color: var(--blue);
+    }
+    .b2b-copy {
+      font-size: 16px;
+      color: #556682;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+    .b2b-stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .b2b-stat {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      box-shadow: var(--shadow-sm);
+      min-width: 120px;
+    }
+    .b2b-stat b {
+      display: block;
+      color: var(--navy);
+      font-size: 22px;
+    }
+    .b2b-stat small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* Onboarding Card Form */
+    .b2b-form-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .b2b-form-card h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      color: var(--navy);
+    }
+    .b2b-form-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Value Pillars */
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: #bcd5f8;
+      box-shadow: var(--shadow);
+    }
+    .feature-ico {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #eef5ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      color: var(--navy);
+      margin: 0 0 8px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: #556682;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Pricing Table */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .plan-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .plan-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .plan-card.featured {
+      border: 2px solid var(--blue);
+      box-shadow: 0 12px 35px rgba(7, 87, 217, 0.14);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: #ffffff;
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+    }
+    .plan-name {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 0 0 4px;
+    }
+    .plan-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .plan-price {
+      font-size: 34px;
+      font-weight: 950;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .plan-price small {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+      color: #40516f;
+    }
+    .plan-features li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .plan-features li span {
+      color: #087e76;
+      font-weight: 900;
+    }
+
+    /* Claim Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .step-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .step-box h3 {
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: var(--navy);
+    }
+    .step-box p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1050px) {
+      .b2b-grid { grid-template-columns: 1fr; }
+      .pricing-grid, .grid3, .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container">
+      <span>🇦🇪 FertiFind Provider Network • Dubai Health Authority Directory</span>
+      <span>Doctor Registrations & Practice Lead Generation</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        FertiFind <small>Dubai</small>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_hospital_profile_page.html">Hospitals & Clinics</a>
+        <a href="fertifind_labs_profile_page.html">Labs & Diagnostics</a>
+        <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
+        <a href="for-doctors.html" class="active">For Doctors</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn btn-outline" onclick="FertiFind.openClaimProfile()">Claim Existing Listing</button>
+        <button class="btn btn-primary" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">List Your Practice →</button>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="index.html">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
+      <a href="fertifind_hospital_profile_page.html">🏥 Hospitals & Clinics</a>
+      <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Labs</a>
+      <a href="fertility-treatment-cost-dubai.html">💰 Cost & Package Guide</a>
+      <a href="for-doctors.html" class="active">💼 For Doctors & Clinics</a>
+      <button class="btn btn-outline" style="width:100%" onclick="FertiFind.openClaimProfile()">Claim Profile</button>
+      <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">Register Practice</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="b2b-hero">
+    <div class="container b2b-grid">
+      <div>
+        <div class="b2b-badge">🇦🇪 Dubai Doctor & Clinic Marketplace</div>
+        <h1>Grow your medical practice with <span>direct patient leads</span> in Dubai.</h1>
+        <p class="b2b-copy">
+          Connect with thousands of patients seeking specialist fertility and reproductive care across Dubai Healthcare City, Jumeirah, and beyond. Eliminate high agency ad retainers and receive direct WhatsApp inquiries from qualified couples.
+        </p>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" style="padding:14px 22px" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">
+            Register Your Practice Free →
+          </button>
+          <button class="btn btn-outline" style="padding:14px 22px" onclick="FertiFind.openClaimProfile()">
+            Claim Pre-Listed Profile
+          </button>
+        </div>
+
+        <div class="b2b-stats">
+          <div class="b2b-stat"><b>18,000+</b><small>Monthly Patient Searches</small></div>
+          <div class="b2b-stat"><b>82%</b><small>Direct WhatsApp Inquiries</small></div>
+          <div class="b2b-stat"><b>100%</b><small>DHA Registry Verified</small></div>
+        </div>
+      </div>
+
+      <!-- Quick Registration Card Form -->
+      <div class="b2b-form-card" id="joinForm">
+        <h3>List Your Medical Practice</h3>
+        <p>Submit your DHA license details to activate your patient-facing profile.</p>
+
+        <form class="ff-form" onsubmit="event.preventDefault(); FertiFind.toast('Practice submitted! Our verification team will review your DHA credentials.'); this.reset();">
+          <div>
+            <label>Doctor / Medical Facility Name</label>
+            <input type="text" required placeholder="e.g. Dr. Fatima Al Mansoori or Orchid Clinic">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <label>Medical Specialty</label>
+              <select required>
+                <option value="fertility">Reproductive Medicine / IVF</option>
+                <option value="obgyn">Obstetrics & Gynecology</option>
+                <option value="andrology">Andrology / Male Fertility</option>
+                <option value="genetics">Genetics / Embryology</option>
+              </select>
+            </div>
+            <div>
+              <label>Primary Dubai District</label>
+              <select required>
+                <option>Dubai Healthcare City (DHCC)</option>
+                <option>Jumeirah</option>
+                <option>Oud Metha</option>
+                <option>Dubai Marina</option>
+                <option>Al Barsha</option>
+                <option>Downtown Dubai</option>
+                <option>Business Bay</option>
+                <option>Deira</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <label>DHA Professional License</label>
+              <input type="text" required placeholder="DHA-P-XXXXXXX">
+            </div>
+            <div>
+              <label>Direct WhatsApp Number</label>
+              <input type="tel" required placeholder="+971 50 XXX XXXX">
+            </div>
+          </div>
+          <div>
+            <label>Official Practice Email</label>
+            <input type="email" required placeholder="coordinator@clinic.ae">
+          </div>
+          <div>
+            <label>Select Listing Tier</label>
+            <select id="selectedPlan">
+              <option value="featured">Featured Specialist (AED 499 / mo) — Recommended</option>
+              <option value="free">Verified Free Listing (AED 0)</option>
+              <option value="clinic">Clinic / Hospital Showcase (AED 1,499 / mo)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">
+            Submit Practice for Verification →
+          </button>
+          <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px">
+            🔒 Zero listing lock-ins. Verified within 24 business hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Pillars -->
+  <section class="section" id="benefits">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Why Dubai doctors list on FertiFind</h2>
+          <p>Traditional social media agencies charge high retainers with low intent. FertiFind delivers qualified patients actively searching for care.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="feature-card">
+          <div class="feature-ico">💬</div>
+          <h3>Direct WhatsApp Routing</h3>
+          <p>Over 80% of patient inquiries in the UAE happen over WhatsApp. We route high-intent patients directly into your clinic coordinator’s WhatsApp inbox.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-ico">📍</div>
+          <h3>Local District Search Authority</h3>
+          <p>Gain first-page organic visibility for geo-targeted searches like "IVF doctors in DHCC" or "fertility clinic in Jumeirah" without spending on Google Ads.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-ico">✓</div>
+          <h3>DHA Verified Credential Badge</h3>
+          <p>Build instant patient confidence. Our verified badge proves your clinical licensing, specialist title, and hospital admitting credentials.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-ico">⭐</div>
+          <h3>Reputation & Review Showcase</h3>
+          <p>Collect authenticated patient feedback. Protect your online reputation with moderated, verified patient testimonials.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-ico">📊</div>
+          <h3>Zero Agency Retainers</h3>
+          <p>No AED 10,000 monthly marketing retainers. Transparent, fixed-cost subscription plans with zero patient booking commissions.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-ico">🏥</div>
+          <h3>Full Inpatient & Lab Links</h3>
+          <p>Link your hospital surgical privileges and diagnostic lab partners directly on your profile so patients see your complete care network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Plans -->
+  <section class="section alt" id="plans">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Transparent listing packages for Dubai practices</h2>
+          <p>Choose the right level of visibility for your solo practice or multi-specialty medical centre.</p>
+        </div>
+      </div>
+      <div class="pricing-grid">
+
+        <!-- Free Plan -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name">Verified Free</div>
+            <div class="plan-desc">Essential directory presence for licensed physicians.</div>
+            <div class="plan-price">AED 0 <small>/ forever</small></div>
+            <ul class="plan-features">
+              <li><span>✓</span> Verified DHA doctor profile</li>
+              <li><span>✓</span> Listed in specialty & district search</li>
+              <li><span>✓</span> Standard appointment booking form</li>
+              <li><span>✓</span> Basic clinic address and phone listing</li>
+              <li><span style="color:#a4b6d0">✕</span> Direct WhatsApp click-to-chat</li>
+              <li><span style="color:#a4b6d0">✕</span> Priority top search placement</li>
+            </ul>
+          </div>
+          <button class="btn btn-outline" style="width:100%" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">Get Started Free</button>
+        </div>
+
+        <!-- Featured Doctor Plan (Recommended) -->
+        <div class="plan-card featured">
+          <div class="plan-badge">MOST POPULAR</div>
+          <div>
+            <div class="plan-name">Featured Specialist</div>
+            <div class="plan-desc">Maximum patient inquiry volume for consultant doctors.</div>
+            <div class="plan-price">AED 499 <small>/ month</small></div>
+            <ul class="plan-features">
+              <li><span>✓</span> <b>Priority top placement</b> in district searches</li>
+              <li><span>✓</span> <b>Direct "Chat on WhatsApp"</b> button on cards</li>
+              <li><span>✓</span> Verified gold consultant badge</li>
+              <li><span>✓</span> Real-time lead notifications via SMS/Email</li>
+              <li><span>✓</span> Video tele-consultation booking button</li>
+              <li><span>✓</span> Monthly patient inquiry analytics report</li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">Upgrade to Featured →</button>
+        </div>
+
+        <!-- Clinic Enterprise Plan -->
+        <div class="plan-card">
+          <div>
+            <div class="plan-name">Clinic Showcase</div>
+            <div class="plan-desc">Designed for fertility centres and women's hospitals.</div>
+            <div class="plan-price">AED 1,499 <small>/ month</small></div>
+            <ul class="plan-features">
+              <li><span>✓</span> <b>Unlimited doctor profiles</b> under facility</li>
+              <li><span>✓</span> Dedicated hospital & clinic profile page</li>
+              <li><span>✓</span> Homepage featured center showcase</li>
+              <li><span>✓</span> Direct reception WhatsApp & phone routing</li>
+              <li><span>✓</span> Procedure package listings (IVF, egg freezing)</li>
+              <li><span>✓</span> Dedicated practice support coordinator</li>
+            </ul>
+          </div>
+          <button class="btn btn-soft" style="width:100%" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">Select Clinic Plan →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How Claiming Works -->
+  <section class="section" id="claim">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Is your practice already listed? Claim your profile</h2>
+          <p>Our research team pre-indexes verified DHA practices. Claiming takes under 2 minutes.</p>
+        </div>
+      </div>
+      <div class="steps-grid">
+        <div class="step-box">
+          <div class="step-num">1</div>
+          <h3>Find Your Listing</h3>
+          <p>Search your name or clinic on our directory search page to locate your pre-indexed record.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num">2</div>
+          <h3>Verify DHA Identity</h3>
+          <p>Click "Claim Profile" and confirm your official clinic email and DHA license number.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num">3</div>
+          <h3>Receive Patient Leads</h3>
+          <p>Update your consultation hours, add WhatsApp numbers, and start receiving direct inquiries.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:24px">
+        <button class="btn btn-primary" onclick="FertiFind.openClaimProfile()">Claim Your Profile Now →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Provider FAQs -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Frequently asked questions by doctors & clinics</h2>
+          <p>Everything you need to know about listings, compliance, and patient inquiries.</p>
+        </div>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q">How does FertiFind verify healthcare provider credentials? <span>+</span></button>
+          <div class="faq-a">Every doctor and facility is cross-referenced against the official Dubai Health Authority (DHA) registry. We verify active licensure, consultant title, and facility accreditation before publishing badges.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do patient leads reach my practice? <span>+</span></button>
+          <div class="faq-a">Depending on your plan, patients can contact your reception directly via verified WhatsApp click-to-chat, submit structured appointment requests through encrypted forms, or call your clinic switchboard directly.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Are there any commissions on patient appointments? <span>+</span></button>
+          <div class="faq-a">No. FertiFind does not charge commission fees or booking markups. Patients pay your clinic directly according to your standard consultation and treatment tariff.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I cancel or pause my Featured subscription at any time? <span>+</span></button>
+          <div class="faq-a">Yes. Subscriptions are billed on a flexible monthly basis with zero long-term contracts. You can pause or cancel at any time with one click.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unified Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            FertiFind <small style="color:var(--teal)">Dubai</small>
+          </a>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Directory</div>
+          <div class="footer-links">
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Districts</div>
+          <div class="footer-links">
+            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
+            <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah Clinics</a>
+            <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers</a>
+            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">For Practices</div>
+          <div class="footer-links">
+            <a href="for-doctors.html">List Your Practice</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
+            <a href="for-doctors.html#plans">Provider Pricing Plans</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('login')">Provider Portal Login</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Company</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#how">How It Works</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>
