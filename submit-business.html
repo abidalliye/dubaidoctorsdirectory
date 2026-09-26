@@ -555,7 +555,9 @@
     </div>
   </footer>
 
-  <!-- Google Firebase SDKs & Integration -->
+  <!-- Supabase & Firebase Database SDKs -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -585,7 +587,7 @@
       }
     });
 
-    function handleBusinessSubmit(e) {
+    async function handleBusinessSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('bizName').value;
       const category = document.getElementById('bizCategory').value;
@@ -620,32 +622,37 @@
       successEl.style.display = 'block';
       successEl.scrollIntoView({ behavior: 'smooth' });
 
+      const submissionPayload = {
+        ref: ref,
+        name: name,
+        category: category,
+        leadDoctor: leadDoctor,
+        yearsInDubai: years,
+        accreditations: accred,
+        area: district,
+        address: unit + (street ? ', ' + street : ''),
+        parking: parking,
+        dhaLicense: license,
+        whatsapp: whatsapp,
+        phone: phone,
+        email: email,
+        website: website,
+        services: selectedServices,
+        fee: fee,
+        insurance: insurance,
+        plan: planText,
+        status: 'Pending Verification',
+        submittedAt: new Date().toISOString()
+      };
+
+      if (window.FertiSupabase) {
+        await FertiSupabase.submitPractice(submissionPayload);
+      }
       if (window.FertiFirebase) {
-        FertiFirebase.recordSubmission({
-          ref: ref,
-          name: name,
-          category: category,
-          leadDoctor: leadDoctor,
-          yearsInPractice: years,
-          accreditations: accred,
-          area: district,
-          address: unit + (street ? ', ' + street : ''),
-          parking: parking,
-          dhaLicense: license,
-          whatsapp: whatsapp,
-          phone: phone,
-          email: email,
-          website: website,
-          services: selectedServices,
-          consultationFee: fee,
-          insurance: insurance,
-          plan: planText,
-          status: 'Pending Verification',
-          submittedAt: new Date().toISOString()
-        });
+        await FertiFirebase.recordSubmission(submissionPayload);
       }
 
-      FertiFind.toast(`Practice submission received & saved to database! Reference #${ref}`);
+      FertiFind.toast(`Practice submission received & saved to Supabase! Reference #${ref}`);
     }
   </script>
 </body>

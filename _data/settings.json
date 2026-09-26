@@ -10,6 +10,7 @@
   "totalAppointments": 3406,
   "totalReviews": 1205,
   "totalRevenueUSD": 24580,
-  "firebaseProjectId": "dubaidoctorsdirectory-prod",
-  "pagesCmsRepo": "abidalliye/dubaidoctorsdirectory"
+  "databaseEngine": "Supabase PostgreSQL",
+  "supabaseUrl": "https://vkmuxfqzcqkegymubtyv.supabase.co",
+  "firebaseProjectId": "dubaidoctorsdirectory-prod"
 }

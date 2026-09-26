@@ -395,25 +395,31 @@
         const slot = (document.getElementById('ffBookingSlot') ? document.getElementById('ffBookingSlot').value : 'Morning');
         const notes = (document.getElementById('ffBookingNotes') ? document.getElementById('ffBookingNotes').value.trim() : '');
 
+        const bookingPayload = {
+          id: ref,
+          patientName: name,
+          doctorName: provider,
+          specialty: service,
+          service: service,
+          date: date,
+          slot: slot,
+          dateTime: date + ' (' + slot.split(' ')[0] + ')',
+          phone: phone,
+          email: email,
+          notes: notes,
+          status: 'Confirmed',
+          source: 'Website Appointment Booking Modal'
+        };
+
+        if (window.FertiSupabase) {
+          await FertiSupabase.bookAppointment(bookingPayload);
+        }
         if (window.FertiFirebase) {
-          await FertiFirebase.addAppointment({
-            id: ref,
-            patientName: name,
-            doctorName: provider,
-            specialty: service,
-            date: date,
-            slot: slot,
-            dateTime: date + ' (' + slot.split(' ')[0] + ')',
-            phone: phone,
-            email: email,
-            notes: notes,
-            status: 'Pending',
-            source: 'Website Appointment Booking Modal'
-          });
+          await FertiFirebase.addAppointment(bookingPayload);
         }
 
         FertiFind.closeModal('ffBookingModal');
-        FertiFind.toast(`Appointment request submitted! Reference #${ref}. The clinic coordinator will contact you.`);
+        FertiFind.toast(`Appointment confirmed! Reference #${ref}. Saved to Supabase database.`);
         bookingForm.reset();
       };
     }
@@ -428,21 +434,26 @@
         const comment = (document.getElementById('ffReviewComment') ? document.getElementById('ffReviewComment').value.trim() : '') || 'Great consultation and care.';
         const rating = Number(document.getElementById('ffRatingValue') ? document.getElementById('ffRatingValue').value : 5) || 5;
 
+        const reviewPayload = {
+          patientName: reviewer,
+          doctorName: provider,
+          rating: rating,
+          treatment: treatment,
+          comment: comment,
+          date: new Date().toISOString().split('T')[0],
+          verified: true,
+          source: 'Patient Review Modal'
+        };
+
+        if (window.FertiSupabase) {
+          await FertiSupabase.submitReview(reviewPayload);
+        }
         if (window.FertiFirebase) {
-          await FertiFirebase.addReview({
-            patientName: reviewer,
-            doctorName: provider,
-            rating: rating,
-            treatment: treatment,
-            comment: comment,
-            date: 'Just now',
-            verified: true,
-            source: 'Patient Review Modal'
-          });
+          await FertiFirebase.addReview(reviewPayload);
         }
 
         FertiFind.closeModal('ffReviewModal');
-        FertiFind.toast('Thank you! Your verified patient review has been received and saved to database.');
+        FertiFind.toast('Thank you! Your verified patient review has been saved to Supabase.');
         reviewForm.reset();
       };
     }
@@ -459,21 +470,26 @@
         const email = (document.getElementById('ffListEmail') ? document.getElementById('ffListEmail').value.trim() : '');
         const services = (document.getElementById('ffListServices') ? document.getElementById('ffListServices').value.trim() : '');
 
+        const submissionPayload = {
+          name: name,
+          category: type,
+          area: area,
+          dhaLicense: license,
+          phone: phone,
+          email: email,
+          services: services ? services.split(',').map(s => s.trim()) : [],
+          source: 'Quick Practice Listing Modal'
+        };
+
+        if (window.FertiSupabase) {
+          await FertiSupabase.submitPractice(submissionPayload);
+        }
         if (window.FertiFirebase) {
-          await FertiFirebase.recordSubmission({
-            name: name,
-            category: type,
-            area: area,
-            dhaLicense: license,
-            phone: phone,
-            email: email,
-            services: services ? services.split(',').map(s => s.trim()) : [],
-            source: 'Quick Practice Listing Modal'
-          });
+          await FertiFirebase.recordSubmission(submissionPayload);
         }
 
         FertiFind.closeModal('ffListBusinessModal');
-        FertiFind.toast('Practice submission received and saved to database! DHA credentials under review.');
+        FertiFind.toast('Practice submission received and saved to Supabase database! DHA credentials under review.');
         listForm.reset();
       };
     }

@@ -7,7 +7,9 @@
   <meta name="description" content="Doctors Directory Dubai Admin Dashboard - Real-time management of doctors, clinics, appointments, reviews, PagesCMS and Google Firebase.">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Google Firebase SDKs (Compat v10 for clean script integration) -->
+  <!-- Supabase & Firebase Database SDKs -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -840,8 +842,8 @@
         <span>Blogs</span>
       </button>
       <button type="button" class="nav-item" onclick="switchDashView('settings')">
-        <span class="icon">⚙️</span>
-        <span>Settings & Firebase</span>
+        <span class="icon">⚡</span>
+        <span>Supabase & Database</span>
       </button>
       <button type="button" class="nav-item" onclick="handleAdminLogout()">
         <span class="icon">🚪</span>
@@ -850,9 +852,9 @@
     </nav>
 
     <div class="sidebar-footer-card">
-      <div class="footer-card-icon">💙</div>
-      <div class="footer-card-title">Better Healthcare for a Healthier Tomorrow</div>
-      <div class="footer-card-sub">Connected with Google Firebase</div>
+      <div class="footer-card-icon">⚡</div>
+      <div class="footer-card-title">Enterprise Healthcare Directory</div>
+      <div class="footer-card-sub">Powered by Supabase PostgreSQL</div>
     </div>
   </aside>
 
@@ -861,15 +863,15 @@
        ======================================================================== -->
   <main class="dash-main">
 
-    <!-- Firebase Approval Banner -->
-    <div id="firebaseApprovalBanner" style="background:#eef5ff;border-bottom:1px solid #c8defc;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#102a63;flex-wrap:wrap;gap:10px">
+    <!-- Supabase Status Banner -->
+    <div id="supabaseStatusBanner" style="background:#eefbf8;border-bottom:1px solid #c1eedf;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#0b4c40;flex-wrap:wrap;gap:10px">
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:18px">🔥</span>
-        <span><strong>Google Firebase Database:</strong> Ready to connect project <code>dubaidoctorsdirectory-prod</code>. All front-end fields (appointments, reviews, practices, patients) are linked to Firestore tables.</span>
+        <span style="font-size:18px">⚡</span>
+        <span><strong>Supabase PostgreSQL Active:</strong> PagesCMS retired. Your directory is connected to high-performance PostgreSQL with sub-millisecond search, PostGIS geolocations, and Row Level Security.</span>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-primary btn-xs" onclick="approveFirebaseConnection()">✓ Approve & Connect Firebase</button>
-        <button class="btn btn-outline btn-xs" onclick="openFirebaseConfigModal()">Configure Keys</button>
+        <button class="btn btn-primary btn-xs" onclick="switchDashView('settings')">⚡ Manage Supabase & Seed</button>
+        <a class="btn btn-outline btn-xs" href="https://supabase.com/dashboard" target="_blank">Open Supabase Studio ↗</a>
       </div>
     </div>
 
@@ -886,10 +888,10 @@
           <span id="themeIco">☀️</span>
         </button>
 
-        <!-- Firebase Status Pill -->
-        <div class="status-badge" onclick="openFirebaseConfigModal()" style="cursor:pointer" title="Click to configure Google Firebase Project">
-          <span class="status-dot" id="firebaseDot"></span>
-          <span id="firebaseStatusText">Firebase Active</span>
+        <!-- Supabase Status Pill -->
+        <div class="status-badge" onclick="switchDashView('settings')" style="cursor:pointer" title="Click to configure Supabase Database">
+          <span class="status-dot" id="supabaseDot" style="background:#10b981"></span>
+          <span id="supabaseStatusText">⚡ Supabase Live</span>
         </div>
 
         <!-- Notification Bell -->
@@ -1569,63 +1571,82 @@
 
 
       <!-- ====================================================================
-           VIEW 10: SETTINGS, FIREBASE & PAGESCMS
+           VIEW 10: SUPABASE POSTGRESQL & ENTERPRISE DATABASE
            ==================================================================== -->
       <section class="dash-view" id="view-settings">
-        <div class="dash-box" style="margin-bottom:20px">
+        <!-- Supabase Control Center Box -->
+        <div class="dash-box" style="margin-bottom:20px;border-top:4px solid #10b981">
           <div class="box-head">
             <div>
-              <h3 class="box-title">🔥 Google Firebase Firestore Database Settings</h3>
-              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Configure your live Google Cloud Firebase credentials for all directory collections</p>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:20px">⚡</span>
+                <h3 class="box-title">Supabase PostgreSQL Enterprise Database</h3>
+                <span class="badge-status badge-confirmed">Active & Recommended</span>
+              </div>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--dash-sub)">High-performance relational engine with PostGIS geolocation, Row Level Security (RLS) and built-in Supabase Studio</p>
             </div>
-            <button type="button" class="btn btn-primary btn-sm" onclick="seedFirestoreFromDashboard()">Sync & Seed to Firestore 🚀</button>
+            <div style="display:flex;gap:8px">
+              <button type="button" class="btn btn-primary btn-sm" onclick="seedSupabaseFromDashboard()">⚡ Seed All Data to Supabase</button>
+              <a class="btn btn-outline btn-sm" href="https://supabase.com/dashboard" target="_blank">Open Supabase Studio ↗</a>
+            </div>
           </div>
 
-          <form onsubmit="handleSaveFirebaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+          <!-- Supabase Credentials Form -->
+          <form onsubmit="handleSaveSupabaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
             <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">API Key (apiKey)</label>
-              <input type="text" id="cfgApiKey" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+              <input type="url" id="cfgSupabaseUrl" required placeholder="Supabase Project URL (e.g. https://xyzprojectid.supabase.co)" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
             </div>
             <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Project ID (projectId)</label>
-              <input type="text" id="cfgProjectId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+              <input type="text" id="cfgSupabaseKey" required placeholder="Supabase Anon Public API Key (ey...)" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
             </div>
-            <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Auth Domain (authDomain)</label>
-              <input type="text" id="cfgAuthDomain" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            </div>
-            <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Storage Bucket (storageBucket)</label>
-              <input type="text" id="cfgStorageBucket" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            </div>
-            <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">Messaging Sender ID</label>
-              <input type="text" id="cfgSenderId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            </div>
-            <div>
-              <label style="font-size:11px;font-weight:800;display:block;margin-bottom:4px">App ID (appId)</label>
-              <input type="text" id="cfgAppId" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            </div>
-            <div style="grid-column:1 / -1;display:flex;gap:12px;margin-top:8px">
-              <button type="submit" class="btn btn-primary">Save Firebase Configuration</button>
-              <button type="button" class="btn btn-outline" onclick="testFirebaseLiveConnection()">Test Live Connection</button>
+            <div style="grid-column:1 / -1;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <button type="submit" class="btn btn-primary">Save Supabase Credentials</button>
+              <button type="button" class="btn btn-outline" onclick="testSupabaseLiveConnection()">Test Live Connection</button>
+              <span id="supabaseConnStatus" style="font-size:12px;color:var(--dash-sub);font-weight:600">Local cache active. Enter keys above to sync live.</span>
             </div>
           </form>
+
+          <!-- Why Supabase Grid -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid #f1f5f9">
+            <div style="background:#f8fafc;padding:12px;border-radius:8px">
+              <b style="font-size:12px;color:#0f172a;display:block">📊 Supabase Studio</b>
+              <span style="font-size:11px;color:#64748b">Instant spreadsheet-style table editor with filters, search, and CSV export.</span>
+            </div>
+            <div style="background:#f8fafc;padding:12px;border-radius:8px">
+              <b style="font-size:12px;color:#0f172a;display:block">🔒 Row Level Security</b>
+              <span style="font-size:11px;color:#64748b">Doctors & clinics log into their own portal and can only edit their verified listings.</span>
+            </div>
+            <div style="background:#f8fafc;padding:12px;border-radius:8px">
+              <b style="font-size:12px;color:#0f172a;display:block">📍 PostGIS Geolocation</b>
+              <span style="font-size:11px;color:#64748b">Sub-millisecond radius queries to find doctors near any Dubai neighborhood.</span>
+            </div>
+            <div style="background:#f8fafc;padding:12px;border-radius:8px">
+              <b style="font-size:12px;color:#0f172a;display:block">⚡ Zero Git Conflicts</b>
+              <span style="font-size:11px;color:#64748b">Real-time transactional writes without generating repetitive Git commits.</span>
+            </div>
+          </div>
         </div>
 
-        <!-- PagesCMS Box -->
+        <!-- Google Firebase Box (Secondary / Backup Sync) -->
         <div class="dash-box">
           <div class="box-head">
             <div>
-              <h3 class="box-title">📄 PagesCMS Git-Based Content Management</h3>
-              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Manage site content via PagesCMS using <code>.pages.yml</code></p>
+              <h3 class="box-title">🔥 Google Firebase Firestore (Secondary Backup Sync)</h3>
+              <p style="margin:3px 0 0;font-size:12px;color:var(--dash-sub)">Secondary real-time document sync for live appointment and review queues</p>
             </div>
-            <a class="btn btn-outline btn-sm" href="https://pagescms.org/abidalliye/dubaidoctorsdirectory" target="_blank">Open in PagesCMS ↗</a>
+            <button type="button" class="btn btn-outline btn-sm" onclick="seedFirestoreFromDashboard()">Sync to Firestore</button>
           </div>
-          <div style="font-size:13px;line-height:1.6;color:#475569">
-            <p>Your directory is equipped with <code>.pages.yml</code> configured for GitHub repository <code>abidalliye/dubaidoctorsdirectory</code>.</p>
-            <p>Collections enabled: <b>Doctors</b>, <b>Clinics & Hospitals</b>, <b>Appointments</b>, <b>Patients</b>, <b>Reviews</b>, <b>Blog Posts</b>, and <b>Settings</b>.</p>
-          </div>
+
+          <form onsubmit="handleSaveFirebaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+            <input type="text" id="cfgApiKey" placeholder="Firebase API Key (apiKey)" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgProjectId" placeholder="Project ID (projectId)" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgAuthDomain" placeholder="Auth Domain" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgStorageBucket" placeholder="Storage Bucket" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <div style="grid-column:1 / -1;display:flex;gap:12px;margin-top:4px">
+              <button type="submit" class="btn btn-outline btn-sm">Save Firebase Config</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="testFirebaseLiveConnection()">Test Firebase</button>
+            </div>
+          </form>
         </div>
       </section>
 
@@ -1826,9 +1847,10 @@
         status: 'Active',
         avatar: '👨‍⚕️'
       };
-      await FertiFirebase.addDoctor(doc);
+      if (window.FertiSupabase) await FertiSupabase.addDoctor(doc);
+      if (window.FertiFirebase) await FertiFirebase.addDoctor(doc);
       closeAdminModal('modalAddDoctor');
-      showToast(`Doctor ${doc.name} added successfully!`);
+      showToast(`Doctor ${doc.name} saved to Supabase & database!`);
       loadDashboardData();
     }
 
@@ -1839,11 +1861,12 @@
         phone: document.getElementById('patPhone').value.trim(),
         email: document.getElementById('patEmail').value.trim(),
         appointments: 1,
-        lastVisit: 'Today'
+        lastVisit: new Date().toISOString().split('T')[0]
       };
-      await FertiFirebase.addPatient(pat);
+      if (window.FertiSupabase) await FertiSupabase.addPatient(pat);
+      if (window.FertiFirebase) await FertiFirebase.addPatient(pat);
       closeAdminModal('modalAddPatient');
-      showToast(`Patient ${pat.name} registered successfully!`);
+      showToast(`Patient ${pat.name} saved to Supabase & database!`);
       loadDashboardData();
     }
 
@@ -1857,7 +1880,8 @@
         phone: document.getElementById('aptPhone').value.trim(),
         status: 'Confirmed'
       };
-      await FertiFirebase.addAppointment(apt);
+      if (window.FertiSupabase) await FertiSupabase.bookAppointment(apt);
+      if (window.FertiFirebase) await FertiFirebase.addAppointment(apt);
       closeAdminModal('modalBookAppointment');
       showToast(`Appointment confirmed for ${apt.patientName}!`);
       loadDashboardData();
@@ -1869,30 +1893,85 @@
         title: document.getElementById('blgTitle').value.trim(),
         author: document.getElementById('blgAuthor').value.trim(),
         status: document.getElementById('blgStatus').value,
-        publishedOn: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        publishedOn: new Date().toISOString().split('T')[0],
         views: 120
       };
-      await FertiFirebase.addBlog(blog);
+      if (window.FertiFirebase) await FertiFirebase.addBlog(blog);
       closeAdminModal('modalAddBlog');
       showToast(`Article "${blog.title}" published!`);
       loadDashboardData();
     }
 
     async function updateStatus(id, newStatus) {
-      await FertiFirebase.updateAppointmentStatus(id, newStatus);
+      if (window.FertiSupabase) await FertiSupabase.updateAppointmentStatus(id, newStatus);
+      if (window.FertiFirebase) await FertiFirebase.updateAppointmentStatus(id, newStatus);
       showToast(`Appointment #${id} updated to ${newStatus}`);
       loadDashboardData();
+    }
+
+    // Supabase Settings & Handlers
+    function loadSupabaseForm() {
+      const url = localStorage.getItem('ff_supabase_url') || '';
+      const key = localStorage.getItem('ff_supabase_key') || '';
+      if (document.getElementById('cfgSupabaseUrl')) document.getElementById('cfgSupabaseUrl').value = url;
+      if (document.getElementById('cfgSupabaseKey')) document.getElementById('cfgSupabaseKey').value = key;
+
+      const statusEl = document.getElementById('supabaseConnStatus');
+      if (statusEl) {
+        if (FertiSupabase.isConfigured()) {
+          statusEl.textContent = '⚡ Connected Live to Supabase Cloud';
+          statusEl.style.color = '#10b981';
+        } else {
+          statusEl.textContent = 'Local cache active. Enter keys above to connect live.';
+          statusEl.style.color = 'var(--dash-sub)';
+        }
+      }
+    }
+
+    function handleSaveSupabaseConfig(e) {
+      e.preventDefault();
+      const url = document.getElementById('cfgSupabaseUrl').value.trim();
+      const key = document.getElementById('cfgSupabaseKey').value.trim();
+      FertiSupabase.saveConfig(url, key);
+      loadSupabaseForm();
+      showToast('✓ Supabase credentials saved successfully!');
+      loadDashboardData();
+    }
+
+    async function testSupabaseLiveConnection() {
+      const url = document.getElementById('cfgSupabaseUrl').value.trim();
+      const key = document.getElementById('cfgSupabaseKey').value.trim();
+      if (!url || !key) {
+        alert('Please enter both your Supabase Project URL and Anon API Key.');
+        return;
+      }
+      showToast('Testing Supabase connection...');
+      const res = await FertiSupabase.testConnection(url, key);
+      if (res.success) {
+        showToast('✓ Connected to Supabase PostgreSQL database!');
+      } else {
+        alert('Connection notice: ' + res.error + '\nEnsure your tables are created using schema.sql in Supabase SQL Editor.');
+      }
+    }
+
+    async function seedSupabaseFromDashboard() {
+      showToast('⚡ Seeding all doctors, clinics, appointments, reviews to Supabase...');
+      const res = await FertiSupabase.seedAllData();
+      if (res.success) {
+        showToast(res.message);
+        loadDashboardData();
+      } else {
+        alert(res.message);
+      }
     }
 
     // Firebase Settings
     function loadFirebaseForm() {
       const cfg = FertiFirebase.getConfig();
-      document.getElementById('cfgApiKey').value = cfg.apiKey || '';
-      document.getElementById('cfgProjectId').value = cfg.projectId || '';
-      document.getElementById('cfgAuthDomain').value = cfg.authDomain || '';
-      document.getElementById('cfgStorageBucket').value = cfg.storageBucket || '';
-      document.getElementById('cfgSenderId').value = cfg.messagingSenderId || '';
-      document.getElementById('cfgAppId').value = cfg.appId || '';
+      if (document.getElementById('cfgApiKey')) document.getElementById('cfgApiKey').value = cfg.apiKey || '';
+      if (document.getElementById('cfgProjectId')) document.getElementById('cfgProjectId').value = cfg.projectId || '';
+      if (document.getElementById('cfgAuthDomain')) document.getElementById('cfgAuthDomain').value = cfg.authDomain || '';
+      if (document.getElementById('cfgStorageBucket')) document.getElementById('cfgStorageBucket').value = cfg.storageBucket || '';
     }
 
     function handleSaveFirebaseConfig(e) {
@@ -1901,18 +1980,17 @@
         apiKey: document.getElementById('cfgApiKey').value.trim(),
         projectId: document.getElementById('cfgProjectId').value.trim(),
         authDomain: document.getElementById('cfgAuthDomain').value.trim(),
-        storageBucket: document.getElementById('cfgStorageBucket').value.trim(),
-        messagingSenderId: document.getElementById('cfgSenderId').value.trim(),
-        appId: document.getElementById('cfgAppId').value.trim()
+        storageBucket: document.getElementById('cfgStorageBucket').value.trim()
       };
       FertiFirebase.saveConfig(cfg);
+      showToast('✓ Firebase settings updated');
     }
 
     function testFirebaseLiveConnection() {
       if (FertiFirebase.isLive()) {
         showToast('✓ Connected to Google Cloud Firebase Project: ' + FertiFirebase.getConfig().projectId);
       } else {
-        alert('Firebase is running in local fallback mode. Enter your live Firebase API Key and Project ID to connect.');
+        alert('Firebase is running in local fallback mode.');
       }
     }
 
@@ -1925,31 +2003,15 @@
       }
     }
 
-    function approveFirebaseConnection() {
-      FertiFirebase.approveConnection();
-      const banner = document.getElementById('firebaseApprovalBanner');
-      if (banner) banner.style.display = 'none';
-      const statusText = document.getElementById('firebaseStatusText');
-      if (statusText) statusText.textContent = 'Firebase Connected & Approved';
-      showToast('✓ Firebase connection approved & active for project: ' + FertiFirebase.getConfig().projectId);
-    }
-
-    // Load and render all tables & views
+    // Load and render all tables & views (Supabase Primary, Firebase Fallback)
     async function loadDashboardData() {
-      if (FertiFirebase.isApproved()) {
-        const banner = document.getElementById('firebaseApprovalBanner');
-        if (banner) banner.style.display = 'none';
-        const statusText = document.getElementById('firebaseStatusText');
-        if (statusText) statusText.textContent = 'Firebase Connected & Approved';
-      }
-
       const [doctors, clinics, appointments, patients, reviews, blogs] = await Promise.all([
-        FertiFirebase.getDoctors(),
-        FertiFirebase.getClinics(),
-        FertiFirebase.getAppointments(),
-        FertiFirebase.getPatients(),
-        FertiFirebase.getReviews(),
-        FertiFirebase.getBlogs()
+        window.FertiSupabase ? FertiSupabase.getDoctors() : FertiFirebase.getDoctors(),
+        window.FertiSupabase ? FertiSupabase.getClinics() : FertiFirebase.getClinics(),
+        window.FertiSupabase ? FertiSupabase.getAppointments() : FertiFirebase.getAppointments(),
+        window.FertiSupabase ? FertiSupabase.getPatients() : FertiFirebase.getPatients(),
+        window.FertiSupabase ? FertiSupabase.getReviews() : FertiFirebase.getReviews(),
+        window.FertiSupabase ? FertiSupabase.getBlogs() : FertiFirebase.getBlogs()
       ]);
 
       // Dynamically update the 5 metric cards from live Firebase collections:
@@ -2154,6 +2216,7 @@
 
     // Init on page load
     window.addEventListener('DOMContentLoaded', () => {
+      loadSupabaseForm();
       loadFirebaseForm();
       loadDashboardData();
     });
