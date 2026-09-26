@@ -1,12 +1,11 @@
 /**
- * FertiFind Dubai Directory - Google Firebase Firestore Integration
- * Supports live Firebase Firestore database + automatic offline fallback.
+ * FertiFind Dubai Directory - Unified Google Firebase Firestore Integration
+ * Full End-to-End Database Connection for all Frontend Pages, Modals, Forms & Admin Dashboard.
  */
 
 (function () {
-  // Default configuration or saved custom config from localStorage
-  const savedConfig = localStorage.getItem('ff_firebase_config');
-  let firebaseConfig = {
+  // Production / Configured Firebase project credentials
+  const defaultFirebaseConfig = {
     apiKey: "AIzaSyDemoKeyDubaiDoctorsDirectory2026",
     authDomain: "dubaidoctorsdirectory-prod.firebaseapp.com",
     projectId: "dubaidoctorsdirectory-prod",
@@ -15,33 +14,43 @@
     appId: "1:109283746501:web:9a8b7c6d5e4f3a2b1c0d"
   };
 
+  // Check custom configuration from localStorage
+  const savedConfig = localStorage.getItem('ff_firebase_config');
+  let activeConfig = defaultFirebaseConfig;
   if (savedConfig) {
     try {
-      firebaseConfig = Object.assign(firebaseConfig, JSON.parse(savedConfig));
+      activeConfig = Object.assign({}, defaultFirebaseConfig, JSON.parse(savedConfig));
     } catch (e) {
-      console.warn('Could not parse saved Firebase config', e);
+      console.warn('Could not parse custom Firebase config', e);
     }
   }
+
+  // Connection Approval state
+  let isApproved = localStorage.getItem('ff_firebase_approved') === 'true';
 
   let db = null;
+  let auth = null;
   let isLive = false;
 
-  // Try initializing Firebase if SDK is available
+  // Initialize Firebase App & Firestore if SDK is loaded
   if (typeof firebase !== 'undefined' && firebase.initializeApp) {
     try {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
+      if (!firebase.apps || !firebase.apps.length) {
+        firebase.initializeApp(activeConfig);
       }
       db = firebase.firestore();
+      if (firebase.auth) {
+        auth = firebase.auth();
+      }
       isLive = true;
-      console.log('Google Firebase initialized successfully for project:', firebaseConfig.projectId);
+      console.log('🔥 Google Firebase Firestore connected! Project:', activeConfig.projectId);
     } catch (err) {
-      console.info('Firebase initializing with fallback store:', err.message);
+      console.info('Firebase initializing with local cache:', err.message);
     }
   }
 
-  // Local storage cache keys for collections
-  const CACHE_KEYS = {
+  // Local collection keys
+  const KEYS = {
     doctors: 'ff_db_doctors',
     clinics: 'ff_db_clinics',
     appointments: 'ff_db_appointments',
@@ -49,12 +58,13 @@
     reviews: 'ff_db_reviews',
     blogs: 'ff_db_blogs',
     submissions: 'ff_db_submissions',
+    users: 'ff_db_users',
     payments: 'ff_db_payments'
   };
 
-  // Pre-seed local storage from _data if not already present
-  async function initLocalStore() {
-    if (!localStorage.getItem(CACHE_KEYS.doctors)) {
+  // Seed default collections if empty
+  async function seedInitialData() {
+    if (!localStorage.getItem(KEYS.doctors)) {
       try {
         const [docsRes, cliRes, aptRes, patRes, revRes, blgRes] = await Promise.all([
           fetch('_data/doctors.json').then(r => r.json()),
@@ -64,125 +74,92 @@
           fetch('_data/reviews.json').then(r => r.json()),
           fetch('_data/blogs.json').then(r => r.json())
         ]);
-        localStorage.setItem(CACHE_KEYS.doctors, JSON.stringify(docsRes));
-        localStorage.setItem(CACHE_KEYS.clinics, JSON.stringify(cliRes));
-        localStorage.setItem(CACHE_KEYS.appointments, JSON.stringify(aptRes));
-        localStorage.setItem(CACHE_KEYS.patients, JSON.stringify(patRes));
-        localStorage.setItem(CACHE_KEYS.reviews, JSON.stringify(revRes));
-        localStorage.setItem(CACHE_KEYS.blogs, JSON.stringify(blgRes));
+        localStorage.setItem(KEYS.doctors, JSON.stringify(docsRes));
+        localStorage.setItem(KEYS.clinics, JSON.stringify(cliRes));
+        localStorage.setItem(KEYS.appointments, JSON.stringify(aptRes));
+        localStorage.setItem(KEYS.patients, JSON.stringify(patRes));
+        localStorage.setItem(KEYS.reviews, JSON.stringify(revRes));
+        localStorage.setItem(KEYS.blogs, JSON.stringify(blgRes));
       } catch (e) {
         console.warn('Initial _data fetch skipped:', e.message);
       }
     }
   }
-  initLocalStore();
+  seedInitialData();
 
   window.FertiFirebase = {
     getConfig: function () {
-      return Object.assign({}, firebaseConfig);
-    },
-
-    saveConfig: function (newConfig) {
-      localStorage.setItem('ff_firebase_config', JSON.stringify(newConfig));
-      window.location.reload();
+      return Object.assign({}, activeConfig);
     },
 
     isLive: function () {
       return isLive;
     },
 
-    // Doctors CRUD
-    getDoctors: async function () {
-      if (isLive) {
-        try {
-          const snapshot = await db.collection('doctors').get();
-          if (!snapshot.empty) {
-            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-          }
-        } catch (e) {
-          console.warn('Firestore fallback on doctors:', e);
-        }
-      }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.doctors) || '[]');
+    isApproved: function () {
+      return isApproved;
     },
 
-    addDoctor: async function (doctor) {
-      doctor.id = doctor.id || 'DOC-' + Math.floor(100 + Math.random() * 900);
-      if (isLive) {
-        try {
-          await db.collection('doctors').doc(doctor.id).set(doctor);
-        } catch (e) {
-          console.warn('Firestore save error:', e);
-        }
-      }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.doctors) || '[]');
-      list.unshift(doctor);
-      localStorage.setItem(CACHE_KEYS.doctors, JSON.stringify(list));
-      return doctor;
-    },
-
-    deleteDoctor: async function (id) {
-      if (isLive) {
-        try { await db.collection('doctors').doc(id).delete(); } catch (e) {}
-      }
-      let list = JSON.parse(localStorage.getItem(CACHE_KEYS.doctors) || '[]');
-      list = list.filter(d => d.id !== id);
-      localStorage.setItem(CACHE_KEYS.doctors, JSON.stringify(list));
+    approveConnection: function () {
+      isApproved = true;
+      localStorage.setItem('ff_firebase_approved', 'true');
       return true;
     },
 
-    // Clinics & Listings CRUD
-    getClinics: async function () {
-      if (isLive) {
-        try {
-          const snapshot = await db.collection('clinics').get();
-          if (!snapshot.empty) {
-            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-          }
-        } catch (e) {}
-      }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.clinics) || '[]');
+    saveConfig: function (newConfig) {
+      activeConfig = Object.assign({}, activeConfig, newConfig);
+      localStorage.setItem('ff_firebase_config', JSON.stringify(activeConfig));
+      isApproved = true;
+      localStorage.setItem('ff_firebase_approved', 'true');
+      window.location.reload();
     },
 
-    addClinic: async function (clinic) {
-      clinic.id = clinic.id || 'CLI-' + Math.floor(100 + Math.random() * 900);
-      if (isLive) {
-        try {
-          await db.collection('clinics').doc(clinic.id).set(clinic);
-        } catch (e) {}
-      }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.clinics) || '[]');
-      list.unshift(clinic);
-      localStorage.setItem(CACHE_KEYS.clinics, JSON.stringify(list));
-      return clinic;
-    },
-
-    // Appointments CRUD
-    getAppointments: async function () {
-      if (isLive) {
-        try {
-          const snapshot = await db.collection('appointments').orderBy('dateTime', 'desc').get();
-          if (!snapshot.empty) {
-            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-          }
-        } catch (e) {}
-      }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.appointments) || '[]');
-    },
-
+    /* ========================================================================
+       1. Appointments Table (Appointment Booking Modal)
+       ======================================================================== */
     addAppointment: async function (apt) {
       apt.id = apt.id || 'APT-' + Math.floor(1000 + Math.random() * 9000);
       apt.status = apt.status || 'Pending';
       apt.createdAt = new Date().toISOString();
+      apt.source = apt.source || 'Website Booking Form';
+
+      // 1. Save to Firebase Firestore
       if (isLive) {
         try {
           await db.collection('appointments').doc(apt.id).set(apt);
+        } catch (e) {
+          console.warn('Firestore write error (appointment):', e.message);
+        }
+      }
+
+      // 2. Save to local cache
+      const list = JSON.parse(localStorage.getItem(KEYS.appointments) || '[]');
+      list.unshift(apt);
+      localStorage.setItem(KEYS.appointments, JSON.stringify(list));
+
+      // 3. Automatically link and create/update patient in Patients Table!
+      if (apt.patientName) {
+        await this.upsertPatient({
+          name: apt.patientName,
+          phone: apt.phone || '',
+          email: apt.email || '',
+          lastVisit: apt.dateTime || new Date().toISOString().split('T')[0]
+        });
+      }
+
+      return apt;
+    },
+
+    getAppointments: async function () {
+      if (isLive) {
+        try {
+          const snapshot = await db.collection('appointments').orderBy('createdAt', 'desc').get();
+          if (!snapshot.empty) {
+            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          }
         } catch (e) {}
       }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.appointments) || '[]');
-      list.unshift(apt);
-      localStorage.setItem(CACHE_KEYS.appointments, JSON.stringify(list));
-      return apt;
+      return JSON.parse(localStorage.getItem(KEYS.appointments) || '[]');
     },
 
     updateAppointmentStatus: async function (id, status) {
@@ -191,14 +168,47 @@
           await db.collection('appointments').doc(id).update({ status });
         } catch (e) {}
       }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.appointments) || '[]');
+      const list = JSON.parse(localStorage.getItem(KEYS.appointments) || '[]');
       const item = list.find(a => a.id === id);
       if (item) item.status = status;
-      localStorage.setItem(CACHE_KEYS.appointments, JSON.stringify(list));
+      localStorage.setItem(KEYS.appointments, JSON.stringify(list));
       return true;
     },
 
-    // Patients CRUD
+    /* ========================================================================
+       2. Patients Table
+       ======================================================================== */
+    upsertPatient: async function (patientData) {
+      let patients = JSON.parse(localStorage.getItem(KEYS.patients) || '[]');
+      let existing = patients.find(p => p.name.toLowerCase() === patientData.name.toLowerCase() || (p.email && p.email === patientData.email));
+      
+      if (existing) {
+        existing.appointments = (existing.appointments || 1) + 1;
+        existing.lastVisit = patientData.lastVisit || new Date().toISOString().split('T')[0];
+        if (patientData.phone && !existing.phone) existing.phone = patientData.phone;
+        if (patientData.email && !existing.email) existing.email = patientData.email;
+        if (isLive) {
+          try { await db.collection('patients').doc(existing.id).set(existing); } catch (e) {}
+        }
+      } else {
+        existing = {
+          id: 'PAT-' + Math.floor(100 + Math.random() * 900),
+          name: patientData.name,
+          phone: patientData.phone || '+971 50 XXX XXXX',
+          email: patientData.email || '',
+          appointments: 1,
+          lastVisit: patientData.lastVisit || 'Today',
+          createdAt: new Date().toISOString()
+        };
+        patients.unshift(existing);
+        if (isLive) {
+          try { await db.collection('patients').doc(existing.id).set(existing); } catch (e) {}
+        }
+      }
+      localStorage.setItem(KEYS.patients, JSON.stringify(patients));
+      return existing;
+    },
+
     getPatients: async function () {
       if (isLive) {
         try {
@@ -208,92 +218,112 @@
           }
         } catch (e) {}
       }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.patients) || '[]');
+      return JSON.parse(localStorage.getItem(KEYS.patients) || '[]');
     },
 
     addPatient: async function (pat) {
-      pat.id = pat.id || 'PAT-' + Math.floor(100 + Math.random() * 900);
-      if (isLive) {
-        try {
-          await db.collection('patients').doc(pat.id).set(pat);
-        } catch (e) {}
-      }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.patients) || '[]');
-      list.unshift(pat);
-      localStorage.setItem(CACHE_KEYS.patients, JSON.stringify(list));
-      return pat;
+      return this.upsertPatient(pat);
     },
 
-    // Reviews CRUD
-    getReviews: async function () {
-      if (isLive) {
-        try {
-          const snapshot = await db.collection('reviews').get();
-          if (!snapshot.empty) {
-            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-          }
-        } catch (e) {}
-      }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.reviews) || '[]');
-    },
-
+    /* ========================================================================
+       3. Reviews Table (Patient Review Modal)
+       ======================================================================== */
     addReview: async function (rev) {
       rev.id = rev.id || 'REV-' + Math.floor(100 + Math.random() * 900);
+      rev.rating = Number(rev.rating) || 5;
       rev.date = rev.date || 'Just now';
+      rev.verified = rev.verified !== false;
+      rev.createdAt = new Date().toISOString();
+
       if (isLive) {
         try {
           await db.collection('reviews').doc(rev.id).set(rev);
-        } catch (e) {}
+        } catch (e) {
+          console.warn('Firestore write error (review):', e.message);
+        }
       }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.reviews) || '[]');
+
+      const list = JSON.parse(localStorage.getItem(KEYS.reviews) || '[]');
       list.unshift(rev);
-      localStorage.setItem(CACHE_KEYS.reviews, JSON.stringify(list));
+      localStorage.setItem(KEYS.reviews, JSON.stringify(list));
       return rev;
     },
 
-    // Blogs CRUD
-    getBlogs: async function () {
+    getReviews: async function () {
       if (isLive) {
         try {
-          const snapshot = await db.collection('blogs').get();
+          const snapshot = await db.collection('reviews').orderBy('createdAt', 'desc').get();
           if (!snapshot.empty) {
             return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
           }
         } catch (e) {}
       }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.blogs) || '[]');
+      return JSON.parse(localStorage.getItem(KEYS.reviews) || '[]');
     },
 
-    addBlog: async function (blog) {
-      blog.id = blog.id || 'BLG-' + Math.floor(100 + Math.random() * 900);
-      blog.publishedOn = blog.publishedOn || new Date().toISOString().split('T')[0];
-      blog.status = blog.status || 'Published';
-      if (isLive) {
-        try {
-          await db.collection('blogs').doc(blog.id).set(blog);
-        } catch (e) {}
-      }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.blogs) || '[]');
-      list.unshift(blog);
-      localStorage.setItem(CACHE_KEYS.blogs, JSON.stringify(list));
-      return blog;
-    },
+    /* ========================================================================
+       4. Practice Submissions & Clinics Table (submit-business.html & quick list)
+       ======================================================================== */
+    recordSubmission: async function (sub) {
+      sub.id = sub.id || 'SUB-' + Math.floor(10000 + Math.random() * 90000);
+      sub.submittedAt = new Date().toISOString();
+      sub.status = sub.status || 'Pending Verification';
 
-    // Practice Submissions (from submit-business.html)
-    recordSubmission: async function (submission) {
-      submission.id = submission.id || 'SUB-' + Math.floor(10000 + Math.random() * 90000);
-      submission.submittedAt = new Date().toISOString();
       if (isLive) {
         try {
-          await db.collection('submissions').doc(submission.id).set(submission);
+          await db.collection('submissions').doc(sub.id).set(sub);
         } catch (e) {
-          console.warn('Firestore submission save error:', e);
+          console.warn('Firestore write error (submission):', e.message);
         }
       }
-      const list = JSON.parse(localStorage.getItem(CACHE_KEYS.submissions) || '[]');
-      list.unshift(submission);
-      localStorage.setItem(CACHE_KEYS.submissions, JSON.stringify(list));
-      return submission;
+
+      // Also create listing in clinics/facilities table
+      const clinicRecord = {
+        id: 'CLI-' + Math.floor(100 + Math.random() * 900),
+        name: sub.name,
+        category: sub.category || 'Clinic',
+        area: sub.area || 'Dubai',
+        address: sub.address || '',
+        phone: sub.phone || sub.whatsapp || '',
+        whatsapp: sub.whatsapp || '',
+        email: sub.email || '',
+        website: sub.website || '',
+        dhaLicense: sub.dhaLicense || '',
+        tradeLicense: sub.tradeLicense || '',
+        services: sub.services || [],
+        consultationFee: sub.consultationFee || 500,
+        plan: sub.plan || 'Featured Specialist',
+        rating: 5.0,
+        reviewsCount: 1,
+        status: 'Pending Verification',
+        submittedAt: sub.submittedAt
+      };
+
+      await this.addClinic(clinicRecord);
+
+      // If category is doctor, also add to doctors table
+      if (sub.category && sub.category.toLowerCase().includes('doctor')) {
+        await this.addDoctor({
+          name: sub.name,
+          specialty: 'Reproductive Medicine & Infertility',
+          category: 'Gynecology',
+          clinic: sub.name,
+          area: sub.area,
+          dhaLicense: sub.dhaLicense,
+          phone: sub.phone,
+          whatsapp: sub.whatsapp,
+          consultationFee: sub.consultationFee || 500,
+          rating: 5.0,
+          reviewsCount: 1,
+          appointmentsCount: 0,
+          status: 'Pending Verification'
+        });
+      }
+
+      const list = JSON.parse(localStorage.getItem(KEYS.submissions) || '[]');
+      list.unshift(sub);
+      localStorage.setItem(KEYS.submissions, JSON.stringify(list));
+      return sub;
     },
 
     getSubmissions: async function () {
@@ -305,24 +335,153 @@
           }
         } catch (e) {}
       }
-      return JSON.parse(localStorage.getItem(CACHE_KEYS.submissions) || '[]');
+      return JSON.parse(localStorage.getItem(KEYS.submissions) || '[]');
     },
 
-    // Seed local cache to real Firestore
+    addClinic: async function (clinic) {
+      clinic.id = clinic.id || 'CLI-' + Math.floor(100 + Math.random() * 900);
+      if (isLive) {
+        try {
+          await db.collection('clinics').doc(clinic.id).set(clinic);
+        } catch (e) {}
+      }
+      const list = JSON.parse(localStorage.getItem(KEYS.clinics) || '[]');
+      list.unshift(clinic);
+      localStorage.setItem(KEYS.clinics, JSON.stringify(list));
+      return clinic;
+    },
+
+    getClinics: async function () {
+      if (isLive) {
+        try {
+          const snapshot = await db.collection('clinics').get();
+          if (!snapshot.empty) {
+            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          }
+        } catch (e) {}
+      }
+      return JSON.parse(localStorage.getItem(KEYS.clinics) || '[]');
+    },
+
+    /* ========================================================================
+       5. Doctors Table
+       ======================================================================== */
+    addDoctor: async function (doc) {
+      doc.id = doc.id || 'DOC-' + Math.floor(100 + Math.random() * 900);
+      doc.status = doc.status || 'Active';
+      doc.avatar = doc.avatar || '👨‍⚕️';
+      if (isLive) {
+        try {
+          await db.collection('doctors').doc(doc.id).set(doc);
+        } catch (e) {}
+      }
+      const list = JSON.parse(localStorage.getItem(KEYS.doctors) || '[]');
+      list.unshift(doc);
+      localStorage.setItem(KEYS.doctors, JSON.stringify(list));
+      return doc;
+    },
+
+    getDoctors: async function () {
+      if (isLive) {
+        try {
+          const snapshot = await db.collection('doctors').get();
+          if (!snapshot.empty) {
+            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          }
+        } catch (e) {}
+      }
+      return JSON.parse(localStorage.getItem(KEYS.doctors) || '[]');
+    },
+
+    deleteDoctor: async function (id) {
+      if (isLive) {
+        try { await db.collection('doctors').doc(id).delete(); } catch (e) {}
+      }
+      let list = JSON.parse(localStorage.getItem(KEYS.doctors) || '[]');
+      list = list.filter(d => d.id !== id);
+      localStorage.setItem(KEYS.doctors, JSON.stringify(list));
+      return true;
+    },
+
+    /* ========================================================================
+       6. Users Table (Registration & Auth)
+       ======================================================================== */
+    registerUser: async function (user) {
+      user.uid = user.uid || 'USR-' + Math.floor(1000 + Math.random() * 9000);
+      user.registeredAt = new Date().toISOString();
+      if (isLive) {
+        try {
+          await db.collection('users').doc(user.uid).set(user);
+        } catch (e) {}
+      }
+      const list = JSON.parse(localStorage.getItem(KEYS.users) || '[]');
+      list.unshift(user);
+      localStorage.setItem(KEYS.users, JSON.stringify(list));
+      localStorage.setItem('ff_user', JSON.stringify(user));
+      return user;
+    },
+
+    getUsers: async function () {
+      if (isLive) {
+        try {
+          const snapshot = await db.collection('users').get();
+          if (!snapshot.empty) {
+            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          }
+        } catch (e) {}
+      }
+      return JSON.parse(localStorage.getItem(KEYS.users) || '[]');
+    },
+
+    /* ========================================================================
+       7. Blogs & Articles Table
+       ======================================================================== */
+    addBlog: async function (blog) {
+      blog.id = blog.id || 'BLG-' + Math.floor(100 + Math.random() * 900);
+      blog.publishedOn = blog.publishedOn || new Date().toISOString().split('T')[0];
+      blog.status = blog.status || 'Published';
+      if (isLive) {
+        try {
+          await db.collection('blogs').doc(blog.id).set(blog);
+        } catch (e) {}
+      }
+      const list = JSON.parse(localStorage.getItem(KEYS.blogs) || '[]');
+      list.unshift(blog);
+      localStorage.setItem(KEYS.blogs, JSON.stringify(list));
+      return blog;
+    },
+
+    getBlogs: async function () {
+      if (isLive) {
+        try {
+          const snapshot = await db.collection('blogs').get();
+          if (!snapshot.empty) {
+            return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+          }
+        } catch (e) {}
+      }
+      return JSON.parse(localStorage.getItem(KEYS.blogs) || '[]');
+    },
+
+    /* ========================================================================
+       8. Seed local collections to real Cloud Firestore
+       ======================================================================== */
     seedToFirestore: async function () {
       if (!isLive) {
-        throw new Error('Firebase is not initialized. Please verify your Firebase project credentials in Settings.');
+        throw new Error('Firebase is not initialized. Please verify your Project ID and API Key.');
       }
       const collections = ['doctors', 'clinics', 'appointments', 'patients', 'reviews', 'blogs'];
-      let total = 0;
+      let count = 0;
       for (const col of collections) {
         const items = JSON.parse(localStorage.getItem('ff_db_' + col) || '[]');
         for (const item of items) {
           await db.collection(col).doc(item.id).set(item);
-          total++;
+          count++;
         }
       }
-      return total;
+      isApproved = true;
+      localStorage.setItem('ff_firebase_approved', 'true');
+      return count;
     }
   };
 })();

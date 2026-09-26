@@ -555,6 +555,10 @@
     </div>
   </footer>
 
+  <!-- Google Firebase SDKs & Integration -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/site.js"></script>
   <script>
@@ -584,10 +588,25 @@
     function handleBusinessSubmit(e) {
       e.preventDefault();
       const name = document.getElementById('bizName').value;
+      const category = document.getElementById('bizCategory').value;
+      const leadDoctor = document.getElementById('bizLeadDoctor').value;
+      const years = document.getElementById('bizYears').value;
+      const accred = document.getElementById('bizAccred').value;
+      const district = document.getElementById('bizDistrict').value;
+      const unit = document.getElementById('bizUnit').value;
+      const street = document.getElementById('bizStreet').value;
+      const parking = document.getElementById('bizParking').value;
       const license = document.getElementById('bizDhaLicense').value;
       const whatsapp = document.getElementById('bizWhatsApp').value;
+      const phone = document.getElementById('bizPhone').value;
+      const email = document.getElementById('bizEmail').value;
+      const website = document.getElementById('bizWebsite').value;
+      const fee = document.getElementById('bizFee').value;
+      const insurance = document.getElementById('bizInsurance').value;
       const planSel = document.getElementById('bizPlan');
       const planText = planSel.options[planSel.selectedIndex].text.split('(')[0].trim();
+
+      const selectedServices = [...document.querySelectorAll('input[name="services"]:checked')].map(cb => cb.parentElement.textContent.trim());
 
       const ref = 'FF-DHA-' + Math.floor(10000 + Math.random() * 90000);
       document.getElementById('refCode').textContent = ref;
@@ -603,18 +622,30 @@
 
       if (window.FertiFirebase) {
         FertiFirebase.recordSubmission({
+          ref: ref,
           name: name,
+          category: category,
+          leadDoctor: leadDoctor,
+          yearsInPractice: years,
+          accreditations: accred,
+          area: district,
+          address: unit + (street ? ', ' + street : ''),
+          parking: parking,
           dhaLicense: license,
           whatsapp: whatsapp,
+          phone: phone,
+          email: email,
+          website: website,
+          services: selectedServices,
+          consultationFee: fee,
+          insurance: insurance,
           plan: planText,
-          category: document.getElementById('bizCategory') ? document.getElementById('bizCategory').value : '',
-          area: document.getElementById('bizDistrict') ? document.getElementById('bizDistrict').value : '',
-          email: document.getElementById('bizEmail') ? document.getElementById('bizEmail').value : '',
-          ref: ref
+          status: 'Pending Verification',
+          submittedAt: new Date().toISOString()
         });
       }
 
-      FertiFind.toast(`Practice submission received! Reference #${ref}`);
+      FertiFind.toast(`Practice submission received & saved to database! Reference #${ref}`);
     }
   </script>
 </body>

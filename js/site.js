@@ -42,16 +42,16 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <label>Full Name</label>
-                <input type="text" required placeholder="e.g. Fatima Al Mansoori">
+                <input type="text" id="ffBookingName" required placeholder="e.g. Fatima Al Mansoori">
               </div>
               <div>
                 <label>Mobile Number (+971)</label>
-                <input type="tel" required placeholder="+971 50 XXX XXXX">
+                <input type="tel" id="ffBookingPhone" required placeholder="+971 50 XXX XXXX">
               </div>
             </div>
             <div>
               <label>Email Address</label>
-              <input type="email" required placeholder="name@example.com">
+              <input type="email" id="ffBookingEmail" required placeholder="name@example.com">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
@@ -60,16 +60,16 @@
               </div>
               <div>
                 <label>Preferred Slot</label>
-                <select>
-                  <option>Morning (09:00 AM – 12:00 PM)</option>
-                  <option>Afternoon (12:00 PM – 04:00 PM)</option>
-                  <option>Evening (04:00 PM – 08:00 PM)</option>
+                <select id="ffBookingSlot">
+                  <option value="Morning (09:00 AM – 12:00 PM)">Morning (09:00 AM – 12:00 PM)</option>
+                  <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12:00 PM – 04:00 PM)</option>
+                  <option value="Evening (04:00 PM – 08:00 PM)">Evening (04:00 PM – 08:00 PM)</option>
                 </select>
               </div>
             </div>
             <div>
               <label>Clinical Notes or Prior History (Optional)</label>
-              <textarea placeholder="Describe previous cycles, test results, or specific questions for the doctor..."></textarea>
+              <textarea id="ffBookingNotes" placeholder="Describe previous cycles, test results, or specific questions for the doctor..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Confirm Booking Request →</button>
             <p style="font-size:11px;color:var(--muted);text-align:center;margin:6px 0 0">
@@ -104,22 +104,22 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <label>Your Display Name</label>
-                <input type="text" required placeholder="e.g. Mariam K. (or Verified Patient)">
+                <input type="text" id="ffReviewName" required placeholder="e.g. Fatima K. (or Verified Patient)">
               </div>
               <div>
                 <label>Treatment Received</label>
-                <select>
-                  <option>IVF / ICSI Treatment</option>
-                  <option>Fertility Assessment Consultation</option>
-                  <option>Semen Analysis / Andrology</option>
-                  <option>Egg Freezing Preservation</option>
-                  <option>Diagnostic Blood Tests</option>
+                <select id="ffReviewTreatment">
+                  <option value="IVF / ICSI Treatment">IVF / ICSI Treatment</option>
+                  <option value="Fertility Assessment Consultation">Fertility Assessment Consultation</option>
+                  <option value="Semen Analysis / Andrology">Semen Analysis / Andrology</option>
+                  <option value="Egg Freezing Preservation">Egg Freezing Preservation</option>
+                  <option value="Diagnostic Blood Tests">Diagnostic Blood Tests</option>
                 </select>
               </div>
             </div>
             <div>
               <label>Your Review</label>
-              <textarea required placeholder="Detail the doctor's communication, waiting times, lab explanations, and overall care..."></textarea>
+              <textarea id="ffReviewComment" required placeholder="Detail the doctor's communication, waiting times, lab explanations, and overall care..."></textarea>
             </div>
             <label style="display:flex;gap:8px;align-items:center;font-size:12px;cursor:pointer">
               <input type="checkbox" required checked>
@@ -143,49 +143,49 @@
           <form class="ff-form" id="ffListForm">
             <div>
               <label>Medical Practice / Doctor Name</label>
-              <input type="text" required placeholder="e.g. Orchid Fertility Clinic or Dr. Name">
+              <input type="text" id="ffListName" required placeholder="e.g. Orchid Fertility Clinic or Dr. Name">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <label>Provider Type</label>
-                <select required>
-                  <option value="clinic">Fertility / IVF Clinic</option>
-                  <option value="doctor">Consultant Specialist</option>
-                  <option value="hospital">Women's / Multispecialty Hospital</option>
-                  <option value="lab">Diagnostic / Genetics Laboratory</option>
+                <select id="ffListType" required>
+                  <option value="Clinic">Fertility / IVF Clinic</option>
+                  <option value="Doctor">Consultant Specialist</option>
+                  <option value="Hospital">Women's / Multispecialty Hospital</option>
+                  <option value="Diagnostic Lab">Diagnostic / Genetics Laboratory</option>
                 </select>
               </div>
               <div>
                 <label>Dubai District</label>
-                <select required>
-                  <option>Dubai Healthcare City</option>
-                  <option>Jumeirah</option>
-                  <option>Oud Metha</option>
-                  <option>Dubai Marina</option>
-                  <option>JLT</option>
-                  <option>Al Barsha</option>
-                  <option>Downtown Dubai</option>
-                  <option>Deira</option>
+                <select id="ffListDistrict" required>
+                  <option value="Dubai Healthcare City">Dubai Healthcare City</option>
+                  <option value="Jumeirah">Jumeirah</option>
+                  <option value="Oud Metha">Oud Metha</option>
+                  <option value="Dubai Marina">Dubai Marina</option>
+                  <option value="JLT">JLT</option>
+                  <option value="Al Barsha">Al Barsha</option>
+                  <option value="Downtown Dubai">Downtown Dubai</option>
+                  <option value="Deira">Deira</option>
                 </select>
               </div>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <label>DHA License Number</label>
-                <input type="text" required placeholder="DHA-XXXX-XXXX">
+                <input type="text" id="ffListDhaLicense" required placeholder="DHA-XXXX-XXXX">
               </div>
               <div>
                 <label>Official Phone Number</label>
-                <input type="tel" required placeholder="+971 4 XXX XXXX">
+                <input type="tel" id="ffListPhone" required placeholder="+971 4 XXX XXXX">
               </div>
             </div>
             <div>
               <label>Official Practice Email</label>
-              <input type="email" required placeholder="contact@clinic.ae">
+              <input type="email" id="ffListEmail" required placeholder="contact@clinic.ae">
             </div>
             <div>
               <label>Key Services Offered</label>
-              <textarea placeholder="e.g. IVF, ICSI, PGT-A, Laparoscopy, TESA, Semen Analysis, Egg Freezing..."></textarea>
+              <textarea id="ffListServices" placeholder="e.g. IVF, ICSI, PGT-A, Laparoscopy, TESA, Semen Analysis, Egg Freezing..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Submit for DHA Verification →</button>
           </form>
@@ -383,24 +383,32 @@
 
     const bookingForm = document.getElementById('ffBookingForm');
     if (bookingForm) {
-      bookingForm.onsubmit = function (e) {
+      bookingForm.onsubmit = async function (e) {
         e.preventDefault();
         const ref = 'FF-DXB-' + Math.floor(100000 + Math.random() * 900000);
-        const name = (document.getElementById('ffBookingName') ? document.getElementById('ffBookingName').value : '') || 'Patient';
+        const name = (document.getElementById('ffBookingName') ? document.getElementById('ffBookingName').value.trim() : '') || 'Patient';
         const provider = (document.getElementById('ffBookingProvider') ? document.getElementById('ffBookingProvider').value : '') || 'Specialist';
         const service = (document.getElementById('ffBookingService') ? document.getElementById('ffBookingService').value : '') || 'Consultation';
-        const phone = (document.getElementById('ffBookingPhone') ? document.getElementById('ffBookingPhone').value : '');
-        const date = (document.getElementById('ffBookingDate') ? document.getElementById('ffBookingDate').value : '2025-09-24');
+        const phone = (document.getElementById('ffBookingPhone') ? document.getElementById('ffBookingPhone').value.trim() : '');
+        const email = (document.getElementById('ffBookingEmail') ? document.getElementById('ffBookingEmail').value.trim() : '');
+        const date = (document.getElementById('ffBookingDate') ? document.getElementById('ffBookingDate').value : new Date().toISOString().split('T')[0]);
+        const slot = (document.getElementById('ffBookingSlot') ? document.getElementById('ffBookingSlot').value : 'Morning');
+        const notes = (document.getElementById('ffBookingNotes') ? document.getElementById('ffBookingNotes').value.trim() : '');
 
         if (window.FertiFirebase) {
-          FertiFirebase.addAppointment({
+          await FertiFirebase.addAppointment({
             id: ref,
             patientName: name,
             doctorName: provider,
             specialty: service,
-            dateTime: date + ' 10:00 AM',
+            date: date,
+            slot: slot,
+            dateTime: date + ' (' + slot.split(' ')[0] + ')',
             phone: phone,
-            status: 'Pending'
+            email: email,
+            notes: notes,
+            status: 'Pending',
+            source: 'Website Appointment Booking Modal'
           });
         }
 
@@ -412,36 +420,60 @@
 
     const reviewForm = document.getElementById('ffReviewForm');
     if (reviewForm) {
-      reviewForm.onsubmit = function (e) {
+      reviewForm.onsubmit = async function (e) {
         e.preventDefault();
-        const reviewer = (document.getElementById('ffReviewName') ? document.getElementById('ffReviewName').value : '') || 'Patient';
-        const provider = (document.getElementById('ffReviewProvider') ? document.getElementById('ffReviewProvider').value : '') || 'Doctor';
-        const comment = (document.getElementById('ffReviewComment') ? document.getElementById('ffReviewComment').value : '') || 'Great consultation and care.';
+        const reviewer = (document.getElementById('ffReviewName') ? document.getElementById('ffReviewName').value.trim() : '') || 'Verified Patient';
+        const provider = (document.getElementById('ffReviewProvider') ? document.getElementById('ffReviewProvider').value : '') || 'Healthcare Provider';
+        const treatment = (document.getElementById('ffReviewTreatment') ? document.getElementById('ffReviewTreatment').value : 'Consultation');
+        const comment = (document.getElementById('ffReviewComment') ? document.getElementById('ffReviewComment').value.trim() : '') || 'Great consultation and care.';
         const rating = Number(document.getElementById('ffRatingValue') ? document.getElementById('ffRatingValue').value : 5) || 5;
 
         if (window.FertiFirebase) {
-          FertiFirebase.addReview({
+          await FertiFirebase.addReview({
             patientName: reviewer,
             doctorName: provider,
             rating: rating,
+            treatment: treatment,
             comment: comment,
             date: 'Just now',
-            verified: true
+            verified: true,
+            source: 'Patient Review Modal'
           });
         }
 
         FertiFind.closeModal('ffReviewModal');
-        FertiFind.toast('Thank you! Your verified patient review has been received.');
+        FertiFind.toast('Thank you! Your verified patient review has been received and saved to database.');
         reviewForm.reset();
       };
     }
 
     const listForm = document.getElementById('ffListForm');
     if (listForm) {
-      listForm.onsubmit = function (e) {
+      listForm.onsubmit = async function (e) {
         e.preventDefault();
+        const name = (document.getElementById('ffListName') ? document.getElementById('ffListName').value.trim() : '');
+        const type = (document.getElementById('ffListType') ? document.getElementById('ffListType').value : 'Clinic');
+        const area = (document.getElementById('ffListDistrict') ? document.getElementById('ffListDistrict').value : 'Dubai');
+        const license = (document.getElementById('ffListDhaLicense') ? document.getElementById('ffListDhaLicense').value.trim() : '');
+        const phone = (document.getElementById('ffListPhone') ? document.getElementById('ffListPhone').value.trim() : '');
+        const email = (document.getElementById('ffListEmail') ? document.getElementById('ffListEmail').value.trim() : '');
+        const services = (document.getElementById('ffListServices') ? document.getElementById('ffListServices').value.trim() : '');
+
+        if (window.FertiFirebase) {
+          await FertiFirebase.recordSubmission({
+            name: name,
+            category: type,
+            area: area,
+            dhaLicense: license,
+            phone: phone,
+            email: email,
+            services: services ? services.split(',').map(s => s.trim()) : [],
+            source: 'Quick Practice Listing Modal'
+          });
+        }
+
         FertiFind.closeModal('ffListBusinessModal');
-        FertiFind.toast('Practice submission received. Our DHA registry team will verify your credentials.');
+        FertiFind.toast('Practice submission received and saved to database! DHA credentials under review.');
         listForm.reset();
       };
     }
@@ -687,6 +719,9 @@
       }
 
       const user = { name, email, mobile, role, loggedInAt: new Date().toISOString() };
+      if (window.FertiFirebase) {
+        FertiFirebase.registerUser(user);
+      }
       localStorage.setItem('ff_user', JSON.stringify(user));
 
       this.closeModal('ffAuthModal');
