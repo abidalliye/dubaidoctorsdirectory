@@ -19,7 +19,11 @@ This directory is powered by **Supabase PostgreSQL**, providing enterprise scala
 ### Step 2: Run the Schema & Data Migration (1 Click)
 1. In your Supabase project dashboard, click on the **SQL Editor** tab in the left sidebar (icon with `>_`).
 2. Click **New query**.
-3. Open `supabase/schema.sql` from this repository, copy all contents, paste it into the editor, and click **Run**.
+3. Open `supabase/schema.sql` from this repository, copy all contents, paste it into the editor, and click **Run** (or press `Ctrl+Enter`).
+   > **Note on Supabase SQL Editor:** Make sure **no text is highlighted** before clicking **Run**. If text is partially selected in the editor, Supabase will only execute the highlighted lines instead of the whole file.
+   > **Alternative Modular Approach:** You can also run:
+   > - `supabase/tables_and_security.sql` first (creates all 8 tables and RLS security policies).
+   > - `supabase/seed_data.sql` second (populates initial verified doctors, clinics, appointments, reviews, and blogs).
 4. ✅ All 8 tables (`doctors`, `clinics`, `appointments`, `patients`, `reviews`, `practice_submissions`, `blogs`, `platform_settings`) with full RLS security policies and initial Dubai records will be created instantly.
 
 ---
