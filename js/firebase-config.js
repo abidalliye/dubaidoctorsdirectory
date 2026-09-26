@@ -25,8 +25,11 @@
     }
   }
 
-  // Connection Approval state
-  let isApproved = localStorage.getItem('ff_firebase_approved') === 'true';
+  // Connection Approval state (Approved by user)
+  let isApproved = localStorage.getItem('ff_firebase_approved') !== 'false';
+  if (!localStorage.getItem('ff_firebase_approved')) {
+    localStorage.setItem('ff_firebase_approved', 'true');
+  }
 
   let db = null;
   let auth = null;
@@ -62,27 +65,57 @@
     payments: 'ff_db_payments'
   };
 
-  // Seed default collections if empty
+  // Seed default collections and synchronize to Firestore
   async function seedInitialData() {
-    if (!localStorage.getItem(KEYS.doctors)) {
-      try {
-        const [docsRes, cliRes, aptRes, patRes, revRes, blgRes] = await Promise.all([
-          fetch('_data/doctors.json').then(r => r.json()),
-          fetch('_data/clinics.json').then(r => r.json()),
-          fetch('_data/appointments.json').then(r => r.json()),
-          fetch('_data/patients.json').then(r => r.json()),
-          fetch('_data/reviews.json').then(r => r.json()),
-          fetch('_data/blogs.json').then(r => r.json())
-        ]);
+    try {
+      const [docsRes, cliRes, aptRes, patRes, revRes, blgRes] = await Promise.all([
+        fetch('_data/doctors.json').then(r => r.json()).catch(() => []),
+        fetch('_data/clinics.json').then(r => r.json()).catch(() => []),
+        fetch('_data/appointments.json').then(r => r.json()).catch(() => []),
+        fetch('_data/patients.json').then(r => r.json()).catch(() => []),
+        fetch('_data/reviews.json').then(r => r.json()).catch(() => []),
+        fetch('_data/blogs.json').then(r => r.json()).catch(() => [])
+      ]);
+
+      if (docsRes && docsRes.length && !localStorage.getItem(KEYS.doctors)) {
         localStorage.setItem(KEYS.doctors, JSON.stringify(docsRes));
-        localStorage.setItem(KEYS.clinics, JSON.stringify(cliRes));
-        localStorage.setItem(KEYS.appointments, JSON.stringify(aptRes));
-        localStorage.setItem(KEYS.patients, JSON.stringify(patRes));
-        localStorage.setItem(KEYS.reviews, JSON.stringify(revRes));
-        localStorage.setItem(KEYS.blogs, JSON.stringify(blgRes));
-      } catch (e) {
-        console.warn('Initial _data fetch skipped:', e.message);
       }
+      if (cliRes && cliRes.length && !localStorage.getItem(KEYS.clinics)) {
+        localStorage.setItem(KEYS.clinics, JSON.stringify(cliRes));
+      }
+      if (aptRes && aptRes.length && !localStorage.getItem(KEYS.appointments)) {
+        localStorage.setItem(KEYS.appointments, JSON.stringify(aptRes));
+      }
+      if (patRes && patRes.length && !localStorage.getItem(KEYS.patients)) {
+        localStorage.setItem(KEYS.patients, JSON.stringify(patRes));
+      }
+      if (revRes && revRes.length && !localStorage.getItem(KEYS.reviews)) {
+        localStorage.setItem(KEYS.reviews, JSON.stringify(revRes));
+      }
+      if (blgRes && blgRes.length && !localStorage.getItem(KEYS.blogs)) {
+        localStorage.setItem(KEYS.blogs, JSON.stringify(blgRes));
+      }
+
+      // Synchronize initial data to Firestore if online
+      if (isLive && isApproved && db) {
+        try {
+          const docSnap = await db.collection('doctors').limit(1).get();
+          if (docSnap.empty) {
+            console.log('Seeding initial collections into Cloud Firestore...');
+            for (const doc of docsRes) await db.collection('doctors').doc(doc.id).set(doc);
+            for (const cli of cliRes) await db.collection('clinics').doc(cli.id).set(cli);
+            for (const apt of aptRes) await db.collection('appointments').doc(apt.id).set(apt);
+            for (const pat of patRes) await db.collection('patients').doc(pat.id).set(pat);
+            for (const rev of revRes) await db.collection('reviews').doc(rev.id).set(rev);
+            for (const blg of blgRes) await db.collection('blogs').doc(blg.id).set(blg);
+            console.log('✅ Cloud Firestore seeding complete!');
+          }
+        } catch (e) {
+          console.info('Auto-seed check note:', e.message);
+        }
+      }
+    } catch (e) {
+      console.warn('Initial data seed error:', e.message);
     }
   }
   seedInitialData();
