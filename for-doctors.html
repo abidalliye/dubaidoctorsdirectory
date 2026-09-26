@@ -320,11 +320,11 @@
         </p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn btn-primary" style="padding:14px 22px" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">
-            Register Your Practice Free →
-          </button>
-          <button class="btn btn-outline" style="padding:14px 22px" onclick="FertiFind.openClaimProfile()">
-            Claim Pre-Listed Profile
+          <a class="btn btn-primary" style="padding:14px 22px" href="submit-business.html">
+            Submit Business Details Free →
+          </a>
+          <button class="btn btn-outline" style="padding:14px 22px" onclick="FertiFind.openAuth('login')">
+            Provider Sign In
           </button>
         </div>
 
@@ -394,6 +394,9 @@
           <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">
             Submit Practice for Verification →
           </button>
+          <div style="font-size:12px;text-align:center;margin-top:10px">
+            <a href="submit-business.html" style="color:var(--blue);font-weight:700">Looking for full practice registration? Open Submit Business Details Portal →</a>
+          </div>
           <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px">
             🔒 Zero listing lock-ins. Verified within 24 business hours.
           </div>
@@ -617,10 +620,11 @@
         <div>
           <div class="footer-title">For Practices</div>
           <div class="footer-links">
+            <a href="submit-business.html">Submit Business Details</a>
             <a href="for-doctors.html">List Your Practice</a>
             <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
             <a href="for-doctors.html#plans">Provider Pricing Plans</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('login')">Provider Portal Login</a>
+            <a href="auth.html#login">Provider Portal Sign In</a>
           </div>
         </div>
 

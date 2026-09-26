@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign In & Register | FertiFind Dubai Healthcare Directory</title>
+  <meta name="description" content="Sign in or register for your FertiFind Dubai patient account or medical provider portal. Manage appointments, list your practice, and access direct patient leads.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-page-hero {
+      background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
+      padding: 50px 0 70px;
+      min-height: calc(100vh - 350px);
+      display: flex;
+      align-items: center;
+    }
+    .auth-container {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 32px 30px;
+      box-shadow: var(--shadow);
+    }
+    .auth-page-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 0 0 6px;
+      text-align: center;
+    }
+    .auth-page-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 20px;
+      text-align: center;
+    }
+    .crumb {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .crumb a {
+      color: var(--blue);
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="topbar">
+    <div class="container">
+      <span>🇦🇪 FertiFind Dubai • Secure Account Portal</span>
+      <span>Patient Care Navigation & DHA Verified Practice Access</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        FertiFind <small>Dubai</small>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_hospital_profile_page.html">Hospitals & Clinics</a>
+        <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
+        <a href="for-doctors.html">For Doctors</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="submit-business.html">Submit Business Details</a>
+        <a class="btn btn-primary" href="fertifind_dubai_directory_search_page.html">Find Care →</a>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="index.html">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
+      <a href="fertifind_hospital_profile_page.html">🏥 Hospitals & Clinics</a>
+      <a href="fertility-treatment-cost-dubai.html">💰 Cost & Pricing Guide</a>
+      <a href="for-doctors.html">💼 For Doctors & Clinics</a>
+      <a href="submit-business.html">📝 Submit Business Details</a>
+      <a class="btn btn-primary" href="fertifind_dubai_directory_search_page.html" style="text-align:center">Find Specialist</a>
+    </div>
+  </header>
+
+  <!-- Auth Single Page Hero -->
+  <main class="auth-page-hero">
+    <div class="container" style="width:100%">
+      <div class="crumb"><a href="index.html">Home</a> / Account Access</div>
+
+      <div class="auth-container">
+        <h1 class="auth-page-title" id="pageAuthTitle">FertiFind Account</h1>
+        <p class="auth-page-sub" id="pageAuthSub">Log in to manage appointments or list your healthcare practice</p>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs" style="justify-content:center">
+          <button type="button" class="auth-tab active" id="tabLogin" onclick="switchPageTab('login')">Log In</button>
+          <button type="button" class="auth-tab" id="tabRegister" onclick="switchPageTab('register')">Create Account</button>
+          <button type="button" class="auth-tab" id="tabForgot" onclick="switchPageTab('forgot')">Forgot Password</button>
+        </div>
+
+        <!-- View 1: Log In -->
+        <div class="auth-view active" id="viewLogin">
+          <form class="ff-form" onsubmit="handleLogin(event)">
+            <div>
+              <label>Email Address or Mobile Number</label>
+              <input type="text" id="loginEmail" required placeholder="doctor@clinic.ae or patient@example.com">
+            </div>
+            <div>
+              <label>Password</label>
+              <div class="input-pass-wrap">
+                <input type="password" id="loginPass" required placeholder="••••••••">
+                <button type="button" class="pass-toggle-btn" onclick="togglePass('loginPass', this)">👁</button>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:2px 0">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
+                <input type="checkbox" checked style="width:14px;height:14px;margin:0"> Remember me
+              </label>
+              <a href="javascript:void(0)" onclick="switchPageTab('forgot')" style="color:var(--blue);font-weight:700">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
+
+            <div class="demo-auth-strip">
+              <span>Quick Demo:</span>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Demo Doctor</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('patient')">👤 Demo Patient</button>
+            </div>
+
+            <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
+              Don't have an account yet? <a href="javascript:void(0)" onclick="switchPageTab('register')" style="color:var(--blue);font-weight:800">Create one now</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- View 2: Register -->
+        <div class="auth-view" id="viewRegister">
+          <form class="ff-form" onsubmit="handleRegister(event)">
+            <div>
+              <label>I am registering as:</label>
+              <div class="role-picker">
+                <div class="role-chip active" id="p-chip-patient" onclick="selectPageRole('patient')">
+                  <span class="role-ico">👤</span>
+                  <span>Patient</span>
+                </div>
+                <div class="role-chip" id="p-chip-doctor" onclick="selectPageRole('doctor')">
+                  <span class="role-ico">🩺</span>
+                  <span>Doctor</span>
+                </div>
+                <div class="role-chip" id="p-chip-clinic" onclick="selectPageRole('clinic')">
+                  <span class="role-ico">🏥</span>
+                  <span>Clinic</span>
+                </div>
+                <div class="role-chip" id="p-chip-hospital" onclick="selectPageRole('hospital')">
+                  <span class="role-ico">🏨</span>
+                  <span>Hospital/Lab</span>
+                </div>
+              </div>
+              <input type="hidden" id="pRegRole" value="patient">
+            </div>
+
+            <!-- Provider Notice -->
+            <div class="auth-b2b-callout" id="pProviderNotice" style="display:none">
+              <div>
+                <b style="display:block;font-size:12px">Registering a Medical Practice?</b>
+                <span>Submit your DHA license, address & WhatsApp for direct leads.</span>
+              </div>
+              <a class="btn btn-primary btn-xs" href="submit-business.html">Submit Details →</a>
+            </div>
+
+            <div>
+              <label id="pRegNameLabel">Full Name</label>
+              <input type="text" id="pRegName" required placeholder="e.g. Dr. Sarah Mansoori">
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label>Email Address</label>
+                <input type="email" id="pRegEmail" required placeholder="name@domain.ae">
+              </div>
+              <div>
+                <label>Mobile (+971 UAE)</label>
+                <input type="tel" id="pRegMobile" required placeholder="+971 50 XXX XXXX">
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label>Password</label>
+                <div class="input-pass-wrap">
+                  <input type="password" id="pRegPass" required placeholder="••••••••">
+                  <button type="button" class="pass-toggle-btn" onclick="togglePass('pRegPass', this)">👁</button>
+                </div>
+              </div>
+              <div>
+                <label>Confirm Password</label>
+                <div class="input-pass-wrap">
+                  <input type="password" id="pRegPassConf" required placeholder="••••••••">
+                  <button type="button" class="pass-toggle-btn" onclick="togglePass('pRegPassConf', this)">👁</button>
+                </div>
+              </div>
+            </div>
+
+            <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);cursor:pointer;margin-top:2px">
+              <input type="checkbox" required checked style="width:15px;height:15px;margin-top:1px">
+              <span>I agree to FertiFind's <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')" style="color:var(--blue);font-weight:700">Terms of Service</a> & UAE Healthcare Guidelines.</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary" id="pRegSubmitBtn" style="width:100%;padding:13px">Create Account →</button>
+
+            <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
+              Already have an account? <a href="javascript:void(0)" onclick="switchPageTab('login')" style="color:var(--blue);font-weight:800">Log In here</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- View 3: Forgot Password -->
+        <div class="auth-view" id="viewForgot">
+          <form class="ff-form" onsubmit="handleForgot(event)">
+            <div style="background:#f8fbff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;font-size:12px;color:#455a7a;line-height:1.5">
+              🔑 Enter your registered email address or mobile phone number. We will send a secure password reset link and 6-digit verification code.
+            </div>
+            <div>
+              <label>Registered Email or Phone</label>
+              <input type="text" id="forgotContact" required placeholder="name@clinic.ae or +971 50 XXX XXXX">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Send Password Reset Code →</button>
+
+            <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
+              Remember your password? <a href="javascript:void(0)" onclick="switchPageTab('login')" style="color:var(--blue);font-weight:800">← Back to Log In</a>
+            </p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Unified Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            FertiFind <small style="color:var(--teal)">Dubai</small>
+          </a>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Directory</div>
+          <div class="footer-links">
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Districts</div>
+          <div class="footer-links">
+            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
+            <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah Clinics</a>
+            <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers</a>
+            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">For Practices</div>
+          <div class="footer-links">
+            <a href="submit-business.html">Submit Business Details</a>
+            <a href="for-doctors.html">Practice Growth & Pricing</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
+            <a href="for-doctors.html#plans">Provider Pricing Plans</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Company</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#how">How It Works</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script>
+    function switchPageTab(tab) {
+      ['login', 'register', 'forgot'].forEach(t => {
+        const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const view = document.getElementById('view' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (view) view.classList.toggle('active', t === tab);
+      });
+      const title = document.getElementById('pageAuthTitle');
+      const sub = document.getElementById('pageAuthSub');
+      if (tab === 'login') {
+        title.textContent = 'Welcome Back';
+        sub.textContent = 'Log in to your FertiFind patient or provider account';
+        window.location.hash = 'login';
+      } else if (tab === 'register') {
+        title.textContent = 'Create an Account';
+        sub.textContent = 'Join Dubai\'s leading verified healthcare directory';
+        window.location.hash = 'register';
+      } else if (tab === 'forgot') {
+        title.textContent = 'Reset Password';
+        sub.textContent = 'Recover access to your account via email or SMS';
+        window.location.hash = 'forgot';
+      }
+    }
+
+    function selectPageRole(role) {
+      ['patient', 'doctor', 'clinic', 'hospital'].forEach(r => {
+        const chip = document.getElementById('p-chip-' + r);
+        if (chip) chip.classList.toggle('active', r === role);
+      });
+      document.getElementById('pRegRole').value = role;
+
+      const notice = document.getElementById('pProviderNotice');
+      const nameLabel = document.getElementById('pRegNameLabel');
+      const submitBtn = document.getElementById('pRegSubmitBtn');
+
+      if (role === 'doctor') {
+        if (notice) notice.style.display = 'flex';
+        if (nameLabel) nameLabel.textContent = 'Doctor Full Name & Title';
+        if (submitBtn) submitBtn.textContent = 'Register Doctor & Continue →';
+      } else if (role === 'clinic' || role === 'hospital') {
+        if (notice) notice.style.display = 'flex';
+        if (nameLabel) nameLabel.textContent = 'Practice / Facility Name';
+        if (submitBtn) submitBtn.textContent = 'Register Practice & Continue →';
+      } else {
+        if (notice) notice.style.display = 'none';
+        if (nameLabel) nameLabel.textContent = 'Full Name';
+        if (submitBtn) submitBtn.textContent = 'Create Patient Account →';
+      }
+    }
+
+    function togglePass(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const role = email.includes('clinic') || email.includes('dr') || email.includes('doctor') ? 'doctor' : 'patient';
+      const name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : 'Mariam Al Falasi';
+      localStorage.setItem('ff_user', JSON.stringify({ name, email, role, loggedInAt: new Date().toISOString() }));
+      FertiFind.toast(`Welcome back, ${name}! Signed in successfully.`);
+      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('pRegName').value.trim();
+      const email = document.getElementById('pRegEmail').value.trim();
+      const mobile = document.getElementById('pRegMobile').value.trim();
+      const role = document.getElementById('pRegRole').value;
+      const pass = document.getElementById('pRegPass').value;
+      const passConf = document.getElementById('pRegPassConf').value;
+
+      if (pass !== passConf) {
+        alert('Passwords do not match. Please verify your password confirmation.');
+        return;
+      }
+
+      localStorage.setItem('ff_user', JSON.stringify({ name, email, mobile, role, loggedInAt: new Date().toISOString() }));
+
+      if (role === 'doctor' || role === 'clinic' || role === 'hospital') {
+        FertiFind.toast(`Account created for ${name}! Please submit your practice details.`, 4000);
+        setTimeout(() => {
+          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}&mobile=${encodeURIComponent(mobile)}`;
+        }, 1000);
+      } else {
+        FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
+        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+      }
+    }
+
+    function handleForgot(e) {
+      e.preventDefault();
+      const contact = document.getElementById('forgotContact').value.trim();
+      FertiFind.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
+    }
+
+    function demoLogin(role) {
+      let user = (role === 'doctor') ? {
+        name: 'Dr. Partha Sarathi Das',
+        email: 'dr.das@orchidfertility.ae',
+        role: 'doctor',
+        loggedInAt: new Date().toISOString()
+      } : {
+        name: 'Mariam Al Falasi',
+        email: 'mariam.k@example.com',
+        role: 'patient',
+        loggedInAt: new Date().toISOString()
+      };
+      localStorage.setItem('ff_user', JSON.stringify(user));
+      FertiFind.toast(`Logged in as ${user.name} (${user.role.toUpperCase()})`);
+      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    }
+
+    // Hash router
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'register' || hash === 'forgot' || hash === 'login') {
+        switchPageTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

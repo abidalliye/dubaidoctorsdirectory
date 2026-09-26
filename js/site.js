@@ -207,6 +207,160 @@
         </div>
       </div>
 
+      <!-- Auth Modal (Login / Register / Forgot Password) -->
+      <div class="ff-modal" id="ffAuthModal">
+        <div class="ff-modal-box" style="max-width:500px">
+          <div class="ff-modal-head" style="margin-bottom:12px">
+            <div>
+              <h3 id="ffAuthMainTitle" style="color:var(--navy);font-size:20px;margin:0">FertiFind Account</h3>
+              <p id="ffAuthMainSubtitle" style="color:var(--muted);font-size:12px;margin:3px 0 0">Access patient portal or provider practice dashboard</p>
+            </div>
+            <button class="ff-close" onclick="FertiFind.closeModal('ffAuthModal')" aria-label="Close">✕</button>
+          </div>
+
+          <!-- Auth Tab Switcher -->
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab active" id="ffAuthTabLogin" onclick="FertiFind.switchAuthTab('login')">Log In</button>
+            <button type="button" class="auth-tab" id="ffAuthTabRegister" onclick="FertiFind.switchAuthTab('register')">Create Account</button>
+            <button type="button" class="auth-tab" id="ffAuthTabForgot" onclick="FertiFind.switchAuthTab('forgot')">Forgot Password</button>
+          </div>
+
+          <!-- View 1: Log In -->
+          <div class="auth-view active" id="ffAuthViewLogin">
+            <form class="ff-form" id="ffLoginForm" onsubmit="FertiFind.submitLogin(event)">
+              <div>
+                <label>Email Address or Mobile Number</label>
+                <input type="text" id="ffLoginEmail" required placeholder="doctor@clinic.ae or patient@example.com">
+              </div>
+              <div>
+                <label>Password</label>
+                <div class="input-pass-wrap">
+                  <input type="password" id="ffLoginPass" required placeholder="••••••••">
+                  <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffLoginPass', this)" aria-label="Toggle password visibility">👁</button>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:2px 0">
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
+                  <input type="checkbox" checked style="width:14px;height:14px;margin:0"> Remember me
+                </label>
+                <a href="javascript:void(0)" onclick="FertiFind.switchAuthTab('forgot')" style="color:var(--blue);font-weight:700">Forgot Password?</a>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">Log In to Account →</button>
+
+              <div class="demo-auth-strip">
+                <span>Quick Demo:</span>
+                <button type="button" class="btn btn-outline btn-xs" onclick="FertiFind.demoLogin('doctor')">🩺 Demo Doctor</button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="FertiFind.demoLogin('patient')">👤 Demo Patient</button>
+              </div>
+
+              <p style="text-align:center;font-size:12px;color:var(--muted);margin:14px 0 0">
+                Don't have an account yet? <a href="javascript:void(0)" onclick="FertiFind.switchAuthTab('register')" style="color:var(--blue);font-weight:800">Create one now</a>
+              </p>
+            </form>
+          </div>
+
+          <!-- View 2: Register -->
+          <div class="auth-view" id="ffAuthViewRegister">
+            <form class="ff-form" id="ffRegisterForm" onsubmit="FertiFind.submitRegister(event)">
+              <div>
+                <label>I am registering as:</label>
+                <div class="role-picker">
+                  <div class="role-chip active" id="chip-patient" onclick="FertiFind.selectRole('patient')">
+                    <span class="role-ico">👤</span>
+                    <span>Patient</span>
+                  </div>
+                  <div class="role-chip" id="chip-doctor" onclick="FertiFind.selectRole('doctor')">
+                    <span class="role-ico">🩺</span>
+                    <span>Doctor</span>
+                  </div>
+                  <div class="role-chip" id="chip-clinic" onclick="FertiFind.selectRole('clinic')">
+                    <span class="role-ico">🏥</span>
+                    <span>Clinic</span>
+                  </div>
+                  <div class="role-chip" id="chip-hospital" onclick="FertiFind.selectRole('hospital')">
+                    <span class="role-ico">🏨</span>
+                    <span>Hospital/Lab</span>
+                  </div>
+                </div>
+                <input type="hidden" id="ffRegRole" value="patient">
+              </div>
+
+              <!-- Provider notice callout -->
+              <div class="auth-b2b-callout" id="ffProviderNotice" style="display:none">
+                <div>
+                  <b style="display:block;font-size:12px">Registering a Medical Practice?</b>
+                  <span>Submit your DHA license, address & WhatsApp for direct leads.</span>
+                </div>
+                <a class="btn btn-primary btn-xs" href="submit-business.html" onclick="FertiFind.closeModal('ffAuthModal')">Submit Details →</a>
+              </div>
+
+              <div>
+                <label id="ffRegNameLabel">Full Name</label>
+                <input type="text" id="ffRegName" required placeholder="e.g. Dr. Sarah Mansoori">
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div>
+                  <label>Email Address</label>
+                  <input type="email" id="ffRegEmail" required placeholder="name@domain.ae">
+                </div>
+                <div>
+                  <label>Mobile (+971 UAE)</label>
+                  <input type="tel" id="ffRegMobile" required placeholder="+971 50 XXX XXXX">
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div>
+                  <label>Password</label>
+                  <div class="input-pass-wrap">
+                    <input type="password" id="ffRegPass" required placeholder="••••••••">
+                    <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffRegPass', this)">👁</button>
+                  </div>
+                </div>
+                <div>
+                  <label>Confirm Password</label>
+                  <div class="input-pass-wrap">
+                    <input type="password" id="ffRegPassConf" required placeholder="••••••••">
+                    <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffRegPassConf', this)">👁</button>
+                  </div>
+                </div>
+              </div>
+
+              <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);cursor:pointer;margin-top:2px">
+                <input type="checkbox" required checked style="width:15px;height:15px;margin-top:1px">
+                <span>I agree to FertiFind's <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')" style="color:var(--blue);font-weight:700">Terms of Service</a> & UAE Healthcare Guidelines.</span>
+              </label>
+
+              <button type="submit" class="btn btn-primary" id="ffRegSubmitBtn" style="width:100%;padding:12px">Create Account →</button>
+
+              <p style="text-align:center;font-size:12px;color:var(--muted);margin:14px 0 0">
+                Already registered? <a href="javascript:void(0)" onclick="FertiFind.switchAuthTab('login')" style="color:var(--blue);font-weight:800">Log In here</a>
+              </p>
+            </form>
+          </div>
+
+          <!-- View 3: Forgot Password -->
+          <div class="auth-view" id="ffAuthViewForgot">
+            <form class="ff-form" id="ffForgotForm" onsubmit="FertiFind.submitForgot(event)">
+              <div style="background:#f8fbff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px;font-size:12px;color:#455a7a;line-height:1.5">
+                🔑 Enter your registered email address or mobile phone number. We will send a secure password reset link and 6-digit verification code.
+              </div>
+              <div>
+                <label>Registered Email or Phone</label>
+                <input type="text" id="ffForgotContact" required placeholder="name@clinic.ae or +971 50 XXX XXXX">
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">Send Password Reset Code →</button>
+
+              <p style="text-align:center;font-size:12px;color:var(--muted);margin:14px 0 0">
+                Remember your password? <a href="javascript:void(0)" onclick="FertiFind.switchAuthTab('login')" style="color:var(--blue);font-weight:800">← Back to Log In</a>
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
       <!-- Toast Notification -->
       <div class="ff-toast" id="ffToast">
         <span style="font-size:16px">✓</span>
@@ -378,12 +532,215 @@
         }
       };
 
+      if (type === 'login') {
+        this.openAuth('login');
+        return;
+      }
+
       const selected = infoPages[type] || infoPages.about;
       titleEl.textContent = selected.title;
       subEl.textContent = selected.sub;
       contentEl.innerHTML = selected.body;
 
       document.getElementById('ffInfoModal').classList.add('show');
+    },
+
+    openAuth: function (tab) {
+      initGlobalModals();
+      this.switchAuthTab(tab || 'login');
+      const modal = document.getElementById('ffAuthModal');
+      if (modal) modal.classList.add('show');
+    },
+
+    switchAuthTab: function (tab) {
+      const tabs = ['login', 'register', 'forgot'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('ffAuthTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        const view = document.getElementById('ffAuthView' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.classList.toggle('active', t === tab);
+        if (view) view.classList.toggle('active', t === tab);
+      });
+      const title = document.getElementById('ffAuthMainTitle');
+      const sub = document.getElementById('ffAuthMainSubtitle');
+      if (title && sub) {
+        if (tab === 'login') {
+          title.textContent = 'Welcome Back';
+          sub.textContent = 'Log in to your FertiFind patient or provider account';
+        } else if (tab === 'register') {
+          title.textContent = 'Create an Account';
+          sub.textContent = 'Join Dubai\'s leading verified healthcare directory';
+        } else if (tab === 'forgot') {
+          title.textContent = 'Reset Password';
+          sub.textContent = 'Recover access to your account via email or SMS';
+        }
+      }
+    },
+
+    selectRole: function (role) {
+      ['patient', 'doctor', 'clinic', 'hospital'].forEach(r => {
+        const chip = document.getElementById('chip-' + r);
+        if (chip) chip.classList.toggle('active', r === role);
+      });
+      const input = document.getElementById('ffRegRole');
+      if (input) input.value = role;
+
+      const notice = document.getElementById('ffProviderNotice');
+      const nameLabel = document.getElementById('ffRegNameLabel');
+      const submitBtn = document.getElementById('ffRegSubmitBtn');
+
+      if (role === 'doctor') {
+        if (notice) notice.style.display = 'flex';
+        if (nameLabel) nameLabel.textContent = 'Doctor Full Name & Title';
+        if (submitBtn) submitBtn.textContent = 'Register Doctor & Continue →';
+      } else if (role === 'clinic' || role === 'hospital') {
+        if (notice) notice.style.display = 'flex';
+        if (nameLabel) nameLabel.textContent = 'Practice / Facility Name';
+        if (submitBtn) submitBtn.textContent = 'Register Practice & Continue →';
+      } else {
+        if (notice) notice.style.display = 'none';
+        if (nameLabel) nameLabel.textContent = 'Full Name';
+        if (submitBtn) submitBtn.textContent = 'Create Patient Account →';
+      }
+    },
+
+    togglePassVisibility: function (inputId, btnEl) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (btnEl) btnEl.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        if (btnEl) btnEl.textContent = '👁';
+      }
+    },
+
+    submitLogin: function (e) {
+      if (e) e.preventDefault();
+      const emailInput = document.getElementById('ffLoginEmail');
+      const email = emailInput ? emailInput.value.trim() : '';
+      const passInput = document.getElementById('ffLoginPass');
+      const pass = passInput ? passInput.value : '';
+
+      if (!email || !pass) {
+        alert('Please enter your email and password.');
+        return;
+      }
+
+      let role = email.includes('clinic') || email.includes('dr') || email.includes('doctor') ? 'doctor' : 'patient';
+      let name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : 'Mariam Al Falasi';
+
+      const user = { name, email, role, loggedInAt: new Date().toISOString() };
+      localStorage.setItem('ff_user', JSON.stringify(user));
+
+      this.closeModal('ffAuthModal');
+      this.updateAuthUI();
+      this.toast(`Welcome back, ${name}! Signed in successfully.`);
+    },
+
+    submitRegister: function (e) {
+      if (e) e.preventDefault();
+      const name = document.getElementById('ffRegName').value.trim();
+      const email = document.getElementById('ffRegEmail').value.trim();
+      const mobile = document.getElementById('ffRegMobile').value.trim();
+      const role = document.getElementById('ffRegRole').value;
+      const pass = document.getElementById('ffRegPass').value;
+      const passConf = document.getElementById('ffRegPassConf').value;
+
+      if (pass !== passConf) {
+        alert('Passwords do not match. Please verify your password confirmation.');
+        return;
+      }
+
+      const user = { name, email, mobile, role, loggedInAt: new Date().toISOString() };
+      localStorage.setItem('ff_user', JSON.stringify(user));
+
+      this.closeModal('ffAuthModal');
+      this.updateAuthUI();
+
+      if (role === 'doctor' || role === 'clinic' || role === 'hospital') {
+        this.toast(`Account created for ${name}! Please submit your practice details.`, 4000);
+        setTimeout(() => {
+          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}&mobile=${encodeURIComponent(mobile)}`;
+        }, 1200);
+      } else {
+        this.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
+      }
+    },
+
+    submitForgot: function (e) {
+      if (e) e.preventDefault();
+      const contact = document.getElementById('ffForgotContact').value.trim();
+      if (!contact) return;
+      this.closeModal('ffAuthModal');
+      this.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
+    },
+
+    demoLogin: function (role) {
+      let user;
+      if (role === 'doctor') {
+        user = {
+          name: 'Dr. Partha Sarathi Das',
+          email: 'dr.das@orchidfertility.ae',
+          role: 'doctor',
+          loggedInAt: new Date().toISOString()
+        };
+      } else {
+        user = {
+          name: 'Mariam Al Falasi',
+          email: 'mariam.k@example.com',
+          role: 'patient',
+          loggedInAt: new Date().toISOString()
+        };
+      }
+      localStorage.setItem('ff_user', JSON.stringify(user));
+      this.closeModal('ffAuthModal');
+      this.updateAuthUI();
+      this.toast(`Logged in as ${user.name} (${user.role.toUpperCase()})`);
+    },
+
+    logout: function () {
+      localStorage.removeItem('ff_user');
+      this.updateAuthUI();
+      this.toast('You have been signed out.');
+    },
+
+    checkAuth: function () {
+      this.updateAuthUI();
+    },
+
+    updateAuthUI: function () {
+      const userStr = localStorage.getItem('ff_user');
+      const user = userStr ? JSON.parse(userStr) : null;
+
+      // Update nav-actions across desktop
+      document.querySelectorAll('.nav-actions').forEach(nav => {
+        let authBtn = nav.querySelector('.btn-signin, .user-badge-nav');
+        if (user) {
+          const badgeHtml = `
+            <div class="user-badge-nav">
+              <span>${user.role === 'doctor' || user.role === 'clinic' || user.role === 'hospital' ? '🩺' : '👤'} ${user.name.split(' ')[0]}</span>
+              <span class="logout-link" onclick="FertiFind.logout()" title="Sign out">✕</span>
+            </div>
+          `;
+          if (authBtn) {
+            authBtn.outerHTML = badgeHtml;
+          } else {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = badgeHtml;
+            nav.insertBefore(wrap.firstElementChild, nav.firstChild);
+          }
+        } else {
+          const signInHtml = `<button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')" style="padding:8px 12px;font-size:12px">Sign In</button>`;
+          if (authBtn && authBtn.classList.contains('user-badge-nav')) {
+            authBtn.outerHTML = signInHtml;
+          } else if (!authBtn) {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = signInHtml;
+            nav.insertBefore(wrap.firstElementChild, nav.firstChild);
+          }
+        }
+      });
     },
 
     toast: function (msg, duration) {
@@ -432,6 +789,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initGlobalModals();
+    FertiFind.checkAuth();
 
     // Home search box routing to directory search page
     const heroSearchBtn = document.querySelector('#heroSearch button, #heroSearch .btn');
