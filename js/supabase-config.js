@@ -182,6 +182,19 @@
       return doc;
     },
 
+    deleteDoctor: async (doctorId) => {
+      if (FertiSupabase.isConfigured() && client) {
+        try {
+          await client.from('doctors').delete().eq('id', doctorId);
+        } catch (e) {
+          console.warn('Supabase deleteDoctor note:', e.message);
+        }
+      }
+      let list = getLocal(STORAGE_KEYS.doctors);
+      list = list.filter(d => d.id !== doctorId);
+      setLocal(STORAGE_KEYS.doctors, list);
+    },
+
     // 2. CLINICS
     getClinics: async () => {
       if (FertiSupabase.isConfigured() && client) {
@@ -291,6 +304,19 @@
       }
     },
 
+    deleteAppointment: async (apptId) => {
+      if (FertiSupabase.isConfigured() && client) {
+        try {
+          await client.from('appointments').delete().eq('id', apptId);
+        } catch (e) {
+          console.warn('Supabase deleteAppointment note:', e.message);
+        }
+      }
+      let appts = getLocal(STORAGE_KEYS.appointments);
+      appts = appts.filter(a => a.id !== apptId);
+      setLocal(STORAGE_KEYS.appointments, appts);
+    },
+
     // 4. PATIENTS
     getPatients: async () => {
       if (FertiSupabase.isConfigured() && client) {
@@ -330,6 +356,19 @@
       pats.unshift(pat);
       setLocal(STORAGE_KEYS.patients, pats);
       return pat;
+    },
+
+    deletePatient: async (patientId) => {
+      if (FertiSupabase.isConfigured() && client) {
+        try {
+          await client.from('patients').delete().eq('id', patientId);
+        } catch (e) {
+          console.warn('Supabase deletePatient note:', e.message);
+        }
+      }
+      let pats = getLocal(STORAGE_KEYS.patients);
+      pats = pats.filter(p => p.id !== patientId);
+      setLocal(STORAGE_KEYS.patients, pats);
     },
 
     // 5. REVIEWS

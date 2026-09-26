@@ -2144,7 +2144,7 @@
             <td>★ ${d.rating} (${d.reviewsCount})</td>
             <td>${d.appointmentsCount}</td>
             <td>AED ${d.consultationFee || 500}</td>
-            <td><button class="btn btn-outline btn-xs" onclick="FertiFirebase.deleteDoctor('${d.id}').then(()=>loadDashboardData())">Delete</button></td>
+            <td><button class="btn btn-outline btn-xs" onclick="(window.FertiSupabase ? FertiSupabase.deleteDoctor('${d.id}') : FertiFirebase.deleteDoctor('${d.id}')).then(()=>loadDashboardData())">Delete</button></td>
           </tr>
         `).join('');
       }
