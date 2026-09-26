@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>American Hospital Dubai - IVF & Fertility Center | Profile & Appointments | FertiFind Dubai</title>
+  <meta name="description" content="Comprehensive hospital profile for American Hospital Dubai IVF & Reproductive Medicine Center in Oud Metha and DHCC. View fertility specialists, clinical treatments, embryology suite, patient reviews, and book direct consultations.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Specific Hospital Profile Page Styles (Original Brand Navy & Blue Theme) */
+    .hero {
+      background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
+      padding: 32px 0 38px;
+      border-bottom: 1px solid var(--line);
+    }
+    .crumb {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .crumb a {
+      color: var(--blue);
+      font-weight: 800;
+    }
+    .hospital-header-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr 280px;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .cover {
+      min-height: 290px;
+      border-radius: var(--radius-md);
+      background: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1000&q=90') center/cover;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid var(--line);
+    }
+    .cover-badge {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 7px 11px;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 900;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .identity h1 {
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      margin: 10px 0 6px;
+      color: var(--navy);
+    }
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .location {
+      margin: 9px 0;
+      color: #40516f;
+      font-size: 12px;
+    }
+    .location a {
+      color: var(--blue);
+      font-weight: 850;
+    }
+    .rating {
+      margin: 10px 0;
+      font-size: 13px;
+    }
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .chip {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 5px 11px;
+      font-size: 11px;
+      color: #3b4d6a;
+      font-weight: 750;
+    }
+
+    .action-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .action-box h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--navy);
+    }
+    .hours {
+      font-size: 11px;
+      color: #087e76;
+      background: var(--mint);
+      border: 1px solid #b7f0e7;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 10px 0;
+      font-weight: 750;
+    }
+    .action-box .btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .micro {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* In-Page Navigation Sticky Tabs */
+    .tabs {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 76px;
+      z-index: 40;
+    }
+    .tabs .container {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+    }
+    .tabs a {
+      padding: 16px 14px;
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--muted);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tabs a:hover, .tabs a.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    /* Content Layout */
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 315px;
+      gap: 24px;
+      padding: 30px 0 60px;
+    }
+    .content-card, .side-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .content-card h2 {
+      font-size: 22px;
+      margin: 0 0 8px;
+      letter-spacing: -0.025em;
+      color: var(--navy);
+    }
+    .content-card h3 {
+      font-size: 16px;
+      margin: 22px 0 10px;
+      color: var(--navy);
+    }
+    .lead {
+      font-size: 13px;
+      color: #556682;
+      line-height: 1.6;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .fact {
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+    .fact b {
+      display: block;
+      font-size: 20px;
+      color: var(--navy);
+    }
+    .fact span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini-service {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: #f8fbff;
+    }
+    .mini-service .ico {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .mini-service b {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .mini-service p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0 0;
+      line-height: 1.45;
+    }
+
+    .list-rows {
+      display: grid;
+      gap: 10px;
+    }
+    .row-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #f8fbff;
+    }
+    .ico-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #eef5ff;
+      color: var(--blue);
+      border: 1px solid #d4e4fc;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex: none;
+    }
+
+    /* Specialists in Hospital */
+    .hospital-doctors {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .doc-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: #ffffff;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .doc-card:hover {
+      transform: translateY(-2px);
+      border-color: #bcd5f8;
+    }
+    .doc-top {
+      display: flex;
+      gap: 10px;
+    }
+    .doc-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: center/cover no-repeat;
+      flex: none;
+    }
+    .doc-card h3 {
+      font-size: 13px;
+      margin: 0 0 3px;
+      color: var(--navy);
+    }
+    .doc-card h3 a:hover {
+      color: var(--blue);
+    }
+    .doc-card p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .doc-card .btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 11px;
+    }
+
+    /* Review breakdown */
+    .review-summary {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+    .big-score strong {
+      font-size: 46px;
+      line-height: 1;
+      display: block;
+      color: var(--navy);
+    }
+    .bars {
+      display: grid;
+      gap: 6px;
+    }
+    .bar {
+      display: grid;
+      grid-template-columns: 28px 1fr 30px;
+      gap: 8px;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .bar-line {
+      height: 7px;
+      border-radius: 99px;
+      background: #eef2f7;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 99px;
+    }
+
+    .article-grid, .near-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .near-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: #f8fbff;
+    }
+    .near-item b {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .near-item p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 8px;
+    }
+    .side-link {
+      font-size: 11px;
+      color: #40516f;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      display: block;
+      transition: all 0.2s;
+    }
+    .side-link:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .side-link b {
+      display: block;
+      color: var(--navy);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1050px) {
+      .hospital-header-grid { grid-template-columns: 1fr; }
+      .cover { min-height: 240px; }
+      .two-col-layout { grid-template-columns: 1fr; }
+      .hospital-doctors { grid-template-columns: repeat(2, 1fr); }
+      .facts { grid-template-columns: repeat(2, 1fr); }
+      .grid3, .near-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .hospital-doctors, .grid3, .grid2, .near-grid { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+      .review-summary { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="topbar">
+    <div class="container">
+      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
+      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        FertiFind <small>Dubai</small>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_hospital_profile_page.html" class="active">Hospitals & Clinics</a>
+        <a href="fertifind_labs_profile_page.html">Labs & Diagnostics</a>
+        <a href="index.html#treatments">Treatments</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQs</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn btn-outline" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+        <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','Reproductive Medicine Center')">Book Consultation →</button>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="index.html">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
+      <a href="fertifind_hospital_profile_page.html" class="active">🏥 American Hospital & Orchid</a>
+      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
+      <a href="fertifind_labs_profile_page.html">🧪 Igenomix Dubai & Genetics</a>
+      <a href="index.html#treatments">🧬 IVF Treatments</a>
+      <a href="#faq">❓ FAQs</a>
+      <button class="btn btn-outline" style="width:100%" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('American Hospital Dubai')">Book Appointment</button>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <div class="crumb"><a href="index.html">Home</a> / <a href="fertifind_dubai_directory_search_page.html">Directory</a> / <a href="fertifind_dubai_directory_search_page.html?type=hospital">Hospitals</a> / American Hospital Dubai</div>
+      <div class="hospital-header-grid">
+        <div class="cover">
+          <div class="cover-badge">✓ Verified DHA & JCI Hospital</div>
+        </div>
+        <div class="identity">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-blue">IVF & Reproductive Medicine Center</span>
+            <span class="badge badge-mint">✓ JCI International Accredited</span>
+          </div>
+          <h1>American Hospital Dubai</h1>
+          <div class="sub">Advanced Reproductive Medicine • Clinical Embryology • High-Risk Maternity • Level III NICU</div>
+          <div class="location">
+            📍 <b>Oud Metha Road</b>, Dubai, UAE • Satellite Unit: Ibn Sina Bldg 27, DHCC • <a href="#location">View on map</a>
+          </div>
+          <div class="rating">
+            <span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">(495 verified patient reviews)</span>
+          </div>
+          <div class="chips">
+            <span class="chip">IVF / ICSI Suites</span>
+            <span class="chip">PGT-A Genetics Partner</span>
+            <span class="chip">Egg & Sperm Cryopreservation</span>
+            <span class="chip">24/7 Maternity Emergency</span>
+            <span class="chip">Multilingual Team</span>
+          </div>
+        </div>
+        <div class="action-box">
+          <div>
+            <h3>Consultation Desk</h3>
+            <div class="hours">● Hospital Open 24/7 • IVF Clinic: Sat – Thu (08:30 – 18:00)</div>
+            <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Direct hospital coordinator contact:</p>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 4 377 5500</div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','IVF Specialist Consultation')">Book Appointment →</button>
+            <button class="btn btn-outline" style="margin-top:6px" onclick="FertiFind.openReview('American Hospital Dubai')">★ Write a Review</button>
+            <div class="micro">🔒 Direct Hospital Confirmation • Zero Booking Fees</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky In-Page Navigation Tabs -->
+  <nav class="tabs">
+    <div class="container">
+      <a href="#overview" class="active">Overview</a>
+      <a href="#specialists">Specialists & Doctors</a>
+      <a href="#services">Clinical Services</a>
+      <a href="#embryology">Embryology & Genetics</a>
+      <a href="#pricing">Packages & Pricing</a>
+      <a href="#reviews">Patient Reviews</a>
+      <a href="#location">Location & Hours</a>
+      <a href="#faq">Hospital FAQs</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="container two-col-layout">
+
+    <!-- Primary Column -->
+    <div>
+
+      <!-- Overview -->
+      <section class="content-card" id="overview">
+        <h2>About American Hospital Dubai IVF Center</h2>
+        <p class="lead">
+          Established in 1996, American Hospital Dubai is a premier multi-specialty medical center accredited by the Joint Commission International (JCI) and the College of American Pathologists (CAP). Its Center for Reproductive Medicine combines leading reproductive endocrinologists, cutting-edge embryology laboratories, and full-spectrum inpatient maternal-fetal care.
+        </p>
+        <p class="lead">
+          In partnership with specialized clinics including Orchid Fertility Clinic in Dubai Healthcare City, the center provides comprehensive assisted reproductive technology (ART), personalized ovarian stimulation protocols, advanced pre-implantation genetic screening (PGT-A/M), and male infertility interventions.
+        </p>
+
+        <div class="facts">
+          <div class="fact"><b>28+</b><span>Years Excellence</span></div>
+          <div class="fact"><b>14,000+</b><span>Successful Deliveries</span></div>
+          <div class="fact"><b>Level III</b><span>On-Site Neonatal ICU</span></div>
+          <div class="fact"><b>JCI / CAP</b><span>Dual International Accreditations</span></div>
+        </div>
+
+        <h3>Hospital Accreditations & Clinical Standards</h3>
+        <div class="grid3">
+          <div class="mini-service">
+            <div class="ico">🏆</div>
+            <b>JCI Accreditation</b>
+            <p>First hospital in the Middle East to receive Joint Commission International gold seal.</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">🧬</div>
+            <b>CAP Accredited Lab</b>
+            <p>Clinical pathology and genetics diagnostic laboratories meet College of American Pathologists benchmarks.</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">🏥</div>
+            <b>DHA Super-Specialty</b>
+            <p>Fully licensed by Dubai Health Authority for tertiary reproductive and obstetrics care.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Specialists -->
+      <section class="content-card" id="specialists">
+        <h2>Fertility Specialists & Consultant Doctors</h2>
+        <p class="lead">
+          Meet the experienced reproductive endocrinologists, fertility consultants, and andrologists practicing at American Hospital Dubai and its partner network.
+        </p>
+
+        <div class="hospital-doctors">
+
+          <!-- Doctor 1: Dr. Partha Sarathi Das -->
+          <div class="doc-card">
+            <div class="doc-top">
+              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=85')"></div>
+              <div>
+                <h3><a href="fertifind_doctor_profile_page.html">Dr. Partha Sarathi Das</a></h3>
+                <p>Consultant Reproductive Medicine</p>
+                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">20+ Years Experience</div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Specializes in IVF/ICSI, ovarian stimulation protocols, recurrent implantation failure, and fertility preservation.</p>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
+              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Fertility Consultation')">Book</button>
+            </div>
+          </div>
+
+          <!-- Doctor 2: Dr. Dalia Khalife -->
+          <div class="doc-card">
+            <div class="doc-top">
+              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=85')"></div>
+              <div>
+                <h3><a href="fertifind_doctor_profile_page.html">Dr. Dalia Khalife</a></h3>
+                <p>Fertility Specialist & Reproductive Med</p>
+                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">13+ Years Experience</div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Expert in assisted conception, PCOS management, diagnostic laparoscopy, and egg vitrification.</p>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
+              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Dalia Khalife','Fertility Consultation')">Book</button>
+            </div>
+          </div>
+
+          <!-- Doctor 3: Dr. Gautam Allahbadia -->
+          <div class="doc-card">
+            <div class="doc-top">
+              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=85')"></div>
+              <div>
+                <h3><a href="fertifind_doctor_profile_page.html">Dr. Gautam Allahbadia</a></h3>
+                <p>Consultant Reproductive Endocrinology</p>
+                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">25+ Years Experience</div>
+              </div>
+            </div>
+            <p style="font-size:11px;color:var(--muted);margin-top:8px">Pioneer in ultrasound-guided embryo transfer, minimal stimulation IVF, and complex reproductive endocrinology.</p>
+            <div style="display:flex;gap:6px;margin-top:8px">
+              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
+              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Gautam Allahbadia','Specialist Consultation')">Book</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="content-card" id="services">
+        <h2>Clinical Treatments & Fertility Services</h2>
+        <div class="list-rows">
+          <div class="row-item">
+            <div class="ico-box">🧬</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">In Vitro Fertilization (IVF) & ICSI</b>
+              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Custom stimulation protocols, egg retrieval in accredited surgical theaters, ICSI micro-fertilization, blastocyst culture, and embryo transfer.</p>
+            </div>
+          </div>
+          <div class="row-item">
+            <div class="ico-box">❄️</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Egg, Sperm & Embryo Cryopreservation</b>
+              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Advanced vitrification protocols for medical and social fertility preservation with long-term nitrogen tank storage compliant with UAE regulations.</p>
+            </div>
+          </div>
+          <div class="row-item">
+            <div class="ico-box">🔬</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Pre-implantation Genetic Testing (PGT-A & PGT-M)</b>
+              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Comprehensive chromosome screening and monogenic single-gene defect prevention conducted in partnership with Igenomix Dubai genetics lab.</p>
+            </div>
+          </div>
+          <div class="row-item">
+            <div class="ico-box">⚕️</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Male Infertility & Surgical Sperm Retrieval</b>
+              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">PESA, TESA, and Micro-TESE surgical procedures performed by certified urologists for obstructive and non-obstructive azoospermia.</p>
+            </div>
+          </div>
+          <div class="row-item">
+            <div class="ico-box">🏥</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Full Inpatient Maternity, Delivery & Level III NICU</b>
+              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Immediate on-site pediatric support and specialized maternal-fetal medicine for high-risk twin and triplet pregnancies resulting from fertility treatment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Embryology & Genetics -->
+      <section class="content-card" id="embryology">
+        <h2>Embryology Laboratory & Diagnostic Partners</h2>
+        <p class="lead">
+          The embryology cleanroom laboratory utilizes HEPA-filtered positive pressure air handling, medical grade gas mixtures, and state-of-the-art incubation chambers to maximize blastocyst yield and implantation rates.
+        </p>
+        <div class="grid2">
+          <div class="mini-service">
+            <div class="ico">🧪</div>
+            <b>Clinical Embryology Team</b>
+            <p>Headed by senior clinical embryologist <b>Estee Van Zyl</b> (certified in human embryology, micromanipulation, and vitrification).</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">🔬</div>
+            <b>Genetics Diagnostic Partner</b>
+            <p>Strategic partnership with <a href="fertifind_labs_profile_page.html" style="color:var(--blue);font-weight:800">Igenomix Dubai</a> (DHCC) for rapid PGT-A aneuploidy screening and ERA endometrial receptivity tests.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Guide -->
+      <section class="content-card" id="pricing">
+        <h2>Estimated Packages & Treatment Costs</h2>
+        <p class="lead">
+          Transparent clinical fee guide for Dubai fertility procedures. Inclusions should be verified directly with your coordinator based on personalized clinical stimulation plans.
+        </p>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
+            <thead>
+              <tr style="border-bottom:2px solid var(--line);color:var(--navy)">
+                <th style="padding:10px 8px">Treatment / Consultation</th>
+                <th style="padding:10px 8px">Estimated Fee</th>
+                <th style="padding:10px 8px">Key Inclusions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line-light)">
+                <td style="padding:12px 8px"><b>Initial Fertility Specialist Consultation</b></td>
+                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 450 – 600</td>
+                <td style="padding:12px 8px;color:var(--muted)">Full medical review, ultrasound scan, treatment recommendation</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line-light)">
+                <td style="padding:12px 8px"><b>Standard IVF / ICSI Cycle</b></td>
+                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 26,000 – 34,000</td>
+                <td style="padding:12px 8px;color:var(--muted)">Monitoring scans, egg collection, ICSI, blastocyst culture & fresh transfer</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line-light)">
+                <td style="padding:12px 8px"><b>Social Egg Freezing Package</b></td>
+                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 16,500 – 21,000</td>
+                <td style="padding:12px 8px;color:var(--muted)">Stimulation monitoring, oocyte retrieval, vitrification & 1st year storage</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line-light)">
+                <td style="padding:12px 8px"><b>PGT-A Chromosome Screening (per embryo)</b></td>
+                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 1,800 – 2,400</td>
+                <td style="padding:12px 8px;color:var(--muted)">Trophectoderm biopsy, next-generation sequencing (Igenomix)</td>
+              </tr>
+              <tr>
+                <td style="padding:12px 8px"><b>Intrauterine Insemination (IUI)</b></td>
+                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 3,500 – 5,500</td>
+                <td style="padding:12px 8px;color:var(--muted)">Follicular tracking, sperm preparation, insemination procedure</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Patient Reviews -->
+      <section class="content-card" id="reviews">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+          <div>
+            <h2 style="margin:0">Verified Patient Reviews</h2>
+            <p class="lead" style="margin:4px 0 0">Direct patient experiences and clinical feedback</p>
+          </div>
+          <button class="btn btn-outline" onclick="FertiFind.openReview('American Hospital Dubai')">★ Write a Review</button>
+        </div>
+
+        <div class="review-summary">
+          <div class="big-score">
+            <strong>4.8</strong>
+            <div class="stars">★★★★★</div>
+            <span class="muted" style="font-size:12px">Based on 495 reviews</span>
+          </div>
+          <div class="bars">
+            <div class="bar"><span>5★</span><div class="bar-line"><div class="bar-fill" style="width:88%"></div></div><span>88%</span></div>
+            <div class="bar"><span>4★</span><div class="bar-line"><div class="bar-fill" style="width:9%"></div></div><span>9%</span></div>
+            <div class="bar"><span>3★</span><div class="bar-line"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+            <div class="bar"><span>2★</span><div class="bar-line"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+            <div class="bar"><span>1★</span><div class="bar-line"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
+          </div>
+        </div>
+
+        <div class="list-rows">
+          <div class="row-item" style="background:#ffffff">
+            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">M</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <b style="color:var(--navy)">Maha & Rashid K.</b>
+                <span style="font-size:11px;color:var(--muted)">1 month ago</span>
+              </div>
+              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Verified IVF Patient</span></div>
+              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
+                “After two unsuccessful cycles overseas, we consulted with Dr. Partha Sarathi Das. He modified our medication protocol and recommended PGT-A testing with Igenomix. We are now in our 24th week of pregnancy. Outstanding hospital staff and nursing care.”
+              </p>
+            </div>
+          </div>
+
+          <div class="row-item" style="background:#ffffff">
+            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">E</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <b style="color:var(--navy)">Elena P.</b>
+                <span style="font-size:11px;color:var(--muted)">3 months ago</span>
+              </div>
+              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Egg Freezing Patient</span></div>
+              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
+                “Completed an elective egg freezing cycle. The facility is world-class, clean, modern, and transparent regarding vitrification storage procedures.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Location & Hours -->
+      <section class="content-card" id="location">
+        <h2>Location & Access Information</h2>
+        <div class="grid2">
+          <div>
+            <h3 style="margin-top:0">Main Hospital Campus</h3>
+            <p style="font-size:13px;color:#40516f;line-height:1.6">
+              📍 <b>Address:</b> 19th Street, Oud Metha Road, Dubai, United Arab Emirates<br>
+              🚗 <b>Parking:</b> Complimentary valet parking available at Main Entrance and Women's Clinic<br>
+              🚇 <b>Metro:</b> Oud Metha Metro Station (Green Line) - 5 minutes walk<br>
+              ☎ <b>Main Switchboard:</b> +971 4 377 5500
+            </p>
+          </div>
+          <div>
+            <h3 style="margin-top:0">Satellite Fertility Partner Unit</h3>
+            <p style="font-size:13px;color:#40516f;line-height:1.6">
+              📍 <b>Orchid Partner Clinic:</b> Ibn Sina Building 27, Block D, Unit 201, Dubai Healthcare City<br>
+              🕒 <b>Operating Hours:</b> Saturday – Thursday, 08:30 AM – 06:00 PM<br>
+              💬 <b>WhatsApp Desk:</b> +971 50 477 3832
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="content-card" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <button class="faq-q">Do you accept insurance for IVF treatments? <span>+</span></button>
+          <div class="faq-a">Most UAE private insurance policies cover diagnostic evaluations, initial consultations, hormone blood tests, and hysteroscopies. Active IVF laboratory procedures and medications generally require self-pay or corporate rider packages.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can single women freeze their eggs at American Hospital Dubai? <span>+</span></button>
+          <div class="faq-a">Yes. Under updated UAE Federal fertility laws, unmarried women are permitted to freeze and store their unfertilized oocytes for fertility preservation.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How long does an initial consultation take? <span>+</span></button>
+          <div class="faq-a">Initial consultations typically take 45 to 60 minutes. Your specialist reviews your medical history, performs an ultrasound scan, and outlines recommended diagnostic steps.</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Secondary Column (Sticky Sidebar) -->
+    <aside>
+
+      <!-- Quick Action Card -->
+      <div class="side-card" style="position:sticky;top:136px">
+        <h3 style="margin-top:0;color:var(--navy)">Quick Actions</h3>
+        <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('American Hospital Dubai','IVF Center Specialist')">Book Appointment →</button>
+        <button class="btn btn-outline" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('American Hospital Dubai','Video Tele-Consultation')">Request Video Call</button>
+        <button class="btn btn-soft" style="width:100%;margin-bottom:14px" onclick="FertiFind.openReview('American Hospital Dubai')">★ Leave a Review</button>
+
+        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Affiliated Specialists</h4>
+        <div class="side-list">
+          <a class="side-link" href="fertifind_doctor_profile_page.html">
+            <b>Dr. Partha Sarathi Das</b>
+            Consultant Reproductive Medicine & IVF
+          </a>
+          <a class="side-link" href="fertifind_doctor_profile_page.html">
+            <b>Dr. Dalia Khalife</b>
+            Fertility Specialist (13+ Yrs Exp)
+          </a>
+          <a class="side-link" href="fertifind_labs_profile_page.html">
+            <b>Igenomix Dubai Genetics Lab</b>
+            PGT-A, ERA & Reproductive Diagnostics
+          </a>
+        </div>
+
+        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Direct Coordination</h4>
+        <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Patient care coordinator:</p>
+        <div style="font-size:13px;font-weight:800;color:var(--navy)">☎ +971 4 377 5500</div>
+        <div style="font-size:12px;color:#087e76;margin-top:4px">💬 WhatsApp: +971 50 477 3832</div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Unified Footer (Original Dark Navy) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            FertiFind <small style="color:var(--teal)">Dubai</small>
+          </a>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Directory</div>
+          <div class="footer-links">
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=home">Home Testing</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Services</div>
+          <div class="footer-links">
+            <a href="index.html#treatments">IVF & Assisted Reproduction</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=ivf">ICSI Fertilization</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=pgt">PGT-A Genetics</a>
+            <a href="fertifind_labs_profile_page.html">AMH & Hormone Panels</a>
+            <a href="fertifind_dubai_directory_search_page.html?specialty=andrology">Male Fertility Care</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">For Practices</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">List Your Practice</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">Claim Practice Profile</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('packages')">Package Listings</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('login')">Provider Portal Login</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">DHA Compliance</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Company</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#how">How It Works</a>
+            <a href="#reviews">Patient Reviews</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dubai Districts Strip -->
+      <div class="footer-areas-strip">
+        <span>Dubai Districts:</span>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Dubai Healthcare City</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Jumeirah</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Al Barsha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Downtown Dubai</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Business Bay</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Deira">Deira</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/site.js"></script>
+  <script>
+    // Tab active state observer
+    document.querySelectorAll('.tabs a').forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        document.querySelectorAll('.tabs a').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Find Fertility Doctors, Clinics & Diagnostics in Dubai | FertiFind Dubai</title>
+  <meta name="description" content="Search and compare verified fertility doctors, IVF clinics, hospitals, diagnostic labs and home healthcare services across Dubai. Verified DHA credentials, patient reviews, and direct appointment booking.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Specific Directory & Search Page Styles (Original Brand Navy & Blue Theme) */
+    .hero {
+      background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
+      padding: 42px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .breadcrumb a {
+      color: var(--blue);
+      font-weight: 800;
+    }
+    .hero-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      align-items: flex-end;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+    }
+    .hero p {
+      color: #556682;
+      max-width: 760px;
+      margin: 10px 0 0;
+      font-size: 14px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      min-width: 105px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat b {
+      display: block;
+      color: var(--navy);
+      font-size: 18px;
+    }
+    .stat small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .searchbar {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto;
+      gap: 8px;
+    }
+    .searchbar input, .searchbar select {
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      outline: none;
+      color: var(--ink);
+      min-width: 0;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .searchbar input:focus, .searchbar select:focus {
+      border-color: var(--blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.12);
+    }
+
+    .main {
+      padding: 32px 0 70px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 24px;
+    }
+    .filters {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      height: max-content;
+      position: sticky;
+      top: 96px;
+      box-shadow: var(--shadow-sm);
+    }
+    .filter-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .filter-head h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--navy);
+    }
+    .reset {
+      border: 0;
+      background: none;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .reset:hover {
+      text-decoration: underline;
+    }
+    .filter-group {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-light);
+    }
+    .filter-group:last-child {
+      border: 0;
+    }
+    .filter-title {
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .filter-check {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+      color: #40516f;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    .filter-check input {
+      accent-color: var(--blue);
+      width: 16px;
+      height: 16px;
+    }
+    .range-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+    .range-row select {
+      width: 100%;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #f8fbff;
+      color: var(--navy);
+      font-size: 12px;
+    }
+    .area-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      border-radius: 99px;
+      padding: 6px 11px;
+      font-size: 11px;
+      font-weight: 750;
+      color: #43516c;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .chip:hover, .chip.active {
+      background: #eef5ff;
+      border-color: var(--blue);
+      color: var(--blue);
+      font-weight: 850;
+    }
+
+    .results-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .results-head h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--navy);
+    }
+    .results-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .view-tools {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .view-btn {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .view-btn.active {
+      background: #eef5ff;
+      color: var(--blue);
+      border-color: #bcd5f8;
+    }
+    .sort {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .cards.list {
+      grid-template-columns: 1fr;
+    }
+
+    .provider-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .provider-card:hover {
+      border-color: #bcd5f8;
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .card-top {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      min-height: 160px;
+    }
+    .card-photo {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .card-info {
+      padding: 16px;
+    }
+    .type-badge {
+      display: inline-flex;
+      background: #eef5ff;
+      color: var(--blue);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .card-info h3 {
+      margin: 8px 0 3px;
+      font-size: 17px;
+      color: var(--navy);
+      line-height: 1.25;
+    }
+    .card-info h3 a:hover {
+      color: var(--blue);
+    }
+    .card-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .card-rating {
+      margin-top: 7px;
+      font-size: 12px;
+    }
+    .card-location {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .card-location b {
+      color: var(--navy);
+    }
+    .card-body {
+      padding: 0 16px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 8px 0;
+    }
+    .service-tag {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #f1f5fa;
+      color: #3b4d6a;
+      font-weight: 700;
+    }
+    .meta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 11px;
+      margin: 8px 0 12px;
+    }
+    .meta-row b {
+      color: var(--navy);
+    }
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+    .card-actions .btn {
+      padding: 8px 6px;
+      font-size: 11px;
+    }
+    .card-footer {
+      border-top: 1px solid var(--line-light);
+      padding: 9px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 11px;
+      background: #f8fbff;
+    }
+    .card-footer b {
+      color: var(--navy);
+    }
+    .heart {
+      border: 0;
+      background: none;
+      font-size: 18px;
+      color: #9cb0cc;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .heart:hover {
+      color: #d64b55;
+    }
+
+    /* List View adjustments */
+    .cards.list .card-top {
+      grid-template-columns: 180px 1fr;
+      min-height: 170px;
+    }
+    .cards.list .provider-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+    .cards.list .card-body {
+      padding-top: 14px;
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 48px 24px;
+    }
+
+    .trust-strip {
+      margin: 32px 0 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .trust-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .trust-box b {
+      display: block;
+      color: var(--navy);
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+    .trust-box span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .mini-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .mini-card:hover {
+      transform: translateY(-2px);
+      border-color: #bcd5f8;
+    }
+    .mini-card h3 {
+      font-size: 16px;
+      margin: 10px 0 4px;
+      color: var(--navy);
+    }
+    .mini-card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .mini-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eef5ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+
+    .area-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      color: #3b4d6a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .area-card:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #f8fbff;
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 1050px) {
+      .layout { grid-template-columns: 1fr; }
+      .filters { position: static; }
+      .cards { grid-template-columns: 1fr; }
+      .grid4 { grid-template-columns: repeat(2, 1fr); }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .searchbar { grid-template-columns: 1fr; }
+      .cards.list .card-top { grid-template-columns: 1fr; }
+      .cards.list .card-photo { height: 180px; }
+      .grid4, .grid3 { grid-template-columns: 1fr; }
+      .trust-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="topbar">
+    <div class="container">
+      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
+      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        FertiFind <small>Dubai</small>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="fertifind_dubai_directory_search_page.html" class="active">Directory</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_hospital_profile_page.html">Hospitals & Clinics</a>
+        <a href="fertifind_labs_profile_page.html">Labs & Diagnostics</a>
+        <a href="index.html#treatments">Treatments</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQs</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn btn-outline" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+        <button class="btn btn-primary" onclick="FertiFind.openBooking('General Fertility Directory','In-Clinic Specialist Consultation')">Find Care →</button>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="index.html">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html" class="active">🔍 Search Directory</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
+      <a href="fertifind_hospital_profile_page.html">🏥 American Hospital & Orchid</a>
+      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
+      <a href="fertifind_labs_profile_page.html">🧪 Igenomix Dubai & Genetics</a>
+      <a href="index.html#treatments">🧬 IVF Treatments</a>
+      <a href="#areas">📍 Dubai Districts</a>
+      <a href="#faq">❓ Directory FAQs</a>
+      <button class="btn btn-outline" style="width:100%" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('General Directory Consultation')">Book Appointment</button>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Fertility Directory / Dubai Providers</div>
+      <div class="hero-row">
+        <div>
+          <h1>Find fertility doctors, IVF clinics & laboratories in Dubai</h1>
+          <p>Search DHA-verified reproductive specialists, IVF centers, women's hospitals, genetic diagnostics and fertility testing near you across Dubai districts. Compare doctor profiles, clinical services, patient reviews, and book directly.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>45+</b><small>Verified Centers</small></div>
+          <div class="stat"><b>12,400+</b><small>Patient Reviews</small></div>
+          <div class="stat"><b>100%</b><small>DHA Regulated</small></div>
+        </div>
+      </div>
+
+      <!-- Live Searchbar -->
+      <div class="searchbar">
+        <input id="q" placeholder="Search doctor, clinic, IVF treatment, AMH test or district…" aria-label="Search">
+        <select id="type">
+          <option value="all">All provider types</option>
+          <option value="doctor">Doctors & Specialists</option>
+          <option value="clinic">Fertility Clinics</option>
+          <option value="hospital">Hospitals</option>
+          <option value="lab">Diagnostic Labs</option>
+        </select>
+        <select id="area">
+          <option value="all">All Dubai Districts</option>
+          <option value="Dubai Healthcare City">Dubai Healthcare City (DHCC)</option>
+          <option value="Oud Metha">Oud Metha</option>
+          <option value="Jumeirah">Jumeirah</option>
+          <option value="Dubai Marina">Dubai Marina</option>
+          <option value="Al Barsha">Al Barsha</option>
+          <option value="Business Bay">Business Bay</option>
+          <option value="Downtown Dubai">Downtown Dubai</option>
+          <option value="Deira">Deira</option>
+        </select>
+        <button class="btn btn-primary" id="searchBtn">Search Providers →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Directory Search Layout -->
+  <main class="main" id="results">
+    <div class="container layout">
+
+      <!-- Filters Sidebar -->
+      <aside class="filters" id="filters">
+        <div class="filter-head">
+          <h3>Filter results</h3>
+          <button class="reset" id="reset">Reset All</button>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Provider Type</div>
+          <label class="filter-check"><input type="checkbox" value="doctor" class="typeFilter"> Doctors & specialists</label>
+          <label class="filter-check"><input type="checkbox" value="clinic" class="typeFilter"> Fertility & IVF clinics</label>
+          <label class="filter-check"><input type="checkbox" value="hospital" class="typeFilter"> Women's hospitals</label>
+          <label class="filter-check"><input type="checkbox" value="lab" class="typeFilter"> Genetic laboratories</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Clinical Specialty</div>
+          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="fertility"> Fertility & reproductive medicine</label>
+          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="ivf"> IVF / assisted reproduction</label>
+          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="obgyn"> Obstetrics & gynecology</label>
+          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="andrology"> Andrology / male fertility</label>
+          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="genetics"> Genetics & embryo diagnostics</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Services & Treatments</div>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="ivf"> IVF & ICSI</label>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="pgt"> PGT-A / PGT-M genetic screening</label>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="freezing"> Egg & sperm freezing</label>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="iui"> IUI Insemination</label>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="testing"> AMH & Hormone testing</label>
+          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="home"> Home sample collection</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Distance Radius</div>
+          <div class="range-row">
+            <select id="radius">
+              <option value="100">Any radius</option>
+              <option value="3">Within 3 km</option>
+              <option value="6">Within 6 km</option>
+              <option value="10">Within 10 km</option>
+              <option value="20">Within 20 km</option>
+            </select>
+            <select id="originArea">
+              <option value="all">From: Near me</option>
+              <option value="DHCC">DHCC</option>
+              <option value="Jumeirah">Jumeirah</option>
+              <option value="Downtown">Downtown</option>
+              <option value="Marina">Marina</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Appointment Availability</div>
+          <label class="filter-check"><input type="checkbox" id="today"> Available this week</label>
+          <label class="filter-check"><input type="checkbox" id="online"> Video tele-consultation</label>
+          <label class="filter-check"><input type="checkbox" id="homeOnly"> Home blood collection</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Patient Rating</div>
+          <label class="filter-check"><input type="checkbox" class="ratingFilter" value="4.8"> 4.8+ rating</label>
+          <label class="filter-check"><input type="checkbox" class="ratingFilter" value="4.5"> 4.5+ rating</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Popular Dubai Districts</div>
+          <div class="area-chips">
+            <button class="chip" data-area="Dubai Healthcare City">DHCC</button>
+            <button class="chip" data-area="Oud Metha">Oud Metha</button>
+            <button class="chip" data-area="Jumeirah">Jumeirah</button>
+            <button class="chip" data-area="Dubai Marina">Marina</button>
+            <button class="chip" data-area="Al Barsha">Al Barsha</button>
+            <button class="chip" data-area="Downtown Dubai">Downtown</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Results Section -->
+      <section>
+        <div class="results-head">
+          <div>
+            <h2 id="resultTitle">Healthcare providers in Dubai</h2>
+            <p id="resultCount">Showing verified research providers</p>
+          </div>
+          <div class="view-tools">
+            <select class="sort" id="sort">
+              <option value="recommended">Sort: Recommended</option>
+              <option value="rating">Sort: Highest rated</option>
+              <option value="reviews">Sort: Most reviewed</option>
+              <option value="distance">Sort: Nearest distance</option>
+            </select>
+            <button class="view-btn active" id="gridBtn">▦ Grid</button>
+            <button class="view-btn" id="listBtn">☰ List</button>
+          </div>
+        </div>
+
+        <!-- Cards Container (Populated with Real Research Data from Dubai_Fertility_Directory_Research_2026.xlsx) -->
+        <div class="cards" id="cards">
+
+          <!-- Card 1: Orchid Fertility Clinic -->
+          <article class="provider-card provider" data-type="clinic" data-specialty="fertility ivf andrology" data-services="ivf pgt freezing iui testing" data-area="Dubai Healthcare City" data-distance="2.2" data-rating="4.9" data-reviews="312" data-today="1" data-online="1" data-home="0" data-name="Orchid Fertility Clinic">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Fertility Clinic</span>
+                <span class="badge badge-mint">✓ DHA Licensed</span>
+                <h3><a href="fertifind_hospital_profile_page.html">Orchid Fertility Clinic</a></h3>
+                <div class="card-sub">Reproductive Medicine • IVF/ICSI • Andrology</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(312 reviews)</span></div>
+                <div class="card-location">📍 <b>Dubai Healthcare City</b> • Ibn Sina Bldg 27</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">IVF / ICSI</span>
+                <span class="service-tag">Natural-Cycle IVF</span>
+                <span class="service-tag">Egg Freezing</span>
+                <span class="service-tag">Micro-TESE</span>
+                <span class="service-tag">PGT Genetics</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Sat – Thu</b></span>
+                <span>💬 Video consult</span>
+                <span>☎ +971 4 437 7520</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Orchid Fertility Clinic')">Review</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Fertility Clinic','IVF Specialist Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Lead Consultant: <b>Dr. Partha Sarathi Das</b></span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Orchid Fertility Clinic', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 2: Dr. Partha Sarathi Das -->
+          <article class="provider-card provider" data-type="doctor" data-specialty="fertility ivf obgyn" data-services="ivf pgt freezing iui testing" data-area="Dubai Healthcare City" data-distance="2.2" data-rating="4.9" data-reviews="248" data-today="1" data-online="1" data-home="1" data-name="Dr. Partha Sarathi Das">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Fertility Consultant</span>
+                <span class="badge badge-mint">✓ DHA Verified</span>
+                <h3><a href="fertifind_doctor_profile_page.html">Dr. Partha Sarathi Das</a></h3>
+                <div class="card-sub">Consultant Reproductive Medicine & Infertility</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(248 reviews)</span></div>
+                <div class="card-location">📍 <b>DHCC & Oud Metha</b> • 20+ Yrs Exp</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">Reproductive Endocrinology</span>
+                <span class="service-tag">IVF / ICSI</span>
+                <span class="service-tag">Ovarian Stimulation</span>
+                <span class="service-tag">Implantation Failure</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Available this week</b></span>
+                <span>💻 Video consult</span>
+                <span>🏥 Orchid & American Hosp</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Partha Sarathi Das')">Review</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Fertility Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Consultation from <b>AED 450</b></span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Dr. Partha Sarathi Das', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 3: American Hospital Dubai -->
+          <article class="provider-card provider" data-type="hospital" data-specialty="fertility ivf obgyn andrology" data-services="ivf pgt freezing iui testing home" data-area="Oud Metha" data-distance="3.1" data-rating="4.8" data-reviews="495" data-today="1" data-online="1" data-home="1" data-name="American Hospital Dubai">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Hospital</span>
+                <span class="badge badge-mint">✓ JCI Accredited</span>
+                <h3><a href="fertifind_hospital_profile_page.html">American Hospital Dubai</a></h3>
+                <div class="card-sub">IVF & Reproductive Medicine Center • NICU</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">(495 reviews)</span></div>
+                <div class="card-location">📍 <b>Oud Metha</b> • Dedicated IVF Center</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">IVF / ICSI Center</span>
+                <span class="service-tag">High-Risk Obstetrics</span>
+                <span class="service-tag">Embryology Suite</span>
+                <span class="service-tag">Level III NICU</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>24/7 Hospital</b></span>
+                <span>☎ +971 4 377 5500</span>
+                <span>🚗 Valet parking</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('American Hospital Dubai')">Review</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','IVF Center Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Multidisciplinary Reproductive Care</span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('American Hospital Dubai', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 4: Igenomix Dubai -->
+          <article class="provider-card provider" data-type="lab" data-specialty="genetics fertility" data-services="pgt testing home" data-area="Dubai Healthcare City" data-distance="2.4" data-rating="4.9" data-reviews="420" data-today="1" data-online="0" data-home="1" data-name="Igenomix Dubai">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Genetics Lab</span>
+                <span class="badge badge-mint">✓ ISO 15189</span>
+                <h3><a href="fertifind_labs_profile_page.html">Igenomix Dubai</a></h3>
+                <div class="card-sub">Reproductive Genetics • PGT-A • Embryo Testing</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(420 reviews)</span></div>
+                <div class="card-location">📍 <b>Dubai Healthcare City</b> • Unit 501-502</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">PGT-A Aneuploidy</span>
+                <span class="service-tag">ERA Receptivity</span>
+                <span class="service-tag">Carrier Screening</span>
+                <span class="service-tag">AMH & Hormone Panel</span>
+                <span class="service-tag">Home Blood Draw</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Sat – Thu</b></span>
+                <span>☎ +971 800 50342</span>
+                <span>🏠 Home sample</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Igenomix Dubai')">Review</button>
+                <a class="btn btn-soft" href="fertifind_labs_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">Book Test</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Clinical Embryology: <b>Estee Van Zyl</b></span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Igenomix Dubai', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 5: Fakih IVF Fertility Center -->
+          <article class="provider-card provider" data-type="clinic" data-specialty="fertility ivf andrology" data-services="ivf pgt freezing iui testing" data-area="Jumeirah" data-distance="4.5" data-rating="4.8" data-reviews="380" data-today="1" data-online="1" data-home="0" data-name="Fakih IVF Fertility Center">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Fertility Clinic</span>
+                <span class="badge badge-mint">✓ DHA Licensed</span>
+                <h3><a href="fertifind_hospital_profile_page.html">Fakih IVF Fertility Center</a></h3>
+                <div class="card-sub">IVF / ICSI • Family Balancing • Ovarian Rejuvenation</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">(380 reviews)</span></div>
+                <div class="card-location">📍 <b>Jumeirah 2</b> • Al Wasl Road</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">IVF / ICSI</span>
+                <span class="service-tag">Mini-IVF</span>
+                <span class="service-tag">Egg Freezing</span>
+                <span class="service-tag">Sperm Retrieval</span>
+                <span class="service-tag">Gender Selection</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Sat – Thu</b></span>
+                <span>💻 Video consult</span>
+                <span>☎ +971 4 349 7600</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Fakih IVF Fertility Center')">Review</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Fakih IVF Fertility Center','Initial Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Founded by <b>Dr. Michael Fakih</b></span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Fakih IVF Fertility Center', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 6: Dr. Michael Fakih -->
+          <article class="provider-card provider" data-type="doctor" data-specialty="fertility ivf obgyn" data-services="ivf pgt freezing iui" data-area="Jumeirah" data-distance="4.5" data-rating="4.9" data-reviews="310" data-today="0" data-online="1" data-home="0" data-name="Dr. Michael Fakih">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Fertility Pioneer</span>
+                <span class="badge badge-mint">✓ DHA Consultant</span>
+                <h3><a href="fertifind_doctor_profile_page.html">Dr. Michael Fakih</a></h3>
+                <div class="card-sub">Consultant Reproductive Endocrinology & Infertility</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(310 reviews)</span></div>
+                <div class="card-location">📍 <b>Jumeirah 2</b> • 30+ Yrs Exp</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">Complex IVF Cases</span>
+                <span class="service-tag">Recurrent Miscarriage</span>
+                <span class="service-tag">Ovarian Rejuvenation</span>
+                <span class="service-tag">Embryo Transfer</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>By Appointment</b></span>
+                <span>💻 Video consult</span>
+                <span>🏥 Fakih IVF</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Michael Fakih')">Review</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Michael Fakih','Senior Specialist Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Over 35,000 successful IVF deliveries</span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Dr. Michael Fakih', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 7: Bourn Hall Fertility Clinic -->
+          <article class="provider-card provider" data-type="clinic" data-specialty="fertility ivf andrology" data-services="ivf freezing iui testing" data-area="Jumeirah" data-distance="4.8" data-rating="4.8" data-reviews="215" data-today="1" data-online="1" data-home="0" data-name="Bourn Hall Fertility Clinic">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Fertility Clinic</span>
+                <span class="badge badge-mint">✓ DHA Licensed</span>
+                <h3><a href="fertifind_hospital_profile_page.html">Bourn Hall Fertility Clinic</a></h3>
+                <div class="card-sub">Pioneers of IVF (Est. by Edwards & Steptoe)</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">(215 reviews)</span></div>
+                <div class="card-location">📍 <b>Jumeirah 1</b> • Al Hudaiba Awards Bldg</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">IVF / ICSI</span>
+                <span class="service-tag">Blastocyst Transfer</span>
+                <span class="service-tag">Egg Freezing</span>
+                <span class="service-tag">Semen Analysis</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Sat – Thu</b></span>
+                <span>💻 Telehealth</span>
+                <span>☎ +971 4 705 5055</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Bourn Hall Fertility Clinic')">Review</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Bourn Hall Fertility Clinic','IVF Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Cleanroom embryology laboratory standard</span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('Bourn Hall Fertility Clinic', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+          <!-- Card 8: First Genomix Laboratory -->
+          <article class="provider-card provider" data-type="lab" data-specialty="genetics fertility" data-services="pgt testing home" data-area="Dubai Healthcare City" data-distance="2.6" data-rating="4.7" data-reviews="188" data-today="1" data-online="0" data-home="1" data-name="First Genomix Laboratory">
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">Diagnostic Lab</span>
+                <span class="badge badge-mint">✓ CAP / DHA</span>
+                <h3><a href="fertifind_labs_profile_page.html">First Genomix Laboratory</a></h3>
+                <div class="card-sub">Molecular Diagnostics & Reproductive Pathology</div>
+                <div class="card-rating"><span class="stars">★★★★☆</span> <b>4.7</b> <span class="muted">(188 reviews)</span></div>
+                <div class="card-location">📍 <b>Dubai Healthcare City</b> • Ibn Sina Bldg</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                <span class="service-tag">AMH Hormone</span>
+                <span class="service-tag">Sperm DNA Frag</span>
+                <span class="service-tag">Karyotyping</span>
+                <span class="service-tag">Home Sample Draw</span>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Sat – Thu</b></span>
+                <span>🧪 Rapid 24h reports</span>
+                <span>🏠 Home collection</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('First Genomix Laboratory')">Review</button>
+                <a class="btn btn-soft" href="fertifind_labs_profile_page.html">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('First Genomix Laboratory','Hormone & Semen Panel')">Book Test</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Same-day fertility hormone reporting</span>
+              <button class="heart" onclick="FertiFind.toggleShortlist('First Genomix Laboratory', this)" aria-label="Shortlist">♡</button>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Empty Results Alert -->
+        <div class="empty" id="empty">
+          <h3 style="font-size:20px;color:var(--navy);margin-bottom:8px">No healthcare providers match these specific filters</h3>
+          <p class="muted" style="margin-bottom:20px">Try clearing selected filters, expanding the distance radius, or exploring nearby Dubai districts.</p>
+          <button class="btn btn-primary" id="emptyReset">Clear All Filters</button>
+        </div>
+
+        <!-- Trust Indicators Strip -->
+        <div class="trust-strip">
+          <div class="trust-box">
+            <b>✓ DHA Verified Profiles</b>
+            <span>Verified licensing and credentials for all practices in Dubai.</span>
+          </div>
+          <div class="trust-box">
+            <b>✓ Real Patient Reviews</b>
+            <span>Honest moderated feedback on clinical care & bedside manner.</span>
+          </div>
+          <div class="trust-box">
+            <b>✓ District Discovery</b>
+            <span>Compare healthcare providers by local Dubai areas and proximity.</span>
+          </div>
+          <div class="trust-box">
+            <b>✓ Direct Booking Coordination</b>
+            <span>Send confirmed appointment requests with zero patient markups.</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Services Nearby Section -->
+  <section class="section alt" id="nearby">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Services you can find nearby</h2>
+          <p>Connect your search directly to the clinical procedures and diagnostic testing you need.</p>
+        </div>
+      </div>
+      <div class="grid4">
+        <a class="mini-card" href="fertifind_dubai_directory_search_page.html?specialty=ivf">
+          <div class="mini-icon">🧬</div>
+          <h3>IVF & Assisted Reproduction</h3>
+          <p>IVF cycles, ICSI fertilization, embryo vitrification, and PGT genetic testing across Dubai clinics.</p>
+        </a>
+        <a class="mini-card" href="fertifind_labs_profile_page.html">
+          <div class="mini-icon">🧪</div>
+          <h3>Fertility Diagnostics</h3>
+          <p>AMH ovarian reserve testing, reproductive hormone blood panels, and semen analysis laboratories.</p>
+        </a>
+        <a class="mini-card" href="fertifind_dubai_directory_search_page.html?type=doctor">
+          <div class="mini-icon">👨‍⚕️</div>
+          <h3>Fertility Specialists</h3>
+          <p>Reproductive endocrinologists, OB-GYN consultants, and andrology specialists in Dubai.</p>
+        </a>
+        <a class="mini-card" href="fertifind_dubai_directory_search_page.html?service=home">
+          <div class="mini-icon">🏠</div>
+          <h3>Healthcare at Home</h3>
+          <p>Licensed home blood draws, fertility hormone tests, and tele-consultations across Dubai.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Dubai Districts -->
+  <section class="section" id="areas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Healthcare providers by area in Dubai</h2>
+          <p>Explore fertility clinics, hospitals, diagnostic laboratories and specialists across Dubai districts.</p>
+        </div>
+        <a class="link" href="fertifind_dubai_directory_search_page.html">View all districts →</a>
+      </div>
+      <div class="grid4">
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Healthcare City (DHCC) <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Clinics in Jumeirah <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Care in Dubai Marina <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Specialists in Al Barsha <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Care in Downtown Dubai <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Clinics in Business Bay <span>→</span></a>
+        <a class="area-card" href="fertifind_dubai_directory_search_page.html?area=Deira">Hospitals in Deira <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patient Reviews -->
+  <section class="section alt" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Real patient experiences across Dubai</h2>
+          <p>Independent patient feedback helps you compare clinic workflows, bed-side manner, and diagnostic speed.</p>
+        </div>
+        <button class="btn btn-outline" onclick="FertiFind.openReview('General Dubai Directory')">★ Write a Review</button>
+      </div>
+      <div class="grid3">
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+            “The clinic profiles made comparing embryology credentials, IVF protocols and doctor availability straightforward before scheduling our consultation.”
+          </p>
+          <div class="reviewer">
+            <div class="avatar">F</div>
+            <div>
+              <b>Fatima M.</b>
+              <div class="muted" style="font-size:12px">Dubai Healthcare City • Orchid Fertility Patient</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+            “Dr. Partha Sarathi Das took the time to review our previous cycle thoroughly and explained the PGT-A test options with great clarity and empathy.”
+          </p>
+          <div class="reviewer">
+            <div class="avatar">S</div>
+            <div>
+              <b>Sarah K.</b>
+              <div class="muted" style="font-size:12px">Oud Metha • Doctor Consultation Review</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card review">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+            “Igenomix Dubai provided our AMH and genetic carrier report turnaround in under 48 hours, coordinated seamlessly with our doctor.”
+          </p>
+          <div class="reviewer">
+            <div class="avatar">H</div>
+            <div>
+              <b>Hassan Al Nuaimi</b>
+              <div class="muted" style="font-size:12px">DHCC • Genetics Diagnostic Lab Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- List Business CTA Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="cta" id="list">
+        <div>
+          <h2>Are you a doctor, clinic, hospital or laboratory in Dubai?</h2>
+          <p>Claim your profile, update services, respond to patient reviews, publish appointment availability and reach couples seeking fertility care.</p>
+        </div>
+        <button class="btn btn-outline" style="background:#ffffff;color:var(--navy);font-weight:900" onclick="FertiFind.openListBusiness()">
+          List / Claim Your Practice →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Directory search FAQs</h2>
+          <p>Answers to common questions about using the FertiFind Dubai healthcare directory.</p>
+        </div>
+      </div>
+      <div class="card" style="padding:24px">
+        <div class="faq-item">
+          <button class="faq-q">How does the district distance calculation work? <span>+</span></button>
+          <div class="faq-a">Distance is calculated using verified Dubai district coordinates from your selected origin area or device location. You can filter providers within 3 km, 6 km, 10 km, or 20 km.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I filter doctors, clinics and labs separately? <span>+</span></button>
+          <div class="faq-a">Yes. You can filter exclusively by individual consultant doctors, standalone fertility clinics, full-service hospitals, diagnostic laboratories, or home healthcare services using the sidebar.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is booking through FertiFind free for patients? <span>+</span></button>
+          <div class="faq-a">Yes, FertiFind is 100% free for patients. There are no booking markups or fees. You pay the clinic or hospital directly according to their published consultation rates.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How are patient reviews verified? <span>+</span></button>
+          <div class="faq-a">Every review is authenticated and checked to ensure clinical integrity. Healthcare providers can also publish official responses to verified reviews.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unified Footer (Original Dark Navy) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            FertiFind <small style="color:var(--teal)">Dubai</small>
+          </a>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Directory</div>
+          <div class="footer-links">
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=home">Home Testing</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Services</div>
+          <div class="footer-links">
+            <a href="index.html#treatments">IVF & Assisted Reproduction</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=ivf">ICSI Fertilization</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=pgt">PGT-A Genetics</a>
+            <a href="fertifind_labs_profile_page.html">AMH & Hormone Panels</a>
+            <a href="fertifind_dubai_directory_search_page.html?specialty=andrology">Male Fertility Care</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">For Practices</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">List Your Practice</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">Claim Practice Profile</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('packages')">Package Listings</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('login')">Provider Portal Login</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">DHA Compliance</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Company</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#how">How It Works</a>
+            <a href="#reviews">Patient Reviews</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dubai Districts Strip -->
+      <div class="footer-areas-strip">
+        <span>Dubai Districts:</span>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Dubai Healthcare City</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Jumeirah</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Al Barsha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Downtown Dubai</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Business Bay</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Deira">Deira</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/site.js"></script>
+  <script>
+    // --- Live Filter Logic & URL Parameter Parser ---
+    (function () {
+      const cards = [...document.querySelectorAll('.provider')];
+      const cardsWrap = document.getElementById('cards');
+      const q = document.getElementById('q'), type = document.getElementById('type'), area = document.getElementById('area');
+      const resultCount = document.getElementById('resultCount'), resultTitle = document.getElementById('resultTitle'), empty = document.getElementById('empty');
+
+      function getSelected(cls) {
+        return [...document.querySelectorAll(cls + ':checked')].map(x => x.value);
+      }
+
+      function apply() {
+        const query = q.value.trim().toLowerCase();
+        const types = getSelected('.typeFilter');
+        const specs = getSelected('.specialtyFilter');
+        const services = getSelected('.serviceFilter');
+        const radius = Number(document.getElementById('radius').value);
+        const minRating = Math.max(...[...document.querySelectorAll('.ratingFilter:checked')].map(x => Number(x.value)), 0);
+        const today = document.getElementById('today').checked;
+        const online = document.getElementById('online').checked;
+        const homeOnly = document.getElementById('homeOnly').checked;
+
+        let visible = cards.filter(c => {
+          const d = c.dataset;
+          const text = (d.name + ' ' + d.type + ' ' + d.specialty + ' ' + d.services + ' ' + d.area).toLowerCase();
+          if (query && !text.includes(query)) return false;
+          if (type.value !== 'all' && d.type !== type.value) return false;
+          if (types.length && !types.includes(d.type)) return false;
+          if (area.value !== 'all' && d.area !== area.value) return false;
+          if (specs.length && !specs.some(x => d.specialty.includes(x))) return false;
+          if (services.length && !services.some(x => d.services.includes(x))) return false;
+          if (radius < 100 && Number(d.distance) > radius) return false;
+          if (minRating && Number(d.rating) < minRating) return false;
+          if (today && d.today !== '1') return false;
+          if (online && d.online !== '1') return false;
+          if (homeOnly && d.home !== '1') return false;
+          return true;
+        });
+
+        const sort = document.getElementById('sort').value;
+        visible.sort((a, b) => {
+          if (sort === 'rating') return Number(b.dataset.rating) - Number(a.dataset.rating);
+          if (sort === 'reviews') return Number(b.dataset.reviews) - Number(a.dataset.reviews);
+          if (sort === 'distance') return Number(a.dataset.distance) - Number(b.dataset.distance);
+          return 0;
+        });
+
+        cards.forEach(c => c.style.display = 'none');
+        visible.forEach(c => c.style.display = 'flex');
+
+        resultCount.textContent = `Showing ${visible.length} provider${visible.length === 1 ? '' : 's'}`;
+        resultTitle.textContent = area.value === 'all' ? 'Healthcare providers in Dubai' : `Healthcare providers in ${area.value}`;
+        empty.style.display = visible.length ? 'none' : 'block';
+      }
+
+      // Bind input events
+      ['q', 'type', 'area', 'radius', 'today', 'online', 'homeOnly', 'sort'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener(id === 'q' ? 'input' : 'change', apply);
+      });
+      document.querySelectorAll('.typeFilter, .specialtyFilter, .serviceFilter, .ratingFilter').forEach(x => x.addEventListener('change', apply));
+
+      // Area chips binding
+      document.querySelectorAll('.chip').forEach(ch => {
+        ch.addEventListener('click', () => {
+          area.value = ch.dataset.area;
+          document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+          ch.classList.add('active');
+          apply();
+        });
+      });
+
+      document.getElementById('searchBtn').onclick = () => {
+        apply();
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+      };
+
+      function clearFilters() {
+        q.value = '';
+        type.value = 'all';
+        area.value = 'all';
+        document.getElementById('radius').value = '100';
+        ['today', 'online', 'homeOnly'].forEach(id => document.getElementById(id).checked = false);
+        document.querySelectorAll('.typeFilter, .specialtyFilter, .serviceFilter, .ratingFilter').forEach(x => x.checked = false);
+        document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+        apply();
+      }
+
+      document.getElementById('reset').onclick = clearFilters;
+      document.getElementById('emptyReset').onclick = clearFilters;
+
+      // Grid vs List view toggle
+      document.getElementById('gridBtn').onclick = () => {
+        cardsWrap.classList.remove('list');
+        document.getElementById('gridBtn').classList.add('active');
+        document.getElementById('listBtn').classList.remove('active');
+      };
+      document.getElementById('listBtn').onclick = () => {
+        cardsWrap.classList.add('list');
+        document.getElementById('listBtn').classList.add('active');
+        document.getElementById('gridBtn').classList.remove('active');
+      };
+
+      // --- URL Parameter Initialization ---
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('q')) {
+        q.value = params.get('q');
+      }
+      if (params.has('type')) {
+        const tVal = params.get('type');
+        type.value = tVal;
+        const matchingCheck = document.querySelector(`.typeFilter[value="${tVal}"]`);
+        if (matchingCheck) matchingCheck.checked = true;
+      }
+      if (params.has('area')) {
+        const aVal = params.get('area');
+        area.value = aVal;
+        const matchingChip = document.querySelector(`.chip[data-area="${aVal}"]`);
+        if (matchingChip) matchingChip.classList.add('active');
+      }
+      if (params.has('specialty')) {
+        const sVal = params.get('specialty');
+        const specCheck = document.querySelector(`.specialtyFilter[value="${sVal}"]`);
+        if (specCheck) specCheck.checked = true;
+      }
+      if (params.has('service')) {
+        const srvVal = params.get('service');
+        const srvCheck = document.querySelector(`.serviceFilter[value="${srvVal}"]`);
+        if (srvCheck) srvCheck.checked = true;
+      }
+
+      apply();
+    })();
+  </script>
+</body>
+</html>

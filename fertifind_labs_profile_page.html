@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Igenomix Dubai | Reproductive Genetics & Diagnostics | FertiFind Dubai</title>
+  <meta name="description" content="Laboratory profile for Igenomix Dubai in Dubai Healthcare City. Specialized in PGT-A embryo screening, ERA endometrial receptivity, AMH hormone testing, home blood collection and partner IVF coordination.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Specific Lab Profile Page Styles (Original Brand Navy & Blue Theme) */
+    .hero {
+      background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
+      padding: 32px 0 38px;
+      border-bottom: 1px solid var(--line);
+    }
+    .crumb {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .crumb a {
+      color: var(--blue);
+      font-weight: 800;
+    }
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr 280px;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .cover {
+      min-height: 290px;
+      border-radius: var(--radius-md);
+      background: url("https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1000&q=90") center/cover;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid var(--line);
+    }
+    .cover-badge {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 7px 11px;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 900;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .identity h1 {
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      margin: 10px 0 6px;
+      color: var(--navy);
+    }
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .location {
+      margin: 9px 0;
+      color: #40516f;
+      font-size: 12px;
+    }
+    .location a {
+      color: var(--blue);
+      font-weight: 850;
+    }
+    .chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .chip {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 5px 11px;
+      font-size: 11px;
+      color: #3b4d6a;
+      font-weight: 750;
+    }
+
+    .action-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .action-box h3 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--navy);
+    }
+    .open-tag {
+      font-size: 11px;
+      color: #087e76;
+      background: var(--mint);
+      border: 1px solid #b7f0e7;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 10px 0;
+      font-weight: 750;
+    }
+    .action-box .btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .micro {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .tabs {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 76px;
+      z-index: 40;
+    }
+    .tabs .container {
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+    }
+    .tabs a {
+      padding: 16px 14px;
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--muted);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tabs a:hover, .tabs a.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 315px;
+      gap: 24px;
+      padding: 30px 0 60px;
+    }
+    .content-card, .side-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .content-card h2 {
+      font-size: 22px;
+      margin: 0 0 8px;
+      letter-spacing: -0.025em;
+      color: var(--navy);
+    }
+    .content-card h3 {
+      font-size: 16px;
+      margin: 22px 0 10px;
+      color: var(--navy);
+    }
+    .lead {
+      font-size: 13px;
+      color: #556682;
+      line-height: 1.6;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .fact {
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+    }
+    .fact b {
+      display: block;
+      font-size: 20px;
+      color: var(--navy);
+    }
+    .fact span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    .test-table th {
+      text-align: left;
+      border-bottom: 2px solid var(--line);
+      padding: 10px 8px;
+      color: var(--navy);
+      font-size: 12px;
+    }
+    .test-table td {
+      padding: 12px 8px;
+      border-bottom: 1px solid var(--line-light);
+      vertical-align: middle;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini-service {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: #f8fbff;
+    }
+    .mini-service .ico {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .mini-service b {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .mini-service p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 4px 0 0;
+      line-height: 1.45;
+    }
+
+    .list-rows {
+      display: grid;
+      gap: 10px;
+    }
+    .row-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #f8fbff;
+    }
+    .ico-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #eef5ff;
+      color: var(--blue);
+      border: 1px solid #d4e4fc;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex: none;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 8px;
+    }
+    .side-link {
+      font-size: 11px;
+      color: #40516f;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      display: block;
+      transition: all 0.2s;
+    }
+    .side-link:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .side-link b {
+      display: block;
+      color: var(--navy);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1050px) {
+      .lab-grid { grid-template-columns: 1fr; }
+      .cover { min-height: 240px; }
+      .two-col-layout { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Notification Bar -->
+  <div class="topbar">
+    <div class="container">
+      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
+      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        FertiFind <small>Dubai</small>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_hospital_profile_page.html">Hospitals & Clinics</a>
+        <a href="fertifind_labs_profile_page.html" class="active">Labs & Diagnostics</a>
+        <a href="index.html#treatments">Treatments</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQs</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="btn btn-outline" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+        <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Test Booking')">Book Lab Test →</button>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="index.html">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
+      <a href="fertifind_hospital_profile_page.html">🏥 American Hospital & Orchid</a>
+      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
+      <a href="fertifind_labs_profile_page.html" class="active">🧪 Igenomix Dubai & Genetics</a>
+      <a href="index.html#treatments">🧬 IVF Treatments</a>
+      <a href="#faq">❓ FAQs</a>
+      <button class="btn btn-outline" style="width:100%" onclick="FertiFind.openListBusiness()">List Your Practice</button>
+      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Igenomix Dubai')">Book Lab Test</button>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="hero">
+    <div class="container">
+      <div class="crumb"><a href="index.html">Home</a> / <a href="fertifind_dubai_directory_search_page.html">Directory</a> / <a href="fertifind_dubai_directory_search_page.html?type=lab">Genetics Labs</a> / Igenomix Dubai</div>
+      <div class="lab-grid">
+        <div class="cover">
+          <div class="cover-badge">✓ Verified DHA Genetics Laboratory</div>
+        </div>
+        <div class="identity">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-blue">Reproductive Genetics Laboratory</span>
+            <span class="badge badge-mint">✓ ISO 15189 & CAP Accredited</span>
+          </div>
+          <h1>Igenomix Dubai</h1>
+          <div class="sub">Advanced Reproductive Genetics • PGT-A / PGT-M • ERA Endometrial Receptivity • AMH Panels</div>
+          <div class="location">
+            📍 <b>Dubai Healthcare City</b> • Unit 501-502, 26th St, Umm Hurair Second, Dubai • <a href="#location">View map</a>
+          </div>
+          <div class="rating">
+            <span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(420 verified patient & clinic reviews)</span>
+          </div>
+          <div class="chips">
+            <span class="chip">PGT-A Next-Gen Sequencing</span>
+            <span class="chip">ERA Receptivity Assay</span>
+            <span class="chip">AMH Hormone Blood Panels</span>
+            <span class="chip">At-Home Sample Collection</span>
+            <span class="chip">Turnaround: 24 – 48 Hours</span>
+          </div>
+        </div>
+        <div class="action-box">
+          <div>
+            <h3>Book Diagnostic Test</h3>
+            <div class="open-tag">● Lab Open Sat – Thu: 08:30 AM – 06:00 PM</div>
+            <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Direct toll-free laboratory desk:</p>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 800 50342</div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">Book Lab Test →</button>
+            <button class="btn btn-soft" style="margin-top:6px" onclick="FertiFind.openBooking('Igenomix Dubai','Home Sample Phlebotomy Collection')">Schedule Home Blood Draw</button>
+            <div class="micro">🔒 DHA Licensed Laboratory • Fast Digital Reports</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky In-Page Navigation Tabs -->
+  <nav class="tabs">
+    <div class="container">
+      <a href="#overview" class="active">Overview</a>
+      <a href="#tests">Diagnostic Tests & Fees</a>
+      <a href="#home-sample">At-Home Collection</a>
+      <a href="#team">Scientific Team</a>
+      <a href="#accreditation">Accreditations</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">Lab FAQs</a>
+    </div>
+  </nav>
+
+  <!-- Main Content Layout -->
+  <main class="container two-col-layout">
+
+    <!-- Primary Column -->
+    <div>
+
+      <!-- Overview -->
+      <section class="content-card" id="overview">
+        <h2>About Igenomix Dubai</h2>
+        <p class="lead">
+          Igenomix Dubai is a global pioneer in reproductive genetics, providing evidence-based molecular diagnostics to fertility clinics, hospitals, and couples across the UAE and GCC. Located in Dubai Healthcare City, the state-of-the-art facility is licensed by the Dubai Health Authority (DHA) and accredited to international ISO 15189 and CAP standards.
+        </p>
+        <p class="lead">
+          Specializing in Pre-implantation Genetic Testing for Aneuploidies (PGT-A), Endometrial Receptivity Analysis (ERA), Non-Invasive Prenatal Testing (NIPT), and comprehensive male and female reproductive hormone panels, Igenomix helps optimize embryo selection and maximize IVF success rates.
+        </p>
+
+        <div class="facts">
+          <div class="fact"><b>100,000+</b><span>Embryos Tested Worldwide</span></div>
+          <div class="fact"><b>24 – 48h</b><span>Rapid Report Turnaround</span></div>
+          <div class="fact"><b>ISO 15189</b><span>Laboratory Quality Seal</span></div>
+          <div class="fact"><b>99.4%</b><span>Diagnostic Concordance</span></div>
+        </div>
+      </section>
+
+      <!-- Tests Catalogue -->
+      <section class="content-card" id="tests">
+        <h2>Reproductive Diagnostic Test Catalogue</h2>
+        <p class="lead">Explore key fertility blood panels and genetic diagnostics available at Igenomix Dubai:</p>
+
+        <table class="test-table">
+          <thead>
+            <tr>
+              <th>Diagnostic Test</th>
+              <th>Sample Type</th>
+              <th>Report Turnaround</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <b style="color:var(--navy)">PGT-A (Pre-implantation Genetic Testing)</b><br>
+                <span class="muted" style="font-size:11px">Screens 24 chromosomes for aneuploidies via Next-Gen Sequencing</span>
+              </td>
+              <td>Embryo Biopsy</td>
+              <td>5 – 7 business days</td>
+              <td><button class="btn btn-soft" style="padding:6px 10px;font-size:11px" onclick="FertiFind.openBooking('Igenomix Dubai','PGT-A Genetic Test')">Book →</button></td>
+            </tr>
+            <tr>
+              <td>
+                <b style="color:var(--navy)">ERA (Endometrial Receptivity Analysis)</b><br>
+                <span class="muted" style="font-size:11px">Determines personalized optimal window for embryo implantation</span>
+              </td>
+              <td>Endometrial Tissue</td>
+              <td>10 – 12 business days</td>
+              <td><button class="btn btn-soft" style="padding:6px 10px;font-size:11px" onclick="FertiFind.openBooking('Igenomix Dubai','ERA Test')">Book →</button></td>
+            </tr>
+            <tr>
+              <td>
+                <b style="color:var(--navy)">AMH & Ovarian Reserve Blood Panel</b><br>
+                <span class="muted" style="font-size:11px">Anti-Müllerian Hormone, FSH, LH, Estradiol & Progesterone</span>
+              </td>
+              <td>Blood Sample</td>
+              <td>Same-day (12 – 24h)</td>
+              <td><button class="btn btn-primary" style="padding:6px 10px;font-size:11px" onclick="FertiFind.openBooking('Igenomix Dubai','AMH Blood Panel')">Book →</button></td>
+            </tr>
+            <tr>
+              <td>
+                <b style="color:var(--navy)">Sperm DNA Fragmentation (SDF)</b><br>
+                <span class="muted" style="font-size:11px">Analyzes integrity of paternal genetic material in semen</span>
+              </td>
+              <td>Semen Sample</td>
+              <td>24 – 48 hours</td>
+              <td><button class="btn btn-soft" style="padding:6px 10px;font-size:11px" onclick="FertiFind.openBooking('Igenomix Dubai','Sperm DNA Fragmentation')">Book →</button></td>
+            </tr>
+            <tr>
+              <td>
+                <b style="color:var(--navy)">CGT (Carrier Genetic Test)</b><br>
+                <span class="muted" style="font-size:11px">Screens couples for over 600 recessive and X-linked genetic conditions</span>
+              </td>
+              <td>Blood / Saliva</td>
+              <td>14 – 18 business days</td>
+              <td><button class="btn btn-soft" style="padding:6px 10px;font-size:11px" onclick="FertiFind.openBooking('Igenomix Dubai','Carrier Genetic Test')">Book →</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- At-Home Collection -->
+      <section class="content-card" id="home-sample">
+        <h2>At-Home Blood & Sample Collection Across Dubai</h2>
+        <p class="lead">
+          Skip clinic waiting rooms. Certified DHA-licensed phlebotomists from Igenomix visit your home or workplace anywhere in Dubai for scheduled blood draws and specimen transport in temperature-controlled transport kits.
+        </p>
+        <div class="grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0">
+          <div class="mini-service">
+            <div class="ico">🚗</div>
+            <b>1. Schedule Online</b>
+            <p>Select your preferred 2-hour morning or afternoon window.</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">💉</div>
+            <b>2. Home Phlebotomy</b>
+            <p>Licensed nurse collects blood samples following sterile DHA protocols.</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">📱</div>
+            <b>3. Digital Results</b>
+            <p>Secure encrypted PDF reports delivered directly to you and your doctor.</p>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Home Phlebotomy Collection')">Book Home Blood Collection →</button>
+      </section>
+
+      <!-- Scientific Team -->
+      <section class="content-card" id="team">
+        <h2>Clinical Embryology & Genetics Team</h2>
+        <p class="lead">Meet the verified laboratory professionals and clinical embryologists:</p>
+        <div class="list-rows">
+          <div class="row-item">
+            <div class="ico-box">👩‍🔬</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Estee Van Zyl — Clinical Embryologist</b>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0">
+                Senior Clinical Embryologist at Orchid Fertility Clinic and coordinating laboratory specialist with Igenomix. Specialized in embryo micromanipulation, trophectoderm biopsy, and vitrification.
+              </p>
+            </div>
+          </div>
+          <div class="row-item">
+            <div class="ico-box">🧬</div>
+            <div>
+              <b style="color:var(--navy);font-size:14px">Hughlene Leonore Baker — Embryology Specialist</b>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0">
+                Registered clinical embryologist experienced in human IVF laboratory operations, blastocyst culture, and quality control systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Accreditations -->
+      <section class="content-card" id="accreditation">
+        <h2>Quality Certifications & Accreditations</h2>
+        <div class="grid2">
+          <div class="mini-service">
+            <div class="ico">🏆</div>
+            <b>ISO 15189 International Standard</b>
+            <p>Accredited for medical laboratory competence, testing accuracy, and quality management systems.</p>
+          </div>
+          <div class="mini-service">
+            <div class="ico">🇦🇪</div>
+            <b>DHA Licensed Diagnostic Facility</b>
+            <p>Full regulatory compliance under Dubai Health Authority standards for human genetic testing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section class="content-card" id="reviews">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+          <div>
+            <h2 style="margin:0">Verified Reviews (420)</h2>
+            <p class="lead" style="margin:4px 0 0">Feedback from patients and referring reproductive specialists</p>
+          </div>
+          <button class="btn btn-outline" onclick="FertiFind.openReview('Igenomix Dubai')">★ Write Review</button>
+        </div>
+
+        <div class="list-rows">
+          <div class="row-item" style="background:#ffffff">
+            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">Z</div>
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <b style="color:var(--navy)">Zainab A.</b>
+                <span style="font-size:11px;color:var(--muted)">3 weeks ago</span>
+              </div>
+              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">PGT-A Embryo Testing</span></div>
+              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
+                “Our IVF doctor at American Hospital recommended Igenomix for PGT-A on our 5 blastocysts. The report was detailed, clearly explained which embryos were euploid, and gave us huge peace of mind before transfer.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQs -->
+      <section class="content-card" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+          <button class="faq-q">Can patients order AMH blood tests directly without a doctor referral? <span>+</span></button>
+          <div class="faq-a">Yes. Routine ovarian reserve blood tests such as AMH, FSH, and female hormone panels can be scheduled directly with home phlebotomy or in-clinic testing.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How are PGT biopsy samples transferred from my clinic to Igenomix? <span>+</span></button>
+          <div class="faq-a">Your clinic’s clinical embryologist performs the trophectoderm biopsy on day 5 or 6 blastocysts and places the cells in specialized lysis tubes. Igenomix couriers securely collect the samples via temperature-regulated transport.</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Secondary Column (Sticky Sidebar) -->
+    <aside>
+
+      <!-- Quick Action Card -->
+      <div class="side-card" style="position:sticky;top:136px">
+        <h3 style="margin-top:0;color:var(--navy)">Schedule Diagnostics</h3>
+        <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('Igenomix Dubai','AMH & Reproductive Panel')">Book Lab Test →</button>
+        <button class="btn btn-soft" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('Igenomix Dubai','Home Sample Collection')">Book Home Blood Draw</button>
+        <button class="btn btn-outline" style="width:100%;margin-bottom:14px" onclick="FertiFind.openReview('Igenomix Dubai')">★ Write a Review</button>
+
+        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Partner Clinics</h4>
+        <div class="side-list">
+          <a class="side-link" href="fertifind_hospital_profile_page.html">
+            <b>American Hospital Dubai</b>
+            Reproductive Medicine Center
+          </a>
+          <a class="side-link" href="fertifind_hospital_profile_page.html">
+            <b>Orchid Fertility Clinic</b>
+            Ibn Sina Bldg 27, DHCC
+          </a>
+          <a class="side-link" href="fertifind_doctor_profile_page.html">
+            <b>Dr. Partha Sarathi Das</b>
+            Consultant Reproductive Medicine
+          </a>
+        </div>
+
+        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Lab Coordination</h4>
+        <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Toll-free customer care:</p>
+        <div style="font-size:13px;font-weight:800;color:var(--navy)">☎ +971 800 50342</div>
+        <div style="font-size:12px;color:#087e76;margin-top:4px">💬 WhatsApp: +971 50 477 3832</div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Unified Footer (Original Dark Navy) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            FertiFind <small style="color:var(--teal)">Dubai</small>
+          </a>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+        </div>
+
+        <div>
+          <div class="footer-title">Directory</div>
+          <div class="footer-links">
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=home">Home Testing</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Services</div>
+          <div class="footer-links">
+            <a href="index.html#treatments">IVF & Assisted Reproduction</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=ivf">ICSI Fertilization</a>
+            <a href="fertifind_dubai_directory_search_page.html?service=pgt">PGT-A Genetics</a>
+            <a href="fertifind_labs_profile_page.html">AMH & Hormone Panels</a>
+            <a href="fertifind_dubai_directory_search_page.html?specialty=andrology">Male Fertility Care</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">For Practices</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">List Your Practice</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openListBusiness()">Claim Practice Profile</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('packages')">Package Listings</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('login')">Provider Portal Login</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">DHA Compliance</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title">Company</div>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#how">How It Works</a>
+            <a href="#reviews">Patient Reviews</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
+            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dubai Districts Strip -->
+      <div class="footer-areas-strip">
+        <span>Dubai Districts:</span>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Dubai Healthcare City</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Jumeirah</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Al Barsha</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Downtown Dubai</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Business Bay</a>
+        <a href="fertifind_dubai_directory_search_page.html?area=Deira">Deira</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/site.js"></script>
+  <script>
+    document.querySelectorAll('.tabs a').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tabs a').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
