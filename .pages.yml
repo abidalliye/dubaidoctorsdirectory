@@ -1,19 +1,19 @@
-# PagesCMS Configuration
-# https://pagescms.org
-# Connects directly to GitHub repository: abidalliye/dubaidoctorsdirectory
+# Pages CMS Configuration
+# Documentation: https://pagescms.org/docs
+# Central configuration for repository: abidalliye/dubaidoctorsdirectory
 
 media:
   input: Images
-  output: Images
+  output: /Images
+  categories: [image]
 
 content:
   - name: doctors
     label: Doctors
-    type: collection
+    type: file
     path: _data/doctors.json
-    view:
-      fields: [name, specialty, clinic, area, dhaLicense, rating, appointmentsCount, status]
-      primary: name
+    format: json
+    list: true
     fields:
       - name: id
         label: Doctor ID
@@ -30,7 +30,17 @@ content:
       - name: category
         label: Category
         type: select
-        options: [Cardiology, Dermatology, Orthopedics, Pediatrics, Gynecology, General Medicine, Others]
+        options:
+          values:
+            - Cardiology
+            - Dermatology
+            - Orthopedics
+            - Pediatrics
+            - Gynecology
+            - Reproductive Endocrinology
+            - Urology
+            - General Medicine
+            - Others
       - name: clinic
         label: Affiliated Clinic / Hospital
         type: string
@@ -61,15 +71,18 @@ content:
       - name: status
         label: Status
         type: select
-        options: [Active, Inactive, Pending Verification]
+        options:
+          values:
+            - Active
+            - Inactive
+            - Pending Verification
 
   - name: clinics
     label: Clinics & Hospitals
-    type: collection
+    type: file
     path: _data/clinics.json
-    view:
-      fields: [name, category, area, phone, rating, status]
-      primary: name
+    format: json
+    list: true
     fields:
       - name: id
         label: Clinic ID
@@ -81,7 +94,12 @@ content:
       - name: category
         label: Category
         type: select
-        options: [Clinic, Hospital, Diagnostic Lab]
+        options:
+          values:
+            - Clinic
+            - Hospital
+            - Diagnostic Lab
+            - Fertility Centre
       - name: area
         label: Dubai District
         type: string
@@ -109,19 +127,26 @@ content:
       - name: status
         label: Verification Status
         type: select
-        options: [Verified, Pending, Under Review]
+        options:
+          values:
+            - Verified
+            - Pending
+            - Under Review
       - name: plan
         label: Listing Plan
         type: select
-        options: [Verified Free Listing, Featured Specialist, Clinic Showcase]
+        options:
+          values:
+            - Verified Free Listing
+            - Featured Specialist
+            - Clinic Showcase
 
   - name: appointments
-    label: Appointments
-    type: collection
+    label: Appointments Queue
+    type: file
     path: _data/appointments.json
-    view:
-      fields: [patientName, doctorName, specialty, dateTime, status]
-      primary: patientName
+    format: json
+    list: true
     fields:
       - name: id
         label: Appointment ID
@@ -143,18 +168,24 @@ content:
       - name: phone
         label: Patient Mobile
         type: string
+      - name: email
+        label: Patient Email
+        type: string
       - name: status
         label: Appointment Status
         type: select
-        options: [Confirmed, Pending, Cancelled]
+        options:
+          values:
+            - Confirmed
+            - Pending
+            - Cancelled
 
   - name: patients
     label: Patients Registry
-    type: collection
+    type: file
     path: _data/patients.json
-    view:
-      fields: [name, appointments, lastVisit, phone, email]
-      primary: name
+    format: json
+    list: true
     fields:
       - name: id
         label: Patient ID
@@ -178,11 +209,10 @@ content:
 
   - name: reviews
     label: Patient Reviews
-    type: collection
+    type: file
     path: _data/reviews.json
-    view:
-      fields: [patientName, doctorName, rating, date, verified]
-      primary: patientName
+    format: json
+    list: true
     fields:
       - name: id
         label: Review ID
@@ -198,7 +228,7 @@ content:
         type: number
       - name: comment
         label: Review Feedback
-        type: string
+        type: text
       - name: date
         label: Date Posted
         type: string
@@ -207,12 +237,11 @@ content:
         type: boolean
 
   - name: blogs
-    label: Blog Articles
-    type: collection
+    label: Blog Articles (JSON Data)
+    type: file
     path: _data/blogs.json
-    view:
-      fields: [title, status, publishedOn, author, views]
-      primary: title
+    format: json
+    list: true
     fields:
       - name: id
         label: Post ID
@@ -224,7 +253,11 @@ content:
       - name: status
         label: Publication Status
         type: select
-        options: [Published, Draft, Archived]
+        options:
+          values:
+            - Published
+            - Draft
+            - Archived
       - name: publishedOn
         label: Date Published
         type: string
@@ -235,10 +268,44 @@ content:
         label: Pageviews
         type: number
 
+  - name: articles
+    label: Editorial Articles (Markdown Collection)
+    type: collection
+    path: content/articles
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Meta Description
+        type: text
+      - name: publishedOn
+        label: Published Date
+        type: date
+      - name: author
+        label: Author Name
+        type: string
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - IVF & Fertility Guides
+            - Doctor Spotlights
+            - DHA Compliance & Medical Law
+            - Dubai Healthcare Tourism
+            - Patient Case Studies
+      - name: body
+        label: Article Content
+        type: rich-text
+
   - name: settings
-    label: Directory Settings
+    label: Platform Settings
     type: file
     path: _data/settings.json
+    format: json
     fields:
       - name: siteName
         label: Site Name
