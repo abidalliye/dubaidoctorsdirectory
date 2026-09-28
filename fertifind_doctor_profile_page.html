@@ -3,15 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dr. Partha Sarathi Das | Consultant Reproductive Medicine & IVF Dubai | FertiFind</title>
-  <meta name="description" content="Official profile for Dr. Partha Sarathi Das, Consultant in Reproductive Medicine & Infertility in Dubai at Orchid Fertility Clinic and American Hospital Dubai. View credentials, patient reviews, fees, and book direct consultations.">
+  <title>Dr. Sara Ahmed | Consultant Fertility Specialist & Reproductive Medicine | Dubai</title>
+  <meta name="description" content="Doctor profile for Dr. Sara Ahmed, Consultant Fertility Specialist in Dubai at Nova Fertility & IVF Centre. View qualifications, clinical specialties, verified patient reviews, transparent consultation fees, and book direct in-clinic, video, or home consultations.">
+  <meta name="theme-color" content="#0757d9">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Dr. Sara Ahmed | Consultant Fertility Specialist & Reproductive Medicine | Dubai">
+  <meta property="og:description" content="DHA-licensed Consultant in Reproductive Medicine & Infertility. Book direct in-clinic consultations, video meetings, and home phlebotomy in Dubai.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://dubaidoctorsdirectory.surge.sh/fertifind_doctor_profile_page.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=90">
+
+  <!-- Schema.org Physician Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "name": "Dr. Sara Ahmed",
+    "description": "Consultant Fertility Specialist and Reproductive Medicine physician in Dubai, specializing in IVF, ICSI, IUI, PCOS, and advanced fertility preservation.",
+    "medicalSpecialty": [
+      "Reproductive Medicine",
+      "Obstetrics and Gynecology",
+      "Infertility",
+      "Assisted Reproductive Technology"
+    ],
+    "worksFor": {
+      "@type": "MedicalClinic",
+      "name": "Nova Fertility & IVF Centre",
+      "telephone": "+971 4 385 6009",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jumeirah Beach Road, Jumeirah 1",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      }
+    },
+    "jobTitle": "Consultant Fertility Specialist",
+    "url": "https://dubaidoctorsdirectory.surge.sh/fertifind_doctor_profile_page.html",
+    "telephone": "+971 4 385 6009",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressRegion": "Dubai",
+      "addressCountry": "AE"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "174",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "knowsAbout": [
+      "In Vitro Fertilization (IVF)",
+      "Intracytoplasmic Sperm Injection (ICSI)",
+      "Intrauterine Insemination (IUI)",
+      "Polycystic Ovary Syndrome (PCOS)",
+      "Oocyte Vitrification (Egg Freezing)",
+      "Recurrent Implantation Failure",
+      "Pre-implantation Genetic Testing (PGT-A)",
+      "Fertility Preservation",
+      "Male Factor Infertility Evaluation"
+    ],
+    "availableService": [
+      {
+        "@type": "MedicalProcedure",
+        "name": "Initial Fertility Evaluation & Pelvic Ultrasound"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Custom IVF & ICSI Protocol Planning"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Intrauterine Insemination (IUI)"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Egg Freezing & Vitrification"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Online Video Tele-Consultation"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "At-Home Fertility Sample Phlebotomy & Evaluation"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Global Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
   <style>
-    /* Specific Doctor Profile Page Styles (Original Brand Navy & Blue Theme) */
-    .hero {
+    /* Scoped Styles for Doctor Profile Page */
+    .profile-hero {
       background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
                   linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
-      padding: 32px 0 38px;
+      padding: 30px 0 38px;
       border-bottom: 1px solid var(--line);
     }
     .crumb {
@@ -23,73 +114,87 @@
       color: var(--blue);
       font-weight: 800;
     }
-    .profile-grid {
+
+    .profile-header-grid {
       display: grid;
-      grid-template-columns: 240px 1fr 280px;
+      grid-template-columns: 240px minmax(0, 1fr) 290px;
       gap: 24px;
       align-items: center;
     }
-    .doctor-photo {
-      height: 270px;
+    .doctor-photo-card {
+      height: 275px;
       border-radius: var(--radius-md);
-      background: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=90') center/cover;
+      background: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=90') center/cover no-repeat;
       box-shadow: var(--shadow);
       position: relative;
       border: 1px solid var(--line);
     }
-    .verified-badge {
+    .verified-pill {
       position: absolute;
       bottom: 12px;
       left: 12px;
       background: #ffffff;
-      border-radius: 8px;
-      padding: 6px 10px;
+      border-radius: 9px;
+      padding: 6px 11px;
+      color: var(--mint-dark);
+      font-size: 11px;
+      font-weight: 850;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      border: 1px solid #bceee6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-identity h1 {
+      font-size: clamp(26px, 3.2vw, 36px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 8px 0 4px;
       color: var(--navy);
-      font-size: 10px;
       font-weight: 900;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
     }
-    .identity h1 {
-      font-size: clamp(28px, 3.4vw, 38px);
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      margin: 10px 0 4px;
-      color: var(--navy);
-    }
-    .role {
+    .profile-identity .role-text {
       font-size: 15px;
-      color: var(--muted);
+      color: #4a5c77;
       font-weight: 750;
     }
-    .clinic {
-      margin: 10px 0;
+    .profile-identity .clinic-affiliation {
+      margin: 8px 0 10px;
       color: #40516f;
       font-size: 13px;
     }
-    .clinic a {
+    .profile-identity .clinic-affiliation a {
       color: var(--blue);
       font-weight: 850;
     }
-    .rating {
-      margin: 12px 0;
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
     }
-    .chips {
+    .rating-row .stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .chips-wrap {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
     }
-    .chip {
+    .chip-item {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 99px;
-      padding: 5px 10px;
+      padding: 5px 11px;
       font-size: 11px;
       color: #3b4d6a;
       font-weight: 750;
     }
 
-    .profile-actions {
+    .action-booking-box {
       background: #ffffff;
       border: 1px solid var(--line);
       border-top: 4px solid var(--blue);
@@ -97,57 +202,70 @@
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-sm);
     }
-    .profile-actions h3 {
+    .action-booking-box h3 {
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--navy);
+      font-weight: 850;
     }
-    .price {
+    .action-booking-box .price-tag {
       font-size: 26px;
       font-weight: 950;
       color: var(--navy);
-      margin: 4px 0;
+      margin: 3px 0 6px;
     }
-    .price small {
+    .action-booking-box .price-tag small {
       font-size: 11px;
       color: var(--muted);
       font-weight: 600;
     }
-    .available {
+    .avail-status {
       font-size: 11px;
-      color: #087e76;
+      color: var(--mint-dark);
       background: var(--mint);
       border: 1px solid #b7f0e7;
       border-radius: 8px;
-      padding: 7px 10px;
-      margin: 9px 0;
-      font-weight: 750;
+      padding: 6px 9px;
+      margin-bottom: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .profile-actions .btn {
+    .action-booking-box .btn {
       width: 100%;
-      margin-top: 8px;
+      margin-top: 7px;
+      padding: 10px 14px;
+      font-size: 12px;
     }
-    .micro {
+    .trust-micro {
       font-size: 10px;
       color: var(--muted);
       text-align: center;
-      margin-top: 9px;
+      margin-top: 8px;
+      line-height: 1.4;
     }
 
-    .tabs {
+    /* Sub Navigation Tabs */
+    .tabs-bar {
       background: #ffffff;
       border-bottom: 1px solid var(--line);
       position: sticky;
-      top: 76px;
-      z-index: 40;
+      top: 74px;
+      z-index: 35;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     }
-    .tabs .container {
+    .tabs-bar .container {
       display: flex;
       overflow-x: auto;
-      gap: 4px;
+      gap: 2px;
+      scrollbar-width: none;
     }
-    .tabs a {
-      padding: 16px 14px;
+    .tabs-bar .container::-webkit-scrollbar {
+      display: none;
+    }
+    .tabs-bar a {
+      padding: 14px 13px;
       font-size: 12px;
       font-weight: 850;
       color: var(--muted);
@@ -155,18 +273,19 @@
       border-bottom: 3px solid transparent;
       transition: color 0.2s, border-color 0.2s;
     }
-    .tabs a:hover, .tabs a.active {
+    .tabs-bar a:hover, .tabs-bar a.active {
       color: var(--blue);
       border-bottom-color: var(--blue);
     }
 
-    .two-col-layout {
+    /* Two-column layout */
+    .profile-main-layout {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 315px;
-      gap: 24px;
-      padding: 30px 0 60px;
+      gap: 22px;
+      padding: 28px 0 65px;
     }
-    .content-card, .side-card {
+    .section-card {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
@@ -174,160 +293,725 @@
       margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
     }
-    .content-card h2 {
+    .section-card h2 {
       font-size: 22px;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       letter-spacing: -0.025em;
       color: var(--navy);
+      font-weight: 900;
     }
-    .content-card h3 {
+    .section-card h3 {
       font-size: 16px;
-      margin: 22px 0 10px;
+      margin: 20px 0 9px;
       color: var(--navy);
+      font-weight: 850;
     }
-    .lead {
+    .section-lead {
       font-size: 13px;
       color: #556682;
       line-height: 1.6;
+      margin: 0 0 14px;
     }
 
-    .facts {
+    /* Facts Metric Cards */
+    .facts-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
-    .fact {
+    .fact-card {
       background: #f8fbff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 12px;
+      border: 1px solid #e2ecf9;
+      border-radius: 12px;
+      padding: 13px;
     }
-    .fact b {
+    .fact-card b {
       display: block;
       font-size: 20px;
       color: var(--navy);
+      font-weight: 900;
     }
-    .fact span {
+    .fact-card span {
       font-size: 11px;
       color: var(--muted);
+      font-weight: 650;
     }
 
-    .grid2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .mini-service {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      background: #f8fbff;
-    }
-    .mini-service .ico {
-      font-size: 22px;
-      margin-bottom: 4px;
-    }
-    .mini-service b {
-      display: block;
-      font-size: 13px;
-      color: var(--navy);
-    }
-    .mini-service p {
-      font-size: 11px;
-      color: var(--muted);
-      margin: 4px 0 0;
-      line-height: 1.45;
-    }
-
-    .list-rows {
+    /* List Rows (Qualifications) */
+    .credentials-list {
       display: grid;
       gap: 10px;
     }
-    .row-item {
+    .credential-row {
       display: flex;
-      gap: 12px;
+      gap: 13px;
       align-items: flex-start;
-      padding: 14px;
+      padding: 13px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: #f8fbff;
+      border-radius: 12px;
+      background: #fbfcfe;
     }
-    .ico-box {
+    .cred-icon {
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: #eef5ff;
+      background: #edf4ff;
       color: var(--blue);
-      border: 1px solid #d4e4fc;
       display: grid;
       place-items: center;
       font-size: 18px;
       flex: none;
+      border: 1px solid #d5e5fc;
+    }
+    .cred-info b {
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .cred-info p {
+      margin: 3px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
     }
 
-    .slots-grid {
+    /* 3x3 Services Grid */
+    .services-3col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 11px;
+    }
+    .service-box {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 14px;
+      background: #fbfcfe;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .service-box:hover {
+      border-color: #b7d3fc;
+      transform: translateY(-2px);
+    }
+    .service-box .ico {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .service-box b {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+      font-weight: 800;
+    }
+    .service-box p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 5px 0 0;
+      line-height: 1.45;
+    }
+
+    /* Career Timeline */
+    .career-timeline {
+      border-left: 2px solid #dbe6f6;
+      margin-left: 10px;
+      padding-left: 20px;
+    }
+    .timeline-node {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .timeline-node:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-node::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid #eaf2ff;
+    }
+    .timeline-node b {
+      font-size: 13px;
+      color: var(--navy);
+      display: block;
+    }
+    .timeline-node p {
+      margin: 3px 0 0;
+      color: #556682;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Consultation Fees Grid */
+    .fees-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .fee-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fbfcfe;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .fee-card b {
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .fee-card .price {
+      font-size: 22px;
+      font-weight: 950;
+      color: var(--blue);
+      margin: 6px 0;
+    }
+    .fee-card p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0 0 12px;
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    /* Schedule Slots */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
       margin-top: 10px;
     }
-    .slot-pill {
+    .slot-card {
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      text-align: center;
-      background: #f8fbff;
+      border-radius: 11px;
+      padding: 10px 12px;
+      background: #fbfcfe;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .slot-pill:hover, .slot-pill.active {
+    .slot-card:hover, .slot-card.active {
       border-color: var(--blue);
-      background: #eef5ff;
-      color: var(--blue);
+      background: #edf4ff;
     }
-    .slot-pill b {
+    .slot-card b {
       display: block;
       font-size: 12px;
+      color: var(--navy);
     }
-    .slot-pill small {
-      font-size: 10px;
+    .slot-card small {
+      font-size: 11px;
       color: var(--muted);
     }
 
-    .side-list {
+    /* Reviews Summary Breakdown */
+    .reviews-header-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .reviews-score-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+    .big-score-center {
+      text-align: center;
+    }
+    .big-score-center strong {
+      font-size: 46px;
+      color: var(--navy);
+      display: block;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .big-score-center .stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin: 4px 0 2px;
+    }
+    .score-bars-list {
+      display: grid;
+      gap: 6px;
+    }
+    .score-bar-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 34px;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .bar-track {
+      height: 7px;
+      border-radius: 99px;
+      background: #e7edf5;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--teal);
+    }
+
+    .patient-review-card {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .patient-review-card:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .review-user-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .user-meta {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+    }
+    .user-avatar-circle {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #e8f0ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .patient-review-card p {
+      font-size: 12px;
+      color: #43546e;
+      margin: 4px 0 0;
+      line-height: 1.5;
+    }
+
+    /* Articles Grid */
+    .articles-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .article-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffffff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .article-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    .article-thumb {
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+    }
+    .article-body {
+      padding: 13px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .article-tag {
+      font-size: 9px;
+      font-weight: 900;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .article-card h4 {
+      font-size: 13px;
+      margin: 6px 0 8px;
+      color: var(--navy);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+    .article-card .author-date {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Nearby Providers Section */
+    .providers-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .provider-mini-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px;
+      background: #fbfcfe;
+    }
+    .provider-mini-top {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .provider-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 11px;
+      background-size: cover;
+      background-position: center;
+      flex: none;
+    }
+    .provider-mini-card h4 {
+      font-size: 13px;
+      color: var(--navy);
+      margin: 0 0 2px;
+      font-weight: 850;
+    }
+    .provider-mini-card p {
+      font-size: 10px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .provider-mini-card .rating-row {
+      margin: 8px 0;
+      font-size: 11px;
+    }
+    .provider-mini-card .btn {
+      width: 100%;
+      padding: 7px;
+      font-size: 11px;
+    }
+
+    .nearby-facilities-list {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 18px;
+    }
+    .nearby-facility-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #edf1f5;
+      padding-bottom: 9px;
+    }
+    .nearby-facility-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .nearby-facility-row b {
+      font-size: 12px;
+      color: var(--navy);
+    }
+    .nearby-facility-row span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .nearby-facility-row strong {
+      font-size: 11px;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    /* FAQ Section - STRICT 2-COLUMN LAYOUT ON DESKTOP */
+    .faq-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .faq-accordion-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .faq-trigger {
+      width: 100%;
+      border: 0;
+      background: none;
+      padding: 14px 15px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--navy);
+      font-weight: 850;
+      font-size: 13px;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .faq-trigger span {
+      font-size: 16px;
+      color: var(--blue);
+      font-weight: 800;
+      flex: none;
+    }
+    .faq-body-content {
+      display: none;
+      color: #556682;
+      font-size: 12px;
+      padding: 0 15px 14px;
+      line-height: 1.5;
+    }
+    .faq-accordion-box.open .faq-body-content {
+      display: block;
+    }
+    .faq-accordion-box.open {
+      background: #ffffff;
+      border-color: #bcd5fb;
+    }
+
+    /* Bottom Conversion CTA Banner */
+    .conversion-cta-banner {
+      background: linear-gradient(135deg, #0b2d70, #0757d9 60%, #11a89e);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .conversion-cta-banner h2 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .conversion-cta-banner p {
+      color: #dce8ff;
+      font-size: 12px;
+      margin: 5px 0 0;
+    }
+
+    /* Sidebar Cards */
+    .side-card-item {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .side-card-item h3 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 850;
+    }
+    .side-card-list {
       display: grid;
       gap: 8px;
     }
-    .side-link {
+    .side-link-pill {
       font-size: 11px;
-      color: #40516f;
-      padding: 10px;
-      border-radius: var(--radius-sm);
-      background: #f8fbff;
+      color: #50617b;
+      padding: 9px 11px;
+      border-radius: 9px;
+      background: #f7f9fc;
       border: 1px solid var(--line);
       display: block;
       transition: all 0.2s;
     }
-    .side-link:hover {
-      border-color: var(--blue);
+    .side-link-pill:hover {
+      background: #edf4ff;
       color: var(--blue);
+      border-color: #bcd5fb;
     }
-    .side-link b {
-      display: block;
+    .side-link-pill b {
       color: var(--navy);
+      display: block;
       font-size: 12px;
     }
 
-    @media (max-width: 1050px) {
-      .profile-grid { grid-template-columns: 1fr; }
-      .doctor-photo { height: 260px; }
-      .two-col-layout { grid-template-columns: 1fr; }
-      .facts { grid-template-columns: repeat(2, 1fr); }
+    /* Profile Modals */
+    .profile-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 27, 58, 0.65);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
     }
-    @media (max-width: 650px) {
-      .grid2, .slots-grid { grid-template-columns: 1fr; }
-      .facts { grid-template-columns: 1fr; }
+    .profile-modal.show {
+      display: flex;
+    }
+    .profile-modal-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      width: min(540px, 100%);
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .modal-close-btn {
+      border: 0;
+      background: #eef2f7;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      color: var(--navy);
+      cursor: pointer;
+    }
+    .profile-form {
+      display: grid;
+      gap: 10px;
+    }
+    .profile-form input,
+    .profile-form select,
+    .profile-form textarea {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-size: 13px;
+      color: var(--ink);
+      background: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .profile-form input:focus,
+    .profile-form select:focus,
+    .profile-form textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(7,87,217,0.12);
+    }
+    .profile-form textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+    .form-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Toast Notification */
+    .profile-toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--navy);
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 11px;
+      display: none;
+      z-index: 250;
+      font-size: 12px;
+      font-weight: 750;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--cyan);
+    }
+    .profile-toast.show {
+      display: block;
+      animation: toastIn 0.3s ease;
+    }
+    @keyframes toastIn {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Responsive Viewport Rules */
+    @media (max-width: 1150px) {
+      .profile-header-grid {
+        grid-template-columns: 210px minmax(0, 1fr);
+      }
+      .action-booking-box {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .action-booking-box .price-tag,
+      .action-booking-box .avail-status,
+      .trust-micro {
+        grid-column: 1 / -1;
+      }
+      .profile-main-layout {
+        grid-template-columns: 1fr;
+      }
+      .side-column-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .side-card-item {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .profile-header-grid {
+        grid-template-columns: 1fr;
+      }
+      .doctor-photo-card {
+        height: 280px;
+      }
+      .action-booking-box {
+        display: block;
+      }
+      .facts-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .services-3col,
+      .fees-grid,
+      .schedule-grid,
+      .articles-3col,
+      .providers-3col {
+        grid-template-columns: 1fr;
+      }
+      .reviews-score-row {
+        grid-template-columns: 1fr;
+      }
+      .faq-grid-2col {
+        grid-template-columns: 1fr;
+      }
+      .conversion-cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .conversion-cta-banner .btn {
+        width: 100%;
+      }
+      .side-column-wrap {
+        grid-template-columns: 1fr;
+      }
+      .form-two-col {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -336,8 +1020,8 @@
   <!-- Top Notification Bar -->
   <div class="topbar">
     <div class="container">
-      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
-      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+      <span>🇦🇪 Dubai Healthcare Directory</span>
+      <span>Verified DHA Profiles • Patient Reviews • Appointment Requests</span>
     </div>
   </div>
 
@@ -363,68 +1047,92 @@
       <!-- Nav Actions -->
       <div class="nav-actions">
         <a class="btn btn-outline" href="for-doctors.html">List Your Practice</a>
-        <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','In-Clinic Fertility Consultation')">Book Doctor →</button>
-        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+        <button class="btn btn-primary" onclick="openProfileBooking('Dr. Sara Ahmed','In-Clinic Fertility Consultation')">Book Doctor →</button>
+        <button class="menu-btn mobile-toggle" id="profileMobileToggle" aria-label="Toggle Menu">☰</button>
       </div>
     </div>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer" id="profileMobileDrawer">
       <a href="index.html">🏠 Home</a>
       <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
       <a href="fertifind_dubai_directory_search_page.html?type=doctor" class="active">👩‍⚕️ Fertility Doctors</a>
       <a href="fertifind_hospital_profile_page.html">🏥 Hospitals & Clinics</a>
-      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
+      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Sara Ahmed</a>
       <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Labs</a>
       <a href="fertility-treatment-cost-dubai.html">💰 Cost & Pricing Guide</a>
       <a href="for-doctors.html">💼 For Doctors & Clinics</a>
       <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">📍 DHCC Doctors Hub</a>
       <a href="ivf-clinics-in-jumeirah-dubai.html">📍 Jumeirah Clinics Hub</a>
       <a class="btn btn-outline" href="for-doctors.html" style="text-align:center">List Your Practice</a>
-      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das')">Book Appointment</button>
+      <button class="btn btn-primary" style="width:100%" onclick="openProfileBooking('Dr. Sara Ahmed')">Book Appointment</button>
     </div>
   </header>
 
   <!-- Hero Header -->
-  <section class="hero">
+  <section class="profile-hero">
     <div class="container">
-      <div class="crumb"><a href="index.html">Home</a> / <a href="fertifind_dubai_directory_search_page.html">Directory</a> / <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a> / Dr. Partha Sarathi Das</div>
-      <div class="profile-grid">
-        <div class="doctor-photo">
-          <div class="verified-badge">✓ DHA Verified Consultant</div>
+      <div class="crumb">
+        <a href="index.html">Home</a> / 
+        <a href="fertifind_dubai_directory_search_page.html">Doctors</a> / 
+        <a href="fertifind_dubai_directory_search_page.html?specialty=Fertility">Fertility Specialists</a> / 
+        <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah, Dubai</a> / 
+        <span>Dr. Sara Ahmed</span>
+      </div>
+
+      <div class="profile-header-grid">
+        <!-- Photo -->
+        <div class="doctor-photo-card">
+          <div class="verified-pill">✓ Profile Information Verified</div>
         </div>
-        <div class="identity">
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <span class="badge badge-blue">Consultant Reproductive Medicine</span>
-            <span class="badge badge-mint">✓ License # DHA-P-0184920</span>
+
+        <!-- Identity Details -->
+        <div class="profile-identity">
+          <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-blue">Fertility Specialist</span>
+            <span class="badge badge-mint">✓ DHA License # DHA-P-0193821</span>
           </div>
-          <h1>Dr. Partha Sarathi Das</h1>
-          <div class="role">MBBS, MD (OB-GYN), FICOG • Senior IVF & Reproductive Specialist</div>
-          <div class="clinic">
-            🏥 Practicing at: <a href="fertifind_hospital_profile_page.html"><b>Orchid Fertility Clinic (DHCC)</b></a> & <a href="fertifind_hospital_profile_page.html"><b>American Hospital Dubai</b></a>
+
+          <h1>Dr. Sara Ahmed</h1>
+          <div class="role-text">Consultant • Reproductive Medicine & Infertility</div>
+
+          <div class="clinic-affiliation">
+            🏥 Practicing at: <a href="fertifind_hospital_profile_page.html"><b>Nova Fertility & IVF Centre</b></a> • Jumeirah, Dubai 
+            <span style="color:var(--muted);margin:0 6px">|</span> 
+            Admitting Privileges: <a href="fertifind_hospital_profile_page.html"><b>American Hospital Dubai</b></a>
           </div>
-          <div class="rating">
-            <span class="stars">★★★★★</span> <b>4.9</b> <span class="muted">(248 verified patient reviews)</span>
+
+          <div class="rating-row">
+            <span class="stars">★★★★★</span> 
+            <b style="color:var(--navy)">4.8 / 5.0</b> 
+            <span style="color:var(--muted)">(174 verified patient reviews)</span>
           </div>
-          <div class="chips">
-            <span class="chip">20+ Years Clinical Exp</span>
-            <span class="chip">IVF / ICSI</span>
-            <span class="chip">Ovarian Stimulation</span>
-            <span class="chip">Implantation Failure</span>
-            <span class="chip">English, Hindi, Bengali</span>
+
+          <div class="chips-wrap">
+            <span class="chip-item">MBBS</span>
+            <span class="chip-item">MD / Obstetrics & Gynecology</span>
+            <span class="chip-item">Fellowship Reproductive Medicine</span>
+            <span class="chip-item">15+ Years Clinical Exp</span>
+            <span class="chip-item">English, Arabic, French</span>
           </div>
         </div>
-        <div class="profile-actions">
+
+        <!-- Right Action Booking Box -->
+        <div class="action-booking-box" id="bookActionBox">
           <div>
-            <h3>Consultation Fee</h3>
-            <div class="price">AED 450 <small>/ Initial Evaluation</small></div>
-            <div class="available">● Next Available: Tomorrow, 10:30 AM</div>
+            <h3>Consultation</h3>
+            <div class="price-tag">AED 350 <small>starting fee</small></div>
+            <div class="avail-status">● Available for appointment requests</div>
           </div>
+
           <div>
-            <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','In-Clinic Initial Evaluation')">Book Consultation →</button>
-            <button class="btn btn-whatsapp" style="width:100%;margin-top:6px" onclick="FertiFind.openWhatsApp('971504773832','Dr. Partha Sarathi Das')">WhatsApp Booking</button>
-            <button class="btn btn-soft" style="margin-top:6px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Video Tele-Consultation')">Video Call (AED 350)</button>
-            <div class="micro">🔒 Direct Clinic Scheduling • Zero Surcharge • <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile('Dr. Partha Sarathi Das')" style="color:var(--muted);text-decoration:underline">Claim profile</a></div>
+            <button class="btn btn-primary" onclick="openProfileBooking('Dr. Sara Ahmed','In-Clinic Consultation')">📅 Book Appointment</button>
+            <button class="btn btn-soft" onclick="openProfileBooking('Dr. Sara Ahmed','Video / Zoom Consultation')">▣ Video / Zoom Call</button>
+            <button class="btn btn-outline" onclick="openProfileBooking('Dr. Sara Ahmed','Home Consultation Request')">⌂ Request Home Service</button>
+            <button class="btn btn-whatsapp" style="margin-top:7px" onclick="openProfileWhatsApp('971504773832','Dr. Sara Ahmed')">💬 WhatsApp Coordination</button>
+            <div class="trust-micro">
+              Appointment availability is subject to provider confirmation. Zero booking surcharges.
+            </div>
           </div>
         </div>
       </div>
@@ -432,276 +1140,701 @@
   </section>
 
   <!-- Sticky In-Page Navigation Tabs -->
-  <nav class="tabs">
+  <nav class="tabs-bar">
     <div class="container">
-      <a href="#about" class="active">Biography</a>
-      <a href="#expertise">Clinical Expertise</a>
-      <a href="#clinic">Affiliated Hospitals</a>
-      <a href="#fees">Consultation Fees</a>
-      <a href="#schedule">Schedule & Booking</a>
-      <a href="#reviews">Patient Reviews</a>
-      <a href="#faq">Doctor FAQs</a>
+      <a href="#about" class="active">Overview</a>
+      <a href="#qualifications">Qualifications</a>
+      <a href="#services">Services</a>
+      <a href="#experience">Experience</a>
+      <a href="#fees">Fees</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#articles">Articles</a>
+      <a href="#nearby">Nearby</a>
+      <a href="#faq">FAQs</a>
     </div>
   </nav>
 
   <!-- Main Content Layout -->
-  <main class="container two-col-layout">
+  <main class="container profile-main-layout">
 
     <!-- Primary Column -->
     <div>
 
-      <!-- Biography -->
-      <section class="content-card" id="about">
-        <h2>About Dr. Partha Sarathi Das</h2>
-        <p class="lead">
-          Dr. Partha Sarathi Das is a distinguished Consultant in Reproductive Medicine and Infertility in Dubai, with over two decades of specialized clinical experience. He currently leads advanced fertility treatments at Orchid Fertility Clinic in Dubai Healthcare City (DHCC) with admitting hospital privileges at American Hospital Dubai.
+      <!-- Overview / About -->
+      <section class="section-card" id="about">
+        <h2>About Dr. Sara Ahmed</h2>
+        <p class="section-lead">
+          Dr. Sara Ahmed is a distinguished Consultant Fertility Specialist focused on reproductive medicine, comprehensive infertility evaluation, and evidence-based assisted reproductive care. With over 15 years of dedicated practice across leading healthcare facilities in the UAE and Europe, Dr. Ahmed is renowned for her personalized stimulation protocols, empathetic approach, and dedication to answering questions patients commonly ask before choosing a specialist.
         </p>
-        <p class="lead">
-          Having trained at prestigious international reproductive medicine institutions, Dr. Das has helped thousands of couples achieve parenthood through individualized ovarian stimulation, tailored blastocyst culture strategies, and immunological treatment for recurrent implantation failure.
+        <p class="section-lead">
+          She leads clinical protocols at Nova Fertility & IVF Centre in Jumeirah, Dubai, collaborating closely with accredited embryology laboratories to provide patients with transparent guidance on IVF, ICSI, egg vitrification, and reproductive endocrinology.
         </p>
 
-        <div class="facts">
-          <div class="fact"><b>20+</b><span>Years Experience</span></div>
-          <div class="fact"><b>3,800+</b><span>IVF Cycles Handled</span></div>
-          <div class="fact"><b>DHA</b><span>Consultant Licensed</span></div>
-          <div class="fact"><b>4.9 / 5</b><span>Patient Score</span></div>
+        <!-- Facts Metrics Grid (4 per row on desktop) -->
+        <div class="facts-grid">
+          <div class="fact-card">
+            <b>15+</b>
+            <span>Years Experience</span>
+          </div>
+          <div class="fact-card">
+            <b>4.8/5</b>
+            <span>Patient Rating</span>
+          </div>
+          <div class="fact-card">
+            <b>174</b>
+            <span>Patient Reviews</span>
+          </div>
+          <div class="fact-card">
+            <b>6</b>
+            <span>Core Specialties</span>
+          </div>
         </div>
 
-        <h3>Medical Qualifications & Board Registrations</h3>
-        <div class="list-rows">
-          <div class="row-item">
-            <div class="ico-box">🎓</div>
-            <div>
-              <b style="color:var(--navy);font-size:13px">MBBS & MD in Obstetrics & Gynecology</b>
-              <p style="font-size:11px;color:var(--muted);margin:2px 0 0">Postgraduate clinical training with honours in reproductive endocrinology.</p>
+        <h3>Clinical Specialties</h3>
+        <div class="chips-wrap">
+          <span class="chip-item">Infertility</span>
+          <span class="chip-item">Reproductive Medicine</span>
+          <span class="chip-item">IVF & ICSI</span>
+          <span class="chip-item">IUI Treatment</span>
+          <span class="chip-item">PCOS & Fertility</span>
+          <span class="chip-item">Fertility Preservation</span>
+          <span class="chip-item">Male & Female Infertility</span>
+          <span class="chip-item">Endometriosis Care</span>
+        </div>
+      </section>
+
+      <!-- Qualifications & Certifications -->
+      <section class="section-card" id="qualifications">
+        <h2>Education, Degrees & Certifications</h2>
+        <p class="section-lead">A structured credentials profile helps patients understand a specialist's verified medical training and academic foundation.</p>
+
+        <div class="credentials-list">
+          <div class="credential-row">
+            <div class="cred-icon">🎓</div>
+            <div class="cred-info">
+              <b>MBBS — Bachelor of Medicine & Surgery</b>
+              <p>Medical degree with honors • University of Dubai Medical Sciences • 2008</p>
             </div>
           </div>
-          <div class="row-item">
-            <div class="ico-box">🎖️</div>
-            <div>
-              <b style="color:var(--navy);font-size:13px">Fellowship of the Indian College of Obstetricians & Gynecologists (FICOG)</b>
-              <p style="font-size:11px;color:var(--muted);margin:2px 0 0">Advanced sub-specialty credentialing in assisted reproductive technologies.</p>
+
+          <div class="credential-row">
+            <div class="cred-icon">🏥</div>
+            <div class="cred-info">
+              <b>MD — Obstetrics & Gynecology</b>
+              <p>Postgraduate specialist training & clinical residency • 2013</p>
             </div>
           </div>
-          <div class="row-item">
-            <div class="ico-box">🇦🇪</div>
-            <div>
-              <b style="color:var(--navy);font-size:13px">Dubai Health Authority (DHA) Consultant License</b>
-              <p style="font-size:11px;color:var(--muted);margin:2px 0 0">Fully registered Consultant Reproductive Medicine specialist in Dubai, UAE.</p>
+
+          <div class="credential-row">
+            <div class="cred-icon">🧬</div>
+            <div class="cred-info">
+              <b>Fellowship — Reproductive Medicine & Infertility</b>
+              <p>Advanced subspecialty fellowship in assisted reproductive technology (ART) • 2016</p>
+            </div>
+          </div>
+
+          <div class="credential-row">
+            <div class="cred-icon">📜</div>
+            <div class="cred-info">
+              <b>Professional Board Registrations & Licensure</b>
+              <p>Dubai Health Authority (DHA) Consultant License # DHA-P-0193821 • Member of ESHRE & ASRM</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Clinical Expertise -->
-      <section class="content-card" id="expertise">
-        <h2>Clinical Expertise & Treatment Scope</h2>
-        <p class="lead">Dr. Das provides specialized diagnostic investigations and tailored reproductive protocols:</p>
-        <div class="grid2">
-          <div class="mini-service">
+      <!-- Services & Treatments (3x3 Grid) -->
+      <section class="section-card" id="services">
+        <h2>Services & Treatments</h2>
+        <p class="section-lead">Explore diagnostic evaluations and therapeutic procedures offered before scheduling your consultation.</p>
+
+        <div class="services-3col">
+          <div class="service-box">
             <div class="ico">🧬</div>
-            <b>Custom IVF & ICSI Protocols</b>
-            <p>Antagonist, micro-dose flare, and mild-stimulation IVF customized to patient anti-Müllerian hormone (AMH) and antral follicle counts.</p>
+            <b>IVF Consultation</b>
+            <p>Assessment, treatment planning, and discussion of customized assisted reproduction protocols.</p>
           </div>
-          <div class="mini-service">
+
+          <div class="service-box">
             <div class="ico">🔬</div>
-            <b>Recurrent Implantation Failure</b>
-            <p>Endometrial receptivity analysis (ERA), immune factor testing, and personalized embryo transfer timing.</p>
+            <b>ICSI Procedure</b>
+            <p>Specialist consultation for intracytoplasmic sperm injection pathways in male-factor infertility.</p>
           </div>
-          <div class="mini-service">
+
+          <div class="service-box">
+            <div class="ico">🌱</div>
+            <b>IUI Treatment</b>
+            <p>Evaluation and ovulation monitoring for intrauterine insemination cycles.</p>
+          </div>
+
+          <div class="service-box">
+            <div class="ico">🧪</div>
+            <b>Fertility Testing</b>
+            <p>Review of ovarian reserve (AMH), hormone panels, pelvic scans, and semen analysis.</p>
+          </div>
+
+          <div class="service-box">
             <div class="ico">❄️</div>
-            <b>Fertility Preservation</b>
-            <p>Oocyte vitrification (social egg freezing) and medical preservation before oncological therapy.</p>
+            <b>Egg & Embryo Freezing</b>
+            <p>Fertility preservation consultations and vitrification pathways for medical and social reasons.</p>
           </div>
-          <div class="mini-service">
-            <div class="ico">⚕️</div>
-            <b>Male Factor Infertility</b>
-            <p>Coordination with reproductive urologists for sperm DNA fragmentation, PESA, and Micro-TESE surgical retrieval.</p>
+
+          <div class="service-box">
+            <div class="ico">👩‍⚕️</div>
+            <b>PCOS & Infertility</b>
+            <p>Comprehensive metabolic review, ovulatory stimulation, and lifestyle-integrated care.</p>
+          </div>
+
+          <div class="service-box">
+            <div class="ico">👨</div>
+            <b>Male Infertility</b>
+            <p>Assessment, sperm DNA fragmentation review, and coordinated referral for reproductive urology.</p>
+          </div>
+
+          <div class="service-box">
+            <div class="ico">🧬</div>
+            <b>Genetic Testing Guidance</b>
+            <p>Pre-implantation genetic screening (PGT-A / PGT-M) counselling with embryology teams.</p>
+          </div>
+
+          <div class="service-box">
+            <div class="ico">🏠</div>
+            <b>Home Consultation</b>
+            <p>DHA-certified home service visits and nurse blood sample collection where clinically appropriate.</p>
           </div>
         </div>
       </section>
 
-      <!-- Affiliated Clinics & Hospitals -->
-      <section class="content-card" id="clinic">
-        <h2>Practice Locations & Clinical Facilities</h2>
-        <div class="list-rows">
-          <div class="row-item">
-            <div class="ico-box">🏥</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">Orchid Fertility Clinic (Primary Practice)</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 6px">Ibn Sina Building 27, Block D, Unit 201, Dubai Healthcare City, Dubai</p>
-              <div style="display:flex;gap:8px">
-                <a class="btn btn-soft" style="padding:6px 12px;font-size:11px" href="fertifind_hospital_profile_page.html">View Facility Profile →</a>
-                <button class="btn btn-primary" style="padding:6px 12px;font-size:11px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das - Orchid DHCC','In-Clinic Consultation')">Book at Orchid</button>
-              </div>
-            </div>
+      <!-- Professional Experience Timeline -->
+      <section class="section-card" id="experience">
+        <h2>Professional Experience</h2>
+        <p class="section-lead">Over 15 years of continuous leadership in reproductive endocrinology and women's healthcare.</p>
+
+        <div class="career-timeline">
+          <div class="timeline-node">
+            <b>2020–Present — Consultant Fertility Specialist</b>
+            <p>Nova Fertility & IVF Centre, Jumeirah, Dubai. Senior consultant leading complex ovarian stimulation cycles, patient consultations, and clinical research in embryo transfer timing.</p>
           </div>
-          <div class="row-item">
-            <div class="ico-box">🏨</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">American Hospital Dubai (Surgical Procedures)</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 6px">19th Street, Oud Metha Road, Dubai • Dedicated IVF & Inpatient Unit</p>
-              <div style="display:flex;gap:8px">
-                <a class="btn btn-soft" style="padding:6px 12px;font-size:11px" href="fertifind_hospital_profile_page.html">Hospital Details →</a>
-                <button class="btn btn-primary" style="padding:6px 12px;font-size:11px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das - American Hospital','Hospital Consultation')">Book at American Hosp</button>
-              </div>
-            </div>
+
+          <div class="timeline-node">
+            <b>2016–2020 — Reproductive Medicine Specialist</b>
+            <p>Advanced Fertility Centre Dubai. Multidisciplinary reproductive care, intrauterine inseminations, and clinical oversight of assisted reproduction programs.</p>
+          </div>
+
+          <div class="timeline-node">
+            <b>2013–2016 — Obstetrics & Gynecology Specialist</b>
+            <p>Latifa Women & Children Hospital, Dubai. Comprehensive gynecological surgery, reproductive endocrinology clinics, and acute women's health practice.</p>
+          </div>
+
+          <div class="timeline-node">
+            <b>2008–2013 — Medical Residency & Academic Training</b>
+            <p>Dubai Medical Teaching Hospitals. Rotational postgraduate residency with honors in maternal-fetal medicine and reproductive biology.</p>
           </div>
         </div>
       </section>
 
-      <!-- Fees -->
-      <section class="content-card" id="fees">
+      <!-- Fees & Consultation Options -->
+      <section class="section-card" id="fees">
         <h2>Consultation Fees & Second Opinions</h2>
-        <div class="grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-          <div class="mini-service" style="background:#ffffff">
-            <b style="font-size:14px;color:var(--navy)">In-Clinic Initial Evaluation</b>
-            <div style="font-size:22px;font-weight:950;color:var(--blue);margin:6px 0">AED 450</div>
-            <p style="font-size:11px;color:var(--muted)">Includes 45-minute clinical interview, history analysis, and pelvic ultrasound.</p>
-            <button class="btn btn-primary" style="width:100%;margin-top:10px;padding:8px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','In-Clinic Evaluation')">Select →</button>
+        <p class="section-lead">Transparent out-of-pocket and evaluation fees for self-pay and insured patients.</p>
+
+        <div class="fees-grid">
+          <div class="fee-card">
+            <div>
+              <b>In-Clinic Initial Evaluation</b>
+              <div class="price">AED 350</div>
+              <p>Includes 45-minute clinical interview, detailed medical history audit, and baseline ultrasound assessment.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openProfileBooking('Dr. Sara Ahmed','In-Clinic Evaluation')">Select & Book →</button>
           </div>
-          <div class="mini-service" style="background:#ffffff">
-            <b style="font-size:14px;color:var(--navy)">Video Tele-Consultation</b>
-            <div style="font-size:22px;font-weight:950;color:var(--blue);margin:6px 0">AED 350</div>
-            <p style="font-size:11px;color:var(--muted)">Convenient video call via Zoom for overseas patients or initial test review.</p>
-            <button class="btn btn-soft" style="width:100%;margin-top:10px;padding:8px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Video Consultation')">Select →</button>
+
+          <div class="fee-card">
+            <div>
+              <b>Video Tele-Consultation</b>
+              <div class="price">AED 300</div>
+              <p>Secure Zoom video call for overseas patients, busy professionals, and preliminary laboratory report reviews.</p>
+            </div>
+            <button class="btn btn-soft" onclick="openProfileBooking('Dr. Sara Ahmed','Video Consultation')">Select Video →</button>
           </div>
-          <div class="mini-service" style="background:#ffffff">
-            <b style="font-size:14px;color:var(--navy)">Second Opinion Cycle Review</b>
-            <div style="font-size:22px;font-weight:950;color:var(--blue);margin:6px 0">AED 500</div>
-            <p style="font-size:11px;color:var(--muted)">Comprehensive review of failed IVF cycles, embryology notes & lab data.</p>
-            <button class="btn btn-outline" style="width:100%;margin-top:10px;padding:8px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Second Opinion Review')">Select →</button>
+
+          <div class="fee-card">
+            <div>
+              <b>Second Opinion Cycle Review</b>
+              <div class="price">AED 450</div>
+              <p>Thorough diagnostic review of previous IVF cycle failures, embryo grading notes, and protocol adjustments.</p>
+            </div>
+            <button class="btn btn-outline" onclick="openProfileBooking('Dr. Sara Ahmed','Second Opinion Review')">Select Review →</button>
           </div>
         </div>
       </section>
 
-      <!-- Schedule & Booking -->
-      <section class="content-card" id="schedule">
+      <!-- Schedule & Booking Slots -->
+      <section class="section-card" id="schedule">
         <h2>Weekly Clinic Hours & Time Slots</h2>
-        <p class="lead">Select your preferred appointment timing with Dr. Das:</p>
-        <div class="slots-grid">
-          <div class="slot-pill" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Morning Slot 09:30 AM')">
+        <p class="section-lead">Select your preferred appointment timing with Dr. Sara Ahmed:</p>
+
+        <div class="schedule-grid">
+          <div class="slot-card" onclick="selectSlot('Tomorrow (Tue)','09:30 AM – In Clinic')">
             <b>Tomorrow (Tue)</b>
             <small>09:30 AM – In Clinic</small>
           </div>
-          <div class="slot-pill active" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Midday Slot 11:30 AM')">
+          <div class="slot-card active" onclick="selectSlot('Tomorrow (Tue)','11:30 AM – In Clinic')">
             <b>Tomorrow (Tue)</b>
             <small>11:30 AM – In Clinic</small>
           </div>
-          <div class="slot-pill" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Afternoon Slot 03:00 PM')">
+          <div class="slot-card" onclick="selectSlot('Tomorrow (Tue)','03:00 PM – Video Call')">
             <b>Tomorrow (Tue)</b>
             <small>03:00 PM – Video Call</small>
           </div>
-          <div class="slot-pill" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Wednesday Morning')">
+          <div class="slot-card" onclick="selectSlot('Wednesday','10:00 AM – In Clinic')">
             <b>Wednesday</b>
             <small>10:00 AM – In Clinic</small>
           </div>
-          <div class="slot-pill" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Thursday Morning')">
+          <div class="slot-card" onclick="selectSlot('Thursday','11:30 AM – In Clinic')">
             <b>Thursday</b>
-            <small>11:00 AM – In Clinic</small>
+            <small>11:30 AM – In Clinic</small>
           </div>
-          <div class="slot-pill" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Saturday Morning')">
+          <div class="slot-card" onclick="selectSlot('Saturday','09:30 AM – In Clinic')">
             <b>Saturday</b>
-            <small>09:00 AM – In Clinic</small>
+            <small>09:30 AM – In Clinic</small>
           </div>
         </div>
       </section>
 
-      <!-- Patient Reviews -->
-      <section class="content-card" id="reviews">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+      <!-- Patient Reviews & Testimonials -->
+      <section class="section-card" id="reviews">
+        <div class="reviews-header-block">
           <div>
-            <h2 style="margin:0">Patient Reviews (248)</h2>
-            <p class="lead" style="margin:4px 0 0">Verified patient feedback for Dr. Partha Sarathi Das</p>
+            <h2 style="margin:0">Patient Reviews & Testimonials</h2>
+            <p class="section-lead" style="margin:4px 0 0">Verified patient feedback for Dr. Sara Ahmed</p>
           </div>
-          <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Partha Sarathi Das')">★ Review Dr. Das</button>
+          <button class="btn btn-outline" onclick="openReviewModal('Dr. Sara Ahmed')">★ Write a Review</button>
         </div>
 
-        <div class="list-rows">
-          <div class="row-item" style="background:#ffffff">
-            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">N</div>
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <b style="color:var(--navy)">Noor & Ahmed T.</b>
-                <span style="font-size:11px;color:var(--muted)">2 weeks ago</span>
-              </div>
-              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Verified Patient</span></div>
-              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
-                “Dr. Das is an exceptionally attentive and humble doctor. He never rushed our consultations and explained the science behind each hormone injection clearly. We succeeded on our very first ICSI transfer under his care.”
-              </p>
-            </div>
+        <!-- Rating Summary with Progress Bars -->
+        <div class="reviews-score-row">
+          <div class="big-score-center">
+            <strong>4.8</strong>
+            <div class="stars">★★★★★</div>
+            <small style="color:var(--muted);font-weight:700">174 verified reviews</small>
           </div>
 
-          <div class="row-item" style="background:#ffffff">
-            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">R</div>
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <b style="color:var(--navy)">Reem S.</b>
-                <span style="font-size:11px;color:var(--muted)">1 month ago</span>
-              </div>
-              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Egg Vitrification</span></div>
-              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
-                “Completed my egg freezing cycle with Dr. Das at Orchid. The entire process was painless and smooth, with 16 mature oocytes frozen. Truly grateful for his expertise.”
-              </p>
+          <div class="score-bars-list">
+            <div class="score-bar-row">
+              <span>5★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+              <b style="color:var(--navy)">92%</b>
+            </div>
+            <div class="score-bar-row">
+              <span>4★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:6%"></div></div>
+              <b style="color:var(--navy)">6%</b>
+            </div>
+            <div class="score-bar-row">
+              <span>3★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:2%"></div></div>
+              <b style="color:var(--navy)">2%</b>
+            </div>
+            <div class="score-bar-row">
+              <span>2★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+              <b style="color:var(--navy)">0%</b>
+            </div>
+            <div class="score-bar-row">
+              <span>1★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+              <b style="color:var(--navy)">0%</b>
             </div>
           </div>
+        </div>
+
+        <!-- Verified Reviews List -->
+        <div>
+          <div class="patient-review-card">
+            <div class="review-user-line">
+              <div class="user-meta">
+                <div class="user-avatar-circle">A</div>
+                <div>
+                  <b style="color:var(--navy);font-size:13px">Amina & Tariq K.</b><br>
+                  <small style="color:var(--muted);font-size:11px">Fertility Consultation • Jumeirah</small>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <span class="stars" style="color:var(--gold);font-size:11px">★★★★★</span><br>
+                <span class="badge badge-mint" style="font-size:9px">Verified Patient</span>
+              </div>
+            </div>
+            <p>
+              “The consultation was clear, empathetic, and detailed. Dr. Sara explained the available ovarian reserve tests and next steps in a way that was easy to understand without any pressure.”
+            </p>
+          </div>
+
+          <div class="patient-review-card">
+            <div class="review-user-line">
+              <div class="user-meta">
+                <div class="user-avatar-circle">M</div>
+                <div>
+                  <b style="color:var(--navy);font-size:13px">Mariam A.</b><br>
+                  <small style="color:var(--muted);font-size:11px">IVF with ICSI • Dubai</small>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <span class="stars" style="color:var(--gold);font-size:11px">★★★★★</span><br>
+                <span class="badge badge-mint" style="font-size:9px">Verified Patient</span>
+              </div>
+            </div>
+            <p>
+              “I deeply appreciated having all treatment options and diagnostic steps explained before making any decisions. Under Dr. Sara's care at Nova, we conceived on our first ICSI embryo transfer!”
+            </p>
+          </div>
+
+          <div class="patient-review-card">
+            <div class="review-user-line">
+              <div class="user-meta">
+                <div class="user-avatar-circle">R</div>
+                <div>
+                  <b style="color:var(--navy);font-size:13px">Reem S.</b><br>
+                  <small style="color:var(--muted);font-size:11px">Egg Vitrification • Dubai</small>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <span class="stars" style="color:var(--gold);font-size:11px">★★★★★</span><br>
+                <span class="badge badge-mint" style="font-size:9px">Verified Patient</span>
+              </div>
+            </div>
+            <p>
+              “Completed my social egg freezing cycle with Dr. Sara Ahmed. The entire procedure was smooth, transparent in pricing, and the clinic team was always available via WhatsApp for updates.”
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <button class="btn btn-outline" style="width:100%" onclick="openReviewModal('Dr. Sara Ahmed')">★ Write a Patient Review</button>
         </div>
       </section>
 
-      <!-- FAQs -->
-      <section class="content-card" id="faq">
+      <!-- Articles & Expert Content (3 Cards) -->
+      <section class="section-card" id="articles">
+        <h2>Articles & Expert Guides</h2>
+        <p class="section-lead">Medically reviewed educational content connecting Dr. Sara Ahmed's expertise with patients researching fertility care.</p>
+
+        <div class="articles-3col">
+          <a class="article-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-body">
+              <div>
+                <span class="article-tag">Fertility</span>
+                <h4>Understanding Your First Fertility Assessment</h4>
+              </div>
+              <p class="author-date">By Dr. Sara Ahmed • May 2026</p>
+            </div>
+          </a>
+
+          <a class="article-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-body">
+              <div>
+                <span class="article-tag">IVF Guide</span>
+                <h4>Essential Questions to Ask Before an IVF Consultation</h4>
+              </div>
+              <p class="author-date">By Dr. Sara Ahmed • April 2026</p>
+            </div>
+          </a>
+
+          <a class="article-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-thumb" style="background-image:url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-body">
+              <div>
+                <span class="article-tag">Diagnostics</span>
+                <h4>Common Fertility Tests and What They Actually Evaluate</h4>
+              </div>
+              <p class="author-date">By Dr. Sara Ahmed • March 2026</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Nearby Fertility Specialists & Local Discovery -->
+      <section class="section-card" id="nearby">
+        <h2>Nearby Specialists & Healthcare Providers</h2>
+        <p class="section-lead">Contextual local discovery to help compare verified fertility providers across Dubai.</p>
+
+        <h3 style="margin-top:0">Other Fertility Specialists in Dubai</h3>
+        <div class="providers-3col">
+          <div class="provider-mini-card">
+            <div class="provider-mini-top">
+              <div class="provider-avatar" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80')"></div>
+              <div>
+                <h4>Dr. Partha Sarathi Das</h4>
+                <p>Reproductive Medicine • DHCC</p>
+              </div>
+            </div>
+            <div class="rating-row">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.9</b> <span style="color:var(--muted)">(248)</span>
+            </div>
+            <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile</a>
+          </div>
+
+          <div class="provider-mini-card">
+            <div class="provider-mini-top">
+              <div class="provider-avatar" style="background-image:url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=200&q=80')"></div>
+              <div>
+                <h4>Dr. Lina Kareem</h4>
+                <p>Reproductive Medicine • Jumeirah</p>
+              </div>
+            </div>
+            <div class="rating-row">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.8</b> <span style="color:var(--muted)">(204)</span>
+            </div>
+            <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile</a>
+          </div>
+
+          <div class="provider-mini-card">
+            <div class="provider-mini-top">
+              <div class="provider-avatar" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80')"></div>
+              <div>
+                <h4>Dr. Omar Hassan</h4>
+                <p>Andrology & Male Fertility • DHCC</p>
+              </div>
+            </div>
+            <div class="rating-row">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.9</b> <span style="color:var(--muted)">(151)</span>
+            </div>
+            <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile</a>
+          </div>
+        </div>
+
+        <h3>Best Clinics Nearby for this Specialty</h3>
+        <div class="nearby-facilities-list">
+          <div class="nearby-facility-row">
+            <div>
+              <b>Nova Fertility & IVF Centre</b><br>
+              <span>Jumeirah Beach Road • Fertility • IVF • ICSI</span>
+            </div>
+            <strong>2.1 km • 4.9★</strong>
+          </div>
+          <div class="nearby-facility-row">
+            <div>
+              <b>Orchid Fertility Clinic</b><br>
+              <span>Dubai Healthcare City • Advanced IVF • Genetics</span>
+            </div>
+            <strong>7.4 km • 4.9★</strong>
+          </div>
+          <div class="nearby-facility-row">
+            <div>
+              <b>Harmony Fertility Centre</b><br>
+              <span>Al Barsha • IVF • Fertility Preservation</span>
+            </div>
+            <strong>9.4 km • 4.8★</strong>
+          </div>
+        </div>
+
+        <h3>Hospitals Nearby with Related Inpatient & Surgical Services</h3>
+        <div class="nearby-facilities-list">
+          <div class="nearby-facility-row">
+            <div>
+              <b>American Hospital Dubai</b><br>
+              <span>Oud Metha Road • Inpatient Surgical Suites • ICU</span>
+            </div>
+            <strong>7.8 km</strong>
+          </div>
+          <div class="nearby-facility-row">
+            <div>
+              <b>CityCare Women's Hospital</b><br>
+              <span>Dubai Healthcare City • Maternal-Fetal Unit & Diagnostics</span>
+            </div>
+            <strong>8.2 km</strong>
+          </div>
+        </div>
+
+        <h3>Popular Healthcare Searches in Dubai</h3>
+        <div class="chips-wrap">
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?specialty=IVF">IVF doctors in Dubai</a>
+          <a class="chip-item" href="ivf-clinics-in-jumeirah-dubai.html">Fertility clinics in Jumeirah</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=IVF+consultation">IVF consultation Dubai</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=IUI">IUI clinics near me</a>
+          <a class="chip-item" href="fertifind_labs_profile_page.html">Fertility testing Dubai</a>
+          <a class="chip-item" href="fertifind_labs_profile_page.html">AMH test Dubai</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=Egg+freezing">Egg freezing Dubai</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=Male+fertility">Male fertility specialist Dubai</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=PCOS">PCOS fertility specialist</a>
+          <a class="chip-item" href="fertifind_dubai_directory_search_page.html?query=Home+doctor">Home doctor Dubai</a>
+        </div>
+      </section>
+
+      <!-- Frequently Asked Questions (STRICT 2-COLUMN LAYOUT ON DESKTOP) -->
+      <section class="section-card" id="faq">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq">
-          <div class="faq-item">
-            <button class="faq-q">What should I bring to my first appointment with Dr. Das? <span>+</span></button>
-            <div class="faq-a">Please bring previous semen analysis reports, hormone test records (AMH, FSH, Thyroid), ultrasound reports, and records of any previous IUI/IVF cycles.</div>
+        <p class="section-lead">Answers to common patient inquiries regarding appointments, clinical care, and insurance coverage.</p>
+
+        <div class="faq-grid-2col">
+          <!-- Column 1 -->
+          <div>
+            <div class="faq-accordion-box">
+              <button class="faq-trigger">
+                What does Dr. Sara Ahmed specialize in? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Dr. Sara Ahmed specializes in reproductive medicine, comprehensive infertility evaluations, customized IVF/ICSI cycles, IUI, social egg freezing, PCOS management, and recurrent implantation failure protocols.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                How can I book an initial consultation? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                You can use the booking buttons on this profile to select in-clinic, video consultation, or home service. Our coordination desk confirms your exact appointment slot within 2 hours.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                Does the doctor offer online consultations? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Yes. Dr. Sara conducts encrypted video consultations via Zoom for overseas couples, preliminary case evaluations, and secondary lab report interpretations.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                Does Dr. Sara Ahmed provide home visits? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Yes. Through our DHA-licensed home healthcare team, patients can request qualified nurse blood sampling (AMH, hormone profiles) and preliminary home assessments across Dubai.
+              </div>
+            </div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q">Does Dr. Das personally perform egg retrievals and embryo transfers? <span>+</span></button>
-            <div class="faq-a">Yes. Dr. Partha Sarathi Das personally plans stimulation protocols, monitors follicular ultrasound progress, and performs the surgical egg retrieval and embryo transfer procedures.</div>
+
+          <!-- Column 2 -->
+          <div>
+            <div class="faq-accordion-box">
+              <button class="faq-trigger">
+                Where does Dr. Sara Ahmed practice in Dubai? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Her primary practice is at Nova Fertility & IVF Centre along Jumeirah Beach Road (Jumeirah 1), with surgical and inpatient privileges at American Hospital Dubai.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                Can I read verified reviews before booking? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Yes. All 174 reviews on this profile are authenticated from verified patients who completed consultations or treatment cycles under Dr. Sara's care.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                What should I bring to my first appointment? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Please bring previous hormone panels (AMH, FSH, Thyroid), semen analysis reports, hysterosalpingography (HSG) or ultrasound scans, and records of any past IUI or IVF cycles.
+              </div>
+            </div>
+
+            <div class="faq-accordion-box" style="margin-top:10px">
+              <button class="faq-trigger">
+                Does Dr. Sara personally perform retrievals? <span>+</span>
+              </button>
+              <div class="faq-body-content">
+                Yes. Dr. Sara Ahmed personally designs ovarian stimulation protocols, conducts ultrasound monitoring, and performs all surgical egg retrievals and ultrasound-guided embryo transfers.
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      <!-- Bottom Conversion CTA Banner -->
+      <div class="conversion-cta-banner">
+        <div>
+          <h2>Ready to speak with Dr. Sara Ahmed?</h2>
+          <p>Request an in-clinic consultation, video call, or eligible home service with instant confirmation.</p>
+        </div>
+        <button class="btn" style="background:#ffffff;color:var(--blue);font-weight:900" onclick="openProfileBooking('Dr. Sara Ahmed')">Book Appointment →</button>
+      </div>
 
     </div>
 
     <!-- Secondary Column (Sticky Sidebar) -->
-    <aside>
+    <aside class="side-column-wrap">
 
-      <!-- Quick Action Card -->
-      <div class="side-card" style="position:sticky;top:136px">
-        <h3 style="margin-top:0;color:var(--navy)">Book with Dr. Das</h3>
-        <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','In-Clinic Consultation')">Book In-Clinic Evaluation →</button>
-        <button class="btn btn-outline" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Video Tele-Consultation')">Book Video Consultation</button>
-        <button class="btn btn-soft" style="width:100%;margin-bottom:14px" onclick="FertiFind.openReview('Dr. Partha Sarathi Das')">★ Write a Review</button>
-
-        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Practice Locations</h4>
-        <div class="side-list">
-          <a class="side-link" href="fertifind_hospital_profile_page.html">
-            <b>Orchid Fertility Clinic</b>
-            Ibn Sina Bldg 27, DHCC, Dubai
+      <!-- Clinic Information Card -->
+      <div class="side-card-item" id="clinicInfoCard">
+        <h3>Clinic Information</h3>
+        <div class="side-card-list">
+          <div class="side-link-pill">
+            <b>Nova Fertility & IVF Centre</b>
+            Jumeirah Beach Road, Jumeirah 1, Dubai
+          </div>
+          <div class="side-link-pill">
+            <span style="color:var(--mint-dark);font-weight:800">✓ Profile Claimed & DHA Verified</span>
+          </div>
+          <div class="side-link-pill">
+            <b>🕘 Open Today</b>
+            08:30 AM – 07:00 PM • By Appointment
+          </div>
+          <a class="side-link-pill" href="tel:+97143856009">
+            <b>☎ Direct Hotline</b>
+            +971 4 385 6009
           </a>
-          <a class="side-link" href="fertifind_hospital_profile_page.html">
-            <b>American Hospital Dubai</b>
-            Oud Metha Road, Dubai
-          </a>
-          <a class="side-link" href="fertifind_labs_profile_page.html">
-            <b>Igenomix Dubai Genetics</b>
-            Affiliated Diagnostic Lab (DHCC)
+          <a class="side-link-pill" href="https://maps.google.com" target="_blank" rel="noopener">
+            <b>📍 Get Directions</b>
+            Villa 42, Jumeirah 1, Dubai
           </a>
         </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="openContactClinicModal('Nova Fertility & IVF Centre')">Contact Clinic</button>
+      </div>
 
-        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Direct Coordination</h4>
-        <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Appointments hotline:</p>
-        <div style="font-size:13px;font-weight:800;color:var(--navy)">☎ +971 4 437 7520</div>
-        <div style="font-size:12px;color:#087e76;margin-top:4px">💬 WhatsApp: +971 50 477 3832</div>
+      <!-- Areas of Clinical Expertise -->
+      <div class="side-card-item">
+        <h3>Areas of Expertise</h3>
+        <div class="chips-wrap">
+          <span class="chip-item">IVF</span>
+          <span class="chip-item">ICSI</span>
+          <span class="chip-item">IUI</span>
+          <span class="chip-item">Infertility</span>
+          <span class="chip-item">PCOS</span>
+          <span class="chip-item">Egg Freezing</span>
+          <span class="chip-item">Embryology</span>
+          <span class="chip-item">Fertility Testing</span>
+          <span class="chip-item">Endometriosis</span>
+        </div>
+      </div>
+
+      <!-- Profile Trust Signals -->
+      <div class="side-card-item">
+        <h3>Profile Trust Signals</h3>
+        <div class="side-card-list">
+          <div class="side-link-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> DHA Credentials Verified</div>
+          <div class="side-link-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Clinic Affiliation Confirmed</div>
+          <div class="side-link-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> 174 Verified Patient Reviews</div>
+          <div class="side-link-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Provider Profile Claimed</div>
+          <div class="side-link-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Transparent Pricing & Fees</div>
+        </div>
+      </div>
+
+      <!-- Need Another Provider? -->
+      <div class="side-card-item">
+        <h3>Need Another Provider?</h3>
+        <p style="font-size:11px;color:var(--muted);margin:0 0 12px;line-height:1.5">
+          Search verified fertility doctors, clinics, diagnostics, and surgeons across Dubai by specialty, location, or insurance.
+        </p>
+        <a class="btn btn-soft" style="width:100%;text-align:center" href="fertifind_dubai_directory_search_page.html">Search Nearby Providers →</a>
       </div>
 
     </aside>
 
   </main>
 
-  <!-- Unified Footer (Original Dark Navy) -->
+  <!-- Unified Footer (Original Deep Navy) -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -711,7 +1844,7 @@
             FertiFind <small style="color:var(--teal)">Dubai</small>
           </a>
           <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
-            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+            Dubai's trusted healthcare navigation platform. Connecting patients with verified specialists, polyclinics, hospitals, and diagnostic labs across the UAE.
           </p>
           <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
         </div>
@@ -719,21 +1852,21 @@
         <div>
           <div class="footer-title">Directory</div>
           <div class="footer-links">
-            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
-            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors & Specialists</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">Clinics & Polyclinics</a>
             <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
-            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Pathology Labs</a>
             <a href="fertility-treatment-cost-dubai.html">Cost & Pricing Guide</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-title">Districts</div>
+          <div class="footer-title">Dubai Districts</div>
           <div class="footer-links">
-            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
             <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah Clinics</a>
+            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
             <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers</a>
-            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
+            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina Hub</a>
           </div>
         </div>
 
@@ -741,7 +1874,7 @@
           <div class="footer-title">For Practices</div>
           <div class="footer-links">
             <a href="for-doctors.html">List Your Practice</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
+            <a href="for-doctors.html#claim">Claim Practice Profile</a>
             <a href="for-doctors.html#plans">Provider Pricing Plans</a>
             <a href="for-doctors.html#faq">Practice Verification FAQ</a>
           </div>
@@ -750,11 +1883,11 @@
         <div>
           <div class="footer-title">Company</div>
           <div class="footer-links">
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#about">About FertiFind</a>
             <a href="index.html#how">How It Works</a>
             <a href="#reviews">Patient Reviews</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+            <a href="for-doctors.html#contact">Contact Support</a>
+            <a href="for-doctors.html#privacy">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -762,8 +1895,8 @@
       <!-- Dubai Districts Strip -->
       <div class="footer-areas-strip">
         <span>Dubai Districts:</span>
-        <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Dubai Healthcare City (DHCC)</a>
         <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah</a>
+        <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Dubai Healthcare City (DHCC)</a>
         <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha</a>
         <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
         <a href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Al Barsha</a>
@@ -779,15 +1912,239 @@
     </div>
   </footer>
 
+  <!-- Interactive Appointment Booking Modal -->
+  <div class="profile-modal" id="bookingModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 id="bookingModalTitle" style="margin:0;color:var(--navy);font-size:18px">Book Consultation</h3>
+          <p id="bookingModalSubtitle" style="margin:3px 0 0;color:var(--muted);font-size:12px">Dr. Sara Ahmed • Nova Fertility & IVF Centre</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('bookingModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="doctorBookingForm">
+        <input type="text" id="formDoctorName" name="doctor_name" value="Dr. Sara Ahmed" readonly style="background:#f7faff;font-weight:800">
+
+        <select id="formConsultType" name="consultation_type" required>
+          <option value="In-Clinic Initial Evaluation (AED 350)">In-Clinic Initial Evaluation (AED 350)</option>
+          <option value="Video / Zoom Tele-Consultation (AED 300)">Video / Zoom Tele-Consultation (AED 300)</option>
+          <option value="Home Consultation Request (AED 500)">Home Consultation Request (AED 500)</option>
+          <option value="Second Opinion Cycle Review (AED 450)">Second Opinion Cycle Review (AED 450)</option>
+        </select>
+
+        <div class="form-two-col">
+          <input type="text" name="patient_full_name" required placeholder="Patient full name">
+          <input type="tel" name="patient_mobile_number" required placeholder="Mobile phone number">
+        </div>
+
+        <input type="email" name="patient_email_address" required placeholder="Email address">
+
+        <div class="form-two-col">
+          <input type="date" id="formDateInput" name="preferred_appointment_date" required>
+          <input type="text" id="formSlotInput" name="preferred_time_slot" placeholder="Preferred time slot" value="11:30 AM">
+        </div>
+
+        <textarea name="clinical_notes_message" placeholder="Notes or symptoms"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Confirm Booking Request →</button>
+        <p style="font-size:10px;color:var(--muted);text-align:center;margin:6px 0 0">
+          🔒 Direct clinic coordination. No booking surcharges.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive Patient Review Modal -->
+  <div class="profile-modal" id="reviewModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 style="margin:0;color:var(--navy);font-size:18px">Write a Patient Review</h3>
+          <p style="margin:3px 0 0;color:var(--muted);font-size:12px">Dr. Sara Ahmed • Nova Fertility & IVF Centre</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('reviewModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="doctorReviewForm">
+        <input type="text" name="reviewed_provider" value="Dr. Sara Ahmed" readonly style="background:#f7faff;font-weight:800">
+
+        <div class="form-two-col">
+          <input type="text" name="reviewer_name" required placeholder="Your full name">
+          <input type="text" name="treatment_received" required placeholder="Treatment or service">
+        </div>
+
+        <select name="star_rating" required>
+          <option value="5">★★★★★ (5/5 Exceptional Care)</option>
+          <option value="4">★★★★☆ (4/5 Very Good)</option>
+          <option value="3">★★★☆☆ (3/5 Satisfactory)</option>
+          <option value="2">★★☆☆☆ (2/5 Needs Improvement)</option>
+          <option value="1">★☆☆☆☆ (1/5 Poor Experience)</option>
+        </select>
+
+        <textarea name="review_comments" required placeholder="Your genuine experience"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Submit Patient Review →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive Contact Clinic Modal -->
+  <div class="profile-modal" id="contactModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 style="margin:0;color:var(--navy);font-size:18px">Contact Clinic</h3>
+          <p style="margin:3px 0 0;color:var(--muted);font-size:12px">Nova Fertility & IVF Centre • Jumeirah</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('contactModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="contactClinicForm">
+        <div class="form-two-col">
+          <input type="text" name="sender_full_name" required placeholder="Your full name">
+          <input type="tel" name="sender_phone_number" required placeholder="Mobile phone number">
+        </div>
+
+        <select name="inquiry_subject" required>
+          <option value="Appointment Availability">Appointment Availability</option>
+          <option value="Price & Package Inquiries">Price & Package Inquiries</option>
+          <option value="Insurance & Payment Options">Insurance & Payment Options</option>
+          <option value="General Clinic Information">General Clinic Information</option>
+        </select>
+
+        <textarea name="inquiry_message" required placeholder="Inquiry or message"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Send Clinic Message →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Message -->
+  <div class="profile-toast" id="profileToast"></div>
+
   <!-- Scripts -->
   <script src="js/site.js"></script>
   <script>
-    document.querySelectorAll('.tabs a').forEach(tab => {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.tabs a').forEach(t => t.classList.remove('active'));
+    // Tab Highlighting on Scroll / Click
+    const tabs = document.querySelectorAll('.tabs-bar a');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function(e) {
+        tabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
       });
     });
+
+    // FAQs Accordion
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const parentBox = this.parentElement;
+        const isOpen = parentBox.classList.contains('open');
+        // Toggle current box
+        if (isOpen) {
+          parentBox.classList.remove('open');
+          this.querySelector('span').textContent = '+';
+        } else {
+          parentBox.classList.add('open');
+          this.querySelector('span').textContent = '−';
+        }
+      });
+    });
+
+    // Modals Controller
+    function openProfileBooking(doctorName, consultType) {
+      if (doctorName) document.getElementById('formDoctorName').value = doctorName;
+      if (consultType) {
+        const typeSelect = document.getElementById('formConsultType');
+        for (let i = 0; i < typeSelect.options.length; i++) {
+          if (typeSelect.options[i].text.toLowerCase().includes(consultType.toLowerCase())) {
+            typeSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      // Set default tomorrow date
+      const d = new Date();
+      d.setDate(d.getDate() + 1);
+      document.getElementById('formDateInput').value = d.toISOString().split('T')[0];
+
+      document.getElementById('bookingModal').classList.add('show');
+    }
+
+    function openReviewModal(doctorName) {
+      document.getElementById('reviewModal').classList.add('show');
+    }
+
+    function openContactClinicModal(clinicName) {
+      document.getElementById('contactModal').classList.add('show');
+    }
+
+    function closeProfileModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+    }
+
+    // Close on backdrop click
+    document.querySelectorAll('.profile-modal').forEach(m => {
+      m.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('show');
+        }
+      });
+    });
+
+    // Form Submissions
+    document.getElementById('doctorBookingForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('bookingModal');
+      showProfileToast('✓ Consultation request submitted! The clinic team will confirm your slot shortly.');
+      this.reset();
+    };
+
+    document.getElementById('doctorReviewForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('reviewModal');
+      showProfileToast('✓ Thank you for your review! It will be verified and published shortly.');
+      this.reset();
+    };
+
+    document.getElementById('contactClinicForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('contactModal');
+      showProfileToast('✓ Message sent to clinic coordination desk!');
+      this.reset();
+    };
+
+    function showProfileToast(msg) {
+      const toast = document.getElementById('profileToast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // Schedule Slot Picker
+    function selectSlot(day, time) {
+      document.querySelectorAll('.slot-card').forEach(s => s.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      openProfileBooking('Dr. Sara Ahmed', time.includes('Video') ? 'Video' : 'In-Clinic');
+      document.getElementById('formSlotInput').value = time;
+    }
+
+    // WhatsApp Action
+    function openProfileWhatsApp(num, name) {
+      const text = encodeURIComponent(`Hello, I would like to inquire about booking an appointment with ${name} via FertiFind.`);
+      window.open(`https://wa.me/${num}?text=${text}`, '_blank');
+    }
+
+    // Mobile Drawer Toggle
+    const mobileToggle = document.getElementById('profileMobileToggle');
+    const mobileDrawer = document.getElementById('profileMobileDrawer');
+    if (mobileToggle && mobileDrawer) {
+      mobileToggle.addEventListener('click', function() {
+        mobileDrawer.classList.toggle('open');
+      });
+    }
   </script>
 </body>
 </html>
