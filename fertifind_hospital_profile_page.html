@@ -3,15 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>American Hospital Dubai - IVF & Fertility Center | Profile & Appointments | FertiFind Dubai</title>
-  <meta name="description" content="Comprehensive hospital profile for American Hospital Dubai IVF & Reproductive Medicine Center in Oud Metha and DHCC. View fertility specialists, clinical treatments, embryology suite, patient reviews, and book direct consultations.">
+  <title>CityCare Women's Hospital Dubai | Specialists, Services, Doctors & Appointments</title>
+  <meta name="description" content="Comprehensive hospital profile for CityCare Women's Hospital in Dubai Healthcare City. View specialist doctors, clinical services, diagnostics, verified patient reviews, and book direct in-hospital visits or online consultations.">
+  <meta name="theme-color" content="#0757d9">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="CityCare Women's Hospital Dubai | Specialists, Services & Appointments">
+  <meta property="og:description" content="Multispecialty women's and family hospital in Dubai Healthcare City. JCI-accredited maternity, fertility, neonatal ICU, and 24/7 emergency care.">
+  <meta property="og:type" content="hospital">
+  <meta property="og:url" content="https://dubaidoctorsdirectory.surge.sh/fertifind_hospital_profile_page.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1000&q=90">
+
+  <!-- Schema.org Hospital Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hospital",
+    "name": "CityCare Women's Hospital",
+    "description": "Leading multispecialty hospital in Dubai Healthcare City providing obstetrics, gynecology, reproductive medicine, pediatrics, neonatal care, and diagnostic medicine.",
+    "url": "https://dubaidoctorsdirectory.surge.sh/fertifind_hospital_profile_page.html",
+    "telephone": "+971 4 555 0188",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "District 1, Dubai Healthcare City",
+      "addressLocality": "Dubai",
+      "addressRegion": "Dubai",
+      "addressCountry": "AE"
+    },
+    "medicalSpecialty": [
+      "Obstetrics",
+      "Gynecology",
+      "Reproductive Medicine",
+      "Pediatrics",
+      "Neonatology",
+      "Diagnostic Medicine",
+      "General Surgery"
+    ],
+    "availableService": [
+      {
+        "@type": "MedicalProcedure",
+        "name": "Fertility Consultation & IVF Planning"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Comprehensive Maternity & Delivery Care"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Advanced Gynecological Surgery"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Level III Neonatal Intensive Care (NICU)"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Diagnostic Pathology & Radiology Imaging"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "24/7 Women's & Pediatric Emergency"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": "386",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+
+  <!-- Global Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
   <style>
-    /* Specific Hospital Profile Page Styles (Original Brand Navy & Blue Theme) */
-    .hero {
+    /* Scoped Styles for Hospital Profile Page */
+    .hospital-hero {
       background: radial-gradient(circle at 90% 10%, #dff5ff 0%, transparent 40%),
                   linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
-      padding: 32px 0 38px;
+      padding: 30px 0 38px;
       border-bottom: 1px solid var(--line);
     }
     .crumb {
@@ -23,65 +95,79 @@
       color: var(--blue);
       font-weight: 800;
     }
+
     .hospital-header-grid {
       display: grid;
-      grid-template-columns: 360px 1fr 280px;
+      grid-template-columns: 360px minmax(0, 1fr) 290px;
       gap: 24px;
       align-items: stretch;
     }
-    .cover {
+    .hospital-cover-box {
       min-height: 290px;
       border-radius: var(--radius-md);
-      background: url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1000&q=90') center/cover;
+      background: linear-gradient(180deg, rgba(16,42,99,0.2) 0%, rgba(16,42,99,0.7) 100%),
+                  url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1000&q=90') center/cover no-repeat;
       box-shadow: var(--shadow);
       position: relative;
       border: 1px solid var(--line);
+      overflow: hidden;
     }
-    .cover-badge {
+    .cover-verified-badge {
       position: absolute;
       left: 14px;
       bottom: 14px;
       background: #ffffff;
-      border-radius: 8px;
-      padding: 7px 11px;
-      color: var(--navy);
-      font-size: 10px;
-      font-weight: 900;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
+      border-radius: 9px;
+      padding: 7px 12px;
+      color: var(--mint-dark);
+      font-size: 11px;
+      font-weight: 850;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      border: 1px solid #bceee6;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .identity h1 {
-      font-size: clamp(28px, 3.2vw, 38px);
+
+    .hospital-identity h1 {
+      font-size: clamp(26px, 3.2vw, 36px);
       line-height: 1.1;
-      letter-spacing: -0.035em;
-      margin: 10px 0 6px;
+      letter-spacing: -0.03em;
+      margin: 8px 0 4px;
       color: var(--navy);
+      font-weight: 900;
     }
-    .sub {
+    .hospital-identity .sub-title {
       font-size: 14px;
-      color: var(--muted);
-      font-weight: 700;
+      color: #4a5c77;
+      font-weight: 750;
     }
-    .location {
-      margin: 9px 0;
+    .hospital-identity .location-line {
+      margin: 8px 0 10px;
       color: #40516f;
-      font-size: 12px;
+      font-size: 13px;
     }
-    .location a {
+    .hospital-identity .location-line a {
       color: var(--blue);
       font-weight: 850;
     }
-    .rating {
-      margin: 10px 0;
+    .rating-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
       font-size: 13px;
     }
-    .chips {
+    .rating-line .stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    .chips-cluster {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      margin-top: 8px;
     }
-    .chip {
+    .chip-pill {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 99px;
@@ -91,7 +177,7 @@
       font-weight: 750;
     }
 
-    .action-box {
+    .hospital-action-card {
       background: #ffffff;
       border: 1px solid var(--line);
       border-top: 4px solid var(--blue);
@@ -102,47 +188,59 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    .action-box h3 {
+    .hospital-action-card h3 {
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
       color: var(--navy);
+      font-weight: 850;
     }
-    .hours {
+    .emergency-status {
       font-size: 11px;
-      color: #087e76;
+      color: var(--mint-dark);
       background: var(--mint);
       border: 1px solid #b7f0e7;
       border-radius: 8px;
-      padding: 8px 10px;
-      margin: 10px 0;
-      font-weight: 750;
+      padding: 7px 10px;
+      margin: 10px 0 8px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .action-box .btn {
+    .hospital-action-card .btn {
       width: 100%;
-      margin-top: 8px;
+      margin-top: 7px;
+      padding: 10px 14px;
+      font-size: 12px;
     }
-    .micro {
+    .trust-micro-copy {
       font-size: 10px;
       color: var(--muted);
       text-align: center;
       margin-top: 8px;
+      line-height: 1.4;
     }
 
-    /* In-Page Navigation Sticky Tabs */
-    .tabs {
+    /* Sub Navigation Sticky Tabs */
+    .tabs-strip {
       background: #ffffff;
       border-bottom: 1px solid var(--line);
       position: sticky;
-      top: 76px;
-      z-index: 40;
+      top: 74px;
+      z-index: 35;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     }
-    .tabs .container {
+    .tabs-strip .container {
       display: flex;
       overflow-x: auto;
-      gap: 4px;
+      gap: 2px;
+      scrollbar-width: none;
     }
-    .tabs a {
-      padding: 16px 14px;
+    .tabs-strip .container::-webkit-scrollbar {
+      display: none;
+    }
+    .tabs-strip a {
+      padding: 14px 13px;
       font-size: 12px;
       font-weight: 850;
       color: var(--muted);
@@ -150,19 +248,19 @@
       border-bottom: 3px solid transparent;
       transition: color 0.2s, border-color 0.2s;
     }
-    .tabs a:hover, .tabs a.active {
+    .tabs-strip a:hover, .tabs-strip a.active {
       color: var(--blue);
       border-bottom-color: var(--blue);
     }
 
-    /* Content Layout */
-    .two-col-layout {
+    /* Two-column layout */
+    .hospital-main-layout {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 315px;
-      gap: 24px;
-      padding: 30px 0 60px;
+      gap: 22px;
+      padding: 28px 0 65px;
     }
-    .content-card, .side-card {
+    .section-card {
       background: #ffffff;
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
@@ -170,248 +268,924 @@
       margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
     }
-    .content-card h2 {
+    .section-card h2 {
       font-size: 22px;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       letter-spacing: -0.025em;
       color: var(--navy);
+      font-weight: 900;
     }
-    .content-card h3 {
+    .section-card h3 {
       font-size: 16px;
-      margin: 22px 0 10px;
+      margin: 20px 0 9px;
       color: var(--navy);
+      font-weight: 850;
     }
-    .lead {
+    .section-lead {
       font-size: 13px;
       color: #556682;
       line-height: 1.6;
+      margin: 0 0 14px;
     }
-    .facts {
+
+    /* Facts Metric Cards */
+    .facts-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin: 18px 0;
+      margin: 16px 0;
     }
-    .fact {
+    .fact-box {
       background: #f8fbff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 12px;
+      border: 1px solid #e2ecf9;
+      border-radius: 12px;
+      padding: 13px;
     }
-    .fact b {
+    .fact-box b {
       display: block;
       font-size: 20px;
       color: var(--navy);
+      font-weight: 900;
     }
-    .fact span {
+    .fact-box span {
       font-size: 11px;
       color: var(--muted);
+      font-weight: 650;
     }
 
-    .grid3 {
+    /* 3x3 Card Grids */
+    .grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+    }
+    .feature-card {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 14px;
+      background: #fbfcfe;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      border-color: #b7d3fc;
+      transform: translateY(-2px);
+    }
+    .feature-card .ico {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .feature-card b {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+      font-weight: 800;
+    }
+    .feature-card p {
+      font-size: 11px;
+      color: var(--muted);
+      margin: 5px 0 0;
+      line-height: 1.45;
+    }
+
+    /* Diagnostics Rows */
+    .diag-list {
+      display: grid;
+      gap: 10px;
+    }
+    .diag-row {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+    }
+    .diag-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #edf4ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex: none;
+      border: 1px solid #d5e5fc;
+    }
+    .diag-info b {
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .diag-info p {
+      margin: 3px 0 0;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* Hospital Doctors Grid */
+    .doctors-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .grid2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .mini-service {
+    .doc-unit-card {
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      background: #f8fbff;
+      border-radius: 14px;
+      padding: 13px;
+      background: #ffffff;
+      transition: transform 0.2s, border-color 0.2s;
     }
-    .mini-service .ico {
-      font-size: 22px;
-      margin-bottom: 4px;
+    .doc-unit-card:hover {
+      transform: translateY(-2px);
+      border-color: #bcd5f8;
     }
-    .mini-service b {
-      display: block;
+    .doc-unit-top {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .doc-unit-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 11px;
+      background-size: cover;
+      background-position: center;
+      flex: none;
+    }
+    .doc-unit-card h4 {
       font-size: 13px;
       color: var(--navy);
+      margin: 0 0 2px;
+      font-weight: 850;
     }
-    .mini-service p {
+    .doc-unit-card p {
+      font-size: 10px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .doc-unit-card .rating-line {
+      margin: 7px 0;
+      font-size: 11px;
+    }
+    .doc-unit-card .btn {
+      width: 100%;
+      padding: 7px;
+      font-size: 11px;
+    }
+
+    /* ==========================================================================
+       RHYTHM 1: 2-Column Section for CTA Bookings & Sliders
+       1st Col: Businesses (List Business + Business Reviews Slider)
+       2nd Col: Patients (Bookings + Customer Reviews Slider)
+       ========================================================================== */
+    .rhythm-2col-bookings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .rhythm-col-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .rhythm-col-card.business-card {
+      border-top: 4px solid var(--teal);
+      background: linear-gradient(180deg, #f7fdfb 0%, #ffffff 40%);
+    }
+    .rhythm-col-card.customer-card {
+      border-top: 4px solid var(--blue);
+      background: linear-gradient(180deg, #f6faff 0%, #ffffff 40%);
+    }
+    .rhythm-badge-tag {
+      font-size: 10px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .business-card .rhythm-badge-tag {
+      background: var(--mint);
+      color: var(--mint-dark);
+      border: 1px solid #b7f0e7;
+    }
+    .customer-card .rhythm-badge-tag {
+      background: #eef5ff;
+      color: var(--blue);
+      border: 1px solid #d4e4fc;
+    }
+    .rhythm-col-card h3 {
+      font-size: 17px;
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-weight: 900;
+    }
+    .rhythm-col-card p {
+      font-size: 12px;
+      color: #556682;
+      line-height: 1.5;
+      margin: 0 0 14px;
+    }
+    .rhythm-action-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .rhythm-action-btns .btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 9px 12px;
+      font-size: 11px;
+    }
+
+    /* Slider Container */
+    .slider-container {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px;
+      position: relative;
+    }
+    .slider-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .slider-head span {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .slider-arrows {
+      display: flex;
+      gap: 4px;
+    }
+    .arrow-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      font-size: 11px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: var(--navy);
+      transition: all 0.2s;
+    }
+    .arrow-btn:hover {
+      background: var(--blue);
+      color: #ffffff;
+      border-color: var(--blue);
+    }
+    .slide-item {
+      display: none;
+      font-size: 11px;
+      color: #40516f;
+      line-height: 1.45;
+    }
+    .slide-item.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-author-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid #f0f4fa;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       RHYTHM 2: 3-Column Lists Section
+       Col 1: Top Doctors in Area
+       Col 2: Top Clinics in Area
+       Col 3: Most Searched Queries in Area
+       ========================================================================== */
+    .rhythm-3col-area {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .rhythm-3col-area h2 {
+      font-size: 20px;
+      color: var(--navy);
+      margin: 0 0 6px;
+      font-weight: 900;
+    }
+    .rhythm-3col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .area-col-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      background: #fbfcfe;
+    }
+    .area-col-box h3 {
+      font-size: 13px;
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-weight: 850;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .area-list-items {
+      display: grid;
+      gap: 8px;
+    }
+    .mini-provider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 9px;
+      background: #ffffff;
+      border: 1px solid #eef2f8;
+      border-radius: 8px;
+      font-size: 11px;
+      transition: all 0.2s;
+    }
+    .mini-provider-row:hover {
+      border-color: var(--blue);
+      transform: translateX(2px);
+    }
+    .mini-provider-row b {
+      color: var(--navy);
+      display: block;
+    }
+    .mini-provider-row span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .search-tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .search-tag-chip {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 5px 9px;
+      font-size: 10px;
+      color: #43546e;
+      font-weight: 750;
+      transition: all 0.2s;
+    }
+    .search-tag-chip:hover {
+      background: #eef5ff;
+      color: var(--blue);
+      border-color: #bcd5fb;
+    }
+
+    /* ==========================================================================
+       RHYTHM 3: 3-Column CTA Section
+       Card 1: Book Live Doctor
+       Card 2: Doctor at Home Visit
+       Card 3: Hire Technician for Home Lab Sample
+       ========================================================================== */
+    .rhythm-3col-cta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .trio-cta-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .trio-cta-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .trio-cta-card.card-live-doc {
+      border-top: 4px solid var(--blue);
+      background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 40%);
+    }
+    .trio-cta-card.card-home-doc {
+      border-top: 4px solid var(--teal);
+      background: linear-gradient(180deg, #f4fcfb 0%, #ffffff 40%);
+    }
+    .trio-cta-card.card-home-tech {
+      border-top: 4px solid var(--gold);
+      background: linear-gradient(180deg, #fffdf5 0%, #ffffff 40%);
+    }
+    .trio-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    .trio-cta-card h3 {
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-weight: 900;
+    }
+    .trio-cta-card p {
+      font-size: 11px;
+      color: #556682;
+      line-height: 1.45;
+      margin: 0 0 12px;
+      flex: 1;
+    }
+    .trio-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .card-live-doc .trio-badge { background: #eef5ff; color: var(--blue); }
+    .card-home-doc .trio-badge { background: var(--mint); color: var(--mint-dark); }
+    .card-home-tech .trio-badge { background: #fff8e8; color: #b57a08; }
+    .trio-cta-card .btn {
+      width: 100%;
+      padding: 9px;
+      font-size: 11px;
+    }
+
+    /* Review Summary Histogram */
+    .reviews-score-block {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+    .big-score-unit {
+      text-align: center;
+    }
+    .big-score-unit strong {
+      font-size: 46px;
+      color: var(--navy);
+      display: block;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .big-score-unit .stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin: 4px 0 2px;
+    }
+    .score-progress-list {
+      display: grid;
+      gap: 6px;
+    }
+    .progress-bar-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 34px;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .track-line {
+      height: 7px;
+      border-radius: 99px;
+      background: #e7edf5;
+      overflow: hidden;
+    }
+    .fill-line {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--teal);
+    }
+
+    /* Journey 6-Step Grid */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+    }
+    .journey-step-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px;
+      background: #fbfcfe;
+    }
+    .journey-step-box .step-num {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    .journey-step-box b {
+      font-size: 13px;
+      color: var(--navy);
+      display: block;
+    }
+    .journey-step-box p {
       font-size: 11px;
       color: var(--muted);
       margin: 4px 0 0;
       line-height: 1.45;
     }
 
-    .list-rows {
-      display: grid;
-      gap: 10px;
-    }
-    .row-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: #f8fbff;
-    }
-    .ico-box {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: #eef5ff;
-      color: var(--blue);
-      border: 1px solid #d4e4fc;
-      display: grid;
-      place-items: center;
-      font-size: 18px;
-      flex: none;
-    }
-
-    /* Specialists in Hospital */
-    .hospital-doctors {
+    /* Articles Grid */
+    .articles-3grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .doc-card {
+    .article-post-card {
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 14px;
+      border-radius: 14px;
+      overflow: hidden;
       background: #ffffff;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .doc-card:hover {
-      transform: translateY(-2px);
-      border-color: #bcd5f8;
-    }
-    .doc-top {
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
-      gap: 10px;
+      flex-direction: column;
     }
-    .doc-img {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      background: center/cover no-repeat;
-      flex: none;
+    .article-post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
     }
-    .doc-card h3 {
+    .article-post-img {
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+    }
+    .article-post-body {
+      padding: 13px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .article-post-tag {
+      font-size: 9px;
+      font-weight: 900;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .article-post-card h4 {
       font-size: 13px;
-      margin: 0 0 3px;
+      margin: 6px 0 8px;
       color: var(--navy);
+      font-weight: 850;
+      line-height: 1.35;
     }
-    .doc-card h3 a:hover {
-      color: var(--blue);
-    }
-    .doc-card p {
+    .article-post-card .post-author {
       font-size: 11px;
       color: var(--muted);
       margin: 0;
     }
-    .doc-card .btn {
-      width: 100%;
-      margin-top: 10px;
-      padding: 8px;
-      font-size: 11px;
-    }
 
-    /* Review breakdown */
-    .review-summary {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 24px;
-      align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 18px;
-    }
-    .big-score strong {
-      font-size: 46px;
-      line-height: 1;
-      display: block;
-      color: var(--navy);
-    }
-    .bars {
-      display: grid;
-      gap: 6px;
-    }
-    .bar {
-      display: grid;
-      grid-template-columns: 28px 1fr 30px;
-      gap: 8px;
-      align-items: center;
-      font-size: 10px;
-      color: var(--muted);
-    }
-    .bar-line {
-      height: 7px;
-      border-radius: 99px;
-      background: #eef2f7;
-      overflow: hidden;
-    }
-    .bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue), var(--cyan));
-      border-radius: 99px;
-    }
-
-    .article-grid, .near-grid {
+    /* Nearby Hospitals */
+    .near-hospitals-3grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
-    .near-item {
+    .near-hospital-card {
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
+      border-radius: 14px;
       padding: 14px;
-      background: #f8fbff;
+      background: #fbfcfe;
     }
-    .near-item b {
-      display: block;
+    .near-hospital-card b {
       font-size: 13px;
       color: var(--navy);
+      display: block;
     }
-    .near-item p {
+    .near-hospital-card p {
       font-size: 11px;
       color: var(--muted);
       margin: 4px 0;
     }
+    .near-hospital-card .rating-line {
+      margin: 6px 0;
+      font-size: 11px;
+    }
+    .near-hospital-card .btn {
+      width: 100%;
+      padding: 7px;
+      font-size: 11px;
+    }
 
-    .side-list {
+    /* FAQ 2-Column Grid on Desktop */
+    .faq-2col-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .faq-item-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .faq-toggle-btn {
+      width: 100%;
+      border: 0;
+      background: none;
+      padding: 14px 15px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--navy);
+      font-weight: 850;
+      font-size: 13px;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .faq-toggle-btn span {
+      font-size: 16px;
+      color: var(--blue);
+      font-weight: 800;
+      flex: none;
+    }
+    .faq-answer-pane {
+      display: none;
+      color: #556682;
+      font-size: 12px;
+      padding: 0 15px 14px;
+      line-height: 1.5;
+    }
+    .faq-item-card.open .faq-answer-pane {
+      display: block;
+    }
+    .faq-item-card.open {
+      background: #ffffff;
+      border-color: #bcd5fb;
+    }
+
+    /* Conversion CTA Banner */
+    .hospital-cta-strip {
+      background: linear-gradient(135deg, #0b2d70, #0757d9 60%, #11a89e);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .hospital-cta-strip h2 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .hospital-cta-strip p {
+      color: #dce8ff;
+      font-size: 12px;
+      margin: 5px 0 0;
+    }
+
+    /* Sidebar Items */
+    .sidebar-block {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-block h3 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 850;
+    }
+    .map-preview-box {
+      height: 140px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #dfeef8, #f8fbfd);
+      border: 1px solid #dbe6f1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #5e7695;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .side-pill-list {
       display: grid;
       gap: 8px;
     }
-    .side-link {
+    .side-detail-pill {
       font-size: 11px;
-      color: #40516f;
-      padding: 10px;
-      border-radius: var(--radius-sm);
-      background: #f8fbff;
+      color: #50617b;
+      padding: 9px 11px;
+      border-radius: 9px;
+      background: #f7f9fc;
       border: 1px solid var(--line);
       display: block;
-      transition: all 0.2s;
     }
-    .side-link:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-    .side-link b {
-      display: block;
+    .side-detail-pill b {
       color: var(--navy);
+      display: block;
       font-size: 12px;
     }
 
-    @media (max-width: 1050px) {
-      .hospital-header-grid { grid-template-columns: 1fr; }
-      .cover { min-height: 240px; }
-      .two-col-layout { grid-template-columns: 1fr; }
-      .hospital-doctors { grid-template-columns: repeat(2, 1fr); }
-      .facts { grid-template-columns: repeat(2, 1fr); }
-      .grid3, .near-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Modals */
+    .profile-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 27, 58, 0.65);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
     }
-    @media (max-width: 650px) {
-      .hospital-doctors, .grid3, .grid2, .near-grid { grid-template-columns: 1fr; }
-      .facts { grid-template-columns: 1fr; }
-      .review-summary { grid-template-columns: 1fr; }
+    .profile-modal.show {
+      display: flex;
+    }
+    .profile-modal-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      width: min(540px, 100%);
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .modal-close-btn {
+      border: 0;
+      background: #eef2f7;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      color: var(--navy);
+      cursor: pointer;
+    }
+    .profile-form {
+      display: grid;
+      gap: 10px;
+    }
+    .profile-form input,
+    .profile-form select,
+    .profile-form textarea {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-size: 13px;
+      color: var(--ink);
+      background: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .profile-form input:focus,
+    .profile-form select:focus,
+    .profile-form textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(7,87,217,0.12);
+    }
+    .profile-form textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+    .form-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Toast Notification */
+    .profile-toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: var(--navy);
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 11px;
+      display: none;
+      z-index: 250;
+      font-size: 12px;
+      font-weight: 750;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--cyan);
+    }
+    .profile-toast.show {
+      display: block;
+      animation: toastIn 0.3s ease;
+    }
+
+    /* Responsive Viewport Breakpoints */
+    @media (max-width: 1150px) {
+      .hospital-header-grid {
+        grid-template-columns: 280px minmax(0, 1fr);
+      }
+      .hospital-action-card {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .emergency-status,
+      .trust-micro-copy {
+        grid-column: 1 / -1;
+      }
+      .hospital-main-layout {
+        grid-template-columns: 1fr;
+      }
+      .side-column-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .sidebar-block {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .hospital-header-grid {
+        grid-template-columns: 1fr;
+      }
+      .hospital-cover-box {
+        min-height: 240px;
+      }
+      .hospital-action-card {
+        display: block;
+      }
+      .facts-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid-3col,
+      .doctors-grid,
+      .rhythm-2col-bookings,
+      .rhythm-3col-grid,
+      .rhythm-3col-cta,
+      .journey-grid,
+      .articles-3grid,
+      .near-hospitals-3grid {
+        grid-template-columns: 1fr;
+      }
+      .reviews-score-block {
+        grid-template-columns: 1fr;
+      }
+      .faq-2col-grid {
+        grid-template-columns: 1fr;
+      }
+      .hospital-cta-strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hospital-cta-strip .btn {
+        width: 100%;
+      }
+      .side-column-wrap {
+        grid-template-columns: 1fr;
+      }
+      .form-two-col {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -420,8 +1194,8 @@
   <!-- Top Notification Bar -->
   <div class="topbar">
     <div class="container">
-      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
-      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+      <span>🇦🇪 Dubai Healthcare Directory</span>
+      <span>Verified Hospitals • Specialist Doctors • Direct Appointments</span>
     </div>
   </div>
 
@@ -444,72 +1218,100 @@
         <a href="for-doctors.html">For Doctors</a>
       </nav>
 
-      <!-- Nav Actions -->
+      <!-- Nav Actions (Per Rule: remove current type CTA button, show others!) -->
       <div class="nav-actions">
-        <a class="btn btn-outline" href="for-doctors.html">List Your Practice</a>
-        <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','Reproductive Medicine Center')">Book Consultation →</button>
-        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+        <a class="btn btn-outline" href="for-doctors.html">List Your Hospital</a>
+        <!-- Showing 'Consult Doctor' instead of redundant 'Book Hospital' on hospital page -->
+        <button class="btn btn-primary" onclick="openHospitalBooking('Consult Specialist Doctor','In-Hospital Specialist Consultation')">Consult Doctor →</button>
+        <button class="menu-btn mobile-toggle" id="hospitalMobileToggle" aria-label="Toggle Menu">☰</button>
       </div>
     </div>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer" id="hospitalMobileDrawer">
       <a href="index.html">🏠 Home</a>
       <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
-      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
-      <a href="fertifind_hospital_profile_page.html" class="active">🏥 American Hospital & Orchid</a>
-      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
-      <a href="fertifind_labs_profile_page.html">🧪 Igenomix Dubai & Genetics</a>
+      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Specialists & Doctors</a>
+      <a href="fertifind_hospital_profile_page.html" class="active">🏥 CityCare Women's Hospital</a>
+      <a href="fertifind_doctor_profile_page.html">⭐ Dr. Sara Ahmed</a>
+      <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Pathology Labs</a>
       <a href="fertility-treatment-cost-dubai.html">💰 Cost & Pricing Guide</a>
-      <a href="for-doctors.html">💼 For Doctors & Clinics</a>
-      <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">📍 DHCC Doctors Hub</a>
-      <a href="ivf-clinics-in-jumeirah-dubai.html">📍 Jumeirah Clinics Hub</a>
-      <a class="btn btn-outline" href="for-doctors.html" style="text-align:center">List Your Practice</a>
-      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('American Hospital Dubai')">Book Appointment</button>
+      <a href="for-doctors.html">💼 For Doctors & Hospitals</a>
+      <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">📍 DHCC Healthcare Hub</a>
+      <a href="ivf-clinics-in-jumeirah-dubai.html">📍 Jumeirah Medical Hub</a>
+      <a class="btn btn-outline" href="for-doctors.html" style="text-align:center">List Your Hospital</a>
+      <button class="btn btn-primary" style="width:100%" onclick="openHospitalBooking('CityCare Women\'s Hospital')">Consult Doctor</button>
     </div>
   </header>
 
   <!-- Hero Header -->
-  <section class="hero">
+  <section class="hospital-hero">
     <div class="container">
-      <div class="crumb"><a href="index.html">Home</a> / <a href="fertifind_dubai_directory_search_page.html">Directory</a> / <a href="fertifind_dubai_directory_search_page.html?type=hospital">Hospitals</a> / American Hospital Dubai</div>
+      <div class="crumb">
+        <a href="index.html">Home</a> / 
+        <a href="fertifind_dubai_directory_search_page.html">Hospitals</a> / 
+        <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Dubai Healthcare City</a> / 
+        <span>CityCare Women's Hospital</span>
+      </div>
+
       <div class="hospital-header-grid">
-        <div class="cover">
-          <div class="cover-badge">✓ Verified DHA & JCI Hospital</div>
+        <!-- Cover Photo -->
+        <div class="hospital-cover-box">
+          <div class="cover-verified-badge">✓ Profile Claimed & DHA Information Verified</div>
         </div>
-        <div class="identity">
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <span class="badge badge-blue">IVF & Reproductive Medicine Center</span>
-            <span class="badge badge-mint">✓ JCI International Accredited</span>
+
+        <!-- Identity Details -->
+        <div class="hospital-identity">
+          <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-blue">Women's & Family Hospital</span>
+            <span class="badge badge-mint">✓ JCI Accredited • DHA Hospital License</span>
           </div>
-          <h1>American Hospital Dubai</h1>
-          <div class="sub">Advanced Reproductive Medicine • Clinical Embryology • High-Risk Maternity • Level III NICU</div>
-          <div class="location">
-            📍 <b>Oud Metha Road</b>, Dubai, UAE • Satellite Unit: Ibn Sina Bldg 27, DHCC • <a href="#location">View on map</a>
+
+          <h1>CityCare Women's Hospital</h1>
+          <div class="sub-title">Multispecialty Hospital • Women's Health • Fertility • Maternity • Diagnostics</div>
+
+          <div class="location-line">
+            📍 <b>Dubai Healthcare City</b>, Dubai, UAE • 
+            <a href="#map">Get directions</a>
           </div>
-          <div class="rating">
-            <span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">(495 verified patient reviews)</span>
+
+          <div class="rating-line">
+            <span class="stars">★★★★★</span> 
+            <b style="color:var(--navy)">4.7 / 5.0</b> 
+            <span style="color:var(--muted)">(386 verified patient reviews)</span>
           </div>
-          <div class="chips">
-            <span class="chip">IVF / ICSI Suites</span>
-            <span class="chip">PGT-A Genetics Partner</span>
-            <span class="chip">Egg & Sperm Cryopreservation</span>
-            <span class="chip">24/7 Maternity Emergency</span>
-            <span class="chip">Multilingual Team</span>
+
+          <div class="chips-cluster">
+            <span class="chip-pill">24/7 Emergency</span>
+            <span class="chip-pill">Fertility Centre</span>
+            <span class="chip-pill">Maternity Wing</span>
+            <span class="chip-pill">Diagnostic Lab</span>
+            <span class="chip-pill">Radiology & 4D Scan</span>
+            <span class="chip-pill">Level III NICU</span>
           </div>
+
+          <p class="section-lead" style="margin:10px 0 0">
+            A comprehensive, patient-centered hospital profile connecting individuals and families with certified medical specialties, leading consultant physicians, and instant appointment booking.
+          </p>
         </div>
-        <div class="action-box">
+
+        <!-- Right Action Box -->
+        <div class="hospital-action-card">
           <div>
-            <h3>Consultation Desk</h3>
-            <div class="hours">● Hospital Open 24/7 • IVF Clinic: Sat – Thu (08:30 – 18:00)</div>
-            <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Direct hospital coordinator contact:</p>
-            <div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 4 377 5500</div>
+            <h3>Contact & Appointments</h3>
+            <div class="emergency-status">● Open 24 Hours • Emergency Services Available</div>
+            <p style="font-size:11px;color:var(--muted);margin:0 0 6px">Hospital appointments desk:</p>
+            <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 4 555 0188</div>
           </div>
+
           <div>
-            <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','IVF Specialist Consultation')">Book Appointment →</button>
-            <button class="btn btn-whatsapp" style="width:100%;margin-top:6px" onclick="FertiFind.openWhatsApp('971504773832','American Hospital Dubai')">WhatsApp Coordinator</button>
-            <button class="btn btn-outline" style="margin-top:6px" onclick="FertiFind.openReview('American Hospital Dubai')">★ Write a Review</button>
-            <div class="micro">🔒 Direct Hospital Confirmation • Zero Fees • <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile('American Hospital Dubai')" style="color:var(--muted);text-decoration:underline">Claim profile</a></div>
+            <button class="btn btn-primary" onclick="openHospitalBooking('CityCare Women\'s Hospital','Hospital General Visit')">📅 Book Hospital Visit</button>
+            <button class="btn btn-soft" onclick="openHospitalBooking('CityCare Women\'s Hospital','Consult Specialist Doctor')">👨‍⚕️ Choose a Doctor</button>
+            <button class="btn btn-outline" onclick="openHospitalContactModal('CityCare Women\'s Hospital')">☎ Contact Hospital</button>
+            <button class="btn btn-whatsapp" style="margin-top:7px" onclick="openHospitalWhatsApp('971504773832','CityCare Women\'s Hospital')">💬 WhatsApp Coordinator</button>
+            <div class="trust-micro-copy">
+              Direct hospital scheduling. Zero booking surcharges.
+            </div>
           </div>
         </div>
       </div>
@@ -517,371 +1319,1007 @@
   </section>
 
   <!-- Sticky In-Page Navigation Tabs -->
-  <nav class="tabs">
+  <nav class="tabs-strip">
     <div class="container">
       <a href="#overview" class="active">Overview</a>
-      <a href="#specialists">Specialists & Doctors</a>
-      <a href="#services">Clinical Services</a>
-      <a href="#embryology">Embryology & Genetics</a>
-      <a href="#pricing">Packages & Pricing</a>
-      <a href="#reviews">Patient Reviews</a>
-      <a href="#location">Location & Hours</a>
-      <a href="#faq">Hospital FAQs</a>
+      <a href="#specialities">Specialities</a>
+      <a href="#services">Services</a>
+      <a href="#diagnostics">Diagnostics</a>
+      <a href="#doctors">Top Doctors</a>
+      <a href="#when-to-visit">Care Guide</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#nearby">Nearby</a>
+      <a href="#faq">FAQs</a>
     </div>
   </nav>
 
   <!-- Main Content Layout -->
-  <main class="container two-col-layout">
+  <main class="container hospital-main-layout">
 
     <!-- Primary Column -->
     <div>
 
-      <!-- Overview -->
-      <section class="content-card" id="overview">
-        <h2>About American Hospital Dubai IVF Center</h2>
-        <p class="lead">
-          Established in 1996, American Hospital Dubai is a premier multi-specialty medical center accredited by the Joint Commission International (JCI) and the College of American Pathologists (CAP). Its Center for Reproductive Medicine combines leading reproductive endocrinologists, cutting-edge embryology laboratories, and full-spectrum inpatient maternal-fetal care.
-        </p>
-        <p class="lead">
-          In partnership with specialized clinics including Orchid Fertility Clinic in Dubai Healthcare City, the center provides comprehensive assisted reproductive technology (ART), personalized ovarian stimulation protocols, advanced pre-implantation genetic screening (PGT-A/M), and male infertility interventions.
+      <!-- SECTION 1: Overview & History -->
+      <section class="section-card" id="overview">
+        <h2>About CityCare Women's Hospital</h2>
+        <p class="section-lead">
+          CityCare Women's Hospital is an accredited multispecialty hospital in Dubai Healthcare City designed around women's health, obstetrics, reproductive endocrinology, and child healthcare. The hospital combines inpatient surgical suites, an advanced neonatal intensive care unit (NICU), and comprehensive diagnostic laboratories to support patients through every stage of their healthcare journey.
         </p>
 
-        <div class="facts">
-          <div class="fact"><b>28+</b><span>Years Excellence</span></div>
-          <div class="fact"><b>14,000+</b><span>Successful Deliveries</span></div>
-          <div class="fact"><b>Level III</b><span>On-Site Neonatal ICU</span></div>
-          <div class="fact"><b>JCI / CAP</b><span>Dual International Accreditations</span></div>
+        <!-- Facts Metrics Grid (4 per row on desktop) -->
+        <div class="facts-grid">
+          <div class="fact-box">
+            <b>20+</b>
+            <span>Years of Service</span>
+          </div>
+          <div class="fact-box">
+            <b>80+</b>
+            <span>Specialist Doctors</span>
+          </div>
+          <div class="fact-box">
+            <b>250+</b>
+            <span>Healthcare Services</span>
+          </div>
+          <div class="fact-box">
+            <b>4.7/5</b>
+            <span>Patient Rating</span>
+          </div>
         </div>
 
-        <h3>Hospital Accreditations & Clinical Standards</h3>
-        <div class="grid3">
-          <div class="mini-service">
-            <div class="ico">🏆</div>
-            <b>JCI Accreditation</b>
-            <p>First hospital in the Middle East to receive Joint Commission International gold seal.</p>
+        <h3>Hospital Clinical Specialties</h3>
+        <div class="chips-cluster">
+          <span class="chip-pill">Obstetrics</span>
+          <span class="chip-pill">Gynecology</span>
+          <span class="chip-pill">Reproductive Medicine</span>
+          <span class="chip-pill">Pediatrics</span>
+          <span class="chip-pill">Neonatology</span>
+          <span class="chip-pill">General Surgery</span>
+          <span class="chip-pill">Diagnostics</span>
+          <span class="chip-pill">Internal Medicine</span>
+        </div>
+
+        <h3>Hospital History & Milestones</h3>
+        <p class="section-lead">
+          Established in Dubai Healthcare City, CityCare began as a dedicated women's health center and has grown into a major tertiary hospital. The facility is fully licensed by the Dubai Health Authority (DHA) and holds international gold accreditation from the Joint Commission International (JCI).
+        </p>
+      </section>
+
+      <!-- SECTION 2: Medical Specialties & Departments -->
+      <section class="section-card" id="specialities">
+        <h2>Medical Specialties & Departments</h2>
+        <p class="section-lead">Our clinical departments are led by internationally trained medical consultants and surgeons.</p>
+
+        <div class="grid-3col">
+          <div class="feature-card">
+            <div class="ico">🤰</div>
+            <b>Obstetrics & Maternity</b>
+            <p>Antenatal monitoring, natural birth planning, Caesarean delivery suites, and postpartum maternal recovery.</p>
           </div>
-          <div class="mini-service">
+
+          <div class="feature-card">
+            <div class="ico">🌸</div>
+            <b>Gynecology Care</b>
+            <p>Preventive annual screenings, colposcopy, laparoscopic surgery, and pelvic pain management.</p>
+          </div>
+
+          <div class="feature-card">
             <div class="ico">🧬</div>
-            <b>CAP Accredited Lab</b>
-            <p>Clinical pathology and genetics diagnostic laboratories meet College of American Pathologists benchmarks.</p>
-          </div>
-          <div class="mini-service">
-            <div class="ico">🏥</div>
-            <b>DHA Super-Specialty</b>
-            <p>Fully licensed by Dubai Health Authority for tertiary reproductive and obstetrics care.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Specialists -->
-      <section class="content-card" id="specialists">
-        <h2>Fertility Specialists & Consultant Doctors</h2>
-        <p class="lead">
-          Meet the experienced reproductive endocrinologists, fertility consultants, and andrologists practicing at American Hospital Dubai and its partner network.
-        </p>
-
-        <div class="hospital-doctors">
-
-          <!-- Doctor 1: Dr. Partha Sarathi Das -->
-          <div class="doc-card">
-            <div class="doc-top">
-              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=85')"></div>
-              <div>
-                <h3><a href="fertifind_doctor_profile_page.html">Dr. Partha Sarathi Das</a></h3>
-                <p>Consultant Reproductive Medicine</p>
-                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">20+ Years Experience</div>
-              </div>
-            </div>
-            <p style="font-size:11px;color:var(--muted);margin-top:8px">Specializes in IVF/ICSI, ovarian stimulation protocols, recurrent implantation failure, and fertility preservation.</p>
-            <div style="display:flex;gap:6px;margin-top:8px">
-              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
-              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Fertility Consultation')">Book</button>
-            </div>
+            <b>Fertility & IVF</b>
+            <p>Diagnostic infertility evaluations, ovarian stimulation, ICSI, and genetic embryo testing (PGT-A).</p>
           </div>
 
-          <!-- Doctor 2: Dr. Dalia Khalife -->
-          <div class="doc-card">
-            <div class="doc-top">
-              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=85')"></div>
-              <div>
-                <h3><a href="fertifind_doctor_profile_page.html">Dr. Dalia Khalife</a></h3>
-                <p>Fertility Specialist & Reproductive Med</p>
-                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">13+ Years Experience</div>
-              </div>
-            </div>
-            <p style="font-size:11px;color:var(--muted);margin-top:8px">Expert in assisted conception, PCOS management, diagnostic laparoscopy, and egg vitrification.</p>
-            <div style="display:flex;gap:6px;margin-top:8px">
-              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
-              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Dalia Khalife','Fertility Consultation')">Book</button>
-            </div>
+          <div class="feature-card">
+            <div class="ico">👶</div>
+            <b>Pediatrics & NICU</b>
+            <p>Well-child development checks, acute pediatric care, and 24-bed Level III neonatal intensive care.</p>
           </div>
 
-          <!-- Doctor 3: Dr. Gautam Allahbadia -->
-          <div class="doc-card">
-            <div class="doc-top">
-              <div class="doc-img" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=85')"></div>
-              <div>
-                <h3><a href="fertifind_doctor_profile_page.html">Dr. Gautam Allahbadia</a></h3>
-                <p>Consultant Reproductive Endocrinology</p>
-                <div style="font-size:11px;color:var(--blue);font-weight:750;margin-top:2px">25+ Years Experience</div>
-              </div>
-            </div>
-            <p style="font-size:11px;color:var(--muted);margin-top:8px">Pioneer in ultrasound-guided embryo transfer, minimal stimulation IVF, and complex reproductive endocrinology.</p>
-            <div style="display:flex;gap:6px;margin-top:8px">
-              <a class="btn btn-soft" style="flex:1;padding:7px;font-size:11px" href="fertifind_doctor_profile_page.html">View Profile</a>
-              <button class="btn btn-primary" style="flex:1;padding:7px;font-size:11px" onclick="FertiFind.openBooking('Dr. Gautam Allahbadia','Specialist Consultation')">Book</button>
-            </div>
+          <div class="feature-card">
+            <div class="ico">🫀</div>
+            <b>Internal Medicine</b>
+            <p>Adult metabolic management, cardiovascular assessments, and comprehensive preventative health checkups.</p>
           </div>
 
-        </div>
-      </section>
-
-      <!-- Services -->
-      <section class="content-card" id="services">
-        <h2>Clinical Treatments & Fertility Services</h2>
-        <div class="list-rows">
-          <div class="row-item">
-            <div class="ico-box">🧬</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">In Vitro Fertilization (IVF) & ICSI</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Custom stimulation protocols, egg retrieval in accredited surgical theaters, ICSI micro-fertilization, blastocyst culture, and embryo transfer.</p>
-            </div>
-          </div>
-          <div class="row-item">
-            <div class="ico-box">❄️</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">Egg, Sperm & Embryo Cryopreservation</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Advanced vitrification protocols for medical and social fertility preservation with long-term nitrogen tank storage compliant with UAE regulations.</p>
-            </div>
-          </div>
-          <div class="row-item">
-            <div class="ico-box">🔬</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">Pre-implantation Genetic Testing (PGT-A & PGT-M)</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Comprehensive chromosome screening and monogenic single-gene defect prevention conducted in partnership with Igenomix Dubai genetics lab.</p>
-            </div>
-          </div>
-          <div class="row-item">
-            <div class="ico-box">⚕️</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">Male Infertility & Surgical Sperm Retrieval</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">PESA, TESA, and Micro-TESE surgical procedures performed by certified urologists for obstructive and non-obstructive azoospermia.</p>
-            </div>
-          </div>
-          <div class="row-item">
-            <div class="ico-box">🏥</div>
-            <div>
-              <b style="color:var(--navy);font-size:14px">Full Inpatient Maternity, Delivery & Level III NICU</b>
-              <p style="font-size:12px;color:var(--muted);margin:3px 0 0">Immediate on-site pediatric support and specialized maternal-fetal medicine for high-risk twin and triplet pregnancies resulting from fertility treatment.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Embryology & Genetics -->
-      <section class="content-card" id="embryology">
-        <h2>Embryology Laboratory & Diagnostic Partners</h2>
-        <p class="lead">
-          The embryology cleanroom laboratory utilizes HEPA-filtered positive pressure air handling, medical grade gas mixtures, and state-of-the-art incubation chambers to maximize blastocyst yield and implantation rates.
-        </p>
-        <div class="grid2">
-          <div class="mini-service">
-            <div class="ico">🧪</div>
-            <b>Clinical Embryology Team</b>
-            <p>Headed by senior clinical embryologist <b>Estee Van Zyl</b> (certified in human embryology, micromanipulation, and vitrification).</p>
-          </div>
-          <div class="mini-service">
+          <div class="feature-card">
             <div class="ico">🔬</div>
-            <b>Genetics Diagnostic Partner</b>
-            <p>Strategic partnership with <a href="fertifind_labs_profile_page.html" style="color:var(--blue);font-weight:800">Igenomix Dubai</a> (DHCC) for rapid PGT-A aneuploidy screening and ERA endometrial receptivity tests.</p>
+            <b>Diagnostics & Imaging</b>
+            <p>CAP-accredited clinical pathology, high-resolution ultrasound, digital mammography, and MRI.</p>
           </div>
         </div>
       </section>
 
-      <!-- Pricing Guide -->
-      <section class="content-card" id="pricing">
-        <h2>Estimated Packages & Treatment Costs</h2>
-        <p class="lead">
-          Transparent clinical fee guide for Dubai fertility procedures. Inclusions should be verified directly with your coordinator based on personalized clinical stimulation plans.
-        </p>
-        <div style="overflow-x:auto">
-          <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
-            <thead>
-              <tr style="border-bottom:2px solid var(--line);color:var(--navy)">
-                <th style="padding:10px 8px">Treatment / Consultation</th>
-                <th style="padding:10px 8px">Estimated Fee</th>
-                <th style="padding:10px 8px">Key Inclusions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid var(--line-light)">
-                <td style="padding:12px 8px"><b>Initial Fertility Specialist Consultation</b></td>
-                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 450 – 600</td>
-                <td style="padding:12px 8px;color:var(--muted)">Full medical review, ultrasound scan, treatment recommendation</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--line-light)">
-                <td style="padding:12px 8px"><b>Standard IVF / ICSI Cycle</b></td>
-                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 26,000 – 34,000</td>
-                <td style="padding:12px 8px;color:var(--muted)">Monitoring scans, egg collection, ICSI, blastocyst culture & fresh transfer</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--line-light)">
-                <td style="padding:12px 8px"><b>Social Egg Freezing Package</b></td>
-                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 16,500 – 21,000</td>
-                <td style="padding:12px 8px;color:var(--muted)">Stimulation monitoring, oocyte retrieval, vitrification & 1st year storage</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--line-light)">
-                <td style="padding:12px 8px"><b>PGT-A Chromosome Screening (per embryo)</b></td>
-                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 1,800 – 2,400</td>
-                <td style="padding:12px 8px;color:var(--muted)">Trophectoderm biopsy, next-generation sequencing (Igenomix)</td>
-              </tr>
-              <tr>
-                <td style="padding:12px 8px"><b>Intrauterine Insemination (IUI)</b></td>
-                <td style="padding:12px 8px;color:var(--blue);font-weight:850">AED 3,500 – 5,500</td>
-                <td style="padding:12px 8px;color:var(--muted)">Follicular tracking, sperm preparation, insemination procedure</td>
-              </tr>
-            </tbody>
-          </table>
+      <!-- SECTION 3: Services & Treatments -->
+      <section class="section-card" id="services">
+        <h2>Services & Clinical Treatments</h2>
+        <p class="section-lead">Explore specialized medical treatments and therapeutic options available at CityCare.</p>
+
+        <div class="grid-3col">
+          <div class="feature-card">
+            <div class="ico">🧬</div>
+            <b>IVF Consultation</b>
+            <p>Comprehensive fertility evaluation, individualized protocol design, and embryo transfer planning.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🌱</div>
+            <b>IUI Treatment</b>
+            <p>Intrauterine insemination assessment, ovulation tracking, and minimally invasive fertility pathways.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🔬</div>
+            <b>ICSI Procedure</b>
+            <p>Intracytoplasmic sperm injection for severe male factor infertility in our state-of-the-art cleanroom lab.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🤰</div>
+            <b>Maternity Care</b>
+            <p>Complete trimester care, fetal anomaly scanning, private delivery suites, and lactation counselling.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🩺</div>
+            <b>Gynecologic Surgery</b>
+            <p>Minimally invasive keyhole surgery for fibroids, endometriosis, ovarian cysts, and hysteroscopy.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🧪</div>
+            <b>Health Screening</b>
+            <p>Comprehensive packages for women, men, and executives with fast digital reports.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🩻</div>
+            <b>Diagnostic Imaging</b>
+            <p>4D fetal ultrasound, bone densitometry, multislice CT, and breast tomosynthesis.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🧫</div>
+            <b>Laboratory Medicine</b>
+            <p>Full blood counts, reproductive hormone assays, genetics, and microbiologic cultures.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🏠</div>
+            <b>Home Healthcare</b>
+            <p>Licensed mobile nurses for postpartum newborn checks, wound care, and home phlebotomy blood draws.</p>
+          </div>
         </div>
       </section>
 
-      <!-- Patient Reviews -->
-      <section class="content-card" id="reviews">
+      <!-- ==========================================================================
+           RHYTHM 1: 2-COLUMN SECTION FOR CTA BOOKINGS & REVIEWS SLIDERS
+           1st Col: Businesses (List Business + Business Reviews Slider)
+           2nd Col: Patients (Bookings + Customer Reviews Slider)
+           ========================================================================== -->
+      <section class="rhythm-2col-bookings">
+        <!-- Col 1: For Healthcare Businesses & Practices -->
+        <div class="rhythm-col-card business-card">
+          <div>
+            <span class="rhythm-badge-tag">For Healthcare Businesses</span>
+            <h3>List Your Hospital or Practice</h3>
+            <p>
+              Join Dubai's verified medical network. Showcase your accredited departments, specialist doctors, and receive qualified patient bookings directly.
+            </p>
+            <div class="rhythm-action-btns">
+              <a class="btn btn-primary" href="for-doctors.html">List Business Free →</a>
+              <button class="btn btn-outline" onclick="openHospitalContactModal('Hospital Profile Claim')">Claim Profile</button>
+            </div>
+          </div>
+
+          <!-- Business Reviews Slider -->
+          <div class="slider-container">
+            <div class="slider-head">
+              <span>Verified Practice Reviews</span>
+              <div class="slider-arrows">
+                <button class="arrow-btn" onclick="prevSlide('bizSlider')" aria-label="Previous review">‹</button>
+                <button class="arrow-btn" onclick="nextSlide('bizSlider')" aria-label="Next review">›</button>
+              </div>
+            </div>
+            <div id="bizSlider">
+              <div class="slide-item active">
+                “FertiFind increased our hospital's specialist admissions by 38% in 4 months. The verified DHA badges build instant trust with international patients.”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Dr. Farhad Mansoori</b>
+                  <span>Medical Director, Dubai</span>
+                </div>
+              </div>
+              <div class="slide-item">
+                “Listing our women's clinic on FertiFind reduced our patient acquisition cost by 50%. The appointment request notifications are instantaneous.”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Sarah Jenkins</b>
+                  <span>Operations Head, Jumeirah</span>
+                </div>
+              </div>
+              <div class="slide-item">
+                “A pristine medical directory that genuinely prioritizes clinical accreditation and patient transparency over paid ranking gimmicks.”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Dr. K. Al-Hashimi</b>
+                  <span>Hospital Chief of Staff</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 2: For Patients & Customers -->
+        <div class="rhythm-col-card customer-card">
+          <div>
+            <span class="rhythm-badge-tag">For Patients & Families</span>
+            <h3>Book Care & Submit Reviews</h3>
+            <p>
+              Connect directly with verified hospital departments, schedule in-person or video specialist visits, or share your healthcare experience.
+            </p>
+            <div class="rhythm-action-btns">
+              <button class="btn btn-primary" onclick="openHospitalBooking('CityCare Women\'s Hospital','Hospital Visit')">📅 Book Visit</button>
+              <button class="btn btn-soft" onclick="openHospitalBooking('CityCare Women\'s Hospital','Online Video Consult')">▣ Consult Doctor</button>
+              <button class="btn btn-outline" onclick="openReviewModal('CityCare Women\'s Hospital')">★ Submit Review</button>
+            </div>
+          </div>
+
+          <!-- Customer's Reviews Submitted Slider -->
+          <div class="slider-container">
+            <div class="slider-head">
+              <span>Patient Experiences</span>
+              <div class="slider-arrows">
+                <button class="arrow-btn" onclick="prevSlide('custSlider')" aria-label="Previous review">‹</button>
+                <button class="arrow-btn" onclick="nextSlide('custSlider')" aria-label="Next review">›</button>
+              </div>
+            </div>
+            <div id="custSlider">
+              <div class="slide-item active">
+                “The labor and delivery suite at CityCare was world-class. The midwives and obstetric team made us feel completely supported every minute.”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Fatima & Zaid M.</b>
+                  <span>★★★★★ Maternity Care</span>
+                </div>
+              </div>
+              <div class="slide-item">
+                “Dr. Sara and the fertility department guided us through our ICSI cycle with complete compassion. We achieved pregnancy on our first embryo transfer!”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Elena R.</b>
+                  <span>★★★★★ IVF Consultation</span>
+                </div>
+              </div>
+              <div class="slide-item">
+                “Brought our toddler to the 24/7 pediatric emergency at 2 AM. The doctor evaluated him within 4 minutes. Exceptionally clean and reassuring.”
+                <div class="slide-author-line">
+                  <b style="color:var(--navy)">Priya S.</b>
+                  <span>★★★★★ Pediatric Emergency</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: Tests & Diagnostics -->
+      <section class="section-card" id="diagnostics">
+        <h2>Tests & Diagnostics Available</h2>
+        <p class="section-lead">The hospital offers comprehensive pathology, genetics, and medical imaging services to ensure accurate diagnostic pathways.</p>
+
+        <div class="diag-list">
+          <div class="diag-row">
+            <div class="diag-icon-box">🧪</div>
+            <div class="diag-info">
+              <b>Blood & Hormone Testing Panels</b>
+              <p>CBC, metabolic panels, thyroid function, ovarian reserve (AMH), beta-hCG, and comprehensive lipid profiles with same-day digital results.</p>
+            </div>
+          </div>
+
+          <div class="diag-row">
+            <div class="diag-icon-box">🧬</div>
+            <div class="diag-info">
+              <b>Fertility & Reproductive Diagnostics</b>
+              <p>Computerized semen analysis (CASA), sperm DNA fragmentation, endometrial receptivity analysis (ERA), and carrier genetic screening.</p>
+            </div>
+          </div>
+
+          <div class="diag-row">
+            <div class="diag-icon-box">🩻</div>
+            <div class="diag-info">
+              <b>Ultrasound & Advanced Medical Imaging</b>
+              <p>High-resolution pelvic ultrasound, hysterosalpingo-contrast sonography (HyCoSy), fetal Doppler scans, and low-dose breast imaging.</p>
+            </div>
+          </div>
+
+          <div class="diag-row">
+            <div class="diag-icon-box">🔬</div>
+            <div class="diag-info">
+              <b>Pathology & Cellular Histology</b>
+              <p>Cervical cytology (liquid-based Pap smear), HPV DNA testing, endometrial biopsy histology, and rapid frozen-section analysis.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: Top Doctors at this Hospital -->
+      <section class="section-card" id="doctors">
+        <h2>Top Doctors at CityCare Women's Hospital</h2>
+        <p class="section-lead">Browse credentialed medical specialists practicing at CityCare and book directly with your preferred consultant.</p>
+
+        <div class="doctors-grid">
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Sara Ahmed</h4>
+                <p>Fertility & Reproductive Medicine</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.8</b> <span style="color:var(--muted)">(174)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Sara Ahmed','Fertility Specialist')">Book Doctor</button>
+          </div>
+
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Omar Hassan</h4>
+                <p>Andrology & Male Fertility</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.9</b> <span style="color:var(--muted)">(151)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Omar Hassan','Andrology Specialist')">Book Doctor</button>
+          </div>
+
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Lina Kareem</h4>
+                <p>Obstetrics & Gynecology</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.8</b> <span style="color:var(--muted)">(204)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Lina Kareem','OB-GYN Specialist')">Book Doctor</button>
+          </div>
+
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1527613426441-4da17471b66d?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Maya Ali</h4>
+                <p>Pediatrics & Neonatology</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.7</b> <span style="color:var(--muted)">(132)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Maya Ali','Pediatric Specialist')">Book Doctor</button>
+          </div>
+
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Ahmed Khalid</h4>
+                <p>Internal Medicine Consultant</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.7</b> <span style="color:var(--muted)">(98)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Ahmed Khalid','Internal Medicine')">Book Doctor</button>
+          </div>
+
+          <div class="doc-unit-card">
+            <div class="doc-unit-top">
+              <div class="doc-unit-img" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=250&q=85')"></div>
+              <div>
+                <h4>Dr. Noor Rahman</h4>
+                <p>Consultant Radiologist</p>
+              </div>
+            </div>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.8</b> <span style="color:var(--muted)">(87)</span>
+            </div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Dr. Noor Rahman','Radiology Specialist')">Book Doctor</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: When Should You Visit a Specialist? -->
+      <section class="section-card" id="when-to-visit">
+        <h2>When Should You Visit a Specialist?</h2>
+        <p class="section-lead">A clinical decision guide to help you find the appropriate department for your symptoms or health milestones.</p>
+
+        <div class="grid-3col">
+          <div class="feature-card">
+            <div class="ico">🌸</div>
+            <b>Women's Health</b>
+            <p>Schedule gynecology visits for persistent pelvic pain, abnormal bleeding, hormone imbalances, or annual cervical screenings.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🧬</div>
+            <b>Fertility Concerns</b>
+            <p>Seek a specialist evaluation if conception has not occurred after 12 months of trying (or 6 months if female partner is over 35).</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🤰</div>
+            <b>Pregnancy & Maternity</b>
+            <p>Contact obstetrics upon confirming pregnancy, for routine trimester scans, antenatal checkups, or high-risk maternal care.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">👶</div>
+            <b>Infant & Child Health</b>
+            <p>Consult pediatrics for milestone developmental evaluations, newborn jaundice, childhood vaccinations, or persistent fever.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🧪</div>
+            <b>Diagnostic Screenings</b>
+            <p>Annual health audits, lipid profiling, AMH checks, and preventative cancer screenings recommended based on age and clinical history.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="ico">🚑</div>
+            <b>Urgent & Emergency</b>
+            <p>For acute abdominal pain, obstetric bleeding, severe breathing distress, or high pediatric fever, visit our 24/7 emergency unit.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           RHYTHM 2: 3-COLUMN LISTS SECTION
+           Col 1: Top Doctors in Area
+           Col 2: Top Clinics in Area
+           Col 3: Most Search Queries in Area
+           ========================================================================== -->
+      <section class="rhythm-3col-area">
+        <h2>Local Healthcare Discovery in Dubai Healthcare City</h2>
+        <p class="section-lead" style="margin-bottom:0">Compare accredited specialists, polyclinics, and high-demand healthcare services in this district.</p>
+
+        <div class="rhythm-3col-grid">
+          <!-- Col 1: Top Doctors in Area -->
+          <div class="area-col-box">
+            <h3>👩‍⚕️ Top Doctors in DHCC</h3>
+            <div class="area-list-items">
+              <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                <div>
+                  <b>Dr. Sara Ahmed</b>
+                  <span>Fertility Specialist • Nova & CityCare</span>
+                </div>
+                <strong style="color:var(--blue)">4.8★</strong>
+              </a>
+              <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                <div>
+                  <b>Dr. Partha Sarathi Das</b>
+                  <span>Reproductive Medicine • Orchid</span>
+                </div>
+                <strong style="color:var(--blue)">4.9★</strong>
+              </a>
+              <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                <div>
+                  <b>Dr. Lina Kareem</b>
+                  <span>OB-GYN Consultant • CityCare</span>
+                </div>
+                <strong style="color:var(--blue)">4.8★</strong>
+              </a>
+              <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                <div>
+                  <b>Dr. Omar Hassan</b>
+                  <span>Andrology Specialist • DHCC</span>
+                </div>
+                <strong style="color:var(--blue)">4.9★</strong>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Top Clinics in Area -->
+          <div class="area-col-box">
+            <h3>🏥 Top Clinics in DHCC</h3>
+            <div class="area-list-items">
+              <a class="mini-provider-row" href="fertifind_dubai_directory_search_page.html?type=clinic">
+                <div>
+                  <b>Orchid Fertility Clinic</b>
+                  <span>Ibn Sina Bldg 27, DHCC • ART</span>
+                </div>
+                <strong style="color:var(--teal)">4.9★</strong>
+              </a>
+              <a class="mini-provider-row" href="ivf-clinics-in-jumeirah-dubai.html">
+                <div>
+                  <b>Nova Fertility Centre</b>
+                  <span>Jumeirah Beach Road • IVF</span>
+                </div>
+                <strong style="color:var(--teal)">4.9★</strong>
+              </a>
+              <a class="mini-provider-row" href="fertifind_dubai_directory_search_page.html?type=clinic">
+                <div>
+                  <b>American Hospital Clinic</b>
+                  <span>DHCC Outpatient Unit</span>
+                </div>
+                <strong style="color:var(--teal)">4.8★</strong>
+              </a>
+              <a class="mini-provider-row" href="fertifind_dubai_directory_search_page.html?type=clinic">
+                <div>
+                  <b>Harmony Medical Center</b>
+                  <span>Al Barsha & DHCC Hub</span>
+                </div>
+                <strong style="color:var(--teal)">4.7★</strong>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 3: Most Searched Queries in Area -->
+          <div class="area-col-box">
+            <h3>🔍 Most Searched Queries</h3>
+            <div class="search-tags-cloud">
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=IVF+hospital">IVF hospital Dubai</a>
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?specialty=Gynecologist">Gynecologist in DHCC</a>
+              <a class="search-tag-chip" href="fertifind_labs_profile_page.html">AMH hormone test</a>
+              <a class="search-tag-chip" href="fertility-treatment-cost-dubai.html">Maternity delivery packages</a>
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?specialty=Pediatrician">Pediatrician near me</a>
+              <a class="search-tag-chip" href="fertifind_labs_profile_page.html">4D Ultrasound scan</a>
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=High-risk+pregnancy">High-risk pregnancy</a>
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=ICSI">ICSI fertility clinic</a>
+              <a class="search-tag-chip" href="fertifind_labs_profile_page.html">Home blood sample collection</a>
+              <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=NICU">NICU hospital Dubai</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: Hospital Reviews & Patient Experience -->
+      <section class="section-card" id="reviews">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px">
           <div>
-            <h2 style="margin:0">Verified Patient Reviews</h2>
-            <p class="lead" style="margin:4px 0 0">Direct patient experiences and clinical feedback</p>
+            <h2 style="margin:0">Hospital Reviews & Patient Experience</h2>
+            <p class="section-lead" style="margin:4px 0 0">Verified patient feedback for CityCare Women's Hospital</p>
           </div>
-          <button class="btn btn-outline" onclick="FertiFind.openReview('American Hospital Dubai')">★ Write a Review</button>
+          <button class="btn btn-outline" onclick="openReviewModal('CityCare Women\'s Hospital')">★ Write a Hospital Review</button>
         </div>
 
-        <div class="review-summary">
-          <div class="big-score">
-            <strong>4.8</strong>
+        <!-- Rating Summary with Progress Bars -->
+        <div class="reviews-score-block">
+          <div class="big-score-unit">
+            <strong>4.7</strong>
             <div class="stars">★★★★★</div>
-            <span class="muted" style="font-size:12px">Based on 495 reviews</span>
+            <small style="color:var(--muted);font-weight:700">386 verified reviews</small>
           </div>
-          <div class="bars">
-            <div class="bar"><span>5★</span><div class="bar-line"><div class="bar-fill" style="width:88%"></div></div><span>88%</span></div>
-            <div class="bar"><span>4★</span><div class="bar-line"><div class="bar-fill" style="width:9%"></div></div><span>9%</span></div>
-            <div class="bar"><span>3★</span><div class="bar-line"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
-            <div class="bar"><span>2★</span><div class="bar-line"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
-            <div class="bar"><span>1★</span><div class="bar-line"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
+
+          <div class="score-progress-list">
+            <div class="progress-bar-row">
+              <span>5★</span>
+              <div class="track-line"><div class="fill-line" style="width:88%"></div></div>
+              <b style="color:var(--navy)">88%</b>
+            </div>
+            <div class="progress-bar-row">
+              <span>4★</span>
+              <div class="track-line"><div class="fill-line" style="width:8%"></div></div>
+              <b style="color:var(--navy)">8%</b>
+            </div>
+            <div class="progress-bar-row">
+              <span>3★</span>
+              <div class="track-line"><div class="fill-line" style="width:3%"></div></div>
+              <b style="color:var(--navy)">3%</b>
+            </div>
+            <div class="progress-bar-row">
+              <span>2★</span>
+              <div class="track-line"><div class="fill-line" style="width:1%"></div></div>
+              <b style="color:var(--navy)">1%</b>
+            </div>
+            <div class="progress-bar-row">
+              <span>1★</span>
+              <div class="track-line"><div class="fill-line" style="width:0%"></div></div>
+              <b style="color:var(--navy)">0%</b>
+            </div>
           </div>
         </div>
 
-        <div class="list-rows">
-          <div class="row-item" style="background:#ffffff">
-            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">M</div>
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <b style="color:var(--navy)">Maha & Rashid K.</b>
-                <span style="font-size:11px;color:var(--muted)">1 month ago</span>
+        <!-- Verified Reviews List -->
+        <div>
+          <div style="padding:14px 0;border-bottom:1px solid var(--line)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div style="display:flex;gap:9px;align-items:center">
+                <div style="width:35px;height:35px;border-radius:50%;background:#e8f0ff;color:var(--blue);display:grid;place-items:center;font-weight:900;font-size:13px">A</div>
+                <div>
+                  <b style="color:var(--navy);font-size:13px">Aisha M.</b><br>
+                  <small style="color:var(--muted);font-size:11px">Fertility Consultation • Dubai</small>
+                </div>
               </div>
-              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Verified IVF Patient</span></div>
-              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
-                “After two unsuccessful cycles overseas, we consulted with Dr. Partha Sarathi Das. He modified our medication protocol and recommended PGT-A testing with Igenomix. We are now in our 24th week of pregnancy. Outstanding hospital staff and nursing care.”
-              </p>
+              <div style="text-align:right">
+                <span class="stars" style="color:var(--gold);font-size:11px">★★★★★</span><br>
+                <span class="badge badge-mint" style="font-size:9px">Verified Patient</span>
+              </div>
             </div>
+            <p style="font-size:12px;color:#43546e;margin:4px 0 0;line-height:1.5">
+              “The appointment process was straightforward and the nursing staff explained where to go for specialist consultation and ultrasound testing without delay.”
+            </p>
           </div>
 
-          <div class="row-item" style="background:#ffffff">
-            <div class="avatar" style="background:#eef5ff;color:var(--blue);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900">E</div>
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <b style="color:var(--navy)">Elena P.</b>
-                <span style="font-size:11px;color:var(--muted)">3 months ago</span>
+          <div style="padding:14px 0">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <div style="display:flex;gap:9px;align-items:center">
+                <div style="width:35px;height:35px;border-radius:50%;background:#e8f0ff;color:var(--blue);display:grid;place-items:center;font-weight:900;font-size:13px">R</div>
+                <div>
+                  <b style="color:var(--navy);font-size:13px">Rehab K.</b><br>
+                  <small style="color:var(--muted);font-size:11px">Maternity Services & Delivery • Dubai</small>
+                </div>
               </div>
-              <div class="stars" style="font-size:12px;margin:2px 0 4px">★★★★★ <span class="badge badge-mint" style="font-size:9px">Egg Freezing Patient</span></div>
-              <p style="font-size:13px;color:#40516f;margin:0;line-height:1.5">
-                “Completed an elective egg freezing cycle. The facility is world-class, clean, modern, and transparent regarding vitrification storage procedures.”
-              </p>
+              <div style="text-align:right">
+                <span class="stars" style="color:var(--gold);font-size:11px">★★★★★</span><br>
+                <span class="badge badge-mint" style="font-size:9px">Verified Patient</span>
+              </div>
             </div>
+            <p style="font-size:12px;color:#43546e;margin:4px 0 0;line-height:1.5">
+              “The maternity facilities were immaculate and the midwife team explained the care steps clearly. Very calm and reassuring birth experience.”
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- Location & Hours -->
-      <section class="content-card" id="location">
-        <h2>Location & Access Information</h2>
-        <div class="grid2">
-          <div>
-            <h3 style="margin-top:0">Main Hospital Campus</h3>
-            <p style="font-size:13px;color:#40516f;line-height:1.6">
-              📍 <b>Address:</b> 19th Street, Oud Metha Road, Dubai, United Arab Emirates<br>
-              🚗 <b>Parking:</b> Complimentary valet parking available at Main Entrance and Women's Clinic<br>
-              🚇 <b>Metro:</b> Oud Metha Metro Station (Green Line) - 5 minutes walk<br>
-              ☎ <b>Main Switchboard:</b> +971 4 377 5500
-            </p>
+      <!-- SECTION 8: How the Hospital Care Journey Works -->
+      <section class="section-card">
+        <h2>How the Hospital Care Journey Works</h2>
+        <p class="section-lead">A seamless 6-step pathway from your first symptom check to comprehensive specialist care.</p>
+
+        <div class="journey-grid">
+          <div class="journey-step-box">
+            <div class="step-num">1️⃣</div>
+            <b>Find Right Department</b>
+            <p>Start with your health concern, clinical specialty, or requested diagnostic checkup.</p>
           </div>
-          <div>
-            <h3 style="margin-top:0">Satellite Fertility Partner Unit</h3>
-            <p style="font-size:13px;color:#40516f;line-height:1.6">
-              📍 <b>Orchid Partner Clinic:</b> Ibn Sina Building 27, Block D, Unit 201, Dubai Healthcare City<br>
-              🕒 <b>Operating Hours:</b> Saturday – Thursday, 08:30 AM – 06:00 PM<br>
-              💬 <b>WhatsApp Desk:</b> +971 50 477 3832
-            </p>
+
+          <div class="journey-step-box">
+            <div class="step-num">2️⃣</div>
+            <b>Choose Your Doctor</b>
+            <p>Compare credentials, clinical experience, languages spoken, and patient reviews.</p>
+          </div>
+
+          <div class="journey-step-box">
+            <div class="step-num">3️⃣</div>
+            <b>Request Appointment</b>
+            <p>Select in-hospital visit or encrypted online video consultation at your convenience.</p>
+          </div>
+
+          <div class="journey-step-box">
+            <div class="step-num">4️⃣</div>
+            <b>Specialist Evaluation</b>
+            <p>Consult with the physician, undergo physical assessment, and receive individualized guidance.</p>
+          </div>
+
+          <div class="journey-step-box">
+            <div class="step-num">5️⃣</div>
+            <b>Diagnostics If Needed</b>
+            <p>Access integrated on-site laboratory pathology, scans, and fast digital reports.</p>
+          </div>
+
+          <div class="journey-step-box">
+            <div class="step-num">6️⃣</div>
+            <b>Coordinated Follow-Up</b>
+            <p>Review lab reports, adjust treatment plans, and schedule continuous follow-up care.</p>
           </div>
         </div>
       </section>
 
-      <!-- FAQs -->
-      <section class="content-card" id="faq">
+      <!-- ==========================================================================
+           RHYTHM 3: 3-COLUMN CTA SECTION
+           Card 1: Book Appointment with Live Doctor
+           Card 2: Get Doctor at Home for Check
+           Card 3: Hire Technician for Home Sample Collection
+           ========================================================================== -->
+      <section class="rhythm-3col-cta">
+        <!-- Card 1: Book Live Doctor -->
+        <div class="trio-cta-card card-live-doc">
+          <div>
+            <div class="trio-icon">👨‍⚕️</div>
+            <span class="trio-badge">● Available Right Now</span>
+            <h3>Consult Live Doctor Online</h3>
+            <p>
+              Connect with on-call DHA-licensed specialists via encrypted video or secure chat. Ideal for second opinions, lab review, and quick triage.
+            </p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 300</div>
+            <button class="btn btn-primary" onclick="openHospitalBooking('Live Doctor Consultation','Video Call Online')">Book Live Doctor →</button>
+          </div>
+        </div>
+
+        <!-- Card 2: Get Doctor at Home -->
+        <div class="trio-cta-card card-home-doc">
+          <div>
+            <div class="trio-icon">🏠</div>
+            <span class="trio-badge">🚑 45–60 Mins Bedside Arrival</span>
+            <h3>Get a Doctor at Home</h3>
+            <p>
+              Request a certified visiting physician at your residence, hotel, or office anywhere across Dubai for full bedside clinical examination.
+            </p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 450</div>
+            <button class="btn btn-soft" onclick="openHospitalBooking('Home Doctor Visit','Doctor at Home Check')">Request Home Doctor →</button>
+          </div>
+        </div>
+
+        <!-- Card 3: Hire Technician for Home Sample -->
+        <div class="trio-cta-card card-home-tech">
+          <div>
+            <div class="trio-icon">🧪</div>
+            <span class="trio-badge">⚡ Same-Day Digital Lab Reports</span>
+            <h3>Hire Home Lab Technician</h3>
+            <p>
+              A certified phlebotomist arrives at your home to collect blood, hormone, or urine samples with sterile care and direct lab transport.
+            </p>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 150</div>
+            <button class="btn btn-outline" onclick="openHospitalBooking('Home Phlebotomy Technician','Sample Collection from Home')">Hire Lab Technician →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: Articles & Hospital Health Information -->
+      <section class="section-card">
+        <h2>Articles & Hospital Health Information</h2>
+        <p class="section-lead">Medically reviewed educational articles published by CityCare clinical departments.</p>
+
+        <div class="articles-3grid">
+          <a class="article-post-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-post-img" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-post-body">
+              <div>
+                <span class="article-post-tag">Women's Health</span>
+                <h4>When Should You See a Gynecologist?</h4>
+              </div>
+              <p class="post-author">Hospital Editorial Board • June 2026</p>
+            </div>
+          </a>
+
+          <a class="article-post-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-post-img" style="background-image:url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-post-body">
+              <div>
+                <span class="article-post-tag">Fertility Guide</span>
+                <h4>What Happens During a Fertility Assessment?</h4>
+              </div>
+              <p class="post-author">Hospital Editorial Board • May 2026</p>
+            </div>
+          </a>
+
+          <a class="article-post-card" href="fertility-treatment-cost-dubai.html">
+            <div class="article-post-img" style="background-image:url('https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=85')"></div>
+            <div class="article-post-body">
+              <div>
+                <span class="article-post-tag">Diagnostics</span>
+                <h4>Understanding Common Laboratory Blood Tests</h4>
+              </div>
+              <p class="post-author">Hospital Editorial Board • April 2026</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- SECTION 10: Nearby Hospitals in the Same Category -->
+      <section class="section-card" id="nearby">
+        <h2>Nearby Hospitals in the Same Category</h2>
+        <p class="section-lead">Alternative accredited medical facilities offering women's health, maternity, and specialty care in Dubai.</p>
+
+        <div class="near-hospitals-3grid">
+          <div class="near-hospital-card">
+            <b>Dubai Women's Medical Centre</b>
+            <p>Women's Health • Maternity • Gynecology</p>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.6</b> <span style="color:var(--muted)">(298)</span>
+            </div>
+            <p style="color:var(--muted);font-size:11px">3.4 km away • Jumeirah</p>
+            <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Hospital</a>
+          </div>
+
+          <div class="near-hospital-card">
+            <b>Harmony Fertility Hospital</b>
+            <p>Fertility • IVF • Reproductive Medicine</p>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.8</b> <span style="color:var(--muted)">(241)</span>
+            </div>
+            <p style="color:var(--muted);font-size:11px">6.7 km away • Al Barsha</p>
+            <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Hospital</a>
+          </div>
+
+          <div class="near-hospital-card">
+            <b>Metro Family Hospital</b>
+            <p>Multispecialty • Pediatrics • Women's Health</p>
+            <div class="rating-line">
+              <span class="stars" style="color:var(--gold)">★★★★★</span> 
+              <b>4.5</b> <span style="color:var(--muted)">(421)</span>
+            </div>
+            <p style="color:var(--muted);font-size:11px">8.1 km away • Oud Metha</p>
+            <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Hospital</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 11: Frequently Asked Questions (STRICT 2-COLUMN LAYOUT ON DESKTOP) -->
+      <section class="section-card" id="faq">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq">
-          <div class="faq-item">
-            <button class="faq-q">Do you accept insurance for IVF treatments? <span>+</span></button>
-            <div class="faq-a">Most UAE private insurance policies cover diagnostic evaluations, initial consultations, hormone blood tests, and hysteroscopies. Active IVF laboratory procedures and medications generally require self-pay or corporate rider packages.</div>
+        <p class="section-lead">Answers to common patient inquiries regarding hospital admissions, specialists, and appointments.</p>
+
+        <div class="faq-2col-grid">
+          <!-- Column 1 -->
+          <div>
+            <div class="faq-item-card">
+              <button class="faq-toggle-btn">
+                What specialties does CityCare offer? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                CityCare provides specialized obstetrics, gynecology, reproductive medicine & IVF, pediatrics, Level III neonatal care, internal medicine, and diagnostic pathology.
+              </div>
+            </div>
+
+            <div class="faq-item-card" style="margin-top:10px">
+              <button class="faq-toggle-btn">
+                Can I book a specific doctor? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                Yes. Our profile lists individual consultant doctors with their verified credentials, ratings, and a direct booking button for each specialist.
+              </div>
+            </div>
+
+            <div class="faq-item-card" style="margin-top:10px">
+              <button class="faq-toggle-btn">
+                What diagnostic tests are on-site? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                Our CAP-accredited laboratories perform complete blood panels, hormone assays, AMH, microbiology, semen analysis, and digital imaging including 4D ultrasound and MRI.
+              </div>
+            </div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q">Can single women freeze their eggs at American Hospital Dubai? <span>+</span></button>
-            <div class="faq-a">Yes. Under updated UAE Federal fertility laws, unmarried women are permitted to freeze and store their unfertilized oocytes for fertility preservation.</div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q">How long does an initial consultation take? <span>+</span></button>
-            <div class="faq-a">Initial consultations typically take 45 to 60 minutes. Your specialist reviews your medical history, performs an ultrasound scan, and outlines recommended diagnostic steps.</div>
+
+          <!-- Column 2 -->
+          <div>
+            <div class="faq-item-card">
+              <button class="faq-toggle-btn">
+                How can I contact the hospital? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                You can call our 24/7 hotline at +971 4 555 0188, reach our coordination team via WhatsApp, or submit an appointment request on this profile.
+              </div>
+            </div>
+
+            <div class="faq-item-card" style="margin-top:10px">
+              <button class="faq-toggle-btn">
+                Are patient reviews verified? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                Yes. All 386 patient reviews displayed on CityCare's profile are authenticated through verified patient appointment records and clinical visits.
+              </div>
+            </div>
+
+            <div class="faq-item-card" style="margin-top:10px">
+              <button class="faq-toggle-btn">
+                Does the hospital accept insurance? <span>+</span>
+              </button>
+              <div class="faq-answer-pane">
+                Yes. CityCare is in-network with major UAE and international health insurance networks including Daman, AXA, NextCare, MetLife, and Sukoon.
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      <!-- Bottom Conversion CTA Banner -->
+      <div class="hospital-cta-strip">
+        <div>
+          <h2>Find the right specialist at CityCare</h2>
+          <p>Explore accredited departments, verified doctors, and schedule your appointment today.</p>
+        </div>
+        <button class="btn" style="background:#ffffff;color:var(--blue);font-weight:900" onclick="openHospitalBooking('CityCare Women\'s Hospital')">Book Consultation →</button>
+      </div>
 
     </div>
 
     <!-- Secondary Column (Sticky Sidebar) -->
-    <aside>
+    <aside class="side-column-wrap">
 
-      <!-- Quick Action Card -->
-      <div class="side-card" style="position:sticky;top:136px">
-        <h3 style="margin-top:0;color:var(--navy)">Quick Actions</h3>
-        <button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('American Hospital Dubai','IVF Center Specialist')">Book Appointment →</button>
-        <button class="btn btn-outline" style="width:100%;margin-bottom:8px" onclick="FertiFind.openBooking('American Hospital Dubai','Video Tele-Consultation')">Request Video Call</button>
-        <button class="btn btn-soft" style="width:100%;margin-bottom:14px" onclick="FertiFind.openReview('American Hospital Dubai')">★ Leave a Review</button>
-
-        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Affiliated Specialists</h4>
-        <div class="side-list">
-          <a class="side-link" href="fertifind_doctor_profile_page.html">
-            <b>Dr. Partha Sarathi Das</b>
-            Consultant Reproductive Medicine & IVF
-          </a>
-          <a class="side-link" href="fertifind_doctor_profile_page.html">
-            <b>Dr. Dalia Khalife</b>
-            Fertility Specialist (13+ Yrs Exp)
-          </a>
-          <a class="side-link" href="fertifind_labs_profile_page.html">
-            <b>Igenomix Dubai Genetics Lab</b>
-            PGT-A, ERA & Reproductive Diagnostics
-          </a>
+      <!-- Hospital Location & Map Card -->
+      <div class="sidebar-block" id="map">
+        <h3>Hospital Location</h3>
+        <div class="map-preview-box">
+          <div>
+            <b>📍 Dubai Healthcare City</b><br>
+            <span>District 1, Building 45, Dubai, UAE</span>
+          </div>
         </div>
+        <div class="side-pill-list">
+          <div class="side-detail-pill">
+            <b>CityCare Women's Hospital</b>
+            Healthcare City, Dubai, UAE
+          </div>
+          <a class="side-detail-pill" href="tel:+97145550188">
+            <b>☎ Direct Hotline</b>
+            +971 4 555 0188
+          </a>
+          <div class="side-detail-pill">
+            <b>🕘 Emergency Hours</b>
+            Open 24/7 • Emergency triage active
+          </div>
+          <div class="side-detail-pill">
+            <b>🚗 Parking & Accessibility</b>
+            Valet parking & metro connection (DHCC Station)
+          </div>
+        </div>
+        <a class="btn btn-primary" style="width:100%;margin-top:12px;text-align:center" href="https://maps.google.com" target="_blank" rel="noopener">Get Directions</a>
+      </div>
 
-        <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Direct Coordination</h4>
-        <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Patient care coordinator:</p>
-        <div style="font-size:13px;font-weight:800;color:var(--navy)">☎ +971 4 377 5500</div>
-        <div style="font-size:12px;color:#087e76;margin-top:4px">💬 WhatsApp: +971 50 477 3832</div>
+      <!-- Why People Use This Profile -->
+      <div class="sidebar-block">
+        <h3>Why People Use This Profile</h3>
+        <div class="side-pill-list">
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Department & Service Discovery</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Verified Consultant Profiles</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Real Patient Reviews (4.7★)</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> 24/7 Emergency Availability</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Zero Booking Surcharge</div>
+        </div>
+      </div>
+
+      <!-- Key Facilities -->
+      <div class="sidebar-block">
+        <h3>Key Hospital Facilities</h3>
+        <div class="chips-cluster">
+          <span class="chip-pill">Emergency 24/7</span>
+          <span class="chip-pill">ICU Suites</span>
+          <span class="chip-pill">Level III NICU</span>
+          <span class="chip-pill">Operating Theatres</span>
+          <span class="chip-pill">Pathology Lab</span>
+          <span class="chip-pill">Radiology & MRI</span>
+          <span class="chip-pill">24h Pharmacy</span>
+          <span class="chip-pill">Ambulance Hub</span>
+          <span class="chip-pill">Maternity Wings</span>
+          <span class="chip-pill">Fertility Cleanroom</span>
+        </div>
+      </div>
+
+      <!-- Hospital Trust Profile -->
+      <div class="sidebar-block">
+        <h3>Hospital Trust Profile</h3>
+        <div class="side-pill-list">
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Provider-Claimed Profile</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> 80+ Credentialed Doctors</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> 386 Verified Reviews</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Official DHA Licensing</div>
+          <div class="side-detail-pill"><span style="color:var(--mint-dark);font-weight:800">✓</span> Direct Clinic Coordination</div>
+        </div>
+      </div>
+
+      <!-- Related Healthcare Searches -->
+      <div class="sidebar-block">
+        <h3>Related Searches</h3>
+        <div class="chips-cluster">
+          <a class="chip-pill" href="fertifind_dubai_directory_search_page.html?type=hospital">Fertility hospitals</a>
+          <a class="chip-pill" href="fertifind_dubai_directory_search_page.html?type=hospital">Women's hospitals</a>
+          <a class="chip-pill" href="fertifind_dubai_directory_search_page.html?type=clinic">IVF clinics</a>
+          <a class="chip-pill" href="fertifind_dubai_directory_search_page.html?specialty=Gynecologist">Gynecologists</a>
+          <a class="chip-pill" href="fertifind_labs_profile_page.html">Diagnostic labs</a>
+          <a class="chip-pill" href="fertifind_dubai_directory_search_page.html">Hospitals near me</a>
+        </div>
       </div>
 
     </aside>
 
   </main>
 
-  <!-- Unified Footer (Original Dark Navy) -->
+  <!-- Unified Footer (Original Deep Navy) -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -891,37 +2329,36 @@
             FertiFind <small style="color:var(--teal)">Dubai</small>
           </a>
           <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
-            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
+            Dubai's trusted healthcare navigation directory. Connecting patients with verified hospitals, medical centers, polyclinics, and diagnostic laboratories.
           </p>
           <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
         </div>
 
         <div>
+          <div class="footer-title">Hospitals</div>
+          <div class="footer-links">
+            <a href="fertifind_hospital_profile_page.html">Women's Hospitals</a>
+            <a href="fertifind_hospital_profile_page.html">Fertility Hospitals</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=hospital">Multispecialty Centers</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=hospital">All Hospitals in Dubai</a>
+          </div>
+        </div>
+
+        <div>
           <div class="footer-title">Directory</div>
           <div class="footer-links">
-            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
-            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
-            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
-            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors & Specialists</a>
+            <a href="fertifind_dubai_directory_search_page.html?type=clinic">Clinics & Polyclinics</a>
+            <a href="fertifind_labs_profile_page.html">Diagnostic Pathology Labs</a>
             <a href="fertility-treatment-cost-dubai.html">Cost & Pricing Guide</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-title">Districts</div>
+          <div class="footer-title">For Providers</div>
           <div class="footer-links">
-            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
-            <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah Clinics</a>
-            <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers</a>
-            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">For Practices</div>
-          <div class="footer-links">
-            <a href="for-doctors.html">List Your Practice</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
+            <a href="for-doctors.html">List Your Hospital</a>
+            <a href="for-doctors.html#claim">Claim Hospital Profile</a>
             <a href="for-doctors.html#plans">Provider Pricing Plans</a>
             <a href="for-doctors.html#faq">Practice Verification FAQ</a>
           </div>
@@ -930,11 +2367,11 @@
         <div>
           <div class="footer-title">Company</div>
           <div class="footer-links">
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
+            <a href="index.html#about">About FertiFind</a>
             <a href="index.html#how">How It Works</a>
             <a href="#reviews">Patient Reviews</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
+            <a href="for-doctors.html#contact">Contact Support</a>
+            <a href="for-doctors.html#privacy">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -953,22 +2390,273 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
+        <span>© 2026 FertiFind Dubai. Hospital Profile & Discovery System.</span>
         <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
       </div>
     </div>
   </footer>
 
+  <!-- Interactive Hospital Booking Modal -->
+  <div class="profile-modal" id="hospitalBookingModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 id="hospModalTitle" style="margin:0;color:var(--navy);font-size:18px">Book Appointment</h3>
+          <p id="hospModalSubtitle" style="margin:3px 0 0;color:var(--muted);font-size:12px">CityCare Women's Hospital • Dubai Healthcare City</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('hospitalBookingModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="hospitalBookingForm">
+        <input type="text" id="hospFormEntity" name="provider_or_doctor" value="CityCare Women's Hospital" readonly style="background:#f7faff;font-weight:800">
+
+        <select id="hospFormService" name="selected_department_service" required>
+          <option value="Obstetrics & Maternity Visit">Obstetrics & Maternity Visit</option>
+          <option value="Fertility Consultation (IVF/ICSI)">Fertility Consultation (IVF/ICSI)</option>
+          <option value="Gynecology Consultation">Gynecology Consultation</option>
+          <option value="Pediatrics & Child Health">Pediatrics & Child Health</option>
+          <option value="Diagnostic Lab Blood Test">Diagnostic Lab Blood Test</option>
+          <option value="Doctor at Home Check">Doctor at Home Check</option>
+          <option value="Live Doctor Video Consultation">Live Doctor Video Consultation</option>
+          <option value="Home Phlebotomy Sample Collection">Home Phlebotomy Sample Collection</option>
+        </select>
+
+        <div class="form-two-col">
+          <input type="text" name="patient_full_name" required placeholder="Patient full name">
+          <input type="tel" name="patient_mobile_number" required placeholder="Mobile phone number">
+        </div>
+
+        <input type="email" name="patient_email_address" required placeholder="Email address">
+
+        <div class="form-two-col">
+          <input type="date" id="hospFormDate" name="preferred_appointment_date" required>
+          <select name="preferred_time_slot" required>
+            <option value="Morning (09:00 AM – 12:00 PM)">Morning 9AM-12PM</option>
+            <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon 12PM-4PM</option>
+            <option value="Evening (04:00 PM – 08:00 PM)">Evening 4PM-8PM</option>
+          </select>
+        </div>
+
+        <textarea name="patient_symptoms_notes" placeholder="Notes or symptoms"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Confirm Appointment Request →</button>
+        <p style="font-size:10px;color:var(--muted);text-align:center;margin:6px 0 0">
+          🔒 Direct hospital coordination. Zero booking surcharges.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive Hospital Review Modal -->
+  <div class="profile-modal" id="hospitalReviewModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 style="margin:0;color:var(--navy);font-size:18px">Write a Hospital Review</h3>
+          <p style="margin:3px 0 0;color:var(--muted);font-size:12px">CityCare Women's Hospital • DHCC</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('hospitalReviewModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="hospitalReviewForm">
+        <input type="text" name="hospital_name" value="CityCare Women's Hospital" readonly style="background:#f7faff;font-weight:800">
+
+        <div class="form-two-col">
+          <input type="text" name="reviewer_full_name" required placeholder="Your full name">
+          <input type="text" name="department_visited" required placeholder="Department or service">
+        </div>
+
+        <select name="star_rating_score" required>
+          <option value="5">★★★★★ (5/5 Exceptional Care & Facilities)</option>
+          <option value="4">★★★★☆ (4/5 Very Good Experience)</option>
+          <option value="3">★★★☆☆ (3/5 Satisfactory Service)</option>
+          <option value="2">★★☆☆☆ (2/5 Needs Improvement)</option>
+          <option value="1">★☆☆☆☆ (1/5 Poor Experience)</option>
+        </select>
+
+        <textarea name="patient_experience_review" required placeholder="Your genuine experience"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Submit Hospital Review →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive Contact Hospital Modal -->
+  <div class="profile-modal" id="hospitalContactModal">
+    <div class="profile-modal-box">
+      <div class="modal-head-row">
+        <div>
+          <h3 style="margin:0;color:var(--navy);font-size:18px">Contact CityCare Hospital</h3>
+          <p style="margin:3px 0 0;color:var(--muted);font-size:12px">Hospital Coordination & Inquiries</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeProfileModal('hospitalContactModal')" aria-label="Close modal">✕</button>
+      </div>
+
+      <form class="profile-form" id="hospitalContactForm">
+        <div class="form-two-col">
+          <input type="text" name="contact_person_name" required placeholder="Your full name">
+          <input type="tel" name="contact_phone_number" required placeholder="Mobile phone number">
+        </div>
+
+        <select name="inquiry_nature" required>
+          <option value="Hospital General Inquiries">Hospital General Inquiries</option>
+          <option value="Claim or Verify Practice Profile">Claim Practice Profile</option>
+          <option value="Maternity Delivery Packages">Maternity Delivery Packages</option>
+          <option value="Insurance Coverage Inquiries">Insurance Coverage Inquiries</option>
+        </select>
+
+        <textarea name="inquiry_details_message" required placeholder="Inquiry or message"></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:12px;margin-top:6px">Send Hospital Message →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Message -->
+  <div class="profile-toast" id="hospitalToast"></div>
+
   <!-- Scripts -->
   <script src="js/site.js"></script>
   <script>
-    // Tab active state observer
-    document.querySelectorAll('.tabs a').forEach(tab => {
+    // Tab Highlighting on Scroll / Click
+    const tabs = document.querySelectorAll('.tabs-strip a');
+    tabs.forEach(tab => {
       tab.addEventListener('click', function(e) {
-        document.querySelectorAll('.tabs a').forEach(t => t.classList.remove('active'));
+        tabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
       });
     });
+
+    // FAQs Accordion
+    document.querySelectorAll('.faq-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.parentElement;
+        const isOpen = card.classList.contains('open');
+        if (isOpen) {
+          card.classList.remove('open');
+          this.querySelector('span').textContent = '+';
+        } else {
+          card.classList.add('open');
+          this.querySelector('span').textContent = '−';
+        }
+      });
+    });
+
+    // Sliders Controller (Business & Customer Reviews)
+    function nextSlide(containerId) {
+      const container = document.getElementById(containerId);
+      const slides = container.querySelectorAll('.slide-item');
+      let activeIndex = -1;
+      slides.forEach((s, idx) => {
+        if (s.classList.contains('active')) activeIndex = idx;
+      });
+      slides[activeIndex].classList.remove('active');
+      const nextIndex = (activeIndex + 1) % slides.length;
+      slides[nextIndex].classList.add('active');
+    }
+
+    function prevSlide(containerId) {
+      const container = document.getElementById(containerId);
+      const slides = container.querySelectorAll('.slide-item');
+      let activeIndex = -1;
+      slides.forEach((s, idx) => {
+        if (s.classList.contains('active')) activeIndex = idx;
+      });
+      slides[activeIndex].classList.remove('active');
+      const prevIndex = (activeIndex - 1 + slides.length) % slides.length;
+      slides[prevIndex].classList.add('active');
+    }
+
+    // Auto rotate sliders every 7 seconds
+    setInterval(() => { nextSlide('bizSlider'); }, 7000);
+    setInterval(() => { nextSlide('custSlider'); }, 8500);
+
+    // Modals Controller
+    function openHospitalBooking(entityName, serviceName) {
+      if (entityName) document.getElementById('hospFormEntity').value = entityName;
+      if (serviceName) {
+        const svcSelect = document.getElementById('hospFormService');
+        for (let i = 0; i < svcSelect.options.length; i++) {
+          if (svcSelect.options[i].text.toLowerCase().includes(serviceName.toLowerCase())) {
+            svcSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      // Set default tomorrow date
+      const d = new Date();
+      d.setDate(d.getDate() + 1);
+      document.getElementById('hospFormDate').value = d.toISOString().split('T')[0];
+
+      document.getElementById('hospitalBookingModal').classList.add('show');
+    }
+
+    function openReviewModal(targetName) {
+      document.getElementById('hospitalReviewModal').classList.add('show');
+    }
+
+    function openHospitalContactModal(subject) {
+      document.getElementById('hospitalContactModal').classList.add('show');
+    }
+
+    function closeProfileModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+    }
+
+    // Close on backdrop click
+    document.querySelectorAll('.profile-modal').forEach(m => {
+      m.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('show');
+        }
+      });
+    });
+
+    // Form Submissions
+    document.getElementById('hospitalBookingForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('hospitalBookingModal');
+      showHospitalToast('✓ Appointment request submitted! The hospital coordination desk will confirm your slot shortly.');
+      this.reset();
+    };
+
+    document.getElementById('hospitalReviewForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('hospitalReviewModal');
+      showHospitalToast('✓ Thank you for your review! It will be verified and published shortly.');
+      this.reset();
+    };
+
+    document.getElementById('hospitalContactForm').onsubmit = function(e) {
+      e.preventDefault();
+      closeProfileModal('hospitalContactModal');
+      showHospitalToast('✓ Message sent to CityCare coordination desk!');
+      this.reset();
+    };
+
+    function showHospitalToast(msg) {
+      const toast = document.getElementById('hospitalToast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // WhatsApp Action
+    function openHospitalWhatsApp(num, name) {
+      const text = encodeURIComponent(`Hello, I would like to inquire about appointments and care at ${name} via FertiFind.`);
+      window.open(`https://wa.me/${num}?text=${text}`, '_blank');
+    }
+
+    // Mobile Drawer Toggle
+    const mobileToggle = document.getElementById('hospitalMobileToggle');
+    const mobileDrawer = document.getElementById('hospitalMobileDrawer');
+    if (mobileToggle && mobileDrawer) {
+      mobileToggle.addEventListener('click', function() {
+        mobileDrawer.classList.toggle('open');
+      });
+    }
   </script>
 </body>
 </html>
