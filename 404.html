@@ -783,10 +783,6 @@
               <span class="m-ico">👑</span>
               <div class="m-text"><b>Super Admin BI</b><small>Platform control & verified database</small></div>
             </a>
-            <a class="mega-link" href="auth.html">
-              <span class="m-ico">🔐</span>
-              <div class="m-text"><b>Sign In / Register</b><small>Account login & security portal</small></div>
-            </a>
           </div>
         </div>
 
@@ -1340,6 +1336,112 @@
       </div>
     </section>
 
+    <!-- CTA Section 1: 2-Column Section for CTA Bookings & Review Sliders -->
+    <section class="section" style="padding:10px 0 30px">
+      <div class="container">
+        <div class="rhythm-2col-bookings">
+          <!-- Col 1: For Healthcare Businesses & Practices -->
+          <div class="rhythm-col-card business-card">
+            <div>
+              <span class="rhythm-badge-tag">For Healthcare Businesses</span>
+              <h3>List Your Hospital or Practice</h3>
+              <p>
+                Join Dubai's verified medical network. Showcase your accredited departments, specialist doctors, and receive qualified patient bookings directly.
+              </p>
+              <div class="rhythm-action-btns">
+                <a class="btn btn-primary" href="for-doctors.html">List Business Free →</a>
+                <button class="btn btn-outline" onclick="FertiFind.openListBusiness()">Claim Practice Profile</button>
+              </div>
+            </div>
+
+            <!-- Business Reviews Slider -->
+            <div class="slider-container">
+              <div class="slider-head">
+                <span>Verified Practice Reviews</span>
+                <div class="slider-arrows">
+                  <button class="arrow-btn" onclick="prevSlide('bizSliderHome')" aria-label="Previous review">‹</button>
+                  <button class="arrow-btn" onclick="nextSlide('bizSliderHome')" aria-label="Next review">›</button>
+                </div>
+              </div>
+              <div id="bizSliderHome">
+                <div class="slide-item active">
+                  “FertiFind increased our hospital's specialist admissions by 38% in 4 months. The verified DHA badges build instant trust with international patients.”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Dr. Farhad Mansoori</b>
+                    <span>Medical Director, Dubai</span>
+                  </div>
+                </div>
+                <div class="slide-item">
+                  “Listing our women's clinic on FertiFind reduced our patient acquisition cost by 50%. The appointment request notifications are instantaneous.”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Sarah Jenkins</b>
+                    <span>Operations Head, Jumeirah</span>
+                  </div>
+                </div>
+                <div class="slide-item">
+                  “A pristine medical directory that genuinely prioritizes clinical accreditation and patient transparency over paid ranking gimmicks.”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Dr. K. Al-Hashimi</b>
+                    <span>Hospital Chief of Staff</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: For Patients & Customers -->
+          <div class="rhythm-col-card customer-card">
+            <div>
+              <span class="rhythm-badge-tag">For Patients & Families</span>
+              <h3>Book Care & Submit Reviews</h3>
+              <p>
+                Connect directly with verified hospital departments, schedule in-person or video specialist visits, or share your healthcare experience.
+              </p>
+              <div class="rhythm-action-btns">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dubai Healthcare Directory','In-Clinic Specialist Consultation')">📅 Book Visit</button>
+                <button class="btn btn-soft" onclick="FertiFind.openBooking('Dubai Healthcare Directory','Video Tele-Consultation')">▣ Consult Doctor</button>
+                <button class="btn btn-outline" onclick="FertiFind.openReview('Dubai Healthcare Directory')">★ Submit Review</button>
+              </div>
+            </div>
+
+            <!-- Customer's Reviews Submitted Slider -->
+            <div class="slider-container">
+              <div class="slider-head">
+                <span>Patient Experiences</span>
+                <div class="slider-arrows">
+                  <button class="arrow-btn" onclick="prevSlide('custSliderHome')" aria-label="Previous review">‹</button>
+                  <button class="arrow-btn" onclick="nextSlide('custSliderHome')" aria-label="Next review">›</button>
+                </div>
+              </div>
+              <div id="custSliderHome">
+                <div class="slide-item active">
+                  “The labor and delivery suite at CityCare was world-class. The midwives and obstetric team made us feel completely supported every minute.”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Fatima & Zaid M.</b>
+                    <span>★★★★★ Maternity Care</span>
+                  </div>
+                </div>
+                <div class="slide-item">
+                  “Dr. Sara and the fertility department guided us through our ICSI cycle with complete compassion. We achieved pregnancy on our first embryo transfer!”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Elena R.</b>
+                    <span>★★★★★ IVF Consultation</span>
+                  </div>
+                </div>
+                <div class="slide-item">
+                  “Brought our toddler to the 24/7 pediatric emergency at 2 AM. The doctor evaluated him within 4 minutes. Exceptionally clean and reassuring.”
+                  <div class="slide-author-line">
+                    <b style="color:var(--navy)">Priya S.</b>
+                    <span>★★★★★ Pediatric Emergency</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Diagnostics & Labs (Split Layout) -->
     <section class="section" id="labs">
       <div class="container split">
@@ -1434,6 +1536,61 @@
             <div>
               <div class="package-price">AED 990 <small>/ package</small></div>
               <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Women Wellness Screen','Wellness Package')">Book Wellness Screen →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section 3: 3-Column Specialist Direct Action CTA Section -->
+    <section class="section" style="padding:10px 0 30px">
+      <div class="container">
+        <div class="rhythm-3col-cta">
+          <!-- Card 1: Book Live Doctor -->
+          <div class="trio-cta-card card-live-doc">
+            <div>
+              <div class="trio-icon">👨‍⚕️</div>
+              <span class="trio-badge">● Available Right Now</span>
+              <h3>Consult Live Doctor Online</h3>
+              <p>
+                Connect with on-call DHA-licensed specialists via encrypted video or secure chat. Ideal for second opinions, lab review, and quick triage.
+              </p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 300</div>
+              <button class="btn btn-primary" onclick="FertiFind.openBooking('Live Doctor Consultation','Video Call Online')">Book Live Doctor →</button>
+            </div>
+          </div>
+
+          <!-- Card 2: Get Doctor at Home -->
+          <div class="trio-cta-card card-home-doc">
+            <div>
+              <div class="trio-icon">🏠</div>
+              <span class="trio-badge">🚑 45–60 Mins Bedside Arrival</span>
+              <h3>Get a Doctor at Home</h3>
+              <p>
+                Request a certified visiting physician at your residence, hotel, or office anywhere across Dubai for full bedside clinical examination.
+              </p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 450</div>
+              <button class="btn btn-soft" onclick="FertiFind.openBooking('Home Doctor Visit','Doctor at Home Check')">Request Home Doctor →</button>
+            </div>
+          </div>
+
+          <!-- Card 3: Hire Technician for Home Sample -->
+          <div class="trio-cta-card card-home-tech">
+            <div>
+              <div class="trio-icon">🧪</div>
+              <span class="trio-badge">⚡ Same-Day Digital Lab Reports</span>
+              <h3>Hire Home Lab Technician</h3>
+              <p>
+                A certified phlebotomist arrives at your home to collect blood, hormone, or urine samples with sterile care and direct lab transport.
+              </p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px">Fee: Starting from AED 150</div>
+              <button class="btn btn-outline" onclick="FertiFind.openBooking('Home Phlebotomy Technician','Sample Collection from Home')">Hire Lab Technician →</button>
             </div>
           </div>
         </div>
@@ -1560,6 +1717,105 @@
           <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Al Barsha Medical Hub <span>→</span></a>
           <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Business Bay Centers <span>→</span></a>
           <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Deira">Deira Polyclinics <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section 2: 3-Column Area Intelligence Section -->
+    <section class="section" style="padding:10px 0 30px">
+      <div class="container">
+        <div class="rhythm-3col-area">
+          <h2>Local Healthcare Discovery in Dubai Healthcare City & Jumeirah</h2>
+          <p class="section-lead" style="margin-bottom:0">Compare accredited specialists, polyclinics, and high-demand healthcare services in this district.</p>
+
+          <div class="rhythm-3col-grid">
+            <!-- Col 1: Top Doctors in Area -->
+            <div class="area-col-box">
+              <h3>👩‍⚕️ Top Doctors in This Area</h3>
+              <div class="area-list-items">
+                <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                  <div>
+                    <b>Dr. Sara Ahmed</b>
+                    <span>Fertility Specialist • Nova & CityCare</span>
+                  </div>
+                  <strong style="color:var(--blue)">4.8★</strong>
+                </a>
+                <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                  <div>
+                    <b>Dr. Partha Sarathi Das</b>
+                    <span>Reproductive Medicine • Orchid</span>
+                  </div>
+                  <strong style="color:var(--blue)">4.9★</strong>
+                </a>
+                <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                  <div>
+                    <b>Dr. Lina Kareem</b>
+                    <span>OB-GYN Consultant • CityCare</span>
+                  </div>
+                  <strong style="color:var(--blue)">4.8★</strong>
+                </a>
+                <a class="mini-provider-row" href="fertifind_doctor_profile_page.html">
+                  <div>
+                    <b>Dr. Omar Hassan</b>
+                    <span>Andrology Specialist • DHCC</span>
+                  </div>
+                  <strong style="color:var(--blue)">4.9★</strong>
+                </a>
+              </div>
+            </div>
+
+            <!-- Col 2: Top Clinics in Area -->
+            <div class="area-col-box">
+              <h3>🏥 Top Clinics in This Area</h3>
+              <div class="area-list-items">
+                <a class="mini-provider-row" href="fertifind_dubai_directory_search_page.html?type=clinic">
+                  <div>
+                    <b>Orchid Fertility Clinic</b>
+                    <span>Ibn Sina Bldg 27, DHCC • ART</span>
+                  </div>
+                  <strong style="color:var(--teal)">4.9★</strong>
+                </a>
+                <a class="mini-provider-row" href="ivf-clinics-in-jumeirah-dubai.html">
+                  <div>
+                    <b>Nova Fertility Centre</b>
+                    <span>Jumeirah Beach Road • IVF</span>
+                  </div>
+                  <strong style="color:var(--teal)">4.9★</strong>
+                </a>
+                <a class="mini-provider-row" href="fertifind_hospital_profile_page.html">
+                  <div>
+                    <b>CityCare Women's Hospital</b>
+                    <span>Dubai Healthcare City Hub</span>
+                  </div>
+                  <strong style="color:var(--teal)">4.7★</strong>
+                </a>
+                <a class="mini-provider-row" href="fertifind_hospital_profile_page.html">
+                  <div>
+                    <b>American Hospital Clinic</b>
+                    <span>DHCC Outpatient Unit</span>
+                  </div>
+                  <strong style="color:var(--teal)">4.8★</strong>
+                </a>
+              </div>
+            </div>
+
+            <!-- Col 3: Most Searched Queries in Area -->
+            <div class="area-col-box">
+              <h3>🔍 Most Searched Queries</h3>
+              <div class="search-tags-cloud">
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=IVF+hospital">IVF hospital Dubai</a>
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?specialty=Gynecologist">Gynecologist in DHCC</a>
+                <a class="search-tag-chip" href="fertifind_labs_profile_page.html">AMH hormone test</a>
+                <a class="search-tag-chip" href="fertility-treatment-cost-dubai.html">Maternity delivery packages</a>
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?specialty=Pediatrician">Pediatrician near me</a>
+                <a class="search-tag-chip" href="fertifind_labs_profile_page.html">4D Ultrasound scan</a>
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=High-risk+pregnancy">High-risk pregnancy</a>
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=ICSI">ICSI fertility clinic</a>
+                <a class="search-tag-chip" href="fertifind_labs_profile_page.html">Home blood sample collection</a>
+                <a class="search-tag-chip" href="fertifind_dubai_directory_search_page.html?query=NICU">NICU hospital Dubai</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1783,6 +2039,38 @@
       if (area && area !== 'all') params.set('area', area);
       window.location.href = 'fertifind_dubai_directory_search_page.html?' + params.toString();
     }
+
+    // Sliders Controller (Business & Customer Reviews)
+    function nextSlide(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const slides = container.querySelectorAll('.slide-item');
+      let activeIndex = -1;
+      slides.forEach((s, idx) => {
+        if (s.classList.contains('active')) activeIndex = idx;
+      });
+      if (activeIndex === -1) return;
+      slides[activeIndex].classList.remove('active');
+      const nextIndex = (activeIndex + 1) % slides.length;
+      slides[nextIndex].classList.add('active');
+    }
+
+    function prevSlide(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const slides = container.querySelectorAll('.slide-item');
+      let activeIndex = -1;
+      slides.forEach((s, idx) => {
+        if (s.classList.contains('active')) activeIndex = idx;
+      });
+      if (activeIndex === -1) return;
+      slides[activeIndex].classList.remove('active');
+      const prevIndex = (activeIndex - 1 + slides.length) % slides.length;
+      slides[prevIndex].classList.add('active');
+    }
+
+    setInterval(() => { nextSlide('bizSliderHome'); }, 7000);
+    setInterval(() => { nextSlide('custSliderHome'); }, 8500);
   </script>
 </body>
 </html>
