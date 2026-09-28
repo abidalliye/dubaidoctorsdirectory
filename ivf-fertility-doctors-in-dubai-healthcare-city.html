@@ -3,497 +3,2493 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Best IVF & Fertility Doctors in Dubai Healthcare City (DHCC) | FertiFind</title>
-  <meta name="description" content="Discover top-rated fertility specialists, IVF doctors, and reproductive clinics in Dubai Healthcare City (DHCC). Verified DHA credentials, patient reviews, WhatsApp booking, and consultation fees.">
+  <title>Best IVF & Fertility Doctors in Dubai Healthcare City (DHCC) | FertiFind Dubai</title>
+  <meta name="description" content="Discover top-rated fertility specialists, licensed IVF doctors, clinics, and diagnostic labs in Dubai Healthcare City (DHCC). Real-time map with travel time estimator, DHA verified credentials, and instant appointment booking.">
+  <link rel="canonical" href="https://dubaidoctorsdirectory.surge.sh/ivf-fertility-doctors-in-dubai-healthcare-city.html">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Leaflet CSS for OpenStreetMap -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <style>
-    /* District Landing Page Styles */
-    .district-hero {
-      background: radial-gradient(circle at 85% 15%, #dff5ff 0%, transparent 40%),
+    /* Clean Medical Light Blue Location Page Styles */
+    :root {
+      --primary-blue: #0757d9;
+      --navy-heading: #102a63;
+      --soft-ice: #eef5ff;
+      --soft-bg: #f8fbff;
+      --mint-accent: #087e76;
+      --mint-bg: #e9fbf8;
+      --line-border: #e2eaf5;
+      --star-amber: #f59e0b;
+    }
+
+    .loc-hero {
+      background: radial-gradient(circle at 85% 15%, #dff2ff 0%, transparent 45%),
                   linear-gradient(135deg, #eef5ff 0%, #ffffff 50%, #eafbf8 100%);
-      padding: 45px 0 35px;
-      border-bottom: 1px solid var(--line);
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--line-border);
     }
-    .crumb {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 14px;
+    .loc-crumb {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 12px;
     }
-    .crumb a {
-      color: var(--blue);
-      font-weight: 800;
+    .loc-crumb a {
+      color: var(--primary-blue);
+      font-weight: 750;
+      text-decoration: none;
     }
-    .district-hero h1 {
-      font-size: clamp(28px, 3.6vw, 42px);
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      color: var(--navy);
-      margin: 10px 0 12px;
+    .loc-hero h1 {
+      font-size: clamp(26px, 3.4vw, 38px);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--navy-heading);
+      margin: 8px 0 12px;
+      font-weight: 900;
     }
-    .district-hero p {
-      font-size: 15px;
-      color: #556682;
+    .loc-hero-desc {
+      color: #475569;
       max-width: 820px;
+      font-size: 14.5px;
       line-height: 1.6;
-      margin: 0 0 20px;
+      margin: 0 0 18px;
     }
-    .district-meta {
+    .loc-stats-strip {
       display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .loc-stat-badge {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(16, 42, 99, 0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #334155;
+    }
+    .loc-stat-badge b {
+      color: var(--primary-blue);
+      font-size: 14px;
+    }
+
+    /* Embedded Hero Search Form */
+    .loc-search-box {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      box-shadow: 0 12px 35px rgba(7, 87, 217, 0.08);
+      border-radius: 16px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr auto;
+      gap: 8px;
+    }
+    .loc-search-box input,
+    .loc-search-box select {
+      border: 1px solid var(--line-border);
+      background: #f8fbff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      outline: none;
+      color: #1e293b;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .loc-search-box input:focus,
+    .loc-search-box select:focus {
+      border-color: var(--primary-blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.12);
+    }
+    .loc-search-box .btn-search {
+      padding: 0 22px;
+      height: 100%;
+      min-height: 44px;
+    }
+
+    .loc-quick-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .loc-q-tag {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 750;
+      color: #334155;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .loc-q-tag:hover {
+      border-color: var(--primary-blue);
+      background: #eef5ff;
+      color: var(--primary-blue);
+    }
+    .loc-q-tag.active {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border-color: var(--primary-blue);
+    }
+
+    /* OpenStreetMap & Travel Estimator Section */
+    .map-section {
+      padding: 34px 0 28px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .map-header-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .map-header-wrap h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--navy-heading);
+      font-weight: 850;
+    }
+    .map-header-wrap p {
+      margin: 4px 0 0;
+      font-size: 13.5px;
+      color: #64748b;
+    }
+    .travel-estimator-bar {
+      background: #f8fbff;
+      border: 1px solid #d8e5f8;
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 14px;
     }
-    .meta-pill {
+    .travel-estimator-title {
+      font-size: 12.5px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .travel-estimator-bar select {
+      border: 1px solid var(--line-border);
       background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 9px 14px;
+      border-radius: 8px;
+      padding: 8px 12px;
       font-size: 12px;
-      color: #3b4d6a;
-      box-shadow: var(--shadow-sm);
+      color: #334155;
+      font-weight: 600;
+      outline: none;
+    }
+    .btn-gps-detect {
+      background: #ffffff;
+      border: 1px solid #cbdcf7;
+      color: var(--primary-blue);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .btn-gps-detect:hover {
+      background: var(--soft-ice);
+      border-color: var(--primary-blue);
+    }
+    .travel-result-pill {
+      background: #ffffff;
+      border: 1px solid #bcd5f8;
+      color: var(--navy-heading);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 750;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+      box-shadow: 0 2px 6px rgba(7, 87, 217, 0.06);
+    }
+    .travel-result-pill b {
+      color: var(--primary-blue);
+    }
+    #location-osm-map {
+      height: 380px;
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line-border);
+      box-shadow: 0 4px 18px rgba(16, 42, 99, 0.05);
+      z-index: 1;
+    }
+    .map-legend-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-size: 11.5px;
+      color: #475569;
+      font-weight: 700;
+    }
+    .legend-item {
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .meta-pill b {
-      color: var(--navy);
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-clinic { background: #0757d9; }
+    .dot-doc { background: #10b4a5; }
+    .dot-lab { background: #0284c7; }
+    .dot-user { background: #e11d48; }
+
+    /* Custom Leaflet Marker Styling */
+    .custom-map-pin {
+      width: 32px;
+      height: 32px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+      cursor: pointer;
+    }
+    .custom-map-pin.clinic { background: #0757d9; }
+    .custom-map-pin.doc { background: #10b4a5; }
+    .custom-map-pin.lab { background: #0284c7; }
+    .custom-map-pin.user { background: #e11d48; }
+    .custom-map-pin span {
+      transform: rotate(45deg);
+      font-size: 14px;
+      color: #fff;
     }
 
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin: 24px 0 40px;
+    /* Main Directory Layout with Sticky Sidebar */
+    .dir-main-section {
+      padding: 36px 0 48px;
+      background: #f8fbff;
     }
-    .doc-full-card {
+    .dir-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .sticky-filters-sidebar {
       background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
+      border: 1px solid var(--line-border);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 18px rgba(16, 42, 99, 0.04);
+      position: sticky;
+      top: 90px;
+    }
+    .filter-group-header {
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      margin: 14px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .filter-group-header:first-child { margin-top: 0; }
+    .filter-check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #334155;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+    .filter-check-item input[type="checkbox"],
+    .filter-check-item input[type="radio"] {
+      accent-color: var(--primary-blue);
+      cursor: pointer;
+    }
+
+    /* Results Header */
+    .results-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .results-head-row h2 {
+      font-size: 18px;
+      color: var(--navy-heading);
+      margin: 0;
+      font-weight: 850;
+    }
+    .results-sort-select {
+      border: 1px solid var(--line-border);
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      color: #334155;
+      font-weight: 600;
+      outline: none;
+    }
+
+    /* Provider Cards Grid - Desktop 2 columns, Mobile 1 column */
+    .provider-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .provider-card {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 14px rgba(16, 42, 99, 0.04);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.2s ease;
+      box-sizing: border-box;
     }
-    .doc-full-card:hover {
+    .provider-card:hover {
       border-color: #bcd5f8;
-      box-shadow: var(--shadow);
+      box-shadow: 0 8px 24px rgba(7, 87, 217, 0.10);
       transform: translateY(-2px);
     }
-    .doc-full-head {
+    .provider-card-head {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      min-height: 160px;
+      grid-template-columns: 110px minmax(0, 1fr);
+      border-bottom: 1px solid var(--line-border);
     }
-    .doc-full-photo {
+    .provider-card-thumb {
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      min-height: 125px;
+    }
+    .thumb-type-tag {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(16, 42, 99, 0.85);
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: 850;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+    .provider-card-body {
+      padding: 12px 14px;
+    }
+    .provider-dha-pill {
+      font-size: 10px;
+      font-weight: 850;
+      color: var(--mint-accent);
+      background: var(--mint-bg);
+      padding: 2px 7px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .provider-title {
+      font-size: 15px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      margin: 4px 0 2px;
+      line-height: 1.25;
+    }
+    .provider-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .provider-title a:hover {
+      color: var(--primary-blue);
+    }
+    .provider-subtext {
+      font-size: 11.5px;
+      color: #64748b;
+      margin: 0 0 6px;
+    }
+    .provider-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: #475569;
+    }
+    .rating-num {
+      font-weight: 850;
+      color: var(--navy-heading);
+    }
+    .provider-card-details {
+      padding: 10px 14px;
+      background: #fcfdfe;
+      border-top: 1px solid #f1f5f9;
+      font-size: 11.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .tags-strip {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .micro-tag {
+      background: #f1f6fd;
+      color: var(--primary-blue);
+      border: 1px solid #dce8fa;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .provider-card-actions {
+      padding: 10px 14px;
+      background: #ffffff;
+      border-top: 1px solid var(--line-border);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .provider-card-actions .btn {
+      font-size: 11.5px;
+      padding: 8px 12px;
+      flex: 1;
+      text-align: center;
+    }
+
+    /* Top Doctors Slider Section */
+    .top-docs-section {
+      padding: 44px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .slider-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .slider-header-row h2 {
+      margin: 0;
+      font-size: 24px;
+      color: var(--navy-heading);
+      font-weight: 850;
+    }
+    .slider-header-row p {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #64748b;
+    }
+    .slider-arrows {
+      display: flex;
+      gap: 8px;
+    }
+    .slider-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      color: var(--navy-heading);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(16, 42, 99, 0.05);
+    }
+    .slider-btn:hover {
+      background: var(--soft-ice);
+      border-color: var(--primary-blue);
+      color: var(--primary-blue);
+    }
+    .docs-slider-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+    .doc-slide-card {
+      min-width: 270px;
+      max-width: 270px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(16, 42, 99, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .doc-slide-card:hover {
+      border-color: #bcd5f8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(7, 87, 217, 0.08);
+    }
+    .doc-slide-img {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .doc-slide-body {
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* 2-Columns Lists Section (Top Clinics & Top Labs) */
+    .twocol-lists-section {
+      padding: 44px 0;
+      background: #f8fbff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .twocol-block {
+      margin-bottom: 38px;
+    }
+    .twocol-block:last-child {
+      margin-bottom: 0;
+    }
+    .twocol-head {
+      margin-bottom: 18px;
+    }
+    .twocol-head h2 {
+      font-size: 22px;
+      color: var(--navy-heading);
+      margin: 0;
+      font-weight: 850;
+    }
+    .twocol-head p {
+      font-size: 13.5px;
+      color: #64748b;
+      margin: 4px 0 0;
+    }
+    .twocol-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .list-card {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 3px 12px rgba(16, 42, 99, 0.04);
+      display: flex;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+    .list-card:hover {
+      border-color: #bcd5f8;
+      box-shadow: 0 6px 20px rgba(7, 87, 217, 0.08);
+      transform: translateY(-2px);
+    }
+    .list-card-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      border: 1px solid var(--line-border);
+    }
+    .list-card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Customer Reviews Slider Section */
+    .reviews-slider-section {
+      padding: 44px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .rev-slider-track {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+    .rev-slide-card {
+      min-width: 320px;
+      max-width: 360px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      background: #f8fbff;
+      border: 1px solid #dce8fa;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(16, 42, 99, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .rev-quote {
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.6;
+      font-style: italic;
+      margin: 10px 0 14px;
+      flex: 1;
+    }
+    .rev-author-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #e2eaf5;
+      padding-top: 10px;
+    }
+    .rev-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--soft-ice);
+      color: var(--primary-blue);
+      font-weight: 850;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mid-Page Single CTA Banner */
+    .mid-cta-banner {
+      padding: 44px 0;
+      background: linear-gradient(135deg, #0757d9 0%, #0645ad 100%);
+      color: #ffffff;
+      text-align: center;
+    }
+    .mid-cta-box {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .mid-cta-box h2 {
+      font-size: clamp(24px, 3.2vw, 32px);
+      margin: 0 0 10px;
+      color: #ffffff;
+      font-weight: 900;
+    }
+    .mid-cta-box p {
+      font-size: 15px;
+      color: #e0edff;
+      margin: 0 0 22px;
+      line-height: 1.55;
+    }
+    .mid-cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-cta-white {
+      background: #ffffff;
+      color: #0757d9 !important;
+      font-weight: 850;
+      border: 1px solid #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      padding: 12px 24px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-cta-white:hover {
+      background: #f0f7ff;
+      transform: translateY(-2px);
+    }
+    .btn-cta-wa {
+      background: #25d366;
+      color: #ffffff !important;
+      font-weight: 850;
+      padding: 12px 24px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+    }
+    .btn-cta-wa:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+    }
+
+    /* Blog Post Guides Section */
+    .guides-section {
+      padding: 44px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .guides-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .guide-card {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(16, 42, 99, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .guide-card:hover {
+      border-color: #bcd5f8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(7, 87, 217, 0.08);
+    }
+    .guide-img {
+      height: 160px;
       background-size: cover;
       background-position: center;
     }
-    .doc-full-info {
-      padding: 18px;
-    }
-    .doc-full-info h3 {
-      margin: 8px 0 4px;
-      font-size: 18px;
-      color: var(--navy);
-    }
-    .doc-full-info h3 a:hover {
-      color: var(--blue);
-    }
-    .doc-full-body {
-      padding: 0 18px 16px;
-    }
-    .doc-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin: 8px 0 14px;
-    }
-    .doc-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px;
-    }
-    .doc-actions .btn {
-      padding: 9px 6px;
-      font-size: 11px;
-    }
-
-    .district-guide {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 28px;
-      margin: 30px 0;
-    }
-    .district-guide h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      color: var(--navy);
-    }
-    .district-guide p {
-      font-size: 14px;
-      color: #556682;
-      line-height: 1.65;
-    }
-
-    .grid3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 20px;
-    }
-    .guide-box {
-      background: #f8fbff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
+    .guide-body {
       padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .guide-box b {
-      display: block;
-      color: var(--navy);
-      font-size: 14px;
-      margin-bottom: 4px;
+    .guide-meta {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .guide-box p {
+    .guide-title {
+      font-size: 15px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+    .guide-excerpt {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+      margin: 0 0 12px;
+      flex: 1;
+    }
+    .guide-link {
       font-size: 12px;
-      color: var(--muted);
+      font-weight: 850;
+      color: var(--primary-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Dual CTA Section (Owners & Patients) */
+    .dual-cta-section {
+      padding: 44px 0;
+      background: #f8fbff;
+      border-bottom: 1px solid var(--line-border);
+    }
+    .dual-cta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .dual-cta-card {
+      background: #ffffff;
+      border: 1px solid var(--line-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 6px 20px rgba(16, 42, 99, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .dual-cta-card.owner {
+      border-top: 4px solid var(--navy-heading);
+    }
+    .dual-cta-card.patient {
+      border-top: 4px solid var(--primary-blue);
+    }
+    .dual-cta-card h3 {
+      font-size: 20px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      margin: 0 0 8px;
+    }
+    .dual-cta-card p {
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.55;
+      margin: 0 0 16px;
+    }
+    .dual-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #334155;
+    }
+    .dual-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dual-checklist li svg {
+      color: var(--primary-blue);
+      flex-shrink: 0;
+    }
+
+    /* Strict 2-Column FAQs Grid */
+    .faq-section {
+      padding: 44px 0 54px;
+      background: #ffffff;
+    }
+    .faq-head {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .faq-head h2 {
+      font-size: 24px;
+      color: var(--navy-heading);
+      margin: 0;
+      font-weight: 850;
+    }
+    .faq-head p {
+      font-size: 14px;
+      color: #64748b;
+      margin: 6px 0 0;
+    }
+    .faq-2col-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .faq-card {
+      background: #f8fbff;
+      border: 1px solid var(--line-border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(16, 42, 99, 0.02);
+    }
+    .faq-q {
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--navy-heading);
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+    .faq-a {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.6;
       margin: 0;
     }
 
-    @media (max-width: 900px) {
-      .cards-grid, .grid3 { grid-template-columns: 1fr; }
-      .doc-full-head { grid-template-columns: 1fr; }
-      .doc-full-photo { height: 180px; }
+    /* Responsive Queries */
+    @media (max-width: 992px) {
+      .loc-search-box {
+        grid-template-columns: 1fr 1fr;
+      }
+      .loc-search-box .btn-search {
+        grid-column: 1 / -1;
+      }
+      .dir-layout {
+        grid-template-columns: 1fr;
+      }
+      .sticky-filters-sidebar {
+        position: static;
+        margin-bottom: 20px;
+      }
+      .guides-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .loc-search-box {
+        grid-template-columns: 1fr;
+      }
+      .provider-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .twocol-grid {
+        grid-template-columns: 1fr;
+      }
+      .dual-cta-grid {
+        grid-template-columns: 1fr;
+      }
+      .faq-2col-grid {
+        grid-template-columns: 1fr;
+      }
+      .travel-estimator-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .travel-result-pill {
+        margin-left: 0;
+        text-align: center;
+        justify-content: center;
+      }
     }
   </style>
 </head>
-<body>
+<body class="has-sticky-bar">
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="container">
-      <span>🇦🇪 FertiFind Dubai • District Healthcare Directory</span>
-      <span>Dubai Healthcare City (DHCC) Medical Free Zone</span>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <a class="logo" href="index.html">
-        <span class="logo-mark">✚</span>
-        FertiFind <small>Dubai</small>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
-        <a href="fertifind_hospital_profile_page.html">Hospitals & Clinics</a>
-        <a href="fertifind_labs_profile_page.html">Labs & Diagnostics</a>
-        <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
-        <a href="for-doctors.html">For Doctors</a>
-      </nav>
-
-      <!-- Nav Actions -->
-      <div class="nav-actions">
-        <button class="btn btn-outline" onclick="FertiFind.openListBusiness()">List Your Practice</button>
-        <button class="btn btn-primary" onclick="FertiFind.openBooking('DHCC District Desk','Specialist Appointment')">Find DHCC Doctor →</button>
-        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
+  <!-- Main Global Navigation Header -->
+  <header class="header">
+    <div class="header-inner container">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <div class="logo-mark">F</div>
+          <div class="logo-text">
+            <span>FertiFind</span>
+            <small>DUBAI HEALTHCARE DIRECTORY</small>
+          </div>
+        </a>
       </div>
-    </div>
-
-    <!-- Mobile Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer">
-      <a href="index.html">🏠 Home</a>
-      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
-      <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
-      <a href="fertifind_hospital_profile_page.html">🏥 Hospitals & Clinics</a>
-      <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Labs</a>
-      <a href="fertility-treatment-cost-dubai.html">💰 Cost & Package Guide</a>
-      <a href="for-doctors.html">💼 For Doctors & Clinics</a>
-      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('DHCC Desk')">Book DHCC Specialist</button>
+      <nav class="nav">
+        <a href="fertifind_dubai_directory_search_page.html" class="nav-link">Search All</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor" class="nav-link">Doctors</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=clinic" class="nav-link">Clinics</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=labs" class="nav-link">Diagnostics</a>
+        <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html" class="nav-link active">DHCC Hub</a>
+        <a href="fertility-treatment-cost-dubai.html" class="nav-link">Pricing</a>
+      </nav>
+      <div class="header-cta" style="display:flex;align-items:center;gap:10px">
+        <a href="submit-business.html" class="btn btn-outline" style="font-size:12px;padding:7px 12px">+ List Practice</a>
+        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking()" style="font-size:12px;padding:7px 14px">Book Appointment</button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="district-hero">
+  <!-- SECTION 1: HERO SECTION WITH EMBEDDED SEARCH FILTERS -->
+  <section class="loc-hero">
     <div class="container">
-      <div class="crumb"><a href="index.html">Home</a> / <a href="fertifind_dubai_directory_search_page.html">Directory</a> / Dubai Healthcare City</div>
-      <h1>Top IVF & Fertility Doctors in <span>Dubai Healthcare City (DHCC)</span></h1>
-      <p>
-        Dubai Healthcare City is the region's dedicated medical free zone, home to internationally certified reproductive endocrinologists, cleanroom embryology suites, and genetic diagnostic laboratories. Compare verified consultants, qualifications, patient reviews, and book direct consultations.
+      <div class="loc-crumb">
+        <a href="index.html">Home</a> &rsaquo;
+        <a href="fertifind_dubai_directory_search_page.html">Dubai Healthcare Directory</a> &rsaquo;
+        <span>Dubai Healthcare City (DHCC)</span>
+      </div>
+
+      <h1>Best IVF &amp; Fertility Doctors in <span style="color:var(--primary-blue)">Dubai Healthcare City (DHCC)</span></h1>
+
+      <p class="loc-hero-desc">
+        Explore verified fertility specialists, licensed reproductive endocrinologists, accredited IVF day-surgery clinics, and clinical diagnostic laboratories in Dubai Healthcare City (DHCC). Regulated under Dubai Healthcare City Authority (DHCR) and DHA licensing standards.
       </p>
 
-      <div class="district-meta">
-        <div class="meta-pill">📍 <b>District:</b> Dubai Healthcare City (Umm Hurair 2)</div>
-        <div class="meta-pill">🚇 <b>Metro:</b> Dubai Healthcare City Station (Green Line)</div>
-        <div class="meta-pill">🏥 <b>Clusters:</b> Ibn Sina (Bldg 27) & Al Razi (Bldg 64)</div>
-        <div class="meta-pill">⭐ <b>Avg Rating:</b> 4.9 / 5.0 (DHA Verified)</div>
+      <div class="loc-stats-strip">
+        <div class="loc-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2zM9 9h6m-6 4h6m-6 4h4"/></svg>
+          <span><b>160+</b> Clinics &amp; Centers</span>
+        </div>
+        <div class="loc-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <span><b>1,200+</b> Licensed Specialists</span>
+        </div>
+        <div class="loc-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span><b>24/7</b> Diagnostic Testing</span>
+        </div>
+        <div class="loc-stat-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span><b>4.9 / 5.0</b> Average Patient Rating</span>
+        </div>
+      </div>
+
+      <!-- Embedded Search Filter Box -->
+      <form class="loc-search-box" id="dhcc-hero-search" onsubmit="handleDhccSearch(event)">
+        <input type="search" name="q" id="search-q" placeholder="Search doctors, treatments" value="">
+        <select name="provider_type" id="search-type">
+          <option value="all">All Healthcare Types</option>
+          <option value="doctor">Doctors &amp; Specialists</option>
+          <option value="clinic">Fertility &amp; IVF Clinics</option>
+          <option value="hospital">Hospitals</option>
+          <option value="labs">Diagnostic &amp; Blood Labs</option>
+        </select>
+        <select name="specialty" id="search-specialty">
+          <option value="all">All Clinical Specialties</option>
+          <option value="ivf">Reproductive Medicine (IVF)</option>
+          <option value="icsi">ICSI &amp; Embryology</option>
+          <option value="obgyn">Obstetrics &amp; Gynecology</option>
+          <option value="andrology">Male Fertility &amp; Andrology</option>
+          <option value="genetics">Reproductive Genetics</option>
+          <option value="ultrasound">Fertility Ultrasound</option>
+        </select>
+        <select name="location" id="search-location" onchange="window.location.href='location.html?location=' + this.value">
+          <option value="dubai-healthcare-city" selected>Dubai Healthcare City (DHCC)</option>
+          <option value="jumeirah">Jumeirah &amp; Al Wasl</option>
+          <option value="dubai-marina">Dubai Marina &amp; JBR</option>
+          <option value="downtown-dubai">Downtown &amp; Business Bay</option>
+          <option value="dubai-hills">Dubai Hills &amp; Al Barsha</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-search">Search Providers</button>
+      </form>
+
+      <!-- Quick Filter Tags -->
+      <div class="loc-quick-tags">
+        <button type="button" class="loc-q-tag active" onclick="filterByTag('all', this)">All Facilities</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('doctor', this)">👨‍⚕️ Doctors</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('clinic', this)">🏥 IVF Clinics</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('labs', this)">🔬 Diagnostic Labs</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('hospital', this)">🏛️ Hospitals</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('dha', this)">🛡️ DHA Verified</button>
+        <button type="button" class="loc-q-tag" onclick="filterByTag('today', this)">⚡ Open Today</button>
       </div>
     </div>
   </section>
 
-  <!-- Main Directory Grid -->
-  <main class="section">
+  <!-- SECTION 2: INTERACTIVE OPENSTREETMAP WITH GEOLOCATION & TRAVEL ESTIMATOR -->
+  <section class="map-section">
     <div class="container">
-      <div class="section-head">
+      <div class="map-header-wrap">
         <div>
-          <h2>Verified fertility specialists & centres in DHCC</h2>
-          <p>Showing top-rated reproductive medicine consultants and accredited genetics facilities.</p>
+          <h2>Interactive Healthcare Map &amp; Route Estimator: <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Explore accredited clinics, consulting doctors, and diagnostic labs in DHCC. Check real-time drive time from your current location.</p>
         </div>
-        <a class="link" href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">View all DHCC listings →</a>
       </div>
 
-      <div class="cards-grid">
-
-        <!-- Card 1: Dr. Partha Sarathi Das -->
-        <article class="doc-full-card">
-          <div>
-            <div class="doc-full-head">
-              <div class="doc-full-photo" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=85')"></div>
-              <div class="doc-full-info">
-                <span class="type-badge">Consultant Doctor</span>
-                <span class="badge badge-mint">✓ DHA License #0184920</span>
-                <h3><a href="fertifind_doctor_profile_page.html">Dr. Partha Sarathi Das</a></h3>
-                <div style="font-size:12px;color:var(--muted)">Consultant Reproductive Medicine & Infertility</div>
-                <div style="margin-top:6px;font-size:12px"><span class="stars">★★★★★</span> <b>4.9</b> (248 reviews)</div>
-                <div style="font-size:11px;color:var(--navy);font-weight:750;margin-top:4px">📍 Orchid Fertility, Ibn Sina Bldg 27, DHCC</div>
-              </div>
-            </div>
-            <div class="doc-full-body">
-              <div class="doc-tags">
-                <span class="service-tag">IVF / ICSI</span>
-                <span class="service-tag">Ovarian Stimulation</span>
-                <span class="service-tag">Implantation Failure</span>
-                <span class="service-tag">20+ Yrs Exp</span>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Languages: <b>English, Hindi, Bengali, Arabic coordinator</b></div>
-            </div>
-          </div>
-          <div style="padding:0 18px 16px">
-            <div class="doc-actions">
-              <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile</a>
-              <button class="btn btn-whatsapp" onclick="FertiFind.openWhatsApp('971504773832','Dr. Partha Sarathi Das')">WhatsApp</button>
-              <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','In-Clinic Evaluation')">Book Now</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2: Orchid Fertility Clinic -->
-        <article class="doc-full-card">
-          <div>
-            <div class="doc-full-head">
-              <div class="doc-full-photo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=85')"></div>
-              <div class="doc-full-info">
-                <span class="type-badge">Fertility Clinic</span>
-                <span class="badge badge-mint">✓ DHCC Licensed</span>
-                <h3><a href="fertifind_hospital_profile_page.html">Orchid Fertility Clinic</a></h3>
-                <div style="font-size:12px;color:var(--muted)">Specialized IVF, Andrology & Reproductive Care</div>
-                <div style="margin-top:6px;font-size:12px"><span class="stars">★★★★★</span> <b>4.9</b> (312 reviews)</div>
-                <div style="font-size:11px;color:var(--navy);font-weight:750;margin-top:4px">📍 Block D, Unit 201, Ibn Sina Bldg 27, DHCC</div>
-              </div>
-            </div>
-            <div class="doc-full-body">
-              <div class="doc-tags">
-                <span class="service-tag">Natural Cycle IVF</span>
-                <span class="service-tag">Micro-TESE</span>
-                <span class="service-tag">Egg Freezing</span>
-                <span class="service-tag">EmbryoScope</span>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Hours: <b>Sat – Thu: 08:30 AM – 06:00 PM</b> • Phone: +971 4 437 7520</div>
-            </div>
-          </div>
-          <div style="padding:0 18px 16px">
-            <div class="doc-actions">
-              <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Clinic</a>
-              <button class="btn btn-whatsapp" onclick="FertiFind.openWhatsApp('971504773832','Orchid Fertility Clinic')">WhatsApp</button>
-              <button class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Fertility Clinic','IVF Consultation')">Book Now</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3: Igenomix Dubai -->
-        <article class="doc-full-card">
-          <div>
-            <div class="doc-full-head">
-              <div class="doc-full-photo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=85')"></div>
-              <div class="doc-full-info">
-                <span class="type-badge">Genetics Lab</span>
-                <span class="badge badge-mint">✓ ISO 15189 / CAP</span>
-                <h3><a href="fertifind_labs_profile_page.html">Igenomix Dubai</a></h3>
-                <div style="font-size:12px;color:var(--muted)">Reproductive Genetics & Diagnostic Laboratory</div>
-                <div style="margin-top:6px;font-size:12px"><span class="stars">★★★★★</span> <b>4.9</b> (420 reviews)</div>
-                <div style="font-size:11px;color:var(--navy);font-weight:750;margin-top:4px">📍 Unit 501-502, 26th Street, DHCC Phase 1</div>
-              </div>
-            </div>
-            <div class="doc-full-body">
-              <div class="doc-tags">
-                <span class="service-tag">PGT-A Screening</span>
-                <span class="service-tag">ERA Test</span>
-                <span class="service-tag">AMH Hormone</span>
-                <span class="service-tag">Home Blood Draw</span>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Clinical Embryologist: <b>Estee Van Zyl</b> • Toll-free: +971 800 50342</div>
-            </div>
-          </div>
-          <div style="padding:0 18px 16px">
-            <div class="doc-actions">
-              <a class="btn btn-soft" href="fertifind_labs_profile_page.html">View Lab</a>
-              <button class="btn btn-whatsapp" onclick="FertiFind.openWhatsApp('971504773832','Igenomix Dubai')">WhatsApp</button>
-              <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">Book Test</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 4: Dr. Dalia Khalife -->
-        <article class="doc-full-card">
-          <div>
-            <div class="doc-full-head">
-              <div class="doc-full-photo" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85')"></div>
-              <div class="doc-full-info">
-                <span class="type-badge">Fertility Specialist</span>
-                <span class="badge badge-mint">✓ Verified DHA</span>
-                <h3><a href="fertifind_doctor_profile_page.html">Dr. Dalia Khalife</a></h3>
-                <div style="font-size:12px;color:var(--muted)">Specialist Reproductive Medicine & IVF</div>
-                <div style="margin-top:6px;font-size:12px"><span class="stars">★★★★★</span> <b>4.8</b> (174 reviews)</div>
-                <div style="font-size:11px;color:var(--navy);font-weight:750;margin-top:4px">📍 First IVF, Al Razi Bldg 64, Block F, DHCC</div>
-              </div>
-            </div>
-            <div class="doc-full-body">
-              <div class="doc-tags">
-                <span class="service-tag">Assisted Conception</span>
-                <span class="service-tag">PCOS Protocols</span>
-                <span class="service-tag">Egg Vitrification</span>
-                <span class="service-tag">13+ Yrs Exp</span>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Languages: <b>English, Arabic, French</b></div>
-            </div>
-          </div>
-          <div style="padding:0 18px 16px">
-            <div class="doc-actions">
-              <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile</a>
-              <button class="btn btn-whatsapp" onclick="FertiFind.openWhatsApp('971504773832','Dr. Dalia Khalife')">WhatsApp</button>
-              <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Dalia Khalife','Fertility Consultation')">Book Now</button>
-            </div>
-          </div>
-        </article>
-
+      <!-- Real-time Travel Time Estimator Bar -->
+      <div class="travel-estimator-bar">
+        <span class="travel-estimator-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Estimate Travel Time:
+        </span>
+        <button type="button" class="btn-gps-detect" id="btn-detect-gps" onclick="requestUserGPS()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>
+          Use My Current Location
+        </button>
+        <select name="origin_preset" id="origin-preset-select" onchange="calculatePresetRoute(this.value)">
+          <option value="">Or Pick Starting Area...</option>
+          <option value="25.1972,55.2744">Downtown Dubai / Burj Khalifa</option>
+          <option value="25.0784,55.1388">Dubai Marina &amp; JBR</option>
+          <option value="25.1842,55.2635">Business Bay</option>
+          <option value="25.2048,55.2444">Jumeirah 1 &amp; Al Wasl</option>
+          <option value="25.1112,55.2536">Dubai Hills Estate</option>
+          <option value="25.2532,55.3657">Dubai Int'l Airport (DXB)</option>
+          <option value="25.1165,55.1963">Al Barsha / Mall of Emirates</option>
+          <option value="25.2711,55.3075">Deira City Centre</option>
+        </select>
+        <div class="travel-result-pill" id="travel-result-display">
+          🚘 <b>14 mins drive</b> (9.8 km via Sheikh Zayed Rd) &bull; 🚇 <b>22 mins</b> (Green Line)
+        </div>
       </div>
 
-      <!-- District Healthcare Guide -->
-      <section class="district-guide">
-        <h2>Patient Navigation Guide for Dubai Healthcare City (DHCC)</h2>
-        <p>
-          Established in 2002 by His Highness Sheikh Mohammed Bin Rashid Al Maktoum, Dubai Healthcare City (DHCC) is the world's first medical free zone community. For patients seeking fertility care, DHCC houses the highest concentration of specialized cleanroom embryology laboratories, clinical andrologists, and reproductive endocrinologists in the United Arab Emirates.
-        </p>
+      <!-- Map Canvas -->
+      <div id="location-osm-map"></div>
 
-        <div class="grid3">
-          <div class="guide-box">
-            <b>Ibn Sina Medical Complex (Bldg 27)</b>
-            <p>Home to Orchid Fertility Clinic, First Genomix, and advanced diagnostic suites with multi-level covered patient parking.</p>
-          </div>
-          <div class="guide-box">
-            <b>Al Razi Medical Complex (Bldg 64)</b>
-            <p>Houses outpatient specialist consultation suites, First IVF Center, and specialized gynecological ultrasound facilities.</p>
-          </div>
-          <div class="guide-box">
-            <b>Transport & Metro Access</b>
-            <p>Conveniently accessible via Dubai Metro Green Line (Dubai Healthcare City Station) with direct pedestrian bridges to clinics.</p>
-          </div>
-        </div>
-      </section>
+      <!-- Map Legend -->
+      <div class="map-legend-row">
+        <div class="legend-item"><span class="legend-dot dot-clinic"></span> <span>Fertility Clinics &amp; Hospitals</span></div>
+        <div class="legend-item"><span class="legend-dot dot-doc"></span> <span>Consulting Specialists &amp; Doctors</span></div>
+        <div class="legend-item"><span class="legend-dot dot-lab"></span> <span>Clinical &amp; Pathology Labs</span></div>
+        <div class="legend-item"><span class="legend-dot dot-user"></span> <span>Your Estimated Location</span></div>
+      </div>
+    </div>
+  </section>
 
-      <!-- District FAQs -->
-      <div class="section-head">
+  <!-- SECTION 3: DIRECTORY RESULTS WITH STICKY SIDEBAR SEARCH FILTERS -->
+  <section class="dir-main-section">
+    <div class="container">
+      <div class="dir-layout">
+        
+        <!-- Sticky Sidebar Search Filters -->
+        <aside class="sticky-filters-sidebar">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid var(--line-border);padding-bottom:10px">
+            <h3 style="margin:0;font-size:15px;color:var(--navy-heading);font-weight:850">Search Filters</h3>
+            <button type="button" onclick="resetSidebarFilters()" style="background:none;border:none;color:var(--primary-blue);font-size:11.5px;font-weight:750;cursor:pointer">Reset All</button>
+          </div>
+
+          <div class="filter-group-header">Facility / Provider Type</div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_type" value="doctor" id="f-doc" onchange="applySidebarFilters()" checked>
+            <span>Doctors &amp; Specialists (8)</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_type" value="clinic" id="f-clinic" onchange="applySidebarFilters()" checked>
+            <span>Fertility &amp; IVF Clinics (4)</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_type" value="labs" id="f-lab" onchange="applySidebarFilters()" checked>
+            <span>Diagnostic &amp; Blood Labs (4)</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_type" value="hospital" id="f-hosp" onchange="applySidebarFilters()" checked>
+            <span>Hospitals &amp; Day Surgery (2)</span>
+          </div>
+
+          <div class="filter-group-header">Clinical Specialties</div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_spec" value="ivf" id="s-ivf" onchange="applySidebarFilters()">
+            <span>In Vitro Fertilization (IVF)</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_spec" value="icsi" id="s-icsi" onchange="applySidebarFilters()">
+            <span>ICSI &amp; Blastocyst Transfer</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_spec" value="egg-freezing" id="s-egg" onchange="applySidebarFilters()">
+            <span>Egg &amp; Sperm Freezing</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_spec" value="andrology" id="s-and" onchange="applySidebarFilters()">
+            <span>Male Infertility &amp; Andrology</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_spec" value="genetics" id="s-gen" onchange="applySidebarFilters()">
+            <span>PGD / PGT-A Genetics</span>
+          </div>
+
+          <div class="filter-group-header">Minimum Star Rating</div>
+          <div class="filter-check-item">
+            <input type="radio" name="sb_rating" value="4.8" id="r-48" onchange="applySidebarFilters()">
+            <span>4.8+ Stars &amp; Above</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="radio" name="sb_rating" value="4.5" id="r-45" onchange="applySidebarFilters()">
+            <span>4.5+ Stars &amp; Above</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="radio" name="sb_rating" value="0" id="r-all" onchange="applySidebarFilters()" checked>
+            <span>All Verified Ratings</span>
+          </div>
+
+          <div class="filter-group-header">Availability</div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_avail" value="today" id="a-today" onchange="applySidebarFilters()">
+            <span>Available Today</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_avail" value="home" id="a-home" onchange="applySidebarFilters()">
+            <span>Home Sample Collection</span>
+          </div>
+          <div class="filter-check-item">
+            <input type="checkbox" name="sb_avail" value="telemed" id="a-telemed" onchange="applySidebarFilters()">
+            <span>Video Consultation</span>
+          </div>
+        </aside>
+
+        <!-- Right Results Content Area -->
+        <main class="dir-results-pane">
+          <div class="results-head-row">
+            <h2 id="results-count-title">Showing 10 Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:12px;color:#64748b">Sort:</span>
+              <select name="sort_order" class="results-sort-select" onchange="sortProviderCards(this.value)">
+                <option value="recommended">FertiFind Recommended</option>
+                <option value="rating">Highest Rated (★ 4.9+)</option>
+                <option value="reviews">Most Patient Reviews</option>
+                <option value="alpha">Alphabetical (A - Z)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 2-Column Cards Grid for Desktop, 1 Column for Mobile -->
+          <div class="provider-cards-grid" id="main-provider-cards">
+            
+            <!-- Card 1: Orchid Fertility DHCC (Clinic) -->
+            <div class="provider-card" data-type="clinic" data-rating="4.96" data-name="Orchid Reproductive Clinic">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">IVF Clinic</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-8921</span>
+                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">Orchid Reproductive Clinic &amp; IVF Centre</a></div>
+                  <div class="provider-subtext">Building 64, Al Razi Complex, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.96</span>
+                    <span style="color:#64748b">(248 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">IVF Cycle</span>
+                  <span class="micro-tag">ICSI</span>
+                  <span class="micro-tag">Egg Freezing</span>
+                  <span class="micro-tag">PGT-A Genetics</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-c1">+971 4 437 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-c1', '+971 4 437 7920')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-c1">+971 50 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-c1', '+971 50 821 4410')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline">View Clinic</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Reproductive Clinic','IVF Consultation')">Book Appointment</button>
+              </div>
+            </div>
+
+            <!-- Card 2: Dr. Michael Al-Husseini (Doctor) -->
+            <div class="provider-card" data-type="doctor" data-rating="4.98" data-name="Dr Michael Al Husseini">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Consultant</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #DOC-4190</span>
+                  <div class="provider-title"><a href="fertifind_doctor_profile_page.html">Dr. Michael Al-Husseini, MD, FRCOG</a></div>
+                  <div class="provider-subtext">Senior IVF Consultant &bull; Al Razi Bldg, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.98</span>
+                    <span style="color:#64748b">(312 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">Reproductive Endocrinology</span>
+                  <span class="micro-tag">Recurrent Failure</span>
+                  <span class="micro-tag">22+ Yrs Exp</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-d1">+971 4 382 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-d1', '+971 4 382 9901')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-d1">+971 54 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-d1', '+971 54 391 0022')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_doctor_profile_page.html" class="btn btn-outline">View Doctor</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Michael Al-Husseini','Initial Fertility Consultation')">Book Consultation</button>
+              </div>
+            </div>
+
+            <!-- Card 3: Bourn Hall Fertility Centre (Clinic) -->
+            <div class="provider-card" data-type="clinic" data-rating="4.92" data-name="Bourn Hall Fertility Centre">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">IVF Centre</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-4412</span>
+                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">Bourn Hall Fertility Centre Dubai</a></div>
+                  <div class="provider-subtext">Building 64, Block A, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.92</span>
+                    <span style="color:#64748b">(184 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">Pioneering IVF Lab</span>
+                  <span class="micro-tag">Blastocyst Biopsy</span>
+                  <span class="micro-tag">Sperm Retrieval</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-c2">+971 4 365 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-c2', '+971 4 365 5200')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-c2">+971 52 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-c2', '+971 52 449 8812')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline">View Clinic</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Bourn Hall Fertility Centre','IVF Evaluation')">Book Appointment</button>
+              </div>
+            </div>
+
+            <!-- Card 4: PureHealth Clinical Genetics & Diagnostics (Lab) -->
+            <div class="provider-card" data-type="labs" data-rating="4.95" data-name="PureHealth Clinical Genetics">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Diagnostic Lab</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> ISO 15189 / CAP</span>
+                  <div class="provider-title"><a href="fertifind_labs_profile_page.html">PureHealth Diagnostics &amp; Genetics Lab</a></div>
+                  <div class="provider-subtext">Building 33, Dubai Healthcare City</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.95</span>
+                    <span style="color:#64748b">(190 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">AMH Hormone</span>
+                  <span class="micro-tag">Semen Analysis</span>
+                  <span class="micro-tag">Karyotyping</span>
+                  <span class="micro-tag">Same-Day</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-l1">+971 4 429 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-l1', '+971 4 429 8830')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-l1">+971 50 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-l1', '+971 50 671 2299')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline">View Lab Profile</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('PureHealth Genetics Lab','Fertility Blood Panel')">Book Lab Test</button>
+              </div>
+            </div>
+
+            <!-- Card 5: Dr. Layla Mahmoud (Doctor) -->
+            <div class="provider-card" data-type="doctor" data-rating="4.97" data-name="Dr Layla Mahmoud">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Specialist</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #DOC-8820</span>
+                  <div class="provider-title"><a href="fertifind_doctor_profile_page.html">Dr. Layla Mahmoud, MD, FACOG</a></div>
+                  <div class="provider-subtext">Reproductive Endocrinologist &bull; Bldg 27, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.97</span>
+                    <span style="color:#64748b">(275 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">PCOS Protocols</span>
+                  <span class="micro-tag">Egg Freezing</span>
+                  <span class="micro-tag">Mild Stimulation</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-d2">+971 4 390 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-d2', '+971 4 390 1200')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-d2">+971 55 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-d2', '+971 55 981 7733')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_doctor_profile_page.html" class="btn btn-outline">View Doctor</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Layla Mahmoud','PCOS / IVF Consultation')">Book Consultation</button>
+              </div>
+            </div>
+
+            <!-- Card 6: Al Borg Diagnostics Centre DHCC (Lab) -->
+            <div class="provider-card" data-type="labs" data-rating="4.90" data-name="Al Borg Diagnostics Centre">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Diagnostic Lab</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> CAP Accredited</span>
+                  <div class="provider-title"><a href="fertifind_labs_profile_page.html">Al Borg Diagnostics Centre DHCC</a></div>
+                  <div class="provider-subtext">Al Razi Building 64, Block B, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.90</span>
+                    <span style="color:#64748b">(165 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">Male Fertility Panel</span>
+                  <span class="micro-tag">Hormone Profiles</span>
+                  <span class="micro-tag">Home Sample</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-l2">+971 4 362 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-l2', '+971 4 362 4910')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-l2">+971 56 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-l2', '+971 56 123 9980')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline">View Lab Profile</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Al Borg Diagnostics','Comprehensive Fertility Screen')">Order Lab Tests</button>
+              </div>
+            </div>
+
+          </div>
+        </main>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: TOP RATED DOCTORS IN THAT REGION (5-10 CARDS SLIDER) -->
+  <section class="top-docs-section">
+    <div class="container">
+      <div class="slider-header-row">
         <div>
-          <h2>Dubai Healthcare City fertility FAQs</h2>
-          <p>Common questions for patients visiting clinics in DHCC.</p>
+          <h2>Top Rated Fertility &amp; Medical Specialists in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Board-certified consultants and senior reproductive specialists with highest verified patient ratings.</p>
+        </div>
+        <div class="slider-arrows">
+          <button type="button" class="slider-btn" onclick="slideContainer('top-docs-slider', -300)" aria-label="Previous Doctor">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="slider-btn" onclick="slideContainer('top-docs-slider', 300)" aria-label="Next Doctor">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
       </div>
-      <div class="faq">
-        <div class="faq-item">
-          <button class="faq-q">Why do couples choose fertility clinics in Dubai Healthcare City? <span>+</span></button>
-          <div class="faq-a">DHCC operates under rigorous healthcare quality standards regulated by Dubai Healthcare City Authority (DHCA) and DHA, ensuring accredited cleanrooms, internationally certified embryologists, and state-of-the-art genetic labs.</div>
+
+      <!-- Doctor Slider Cards Track (6 to 8 Verified Specialists) -->
+      <div class="docs-slider-container" id="top-docs-slider">
+
+        <!-- Slide Doc 1 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #4190 &bull; Consultant</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Michael Al-Husseini</a></div>
+              <div class="provider-subtext">Senior IVF Consultant &bull; Orchid DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.98</span>
+                <span>(312 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 650</b> &bull; Wait: <b>&lt; 15 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Michael Al-Husseini','Specialist Consultation')">Book Doctor</button>
+          </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">Is valet parking available at clinics in DHCC? <span>+</span></button>
-          <div class="faq-a">Yes. Both Ibn Sina Building 27 and Al Razi Building 64 offer dedicated RTA parking and building valet services for patients and visitors.</div>
+
+        <!-- Slide Doc 2 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #8820 &bull; FACOG</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Layla Mahmoud</a></div>
+              <div class="provider-subtext">Reproductive Endocrinology &bull; DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.97</span>
+                <span>(275 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 600</b> &bull; Wait: <b>&lt; 10 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Layla Mahmoud','Specialist Consultation')">Book Doctor</button>
+          </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">Can overseas medical tourists undergo IVF treatment in DHCC? <span>+</span></button>
-          <div class="faq-a">Yes. DHCC fertility centres provide specialized medical tourism packages including visa support, airport transfers, hotel coordination, and multilingual medical concierges.</div>
+
+        <!-- Slide Doc 3 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #6501 &bull; Andrologist</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Farhan Qureshi</a></div>
+              <div class="provider-subtext">Male Infertility Microsurgeon &bull; Bldg 64</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.95</span>
+                <span>(182 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 550</b> &bull; Wait: <b>&lt; 20 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Farhan Qureshi','Andrology Consultation')">Book Doctor</button>
+          </div>
+        </div>
+
+        <!-- Slide Doc 4 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #7712 &bull; ESHRE Cert</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Elena Rostova</a></div>
+              <div class="provider-subtext">Senior Embryologist &bull; Bourn Hall DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.94</span>
+                <span>(210 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 600</b> &bull; Wait: <b>&lt; 15 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Elena Rostova','Embryology Review')">Book Doctor</button>
+          </div>
+        </div>
+
+        <!-- Slide Doc 5 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #3309 &bull; MRCOG</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Tariq Mansoor</a></div>
+              <div class="provider-subtext">Consultant OB-GYN &bull; Bldg 27, DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.96</span>
+                <span>(195 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 500</b> &bull; Wait: <b>&lt; 10 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','OB-GYN Evaluation')">Book Doctor</button>
+          </div>
+        </div>
+
+        <!-- Slide Doc 6 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #9021 &bull; FRCOG</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Samantha Reed</a></div>
+              <div class="provider-subtext">Fertility Preservation Specialist &bull; DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.93</span>
+                <span>(160 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 650</b> &bull; Wait: <b>&lt; 15 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Samantha Reed','Fertility Preservation')">Book Doctor</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: 2-COLUMNS LAYOUTS (TOP CLINICS & TOP LABS NEARBY) -->
+  <section class="twocol-lists-section">
+    <div class="container">
+      
+      <!-- Part 1: 2-Columns List for Top Clinics Nearby in Same Category -->
+      <div class="twocol-block">
+        <div class="twocol-head">
+          <h2>Top Fertility &amp; IVF Clinics Nearby in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Accredited day-surgery centers and clinical IVF embryology suites with certified clinical protocols.</p>
+        </div>
+        <div class="twocol-grid">
+
+          <!-- Clinic 1 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-8921 &bull; Success Rate 68%</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Orchid Reproductive Clinic &amp; IVF Centre</a></div>
+                <div class="provider-subtext">Al Razi Building 64, Block C, DHCC &bull; 0.2 km from Metro</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">IVF / ICSI</span>
+                  <span class="micro-tag">Time-Lapse Embryo</span>
+                  <span class="micro-tag">Laser Assisted Hatching</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Orchid Reproductive Clinic','IVF Consultation')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 2 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-4412 &bull; Pioneering IVF</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Bourn Hall Fertility Centre Dubai</a></div>
+                <div class="provider-subtext">Building 64, 7th Floor, Al Razi Complex, DHCC</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Blastocyst Biopsy</span>
+                  <span class="micro-tag">Egg Freezing</span>
+                  <span class="micro-tag">Onco-Fertility</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Bourn Hall Fertility Centre','IVF Appointment')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 3 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-7703 &bull; Andrology Suite</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Conceive Fertility Hospital &amp; Day Surgery</a></div>
+                <div class="provider-subtext">Building 27, Block D, Dubai Healthcare City</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Micro-TESE</span>
+                  <span class="micro-tag">Sperm Freezing</span>
+                  <span class="micro-tag">Laparoscopy</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Conceive Fertility Hospital','Clinic Tour')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 4 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-3398 &bull; Genetic Lab</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Fakih IVF Fertility Center - Hub Hub</a></div>
+                <div class="provider-subtext">Adjacent DHCC / Oud Metha Medical Zone</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">PGT-A / PGT-M</span>
+                  <span class="micro-tag">Gender Balancing</span>
+                  <span class="micro-tag">IUI Treatment</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Fakih IVF Hub','IVF Consultation')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Part 2: 2-Columns List for Top Labs Nearby for Top Services in That Area -->
+      <div class="twocol-block">
+        <div class="twocol-head">
+          <h2>Top Diagnostic Labs for Clinical Testing in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>ISO 15189 and CAP-accredited pathology, genetics, and hormone diagnostics with rapid turnaround.</p>
+        </div>
+        <div class="twocol-grid">
+
+          <!-- Lab 1 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">ISO 15189 &bull; CAP Accredited</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">PureHealth Diagnostics &amp; Genetics Lab</a></div>
+                <div class="provider-subtext">Building 33, DHCC &bull; Home Sample Collection Across Dubai</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">AMH Hormone (3 hrs)</span>
+                  <span class="micro-tag">Computerized Semen Analysis</span>
+                  <span class="micro-tag">Karyotyping</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('PureHealth Genetics Lab','AMH Blood Test')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 2 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">CAP Certified &bull; Male Fertility Panel</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Al Borg Diagnostics Centre DHCC</a></div>
+                <div class="provider-subtext">Al Razi Building 64, Block B &bull; Walk-ins Welcome</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">FSH / LH / Prolactin</span>
+                  <span class="micro-tag">Sperm DNA Fragmentation</span>
+                  <span class="micro-tag">Inhibin B</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Al Borg Diagnostics','Male Fertility Screen')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 3 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #LB-2041 &bull; Molecular Testing</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Medsol Freezone Diagnostics Hub</a></div>
+                <div class="provider-subtext">Building 47, Ground Floor, Dubai Healthcare City</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">NIPT Screening</span>
+                  <span class="micro-tag">Thyroid &amp; Autoimmune</span>
+                  <span class="micro-tag">Vitamin D &amp; Ferritin</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Medsol Diagnostics Hub','NIPT Screen')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 4 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">JCI &amp; CAP &bull; Reference Lab</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">National Reference Laboratory (NRL) DHCC</a></div>
+                <div class="provider-subtext">Building 64, Al Razi Complex, DHCC</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Endocrine Biomarkers</span>
+                  <span class="micro-tag">Whole Exome Sequencing</span>
+                  <span class="micro-tag">Thrombophilia Panel</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('National Reference Lab','Genetics Screen')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
     </div>
-  </main>
+  </section>
 
-  <!-- Unified Footer -->
-  <footer>
+  <!-- SECTION 6: CUSTOMER REVIEWS SLIDER -->
+  <section class="reviews-slider-section">
     <div class="container">
-      <div class="footer-grid">
+      <div class="slider-header-row">
         <div>
-          <a class="logo" href="index.html" style="color:#ffffff">
-            <span class="logo-mark">✚</span>
-            FertiFind <small style="color:var(--teal)">Dubai</small>
-          </a>
-          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
-            Dubai's independent fertility and reproductive healthcare discovery platform. Connecting patients with verified specialists, IVF centers, and diagnostics.
-          </p>
-          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
+          <h2>What Patients Say About Healthcare in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Verified reviews from patients who booked fertility treatments, consultations, and diagnostic tests.</p>
         </div>
-
-        <div>
-          <div class="footer-title">Directory</div>
-          <div class="footer-links">
-            <a href="fertifind_dubai_directory_search_page.html?type=doctor">Fertility Doctors</a>
-            <a href="fertifind_dubai_directory_search_page.html?type=clinic">IVF Clinics</a>
-            <a href="fertifind_hospital_profile_page.html">Hospitals & Centers</a>
-            <a href="fertifind_labs_profile_page.html">Diagnostic Labs</a>
-            <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">Districts</div>
-          <div class="footer-links">
-            <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">Healthcare City (DHCC)</a>
-            <a href="ivf-clinics-in-jumeirah-dubai.html">Jumeirah Clinics</a>
-            <a href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Providers</a>
-            <a href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Dubai Marina</a>
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">For Practices</div>
-          <div class="footer-links">
-            <a href="for-doctors.html">List Your Practice</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile()">Claim Practice Profile</a>
-            <a href="for-doctors.html#plans">Provider Pricing Plans</a>
-          </div>
-        </div>
-
-        <div>
-          <div class="footer-title">Company</div>
-          <div class="footer-links">
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('about')">About FertiFind</a>
-            <a href="index.html#how">How It Works</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('contact')">Contact Support</a>
-            <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')">Privacy Policy</a>
-          </div>
+        <div class="slider-arrows">
+          <button type="button" class="slider-btn" onclick="slideContainer('cust-rev-slider', -340)" aria-label="Previous Review">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="slider-btn" onclick="slideContainer('cust-rev-slider', 340)" aria-label="Next Review">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <span>© 2026 FertiFind Dubai. Independent Healthcare Navigation Platform.</span>
-        <span>Provider credentials verified through Dubai Health Authority (DHA) registry.</span>
+      <!-- Reviews Track -->
+      <div class="rev-slider-track" id="cust-rev-slider">
+
+        <!-- Review 1 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "Our ICSI journey at Orchid DHCC was successful on our first transfer. Dr. Michael and the entire nursing team were compassionate and transparent about every single clinical milestone."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">SM</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Sarah &amp; David M.</div>
+              <div style="font-size:11px;color:#64748b">IVF ICSI Cycle &bull; Orchid DHCC</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "Booked an egg freezing consultation through FertiFind. The clinic in DHCC had zero wait time, pristine clinical laboratories, and fully itemized DHA pricing with no hidden charges."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">AK</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Amina K.</div>
+              <div style="font-size:11px;color:#64748b">Egg Freezing &bull; Bourn Hall DHCC</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "Ordered home blood sample collection for AMH and thyroid profiling from PureHealth in DHCC. The phlebotomist arrived right on time and results were in my secure portal by 4 PM."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">FA</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Fatima A.</div>
+              <div style="font-size:11px;color:#64748b">Home Hormone Diagnostics &bull; PureHealth Lab</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "We traveled from abroad for reproductive care in Dubai Healthcare City. The international patient concierge coordinated all scans and lab results smoothly before our arrival."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">RP</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Ramesh &amp; Priya P.</div>
+              <div style="font-size:11px;color:#64748b">Reproductive Care &bull; Conceive DHCC</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: MID-PAGE CTA BANNER -->
+  <section class="mid-cta-banner">
+    <div class="container">
+      <div class="mid-cta-box">
+        <h2>Need Assistance Choosing a Clinic or Specialist in Dubai Healthcare City?</h2>
+        <p>Our dedicated Dubai medical coordinators provide free, confidential guidance to help you find the right accredited fertility clinic, compare doctor credentials, and schedule your appointment.</p>
+        <div class="mid-cta-actions">
+          <button type="button" class="btn-cta-white" onclick="FertiFind.openBooking('DHCC Coordination Team','Free Clinic Consultation')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Book Free Consultation
+          </button>
+          <a href="https://wa.me/971501234567" target="_blank" class="btn-cta-wa">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 2C6.496 2 2 6.496 2 12.031c0 1.768.461 3.493 1.338 5.016L2 22l5.122-1.343a9.98 9.98 0 004.909 1.374h.004c5.535 0 10.031-4.496 10.031-10.031 0-2.68-1.043-5.199-2.937-7.094A9.957 9.957 0 0012.031 2z"/></svg>
+            Chat with Medical Coordinator
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: BLOG POST GUIDES -->
+  <section class="guides-section">
+    <div class="container">
+      <div class="twocol-head">
+        <h2>Clinical &amp; Healthcare Guides for <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+        <p>Evidence-based patient guides, regulatory frameworks, and financial benchmarks for healthcare in Dubai.</p>
+      </div>
+
+      <div class="guides-grid">
+        
+        <!-- Guide 1 -->
+        <article class="guide-card">
+          <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=500&q=80')"></div>
+          <div class="guide-body">
+            <div>
+              <div class="guide-meta"><span>May 2026</span> &bull; <span>6 min read</span> &bull; <span>Cost Analysis</span></div>
+              <h3 class="guide-title">2026 IVF Cost Guide in Dubai Healthcare City: Full DHA Tariffs</h3>
+              <p class="guide-excerpt">Itemized pricing benchmarks for ICSI cycles, medications, blastocyst biopsy, and embryo cryopreservation across DHCC centers.</p>
+            </div>
+            <a href="fertility-treatment-cost-dubai.html" class="guide-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Guide 2 -->
+        <article class="guide-card">
+          <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80')"></div>
+          <div class="guide-body">
+            <div>
+              <div class="guide-meta"><span>April 2026</span> &bull; <span>5 min read</span> &bull; <span>Doctor Selection</span></div>
+              <h3 class="guide-title">How to Verify DHA Doctor Credentials in Dubai Healthcare City</h3>
+              <p class="guide-excerpt">Step-by-step checklist to verify reproductive consultant licensure, clinical fellowship standing, and malpractice safety ratings.</p>
+            </div>
+            <a href="fertifind_dubai_directory_search_page.html" class="guide-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Guide 3 -->
+        <article class="guide-card">
+          <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=500&q=80')"></div>
+          <div class="guide-body">
+            <div>
+              <div class="guide-meta"><span>March 2026</span> &bull; <span>7 min read</span> &bull; <span>UAE Law</span></div>
+              <h3 class="guide-title">UAE Federal Fertility Law: Egg Freezing &amp; Embryo Storage Rules</h3>
+              <p class="guide-excerpt">Comprehensive legal overview of female fertility preservation rights, consent documentation, and export regulations under DHCR.</p>
+            </div>
+            <a href="fertifind_dubai_directory_search_page.html" class="guide-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: DUAL CTA: LIST BUSINESS FOR OWNERS & BOOK APPOINTMENTS FOR PATIENTS -->
+  <section class="dual-cta-section">
+    <div class="container">
+      <div class="dual-cta-grid">
+
+        <!-- Column 1: For Clinic Owners & Medical Practitioners -->
+        <div class="dual-cta-card owner">
+          <div>
+            <div style="font-size:11px;font-weight:850;color:var(--primary-blue);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">For Practice Owners &amp; Clinics</div>
+            <h3>List Your Medical Center in Dubai Healthcare City</h3>
+            <p>Connect with over 45,000 active monthly patients searching for verified fertility specialists, polyclinics, and diagnostic laboratories.</p>
+            <ul class="dual-checklist">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Guaranteed DHA verification compliance badge on all profiles</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Direct WhatsApp and phone leads sent instantly with zero commission</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dedicated doctor profile showcase with consultation tariff control</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Exposure to high-intent international DXH medical tourism patients</span>
+              </li>
+            </ul>
+          </div>
+          <a href="submit-business.html" class="btn btn-primary" style="padding:12px;font-size:13px;width:100%;text-align:center">List Your Practice Free &rarr;</a>
+        </div>
+
+        <!-- Column 2: For Patients & Families -->
+        <div class="dual-cta-card patient">
+          <div>
+            <div style="font-size:11px;font-weight:850;color:var(--primary-blue);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">For Patients &amp; Families</div>
+            <h3>Book an Appointment with a Specialist in DHCC</h3>
+            <p>Schedule your clinical consultation, fertility evaluation, or diagnostic blood testing in under 60 seconds with certified Dubai specialists.</p>
+            <ul class="dual-checklist">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% board-certified reproductive endocrinologists and consultants</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Transparent DHA consultation fees with no booking surcharges</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Priority clinic scheduling &amp; convenient valet parking options</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complimentary multilingual care coordination via WhatsApp</span>
+              </li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-primary" style="padding:12px;font-size:13px;width:100%" onclick="FertiFind.openBooking()">Book Appointment Now &rarr;</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: STRICT 2-COLUMN FAQS SECTION -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-head">
+        <h2>Frequently Asked Questions About Healthcare in <span style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+        <p>Essential clinical information, licensing verification, insurance coverage, and transit details.</p>
+      </div>
+
+      <!-- Strict 2-Column Desktop Grid -->
+      <div class="faq-2col-grid">
+
+        <!-- FAQ 1 -->
+        <div class="faq-card">
+          <h3 class="faq-q">What makes Dubai Healthcare City (DHCC) the premier medical hub in Dubai?</h3>
+          <p class="faq-a">DHCC is the world's largest specialized healthcare freezone, established by royal decree and regulated by the Dubai Healthcare City Authority (DHCR) in coordination with DHA. It brings together over 160 accredited clinical facilities, teaching hospitals, and internationally recognized fertility institutes within a walkable, centralized medical district.</p>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-card">
+          <h3 class="faq-q">How do I verify if a fertility doctor in DHCC holds an active license?</h3>
+          <p class="faq-a">All doctors featured on FertiFind Dubai carry verified DHCR/DHA professional licenses. You can verify any specialist's license number through the official Dubai Health Authority registry (Sheryan portal) or the DHCR professional register, ensuring active board certification and clinical privileges.</p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-card">
+          <h3 class="faq-q">What are the standard consultation fees for fertility specialists in DHCC?</h3>
+          <p class="faq-a">Specialist consultation tariffs in DHCC typically range between AED 500 and AED 750 for an initial 45-to-60 minute evaluation with an internationally board-certified consultant. Subsequent follow-up visits generally range from AED 350 to AED 500, aligning with DHA tariff benchmarks.</p>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Do clinics in DHCC accept UAE health insurance for fertility appointments?</h3>
+          <p class="faq-a">Yes. While elective IVF cycles require specialized riders or out-of-pocket payment, primary diagnostic workups—including hormonal blood panels, ultrasound scans, hysteroscopy, and underlying endocrine treatments—are widely covered under major UAE insurance networks such as Saada, Enaya, NextCare, MetLife, Cigna, AXA, and Daman.</p>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Can diagnostic labs in DHCC collect blood and semen samples from home?</h3>
+          <p class="faq-a">Yes. Multiple premier diagnostic centers located in DHCC (including PureHealth and Al Borg) provide licensed phlebotomist house calls across all Dubai districts for routine blood collection, AMH hormone testing, prenatal screenings, and temperature-controlled sample transit.</p>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-card">
+          <h3 class="faq-q">What metro transit and parking facilities are available in DHCC?</h3>
+          <p class="faq-a">Dubai Healthcare City has its own dedicated Metro Station on the Green Line, offering direct covered pedestrian access to clinical buildings 27, 33, 47, and 64 (Al Razi Complex). In addition, all major medical buildings feature dedicated valet parking services and multi-story RTA parking structures.</p>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Are telemedicine and remote video consultations available for doctors in DHCC?</h3>
+          <p class="faq-a">Yes. Most senior consultants in DHCC offer DHA-compliant telehealth video consultations for initial case reviews, second opinions on previous IVF cycles, and review of diagnostic ultrasound or lab findings before in-person procedures.</p>
+        </div>
+
+        <!-- FAQ 8 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Can international patients travel to DHCC for medical tourism treatment?</h3>
+          <p class="faq-a">Dubai Healthcare City is the flagship hub for Dubai Health Experience (DXH). Clinics provide fast-track medical tourism visas, dedicated international patient liaisons, translation services, airport transfers, and bundled treatment packages for overseas patients.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: STICKY BOTTOM ACTION BAR -->
+  <aside class="sticky-action-bar" id="stickyActionBar">
+    <div class="sticky-bar-inner container">
+      <div class="sticky-provider-meta">
+        <div class="sticky-avatar" style="background:#0757d9;color:#fff;font-weight:850">DH</div>
+        <div class="sticky-info">
+          <h4>Healthcare in Dubai Healthcare City</h4>
+          <p>Verified Clinics &bull; Top Doctors &bull; Rapid Diagnostics</p>
+        </div>
+      </div>
+      <div class="sticky-btns">
+        <div class="sticky-reveal-wrap">
+          <span class="masked-num" id="sticky-bar-phone">+971 4 382 ••••</span>
+          <button type="button" class="btn-reveal-num" onclick="revealContact('sticky-bar-phone', '+971 4 382 9900')">📞 Call</button>
+        </div>
+        <a href="https://wa.me/971501234567" target="_blank" class="btn btn-whatsapp" style="font-size:12px;padding:8px 14px">💬 WhatsApp</a>
+        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking()" style="font-size:12px;padding:8px 16px">Book Consultation</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo-text" style="margin-bottom:12px">
+            <span style="font-size:18px;font-weight:900;color:var(--navy-heading)">FertiFind Dubai</span>
+            <small style="display:block;font-size:10px;color:#64748b">OFFICIAL MEDICAL DIRECTORY</small>
+          </div>
+          <p style="font-size:12px;color:#64748b;line-height:1.6">
+            The UAE's independent medical directory connecting patients with accredited fertility doctors, IVF centers, and licensed clinical laboratories.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size:13px;font-weight:850;color:var(--navy-heading);margin-bottom:12px">Popular Locations</h4>
+          <ul style="list-style:none;padding:0;margin:0;font-size:12px;display:flex;flex-direction:column;gap:6px">
+            <li><a href="ivf-fertility-doctors-in-dubai-healthcare-city.html" style="color:#64748b">Dubai Healthcare City (DHCC)</a></li>
+            <li><a href="ivf-clinics-in-jumeirah-dubai.html" style="color:#64748b">Jumeirah &amp; Al Wasl</a></li>
+            <li><a href="location.html?location=dubai-marina" style="color:#64748b">Dubai Marina &amp; JBR</a></li>
+            <li><a href="location.html?location=downtown-dubai" style="color:#64748b">Downtown Dubai &amp; Business Bay</a></li>
+            <li><a href="location.html?location=dubai-hills" style="color:#64748b">Dubai Hills &amp; Al Barsha</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:13px;font-weight:850;color:var(--navy-heading);margin-bottom:12px">Clinical Services</h4>
+          <ul style="list-style:none;padding:0;margin:0;font-size:12px;display:flex;flex-direction:column;gap:6px">
+            <li><a href="fertifind_dubai_directory_search_page.html?specialty=ivf" style="color:#64748b">In Vitro Fertilization (IVF)</a></li>
+            <li><a href="fertifind_dubai_directory_search_page.html?specialty=icsi" style="color:#64748b">ICSI Treatment</a></li>
+            <li><a href="fertifind_dubai_directory_search_page.html?specialty=egg-freezing" style="color:#64748b">Egg Freezing &amp; Cryo</a></li>
+            <li><a href="fertifind_dubai_directory_search_page.html?type=labs" style="color:#64748b">Clinical Hormone Testing</a></li>
+            <li><a href="fertility-treatment-cost-dubai.html" style="color:#64748b">Treatment Cost Benchmark</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:13px;font-weight:850;color:var(--navy-heading);margin-bottom:12px">For Providers</h4>
+          <ul style="list-style:none;padding:0;margin:0;font-size:12px;display:flex;flex-direction:column;gap:6px">
+            <li><a href="submit-business.html" style="color:#64748b">Add Your Clinic</a></li>
+            <li><a href="for-doctors.html" style="color:#64748b">Doctor Verification</a></li>
+            <li><a href="auth.html" style="color:#64748b">Provider Sign In</a></li>
+            <li><a href="admin.html" style="color:#64748b">DHA Admin Portal</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--line-border);padding-top:16px;margin-top:28px;text-align:center;font-size:11.5px;color:#94a3b8">
+        &copy; 2026 FertiFind Dubai. All rights reserved. Registered medical directory complying with DHA and UAE Federal Health regulations.
       </div>
     </div>
   </footer>
 
-  <script src="js/site.js"></script>
+  <!-- Appointment Booking Modal -->
+  <div class="modal-backdrop" id="bookingModalBackdrop" style="display:none;position:fixed;inset:0;background:rgba(16,42,99,0.5);z-index:9999;place-items:center;backdrop-filter:blur(3px)">
+    <div style="background:#ffffff;border-radius:18px;max-width:480px;width:92%;padding:24px;box-shadow:0 20px 60px rgba(16,42,99,0.2);position:relative">
+      <button type="button" onclick="closeBookingModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#64748b">&times;</button>
+      <h3 style="margin:0 0 6px;font-size:18px;color:var(--navy-heading);font-weight:850" id="bm-title">Book Doctor Consultation</h3>
+      <p style="margin:0 0 16px;font-size:12.5px;color:#64748b" id="bm-sub">Schedule your appointment with certified DHA healthcare providers in DHCC.</p>
+      
+      <form id="bookingModalForm" onsubmit="submitBookingModal(event)" style="display:flex;flex-direction:column;gap:12px">
+        <input type="hidden" name="provider_target" id="bm-target" value="">
+        <input type="text" name="patient_name" placeholder="Your Full Name" required style="padding:10px 14px;border:1px solid var(--line-border);border-radius:8px;font-size:13px;outline:none">
+        <input type="tel" name="patient_phone" placeholder="Mobile Number" required style="padding:10px 14px;border:1px solid var(--line-border);border-radius:8px;font-size:13px;outline:none">
+        <input type="email" name="patient_email" placeholder="Email Address" required style="padding:10px 14px;border:1px solid var(--line-border);border-radius:8px;font-size:13px;outline:none">
+        <select name="appointment_type" style="padding:10px 14px;border:1px solid var(--line-border);border-radius:8px;font-size:13px;outline:none">
+          <option value="clinic_consultation">In-Clinic Consultation</option>
+          <option value="telehealth">Video Teleconsultation</option>
+          <option value="home_collection">Home Blood / Sample Collection</option>
+          <option value="second_opinion">Second Opinion Case Review</option>
+        </select>
+        <textarea name="appointment_notes" placeholder="Special Requests" rows="2" style="padding:10px 14px;border:1px solid var(--line-border);border-radius:8px;font-size:13px;outline:none"></textarea>
+        <button type="submit" class="btn btn-primary" style="padding:12px;font-size:13.5px;font-weight:850">Confirm Appointment Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Leaflet JavaScript for OpenStreetMap -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    window.FertiFind = window.FertiFind || {
+      openBooking: function(targetName, procedure) {
+        const modal = document.getElementById('bookingModalBackdrop');
+        const title = document.getElementById('bm-title');
+        const sub = document.getElementById('bm-sub');
+        const hiddenTarget = document.getElementById('bm-target');
+        if (targetName) {
+          title.textContent = 'Book with ' + targetName;
+          sub.textContent = procedure ? 'Requested Service: ' + procedure : 'Schedule direct consultation in Dubai Healthcare City.';
+          hiddenTarget.value = targetName + (procedure ? ' - ' + procedure : '');
+        } else {
+          title.textContent = 'Book Doctor Consultation';
+          sub.textContent = 'Schedule your appointment with certified DHA healthcare providers in DHCC.';
+          hiddenTarget.value = 'Dubai Healthcare City Consultation';
+        }
+        modal.style.display = 'grid';
+      }
+    };
+
+    function closeBookingModal() {
+      document.getElementById('bookingModalBackdrop').style.display = 'none';
+    }
+
+    function submitBookingModal(e) {
+      e.preventDefault();
+      alert('Thank you! Your appointment request has been submitted. A clinical coordinator will contact you via WhatsApp / phone within 15 minutes.');
+      closeBookingModal();
+      e.target.reset();
+    }
+
+    function revealContact(elementId, fullNumber) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.textContent = fullNumber;
+        el.style.color = 'var(--primary-blue)';
+        el.style.fontWeight = '850';
+      }
+    }
+
+    function slideContainer(containerId, offset) {
+      const el = document.getElementById(containerId);
+      if (el) {
+        el.scrollBy({ left: offset, behavior: 'smooth' });
+      }
+    }
+
+    // Leaflet Map Initialization for DHCC
+    const DHCC_COORDS = [25.2341, 55.3218];
+    const DHCC_FACILITIES = [
+      { name: 'Orchid Reproductive Clinic & IVF', type: 'clinic', lat: 25.2352, lng: 55.3225, rating: '4.96 ★', address: 'Bldg 64, Al Razi, DHCC', url: 'fertifind_hospital_profile_page.html' },
+      { name: 'Dr. Michael Al-Husseini, MD', type: 'doc', lat: 25.2345, lng: 55.3212, rating: '4.98 ★', address: 'Consultant &bull; Orchid DHCC', url: 'fertifind_doctor_profile_page.html' },
+      { name: 'Bourn Hall Fertility Centre', type: 'clinic', lat: 25.2338, lng: 55.3230, rating: '4.92 ★', address: 'Bldg 64, 7th Fl, DHCC', url: 'fertifind_hospital_profile_page.html' },
+      { name: 'PureHealth Diagnostics & Genetics Lab', type: 'lab', lat: 25.2332, lng: 55.3208, rating: '4.95 ★', address: 'Building 33, DHCC', url: 'fertifind_labs_profile_page.html' },
+      { name: 'Dr. Layla Mahmoud, FACOG', type: 'doc', lat: 25.2360, lng: 55.3218, rating: '4.97 ★', address: 'Reproductive Endocrinology &bull; Bldg 27', url: 'fertifind_doctor_profile_page.html' },
+      { name: 'Al Borg Diagnostics Centre', type: 'lab', lat: 25.2348, lng: 55.3235, rating: '4.90 ★', address: 'Al Razi Bldg, Block B', url: 'fertifind_labs_profile_page.html' },
+      { name: 'Conceive Fertility Hospital', type: 'clinic', lat: 25.2325, lng: 55.3215, rating: '4.91 ★', address: 'Building 27, DHCC', url: 'fertifind_hospital_profile_page.html' }
+    ];
+
+    let osmMap = null;
+    let userMarker = null;
+    let routeLine = null;
+
+    function initDHCCMap() {
+      osmMap = L.map('location-osm-map').setView(DHCC_COORDS, 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(osmMap);
+
+      DHCC_FACILITIES.forEach(fac => {
+        let pinIconHtml = '🏥';
+        let pinClass = 'clinic';
+        if (fac.type === 'doc') { pinIconHtml = '👨‍⚕️'; pinClass = 'doc'; }
+        else if (fac.type === 'lab') { pinIconHtml = '🔬'; pinClass = 'lab'; }
+
+        const customIcon = L.divIcon({
+          className: '',
+          html: `<div class="custom-map-pin ${pinClass}"><span>${pinIconHtml}</span></div>`,
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -32]
+        });
+
+        const popupContent = `
+          <div style="font-family:inherit;min-width:180px;padding:2px">
+            <span style="font-size:10px;font-weight:800;color:#0757d9;text-transform:uppercase">${fac.type.toUpperCase()} &bull; ${fac.rating}</span>
+            <h4 style="margin:4px 0 2px;font-size:13.5px;color:#102a63">${fac.name}</h4>
+            <p style="margin:0 0 8px;font-size:11px;color:#64748b">${fac.address}</p>
+            <a href="${fac.url}" style="display:inline-block;background:#0757d9;color:#fff;font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:6px;text-decoration:none">View Profile</a>
+          </div>
+        `;
+
+        L.marker([fac.lat, fac.lng], { icon: customIcon })
+          .bindPopup(popupContent)
+          .addTo(osmMap);
+      });
+    }
+
+    function requestUserGPS() {
+      const btn = document.getElementById('btn-detect-gps');
+      btn.textContent = 'Locating...';
+
+      if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser. Please select a starting area from the dropdown.');
+        btn.textContent = '📍 Use My Location';
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          btn.textContent = '✅ Location Detected';
+          updateTravelEstimate(pos.coords.latitude, pos.coords.longitude, 'Your Current Location');
+        },
+        () => {
+          btn.textContent = '📍 Use My Location';
+          alert('Location permission denied or unavailable. Please pick a Dubai area from the dropdown to see travel times.');
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    }
+
+    function calculatePresetRoute(val) {
+      if (!val) return;
+      const [latStr, lngStr] = val.split(',');
+      const sel = document.getElementById('origin-preset-select');
+      const originName = sel.options[sel.selectedIndex].text;
+      updateTravelEstimate(parseFloat(latStr), parseFloat(lngStr), originName);
+    }
+
+    function updateTravelEstimate(userLat, userLng, originLabel) {
+      const destLat = DHCC_COORDS[0];
+      const destLng = DHCC_COORDS[1];
+
+      const R = 6371;
+      const dLat = (destLat - userLat) * Math.PI / 180;
+      const dLon = (destLng - userLng) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(userLat * Math.PI / 180) * Math.cos(destLat * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      const distanceKm = (R * c * 1.25).toFixed(1);
+
+      const driveMins = Math.round((distanceKm / 42) * 60 + 4);
+      const metroMins = Math.round((distanceKm / 32) * 60 + 8);
+
+      const badge = document.getElementById('travel-result-display');
+      badge.innerHTML = `🚘 <b>${driveMins} mins drive</b> (${distanceKm} km from ${originLabel}) &bull; 🚇 <b>${metroMins} mins metro</b>`;
+
+      if (userMarker) osmMap.removeLayer(userMarker);
+      if (routeLine) osmMap.removeLayer(routeLine);
+
+      const userIcon = L.divIcon({
+        className: '',
+        html: `<div class="custom-map-pin user"><span>📍</span></div>`,
+        iconSize: [32, 32],
+        iconAnchor: [16, 32]
+      });
+
+      userMarker = L.marker([userLat, userLng], { icon: userIcon })
+        .bindPopup(`<b>${originLabel}</b><br>Distance: ${distanceKm} km`)
+        .addTo(osmMap);
+
+      routeLine = L.polyline([[userLat, userLng], [destLat, destLng]], {
+        color: '#0757d9',
+        weight: 3,
+        opacity: 0.7,
+        dashArray: '6, 8'
+      }).addTo(osmMap);
+
+      osmMap.fitBounds([[userLat, userLng], [destLat, destLng]], { padding: [40, 40] });
+    }
+
+    function handleDhccSearch(e) {
+      e.preventDefault();
+      const q = document.getElementById('search-q').value.toLowerCase().trim();
+      const type = document.getElementById('search-type').value;
+      const cards = document.querySelectorAll('#main-provider-cards .provider-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        let match = true;
+        const cType = card.getAttribute('data-type');
+        const cName = card.getAttribute('data-name').toLowerCase();
+        if (type !== 'all' && cType !== type) match = false;
+        if (q && !cName.includes(q)) match = false;
+        card.style.display = match ? 'flex' : 'none';
+        if (match) visible++;
+      });
+      document.getElementById('results-count-title').innerHTML = `Showing ${visible} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Dubai Healthcare City</span>`;
+    }
+
+    function filterByTag(tag, btn) {
+      document.querySelectorAll('.loc-q-tag').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#main-provider-cards .provider-card');
+      let count = 0;
+      cards.forEach(card => {
+        const cType = card.getAttribute('data-type');
+        let show = false;
+        if (tag === 'all' || tag === 'dha' || tag === 'today') show = true;
+        else if (cType === tag) show = true;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) count++;
+      });
+      document.getElementById('results-count-title').innerHTML = `Showing ${count} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Dubai Healthcare City</span>`;
+    }
+
+    function applySidebarFilters() {
+      const checkedTypes = Array.from(document.querySelectorAll('input[name="sb_type"]:checked')).map(cb => cb.value);
+      const minRating = parseFloat(document.querySelector('input[name="sb_rating"]:checked')?.value || '0');
+      const cards = document.querySelectorAll('#main-provider-cards .provider-card');
+      let visible = 0;
+
+      cards.forEach(card => {
+        const cType = card.getAttribute('data-type');
+        const cRating = parseFloat(card.getAttribute('data-rating') || '0');
+        let show = true;
+        if (checkedTypes.length > 0 && !checkedTypes.includes(cType)) show = false;
+        if (cRating < minRating) show = false;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('results-count-title').innerHTML = `Showing ${visible} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Dubai Healthcare City</span>`;
+    }
+
+    function resetSidebarFilters() {
+      document.querySelectorAll('input[name="sb_type"]').forEach(cb => cb.checked = true);
+      document.querySelectorAll('input[name="sb_spec"]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('input[name="sb_avail"]').forEach(cb => cb.checked = false);
+      document.getElementById('r-all').checked = true;
+      applySidebarFilters();
+    }
+
+    function sortProviderCards(sortType) {
+      const container = document.getElementById('main-provider-cards');
+      const cards = Array.from(container.children);
+      cards.sort((a, b) => {
+        if (sortType === 'rating') {
+          return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
+        } else if (sortType === 'alpha') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        }
+        return 0;
+      });
+      cards.forEach(card => container.appendChild(card));
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initDHCCMap();
+    });
+  </script>
+
 </body>
 </html>

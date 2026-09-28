@@ -89,9 +89,9 @@
       transition: border-color 0.2s;
     }
     .searchbar input:focus, .searchbar select:focus {
-      border-color: var(--gold-primary, #b8860b);
+      border-color: var(--blue);
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
+      box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.12);
     }
 
     .quick-filter-strip {
@@ -107,7 +107,7 @@
     }
     .q-filter {
       background: #ffffff;
-      border: 1px solid #ede4d3;
+      border: 1px solid var(--line);
       padding: 7px 14px;
       border-radius: 20px;
       font-size: 12px;
@@ -122,13 +122,14 @@
       text-decoration: none;
     }
     .q-filter:hover {
-      border-color: #b8860b;
-      background: #fbf5e6;
+      border-color: var(--blue);
+      background: #eef5ff;
+      color: var(--blue);
     }
     .q-filter.active {
-      background: #b8860b;
+      background: var(--blue);
       color: #ffffff;
-      border-color: #b8860b;
+      border-color: var(--blue);
     }
 
     .main {
@@ -631,10 +632,10 @@
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="fertifind_dubai_directory_search_page.html" class="active">Directory</a>
-        <a href="services.html">30 DHA Services</a>
-        <a href="locations.html">Districts</a>
-        <a href="specialists.html">Specialists</a>
-        <a href="categories.html">Categories</a>
+        <a href="location.html?location=dubai-healthcare-city">Locations</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
+        <a href="fertifind_dubai_directory_search_page.html?type=clinic">Clinics</a>
+        <a href="fertility-treatment-cost-dubai.html">Pricing</a>
 
         <!-- Mega Menu: Find Care -->
         <div class="nav-dropdown">
@@ -761,10 +762,8 @@
     <div class="mobile-drawer" id="mobileDrawer">
       <a href="index.html">🏠 Home Directory</a>
       <a href="fertifind_dubai_directory_search_page.html" class="active">🔍 Search Directory</a>
-      <a href="services.html">📋 All 30 DHA Services</a>
-      <a href="locations.html">📍 Dubai Districts</a>
-      <a href="specialists.html">🩺 Specialists</a>
-      <a href="categories.html">🏢 Facility Categories</a>
+      <a href="location.html?location=dubai-healthcare-city">📍 Dubai Districts (DHCC, Jumeirah)</a>
+      <a href="fertility-treatment-cost-dubai.html">💰 Cost Benchmark</a>
       <a href="fertifind_dubai_directory_search_page.html?type=doctor">🩺 Doctors & Specialists</a>
       <a href="fertifind_dubai_directory_search_page.html?type=hospital">🏥 Hospitals & Centers</a>
       <a href="fertifind_dubai_directory_search_page.html?type=clinic">🏢 Clinics & Polyclinics</a>

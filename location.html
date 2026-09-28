@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Top IVF & Fertility Clinics in Jumeirah Dubai | FertiFind Dubai</title>
-  <meta name="description" content="Discover premier IVF clinics, fertility specialists, and diagnostics in Jumeirah Dubai (Jumeirah 1, 2, 3 & Al Wasl). Interactive map, travel time estimator, DHA verified credentials, and instant appointment booking.">
-  <link rel="canonical" href="https://dubaidoctorsdirectory.surge.sh/ivf-clinics-in-jumeirah-dubai.html">
+  <title>Doctors, IVF Clinics & Diagnostic Labs in Dubai Healthcare City | FertiFind Dubai</title>
+  <meta name="description" content="Discover top-rated fertility doctors, accredited IVF clinics, hospitals, and diagnostic labs in Dubai Healthcare City (DHCC). Real-time map, travel time estimator, DHA verified credentials, and direct appointment booking.">
   <link rel="stylesheet" href="css/style.css">
   <!-- Leaflet CSS for OpenStreetMap -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -1003,7 +1002,7 @@
         <a href="fertifind_dubai_directory_search_page.html?type=doctor" class="nav-link">Doctors</a>
         <a href="fertifind_dubai_directory_search_page.html?type=clinic" class="nav-link">Clinics</a>
         <a href="fertifind_dubai_directory_search_page.html?type=labs" class="nav-link">Diagnostics</a>
-        <a href="ivf-clinics-in-jumeirah-dubai.html" class="nav-link active">Jumeirah Hub</a>
+        <a href="location.html?location=dubai-healthcare-city" class="nav-link active">Locations</a>
         <a href="fertility-treatment-cost-dubai.html" class="nav-link">Pricing</a>
       </nav>
       <div class="header-cta" style="display:flex;align-items:center;gap:10px">
@@ -1019,23 +1018,23 @@
       <div class="loc-crumb">
         <a href="index.html">Home</a> &rsaquo;
         <a href="fertifind_dubai_directory_search_page.html">Dubai Healthcare Directory</a> &rsaquo;
-        <span>Jumeirah (Jumeirah 1, 2, 3 &amp; Al Wasl)</span>
+        <span id="hero-crumb-loc">Dubai Healthcare City (DHCC)</span>
       </div>
 
-      <h1>Top IVF &amp; Fertility Clinics in <span style="color:var(--primary-blue)">Jumeirah Dubai</span></h1>
+      <h1 id="hero-heading">Top Doctors, IVF Clinics & Diagnostic Labs in <span style="color:var(--primary-blue)" id="hero-loc-title">Dubai Healthcare City (DHCC)</span></h1>
 
-      <p class="loc-hero-desc">
-        Explore premier boutique IVF clinics, reproductive endocrinology suites, and certified diagnostic laboratories along Jumeirah Beach Road and Al Wasl Road. Verified DHA credentials, private villa parking, and direct WhatsApp appointment booking.
+      <p class="loc-hero-desc" id="hero-summary-text">
+        Explore verified fertility specialists, licensed reproductive endocrinologists, accredited IVF day-surgery clinics, and clinical diagnostic laboratories in Dubai Healthcare City (DHCC). Regulated under Dubai Healthcare City Authority (DHCR) and DHA licensing standards.
       </p>
 
       <div class="loc-stats-strip">
         <div class="loc-stat-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2zM9 9h6m-6 4h6m-6 4h4"/></svg>
-          <span><b>110+</b> Clinics &amp; Centers</span>
+          <span><b id="stat-clinics-count">160+</b> Clinics & Centers</span>
         </div>
         <div class="loc-stat-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          <span><b>850+</b> Licensed Specialists</span>
+          <span><b id="stat-docs-count">1,200+</b> Licensed Specialists</span>
         </div>
         <div class="loc-stat-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
@@ -1048,30 +1047,30 @@
       </div>
 
       <!-- Embedded Search Filter Box -->
-      <form class="loc-search-box" id="jumeirah-hero-search" onsubmit="handleJumeirahSearch(event)">
+      <form class="loc-search-box" id="location-hero-search" onsubmit="handleLocationSearch(event)">
         <input type="search" name="q" id="search-q" placeholder="Search doctors, treatments" value="">
         <select name="provider_type" id="search-type">
           <option value="all">All Healthcare Types</option>
-          <option value="doctor">Doctors &amp; Specialists</option>
-          <option value="clinic">Fertility &amp; IVF Clinics</option>
+          <option value="doctor">Doctors & Specialists</option>
+          <option value="clinic">Fertility & IVF Clinics</option>
           <option value="hospital">Hospitals</option>
-          <option value="labs">Diagnostic &amp; Blood Labs</option>
+          <option value="labs">Diagnostic & Blood Labs</option>
         </select>
         <select name="specialty" id="search-specialty">
           <option value="all">All Clinical Specialties</option>
           <option value="ivf">Reproductive Medicine (IVF)</option>
-          <option value="icsi">ICSI &amp; Embryology</option>
-          <option value="obgyn">Obstetrics &amp; Gynecology</option>
-          <option value="andrology">Male Fertility &amp; Andrology</option>
+          <option value="icsi">ICSI & Embryology</option>
+          <option value="obgyn">Obstetrics & Gynecology</option>
+          <option value="andrology">Male Fertility & Andrology</option>
           <option value="genetics">Reproductive Genetics</option>
           <option value="ultrasound">Fertility Ultrasound</option>
         </select>
-        <select name="location" id="search-location" onchange="window.location.href='location.html?location=' + this.value">
-          <option value="jumeirah" selected>Jumeirah &amp; Al Wasl</option>
-          <option value="dubai-healthcare-city">Dubai Healthcare City (DHCC)</option>
-          <option value="dubai-marina">Dubai Marina &amp; JBR</option>
-          <option value="downtown-dubai">Downtown &amp; Business Bay</option>
-          <option value="dubai-hills">Dubai Hills &amp; Al Barsha</option>
+        <select name="location" id="search-location" onchange="switchLocationPage(this.value)">
+          <option value="dubai-healthcare-city" selected>Dubai Healthcare City (DHCC)</option>
+          <option value="jumeirah">Jumeirah & Al Wasl</option>
+          <option value="dubai-marina">Dubai Marina & JBR</option>
+          <option value="downtown-dubai">Downtown & Business Bay</option>
+          <option value="dubai-hills">Dubai Hills & Al Barsha</option>
         </select>
         <button type="submit" class="btn btn-primary btn-search">Search Providers</button>
       </form>
@@ -1094,8 +1093,8 @@
     <div class="container">
       <div class="map-header-wrap">
         <div>
-          <h2>Interactive Healthcare Map &amp; Route Estimator: <span style="color:var(--primary-blue)">Jumeirah Dubai</span></h2>
-          <p>Explore accredited clinics, consulting doctors, and diagnostic labs along Jumeirah Beach Road and Al Wasl Road. Check estimated travel time.</p>
+          <h2>Interactive Healthcare Map & Route Estimator: <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Explore accredited clinics, consulting doctors, and diagnostic labs in this area. Check estimated travel time from your location.</p>
         </div>
       </div>
 
@@ -1112,15 +1111,16 @@
         <select name="origin_preset" id="origin-preset-select" onchange="calculatePresetRoute(this.value)">
           <option value="">Or Pick Starting Area...</option>
           <option value="25.1972,55.2744">Downtown Dubai / Burj Khalifa</option>
-          <option value="25.0784,55.1388">Dubai Marina &amp; JBR</option>
+          <option value="25.0784,55.1388">Dubai Marina & JBR</option>
           <option value="25.1842,55.2635">Business Bay</option>
-          <option value="25.2341,55.3218">Dubai Healthcare City (DHCC)</option>
+          <option value="25.2048,55.2444">Jumeirah 1 & Al Wasl</option>
           <option value="25.1112,55.2536">Dubai Hills Estate</option>
           <option value="25.2532,55.3657">Dubai Int'l Airport (DXB)</option>
           <option value="25.1165,55.1963">Al Barsha / Mall of Emirates</option>
+          <option value="25.2711,55.3075">Deira City Centre</option>
         </select>
         <div class="travel-result-pill" id="travel-result-display">
-          🚘 <b>12 mins drive</b> (7.5 km via Al Wasl Rd) &bull; 🚌 <b>25 mins</b> (RTA Bus 8 / 88)
+          🚘 <b>14 mins drive</b> (9.8 km via Sheikh Zayed Rd) &bull; 🚇 <b>22 mins</b> (Green Line)
         </div>
       </div>
 
@@ -1129,9 +1129,9 @@
 
       <!-- Map Legend -->
       <div class="map-legend-row">
-        <div class="legend-item"><span class="legend-dot dot-clinic"></span> <span>Fertility Clinics &amp; Hospitals</span></div>
-        <div class="legend-item"><span class="legend-dot dot-doc"></span> <span>Consulting Specialists &amp; Doctors</span></div>
-        <div class="legend-item"><span class="legend-dot dot-lab"></span> <span>Clinical &amp; Pathology Labs</span></div>
+        <div class="legend-item"><span class="legend-dot dot-clinic"></span> <span>Fertility Clinics & Hospitals</span></div>
+        <div class="legend-item"><span class="legend-dot dot-doc"></span> <span>Consulting Specialists & Doctors</span></div>
+        <div class="legend-item"><span class="legend-dot dot-lab"></span> <span>Clinical & Pathology Labs</span></div>
         <div class="legend-item"><span class="legend-dot dot-user"></span> <span>Your Estimated Location</span></div>
       </div>
     </div>
@@ -1152,19 +1152,19 @@
           <div class="filter-group-header">Facility / Provider Type</div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_type" value="doctor" id="f-doc" onchange="applySidebarFilters()" checked>
-            <span>Doctors &amp; Specialists (6)</span>
+            <span>Doctors & Specialists (8)</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_type" value="clinic" id="f-clinic" onchange="applySidebarFilters()" checked>
-            <span>Fertility &amp; IVF Clinics (4)</span>
+            <span>Fertility & IVF Clinics (4)</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_type" value="labs" id="f-lab" onchange="applySidebarFilters()" checked>
-            <span>Diagnostic &amp; Blood Labs (3)</span>
+            <span>Diagnostic & Blood Labs (4)</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_type" value="hospital" id="f-hosp" onchange="applySidebarFilters()" checked>
-            <span>Hospitals &amp; Day Surgery (2)</span>
+            <span>Hospitals & Day Surgery (2)</span>
           </div>
 
           <div class="filter-group-header">Clinical Specialties</div>
@@ -1174,15 +1174,15 @@
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_spec" value="icsi" id="s-icsi" onchange="applySidebarFilters()">
-            <span>ICSI &amp; Blastocyst Transfer</span>
+            <span>ICSI & Blastocyst Transfer</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_spec" value="egg-freezing" id="s-egg" onchange="applySidebarFilters()">
-            <span>Egg &amp; Sperm Freezing</span>
+            <span>Egg & Sperm Freezing</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_spec" value="andrology" id="s-and" onchange="applySidebarFilters()">
-            <span>Male Infertility &amp; Andrology</span>
+            <span>Male Infertility & Andrology</span>
           </div>
           <div class="filter-check-item">
             <input type="checkbox" name="sb_spec" value="genetics" id="s-gen" onchange="applySidebarFilters()">
@@ -1192,11 +1192,11 @@
           <div class="filter-group-header">Minimum Star Rating</div>
           <div class="filter-check-item">
             <input type="radio" name="sb_rating" value="4.8" id="r-48" onchange="applySidebarFilters()">
-            <span>4.8+ Stars &amp; Above</span>
+            <span>4.8+ Stars & Above</span>
           </div>
           <div class="filter-check-item">
             <input type="radio" name="sb_rating" value="4.5" id="r-45" onchange="applySidebarFilters()">
-            <span>4.5+ Stars &amp; Above</span>
+            <span>4.5+ Stars & Above</span>
           </div>
           <div class="filter-check-item">
             <input type="radio" name="sb_rating" value="0" id="r-all" onchange="applySidebarFilters()" checked>
@@ -1221,7 +1221,7 @@
         <!-- Right Results Content Area -->
         <main class="dir-results-pane">
           <div class="results-head-row">
-            <h2 id="results-count-title">Showing 8 Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Jumeirah</span></h2>
+            <h2 id="results-count-title">Showing 10 Verified Healthcare Facilities in <span class="loc-name-active">Dubai Healthcare City</span></h2>
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:12px;color:#64748b">Sort:</span>
               <select name="sort_order" class="results-sort-select" onchange="sortProviderCards(this.value)">
@@ -1236,164 +1236,246 @@
           <!-- 2-Column Cards Grid for Desktop, 1 Column for Mobile -->
           <div class="provider-cards-grid" id="main-provider-cards">
             
-            <!-- Card 1: Fakih IVF Jumeirah -->
-            <div class="provider-card" data-type="clinic" data-rating="4.96" data-name="Fakih IVF Fertility Centre Jumeirah">
+            <!-- Card 1: Orchid Fertility DHCC (Clinic) -->
+            <div class="provider-card" data-type="clinic" data-rating="4.96" data-name="Orchid Reproductive Clinic">
               <div class="provider-card-head">
-                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80')">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80')">
                   <span class="thumb-type-tag">IVF Clinic</span>
                 </div>
                 <div class="provider-card-body">
-                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-1048</span>
-                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">Fakih IVF Fertility Center Jumeirah</a></div>
-                  <div class="provider-subtext">Al Wasl Road, Jumeirah 2 &bull; Private Valet Parking</div>
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-8921</span>
+                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">Orchid Reproductive Clinic & IVF Centre</a></div>
+                  <div class="provider-subtext">Building 64, Al Razi Complex, DHCC</div>
                   <div class="provider-rating-row">
                     <span class="stars">★★★★★</span>
                     <span class="rating-num">4.96</span>
-                    <span style="color:#64748b">(320 reviews)</span>
+                    <span style="color:#64748b">(248 reviews)</span>
                   </div>
                 </div>
               </div>
               <div class="provider-card-details">
                 <div class="tags-strip">
-                  <span class="micro-tag">IVF / ICSI</span>
+                  <span class="micro-tag">IVF Cycle</span>
+                  <span class="micro-tag">ICSI</span>
+                  <span class="micro-tag">Egg Freezing</span>
                   <span class="micro-tag">PGT-A Genetics</span>
-                  <span class="micro-tag">Gender Selection</span>
-                  <span class="micro-tag">Egg Cryo</span>
                 </div>
+                <!-- Masked Reveal Phone / WhatsApp Strip -->
                 <div class="card-contact-strip">
                   <span class="contact-pill-wrap">
-                    📞 <span class="masked-num" id="cn-jum-c1">+971 4 349 ••••</span>
-                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-jum-c1', '+971 4 349 7600')">Show</button>
+                    📞 <span class="masked-num" id="cn-dhcc-c1">+971 4 437 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-c1', '+971 4 437 7920')">Show</button>
                   </span>
                   <span class="contact-pill-wrap">
-                    💬 <span class="masked-num" id="cw-jum-c1">+971 50 ••••</span>
-                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-jum-c1', '+971 50 488 3311')">WhatsApp</button>
+                    💬 <span class="masked-num" id="cw-dhcc-c1">+971 50 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-c1', '+971 50 821 4410')">WhatsApp</button>
                   </span>
                 </div>
               </div>
               <div class="provider-card-actions">
                 <a href="fertifind_hospital_profile_page.html" class="btn btn-outline">View Clinic</a>
-                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Fakih IVF Jumeirah','IVF Consultation')">Book Appointment</button>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Reproductive Clinic','IVF Consultation')">Book Appointment</button>
               </div>
             </div>
 
-            <!-- Card 2: Dr. Sarah Jenkins (Doctor) -->
-            <div class="provider-card" data-type="doctor" data-rating="4.97" data-name="Dr Sarah Jenkins">
+            <!-- Card 2: Dr. Michael Al-Husseini (Doctor) -->
+            <div class="provider-card" data-type="doctor" data-rating="4.98" data-name="Dr Michael Al Husseini">
               <div class="provider-card-head">
-                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80')">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')">
                   <span class="thumb-type-tag">Consultant</span>
                 </div>
                 <div class="provider-card-body">
-                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #DOC-5510</span>
-                  <div class="provider-title"><a href="fertifind_doctor_profile_page.html">Dr. Sarah Jenkins, BM BCh, FRCOG</a></div>
-                  <div class="provider-subtext">Consultant Reproductive Medicine &bull; Jumeirah 1</div>
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #DOC-4190</span>
+                  <div class="provider-title"><a href="fertifind_doctor_profile_page.html">Dr. Michael Al-Husseini, MD, FRCOG</a></div>
+                  <div class="provider-subtext">Senior IVF Consultant &bull; Al Razi Bldg, DHCC</div>
                   <div class="provider-rating-row">
                     <span class="stars">★★★★★</span>
-                    <span class="rating-num">4.97</span>
-                    <span style="color:#64748b">(245 reviews)</span>
+                    <span class="rating-num">4.98</span>
+                    <span style="color:#64748b">(312 reviews)</span>
                   </div>
                 </div>
               </div>
               <div class="provider-card-details">
                 <div class="tags-strip">
-                  <span class="micro-tag">UK Trained</span>
-                  <span class="micro-tag">Fertility Preservation</span>
-                  <span class="micro-tag">Mild IVF</span>
+                  <span class="micro-tag">Reproductive Endocrinology</span>
+                  <span class="micro-tag">Recurrent Failure</span>
+                  <span class="micro-tag">22+ Yrs Exp</span>
                 </div>
                 <div class="card-contact-strip">
                   <span class="contact-pill-wrap">
-                    📞 <span class="masked-num" id="cn-jum-d1">+971 4 344 ••••</span>
-                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-jum-d1', '+971 4 344 1900')">Show</button>
+                    📞 <span class="masked-num" id="cn-dhcc-d1">+971 4 382 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-d1', '+971 4 382 9901')">Show</button>
                   </span>
                   <span class="contact-pill-wrap">
-                    💬 <span class="masked-num" id="cw-jum-d1">+971 52 ••••</span>
-                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-jum-d1', '+971 52 911 2040')">WhatsApp</button>
+                    💬 <span class="masked-num" id="cw-dhcc-d1">+971 54 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-d1', '+971 54 391 0022')">WhatsApp</button>
                   </span>
                 </div>
               </div>
               <div class="provider-card-actions">
                 <a href="fertifind_doctor_profile_page.html" class="btn btn-outline">View Doctor</a>
-                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Sarah Jenkins','Initial Consultation')">Book Consultation</button>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Michael Al-Husseini','Initial Fertility Consultation')">Book Consultation</button>
               </div>
             </div>
 
-            <!-- Card 3: HealthPlus Fertility Center Jumeirah -->
-            <div class="provider-card" data-type="clinic" data-rating="4.93" data-name="HealthPlus Fertility Center Jumeirah">
+            <!-- Card 3: Bourn Hall Fertility Centre (Clinic) -->
+            <div class="provider-card" data-type="clinic" data-rating="4.92" data-name="Bourn Hall Fertility Centre">
               <div class="provider-card-head">
-                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=400&q=80')">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=400&q=80')">
                   <span class="thumb-type-tag">IVF Centre</span>
                 </div>
                 <div class="provider-card-body">
-                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-6201</span>
-                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">HealthPlus Fertility Center Jumeirah</a></div>
-                  <div class="provider-subtext">Jumeirah Beach Road, Villa 410, Jumeirah 3</div>
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #CL-4412</span>
+                  <div class="provider-title"><a href="fertifind_hospital_profile_page.html">Bourn Hall Fertility Centre Dubai</a></div>
+                  <div class="provider-subtext">Building 64, Block A, DHCC</div>
                   <div class="provider-rating-row">
                     <span class="stars">★★★★★</span>
-                    <span class="rating-num">4.93</span>
-                    <span style="color:#64748b">(175 reviews)</span>
+                    <span class="rating-num">4.92</span>
+                    <span style="color:#64748b">(184 reviews)</span>
                   </div>
                 </div>
               </div>
               <div class="provider-card-details">
                 <div class="tags-strip">
-                  <span class="micro-tag">CAP Accredited Lab</span>
-                  <span class="micro-tag">Pre-implantation Biopsy</span>
-                  <span class="micro-tag">IUI &amp; ICSI</span>
+                  <span class="micro-tag">Pioneering IVF Lab</span>
+                  <span class="micro-tag">Blastocyst Biopsy</span>
+                  <span class="micro-tag">Sperm Retrieval</span>
                 </div>
                 <div class="card-contact-strip">
                   <span class="contact-pill-wrap">
-                    📞 <span class="masked-num" id="cn-jum-c2">+971 4 398 ••••</span>
-                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-jum-c2', '+971 4 398 5500')">Show</button>
+                    📞 <span class="masked-num" id="cn-dhcc-c2">+971 4 365 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-c2', '+971 4 365 5200')">Show</button>
                   </span>
                   <span class="contact-pill-wrap">
-                    💬 <span class="masked-num" id="cw-jum-c2">+971 55 ••••</span>
-                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-jum-c2', '+971 55 601 4488')">WhatsApp</button>
+                    💬 <span class="masked-num" id="cw-dhcc-c2">+971 52 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-c2', '+971 52 449 8812')">WhatsApp</button>
                   </span>
                 </div>
               </div>
               <div class="provider-card-actions">
                 <a href="fertifind_hospital_profile_page.html" class="btn btn-outline">View Clinic</a>
-                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('HealthPlus Fertility Jumeirah','Fertility Evaluation')">Book Appointment</button>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Bourn Hall Fertility Centre','IVF Evaluation')">Book Appointment</button>
               </div>
             </div>
 
-            <!-- Card 4: Al Zahra Diagnostic Lab Jumeirah (Lab) -->
-            <div class="provider-card" data-type="labs" data-rating="4.92" data-name="Al Zahra Diagnostic Lab Jumeirah">
+            <!-- Card 4: PureHealth Clinical Genetics & Diagnostics (Lab) -->
+            <div class="provider-card" data-type="labs" data-rating="4.95" data-name="PureHealth Clinical Genetics">
               <div class="provider-card-head">
-                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80')">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80')">
                   <span class="thumb-type-tag">Diagnostic Lab</span>
                 </div>
                 <div class="provider-card-body">
-                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> ISO 15189 Certified</span>
-                  <div class="provider-title"><a href="fertifind_labs_profile_page.html">Al Zahra Diagnostic Lab Jumeirah</a></div>
-                  <div class="provider-subtext">Al Wasl Medical Plaza, Jumeirah 1</div>
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> ISO 15189 / CAP</span>
+                  <div class="provider-title"><a href="fertifind_labs_profile_page.html">PureHealth Diagnostics & Genetics Lab</a></div>
+                  <div class="provider-subtext">Building 33, Dubai Healthcare City</div>
                   <div class="provider-rating-row">
                     <span class="stars">★★★★★</span>
-                    <span class="rating-num">4.92</span>
-                    <span style="color:#64748b">(140 reviews)</span>
+                    <span class="rating-num">4.95</span>
+                    <span style="color:#64748b">(190 reviews)</span>
                   </div>
                 </div>
               </div>
               <div class="provider-card-details">
                 <div class="tags-strip">
                   <span class="micro-tag">AMH Hormone</span>
-                  <span class="micro-tag">Home Blood Draw</span>
-                  <span class="micro-tag">Thyroid &amp; Vitamin D</span>
+                  <span class="micro-tag">Semen Analysis</span>
+                  <span class="micro-tag">Karyotyping</span>
+                  <span class="micro-tag">Same-Day</span>
                 </div>
                 <div class="card-contact-strip">
                   <span class="contact-pill-wrap">
-                    📞 <span class="masked-num" id="cn-jum-l1">+971 4 344 ••••</span>
-                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-jum-l1', '+971 4 344 8820')">Show</button>
+                    📞 <span class="masked-num" id="cn-dhcc-l1">+971 4 429 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-l1', '+971 4 429 8830')">Show</button>
                   </span>
                   <span class="contact-pill-wrap">
-                    💬 <span class="masked-num" id="cw-jum-l1">+971 56 ••••</span>
-                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-jum-l1', '+971 56 789 2200')">WhatsApp</button>
+                    💬 <span class="masked-num" id="cw-dhcc-l1">+971 50 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-l1', '+971 50 671 2299')">WhatsApp</button>
                   </span>
                 </div>
               </div>
               <div class="provider-card-actions">
                 <a href="fertifind_labs_profile_page.html" class="btn btn-outline">View Lab Profile</a>
-                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Al Zahra Diagnostic Lab Jumeirah','Hormone Blood Panel')">Book Lab Test</button>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('PureHealth Genetics Lab','Fertility Blood Panel')">Book Lab Test</button>
+              </div>
+            </div>
+
+            <!-- Card 5: Dr. Layla Mahmoud (Doctor) -->
+            <div class="provider-card" data-type="doctor" data-rating="4.97" data-name="Dr Layla Mahmoud">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Specialist</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> DHA Lic #DOC-8820</span>
+                  <div class="provider-title"><a href="fertifind_doctor_profile_page.html">Dr. Layla Mahmoud, MD, FACOG</a></div>
+                  <div class="provider-subtext">Reproductive Endocrinologist &bull; Bldg 27, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.97</span>
+                    <span style="color:#64748b">(275 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">PCOS Protocols</span>
+                  <span class="micro-tag">Egg Freezing</span>
+                  <span class="micro-tag">Mild Stimulation</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-d2">+971 4 390 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-d2', '+971 4 390 1200')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-d2">+971 55 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-d2', '+971 55 981 7733')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_doctor_profile_page.html" class="btn btn-outline">View Doctor</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Layla Mahmoud','PCOS / IVF Consultation')">Book Consultation</button>
+              </div>
+            </div>
+
+            <!-- Card 6: Al Borg Diagnostics Centre DHCC (Lab) -->
+            <div class="provider-card" data-type="labs" data-rating="4.90" data-name="Al Borg Diagnostics Centre">
+              <div class="provider-card-head">
+                <div class="provider-card-thumb" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80')">
+                  <span class="thumb-type-tag">Diagnostic Lab</span>
+                </div>
+                <div class="provider-card-body">
+                  <span class="provider-dha-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> CAP Accredited</span>
+                  <div class="provider-title"><a href="fertifind_labs_profile_page.html">Al Borg Diagnostics Centre DHCC</a></div>
+                  <div class="provider-subtext">Al Razi Building 64, Block B, DHCC</div>
+                  <div class="provider-rating-row">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-num">4.90</span>
+                    <span style="color:#64748b">(165 reviews)</span>
+                  </div>
+                </div>
+              </div>
+              <div class="provider-card-details">
+                <div class="tags-strip">
+                  <span class="micro-tag">Male Fertility Panel</span>
+                  <span class="micro-tag">Hormone Profiles</span>
+                  <span class="micro-tag">Home Sample</span>
+                </div>
+                <div class="card-contact-strip">
+                  <span class="contact-pill-wrap">
+                    📞 <span class="masked-num" id="cn-dhcc-l2">+971 4 362 ••••</span>
+                    <button type="button" class="btn-reveal-micro" onclick="revealContact('cn-dhcc-l2', '+971 4 362 4910')">Show</button>
+                  </span>
+                  <span class="contact-pill-wrap">
+                    💬 <span class="masked-num" id="cw-dhcc-l2">+971 56 ••••</span>
+                    <button type="button" class="btn-reveal-micro wa" onclick="revealContact('cw-dhcc-l2', '+971 56 123 9980')">WhatsApp</button>
+                  </span>
+                </div>
+              </div>
+              <div class="provider-card-actions">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline">View Lab Profile</a>
+                <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('Al Borg Diagnostics','Comprehensive Fertility Screen')">Order Lab Tests</button>
               </div>
             </div>
 
@@ -1404,13 +1486,13 @@
     </div>
   </section>
 
-  <!-- SECTION 4: TOP RATED DOCTORS IN JUMEIRAH (5-10 CARDS SLIDER) -->
+  <!-- SECTION 4: TOP RATED DOCTORS IN THAT REGION (5-10 CARDS SLIDER) -->
   <section class="top-docs-section">
     <div class="container">
       <div class="slider-header-row">
         <div>
-          <h2>Top Rated Fertility &amp; Medical Specialists in <span style="color:var(--primary-blue)">Jumeirah</span></h2>
-          <p>Board-certified fertility consultants with highest verified patient satisfaction along Jumeirah and Al Wasl.</p>
+          <h2>Top Rated Fertility & Medical Specialists in <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Board-certified consultants and senior reproductive specialists with highest verified patient ratings.</p>
         </div>
         <div class="slider-arrows">
           <button type="button" class="slider-btn" onclick="slideContainer('top-docs-slider', -300)" aria-label="Previous Doctor">
@@ -1422,38 +1504,17 @@
         </div>
       </div>
 
-      <!-- Doctor Slider Cards Track -->
+      <!-- Doctor Slider Cards Track (6 to 8 Verified Specialists) -->
       <div class="docs-slider-container" id="top-docs-slider">
 
-        <!-- Doc 1 -->
-        <div class="doc-slide-card">
-          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80')"></div>
-          <div class="doc-slide-body">
-            <div>
-              <span class="provider-dha-pill">DHA Lic #5510 &bull; Consultant</span>
-              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Sarah Jenkins, FRCOG</a></div>
-              <div class="provider-subtext">Reproductive Specialist &bull; Jumeirah 1</div>
-              <div class="provider-rating-row" style="margin:4px 0 10px">
-                <span class="stars">★★★★★</span>
-                <span class="rating-num">4.97</span>
-                <span>(245 reviews)</span>
-              </div>
-              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
-                Tariff: <b>AED 600</b> &bull; Wait: <b>&lt; 10 mins</b>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Sarah Jenkins','Specialist Consultation')">Book Doctor</button>
-          </div>
-        </div>
-
-        <!-- Doc 2 -->
+        <!-- Slide Doc 1 -->
         <div class="doc-slide-card">
           <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80')"></div>
           <div class="doc-slide-body">
             <div>
-              <span class="provider-dha-pill">DHA Lic #4190 &bull; Senior Consultant</span>
+              <span class="provider-dha-pill">DHA Lic #4190 &bull; Consultant</span>
               <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Michael Al-Husseini</a></div>
-              <div class="provider-subtext">Visiting Senior Specialist &bull; Jumeirah 2</div>
+              <div class="provider-subtext">Senior IVF Consultant &bull; Orchid DHCC</div>
               <div class="provider-rating-row" style="margin:4px 0 10px">
                 <span class="stars">★★★★★</span>
                 <span class="rating-num">4.98</span>
@@ -1467,14 +1528,14 @@
           </div>
         </div>
 
-        <!-- Doc 3 -->
+        <!-- Slide Doc 2 -->
         <div class="doc-slide-card">
           <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')"></div>
           <div class="doc-slide-body">
             <div>
               <span class="provider-dha-pill">DHA Lic #8820 &bull; FACOG</span>
               <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Layla Mahmoud</a></div>
-              <div class="provider-subtext">Reproductive Endocrinologist &bull; Al Wasl</div>
+              <div class="provider-subtext">Reproductive Endocrinology &bull; DHCC</div>
               <div class="provider-rating-row" style="margin:4px 0 10px">
                 <span class="stars">★★★★★</span>
                 <span class="rating-num">4.97</span>
@@ -1488,14 +1549,14 @@
           </div>
         </div>
 
-        <!-- Doc 4 -->
+        <!-- Slide Doc 3 -->
         <div class="doc-slide-card">
           <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80')"></div>
           <div class="doc-slide-body">
             <div>
               <span class="provider-dha-pill">DHA Lic #6501 &bull; Andrologist</span>
               <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Farhan Qureshi</a></div>
-              <div class="provider-subtext">Male Fertility Microsurgeon &bull; Jumeirah 3</div>
+              <div class="provider-subtext">Male Infertility Microsurgeon &bull; Bldg 64</div>
               <div class="provider-rating-row" style="margin:4px 0 10px">
                 <span class="stars">★★★★★</span>
                 <span class="rating-num">4.95</span>
@@ -1509,6 +1570,69 @@
           </div>
         </div>
 
+        <!-- Slide Doc 4 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #7712 &bull; ESHRE Cert</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Elena Rostova</a></div>
+              <div class="provider-subtext">Senior Embryologist &bull; Bourn Hall DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.94</span>
+                <span>(210 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 600</b> &bull; Wait: <b>&lt; 15 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Elena Rostova','Embryology Review')">Book Doctor</button>
+          </div>
+        </div>
+
+        <!-- Slide Doc 5 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #3309 &bull; MRCOG</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Tariq Mansoor</a></div>
+              <div class="provider-subtext">Consultant OB-GYN &bull; Bldg 27, DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.96</span>
+                <span>(195 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 500</b> &bull; Wait: <b>&lt; 10 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','OB-GYN Evaluation')">Book Doctor</button>
+          </div>
+        </div>
+
+        <!-- Slide Doc 6 -->
+        <div class="doc-slide-card">
+          <div class="doc-slide-img" style="background-image:url('https://images.unsplash.com/photo-1594824813511-370591f42d20?auto=format&fit=crop&w=400&q=80')"></div>
+          <div class="doc-slide-body">
+            <div>
+              <span class="provider-dha-pill">DHA Lic #9021 &bull; FRCOG</span>
+              <div class="provider-title" style="margin-top:6px"><a href="fertifind_doctor_profile_page.html">Dr. Samantha Reed</a></div>
+              <div class="provider-subtext">Fertility Preservation Specialist &bull; DHCC</div>
+              <div class="provider-rating-row" style="margin:4px 0 10px">
+                <span class="stars">★★★★★</span>
+                <span class="rating-num">4.93</span>
+                <span>(160 reviews)</span>
+              </div>
+              <div style="font-size:11.5px;color:#475569;margin-bottom:10px">
+                Tariff: <b>AED 650</b> &bull; Wait: <b>&lt; 15 mins</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('Dr. Samantha Reed','Fertility Preservation')">Book Doctor</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1517,50 +1641,94 @@
   <section class="twocol-lists-section">
     <div class="container">
       
-      <!-- Part 1: Top Clinics in Jumeirah -->
+      <!-- Part 1: 2-Columns List for Top Clinics Nearby in Same Category -->
       <div class="twocol-block">
         <div class="twocol-head">
-          <h2>Top Accredited Fertility Clinics in <span style="color:var(--primary-blue)">Jumeirah</span></h2>
-          <p>Discreet boutique IVF centers and clinical day surgery clinics with private recovery suites.</p>
+          <h2>Top Fertility & IVF Clinics Nearby in <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Accredited day-surgery centers and clinical IVF embryology suites with certified clinical protocols.</p>
         </div>
         <div class="twocol-grid">
 
-          <div class="list-card">
-            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=300&q=80')"></div>
-            <div class="list-card-content">
-              <div>
-                <span class="provider-dha-pill">DHA Lic #CL-1048 &bull; Premier Villa Hub</span>
-                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Fakih IVF Fertility Center Jumeirah</a></div>
-                <div class="provider-subtext">Al Wasl Road, Jumeirah 2 &bull; Private Parking &amp; Valet</div>
-                <div class="tags-strip" style="margin-top:6px">
-                  <span class="micro-tag">IVF / ICSI</span>
-                  <span class="micro-tag">Egg Cryo</span>
-                  <span class="micro-tag">PGD Genetics</span>
-                </div>
-              </div>
-              <div style="display:flex;gap:8px;margin-top:10px">
-                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
-                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Fakih IVF Jumeirah','IVF Consultation')">Book Visit</button>
-              </div>
-            </div>
-          </div>
-
+          <!-- Clinic 1 -->
           <div class="list-card">
             <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=300&q=80')"></div>
             <div class="list-card-content">
               <div>
-                <span class="provider-dha-pill">DHA Lic #CL-6201 &bull; Boutique IVF</span>
-                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">HealthPlus Fertility Center Jumeirah</a></div>
-                <div class="provider-subtext">Jumeirah Beach Road, Villa 410, Jumeirah 3</div>
+                <span class="provider-dha-pill">DHA Lic #CL-8921 &bull; Success Rate 68%</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Orchid Reproductive Clinic & IVF Centre</a></div>
+                <div class="provider-subtext">Al Razi Building 64, Block C, DHCC &bull; 0.2 km from Metro</div>
                 <div class="tags-strip" style="margin-top:6px">
-                  <span class="micro-tag">Blastocyst Culture</span>
-                  <span class="micro-tag">Sperm Freezing</span>
-                  <span class="micro-tag">IUI</span>
+                  <span class="micro-tag">IVF / ICSI</span>
+                  <span class="micro-tag">Time-Lapse Embryo</span>
+                  <span class="micro-tag">Laser Assisted Hatching</span>
                 </div>
               </div>
               <div style="display:flex;gap:8px;margin-top:10px">
                 <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
-                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('HealthPlus Fertility Jumeirah','Fertility Evaluation')">Book Visit</button>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Orchid Reproductive Clinic','IVF Consultation')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 2 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-4412 &bull; Pioneering IVF</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Bourn Hall Fertility Centre Dubai</a></div>
+                <div class="provider-subtext">Building 64, 7th Floor, Al Razi Complex, DHCC</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Blastocyst Biopsy</span>
+                  <span class="micro-tag">Egg Freezing</span>
+                  <span class="micro-tag">Onco-Fertility</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Bourn Hall Fertility Centre','IVF Appointment')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 3 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-7703 &bull; Andrology Suite</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Conceive Fertility Hospital & Day Surgery</a></div>
+                <div class="provider-subtext">Building 27, Block D, Dubai Healthcare City</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Micro-TESE</span>
+                  <span class="micro-tag">Sperm Freezing</span>
+                  <span class="micro-tag">Laparoscopy</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Conceive Fertility Hospital','Clinic Tour')">Book Visit</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinic 4 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #CL-3398 &bull; Genetic Lab</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_hospital_profile_page.html">Fakih IVF Fertility Center - Hub Hub</a></div>
+                <div class="provider-subtext">Adjacent DHCC / Oud Metha Medical Zone</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">PGT-A / PGT-M</span>
+                  <span class="micro-tag">Gender Balancing</span>
+                  <span class="micro-tag">IUI Treatment</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_hospital_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Clinic</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Fakih IVF Hub','IVF Consultation')">Book Visit</button>
               </div>
             </div>
           </div>
@@ -1568,50 +1736,94 @@
         </div>
       </div>
 
-      <!-- Part 2: Top Labs in Jumeirah -->
+      <!-- Part 2: 2-Columns List for Top Labs Nearby for Top Services in That Area -->
       <div class="twocol-block">
         <div class="twocol-head">
-          <h2>Top Diagnostic Labs for Clinical Testing in <span style="color:var(--primary-blue)">Jumeirah</span></h2>
-          <p>Licensed diagnostic centers providing hormone testing, semen analysis, and home blood draw services.</p>
+          <h2>Top Diagnostic Labs for Clinical Testing in <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>ISO 15189 and CAP-accredited pathology, genetics, and hormone diagnostics with rapid turnaround.</p>
         </div>
         <div class="twocol-grid">
 
-          <div class="list-card">
-            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80')"></div>
-            <div class="list-card-content">
-              <div>
-                <span class="provider-dha-pill">ISO 15189 Certified &bull; Rapid Testing</span>
-                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Al Zahra Diagnostic Lab Jumeirah</a></div>
-                <div class="provider-subtext">Al Wasl Medical Plaza, Jumeirah 1 &bull; Home Draw Available</div>
-                <div class="tags-strip" style="margin-top:6px">
-                  <span class="micro-tag">AMH Hormone</span>
-                  <span class="micro-tag">Thyroid Profile</span>
-                  <span class="micro-tag">Semen Analysis</span>
-                </div>
-              </div>
-              <div style="display:flex;gap:8px;margin-top:10px">
-                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
-                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Al Zahra Diagnostic Lab Jumeirah','AMH Test')">Book Lab Test</button>
-              </div>
-            </div>
-          </div>
-
+          <!-- Lab 1 -->
           <div class="list-card">
             <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=300&q=80')"></div>
             <div class="list-card-content">
               <div>
-                <span class="provider-dha-pill">CAP Accredited &bull; Genetics Suite</span>
-                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Jumeirah Reference Diagnostic Center</a></div>
-                <div class="provider-subtext">Jumeirah Beach Road, Block C &bull; Same-Day Results</div>
+                <span class="provider-dha-pill">ISO 15189 &bull; CAP Accredited</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">PureHealth Diagnostics & Genetics Lab</a></div>
+                <div class="provider-subtext">Building 33, DHCC &bull; Home Sample Collection Across Dubai</div>
                 <div class="tags-strip" style="margin-top:6px">
-                  <span class="micro-tag">NIPT Prenatal</span>
-                  <span class="micro-tag">Karyotype Screen</span>
-                  <span class="micro-tag">Endocrine Panel</span>
+                  <span class="micro-tag">AMH Hormone (3 hrs)</span>
+                  <span class="micro-tag">Computerized Semen Analysis</span>
+                  <span class="micro-tag">Karyotyping</span>
                 </div>
               </div>
               <div style="display:flex;gap:8px;margin-top:10px">
                 <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
-                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Jumeirah Reference Lab','NIPT Screen')">Book Lab Test</button>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('PureHealth Genetics Lab','AMH Blood Test')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 2 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">CAP Certified &bull; Male Fertility Panel</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Al Borg Diagnostics Centre DHCC</a></div>
+                <div class="provider-subtext">Al Razi Building 64, Block B &bull; Walk-ins Welcome</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">FSH / LH / Prolactin</span>
+                  <span class="micro-tag">Sperm DNA Fragmentation</span>
+                  <span class="micro-tag">Inhibin B</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Al Borg Diagnostics','Male Fertility Screen')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 3 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">DHA Lic #LB-2041 &bull; Molecular Testing</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">Medsol Freezone Diagnostics Hub</a></div>
+                <div class="provider-subtext">Building 47, Ground Floor, Dubai Healthcare City</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">NIPT Screening</span>
+                  <span class="micro-tag">Thyroid & Autoimmune</span>
+                  <span class="micro-tag">Vitamin D & Ferritin</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('Medsol Diagnostics Hub','NIPT Screen')">Book Lab Test</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lab 4 -->
+          <div class="list-card">
+            <div class="list-card-logo" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=300&q=80')"></div>
+            <div class="list-card-content">
+              <div>
+                <span class="provider-dha-pill">JCI & CAP &bull; Reference Lab</span>
+                <div class="provider-title" style="font-size:16px;margin-top:4px"><a href="fertifind_labs_profile_page.html">National Reference Laboratory (NRL) DHCC</a></div>
+                <div class="provider-subtext">Building 64, Al Razi Complex, DHCC</div>
+                <div class="tags-strip" style="margin-top:6px">
+                  <span class="micro-tag">Endocrine Biomarkers</span>
+                  <span class="micro-tag">Whole Exome Sequencing</span>
+                  <span class="micro-tag">Thrombophilia Panel</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <a href="fertifind_labs_profile_page.html" class="btn btn-outline" style="font-size:11px;padding:6px 10px">View Lab</a>
+                <button type="button" class="btn btn-primary" style="font-size:11px;padding:6px 10px" onclick="FertiFind.openBooking('National Reference Lab','Genetics Screen')">Book Lab Test</button>
               </div>
             </div>
           </div>
@@ -1627,8 +1839,8 @@
     <div class="container">
       <div class="slider-header-row">
         <div>
-          <h2>What Patients Say About Healthcare in <span style="color:var(--primary-blue)">Jumeirah</span></h2>
-          <p>Verified reviews from patients who booked fertility treatments and consultations in Jumeirah.</p>
+          <h2>What Patients Say About Healthcare in <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
+          <p>Verified reviews from patients who booked fertility treatments, consultations, and diagnostic tests.</p>
         </div>
         <div class="slider-arrows">
           <button type="button" class="slider-btn" onclick="slideContainer('cust-rev-slider', -340)" aria-label="Previous Review">
@@ -1640,8 +1852,10 @@
         </div>
       </div>
 
+      <!-- Reviews Track -->
       <div class="rev-slider-track" id="cust-rev-slider">
 
+        <!-- Review 1 -->
         <div class="rev-slide-card">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1649,18 +1863,19 @@
               <span class="provider-dha-pill">Verified Patient</span>
             </div>
             <p class="rev-quote">
-              "We chose Fakih IVF in Jumeirah for our treatment cycle. The privacy of the medical villa, on-site parking, and Dr. Sarah's attentiveness made a delicate journey feel completely calm and supported."
+              "Our ICSI journey at Orchid DHCC was successful on our first transfer. Dr. Michael and the entire nursing team were compassionate and transparent about every single clinical milestone."
             </p>
           </div>
           <div class="rev-author-row">
-            <div class="rev-author-avatar">NL</div>
+            <div class="rev-author-avatar">SM</div>
             <div>
-              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Nadia &amp; Liam T.</div>
-              <div style="font-size:11px;color:#64748b">IVF Treatment &bull; Fakih IVF Jumeirah</div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Sarah &amp; David M.</div>
+              <div style="font-size:11px;color:#64748b">IVF ICSI Cycle &bull; Orchid DHCC</div>
             </div>
           </div>
         </div>
 
+        <!-- Review 2 -->
         <div class="rev-slide-card">
           <div>
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -1668,14 +1883,54 @@
               <span class="provider-dha-pill">Verified Patient</span>
             </div>
             <p class="rev-quote">
-              "Used FertiFind to book an egg freezing consultation on Al Wasl Road. The specialist explained hormone dosages transparently and the clinic had zero waiting time."
+              "Booked an egg freezing consultation through FertiFind. The clinic in DHCC had zero wait time, pristine clinical laboratories, and fully itemized DHA pricing with no hidden charges."
             </p>
           </div>
           <div class="rev-author-row">
-            <div class="rev-author-avatar">MK</div>
+            <div class="rev-author-avatar">AK</div>
             <div>
-              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Mariam K.</div>
-              <div style="font-size:11px;color:#64748b">Egg Freezing &bull; HealthPlus Jumeirah</div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Amina K.</div>
+              <div style="font-size:11px;color:#64748b">Egg Freezing &bull; Bourn Hall DHCC</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "Ordered home blood sample collection for AMH and thyroid profiling from PureHealth in DHCC. The phlebotomist arrived right on time and results were in my secure portal by 4 PM."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">FA</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Fatima A.</div>
+              <div style="font-size:11px;color:#64748b">Home Hormone Diagnostics &bull; PureHealth Lab</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="rev-slide-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="stars">★★★★★</span>
+              <span class="provider-dha-pill">Verified Patient</span>
+            </div>
+            <p class="rev-quote">
+              "We traveled from abroad for reproductive care in Dubai Healthcare City. The international patient concierge coordinated all scans and lab results smoothly before our arrival."
+            </p>
+          </div>
+          <div class="rev-author-row">
+            <div class="rev-author-avatar">RP</div>
+            <div>
+              <div style="font-weight:850;font-size:13px;color:var(--navy-heading)">Ramesh &amp; Priya P.</div>
+              <div style="font-size:11px;color:#64748b">Reproductive Care &bull; Conceive DHCC</div>
             </div>
           </div>
         </div>
@@ -1688,10 +1943,10 @@
   <section class="mid-cta-banner">
     <div class="container">
       <div class="mid-cta-box">
-        <h2>Looking for a Fertility Doctor or Clinic in Jumeirah?</h2>
-        <p>Our dedicated Dubai medical coordinators provide free, confidential guidance to help you find the right boutique fertility center and schedule your consultation.</p>
+        <h2>Need Assistance Choosing a Clinic or Specialist in <span class="loc-name-active">Dubai Healthcare City</span>?</h2>
+        <p>Our dedicated Dubai medical coordinators provide free, confidential guidance to help you find the right accredited fertility clinic, compare doctor credentials, and schedule your appointment.</p>
         <div class="mid-cta-actions">
-          <button type="button" class="btn-cta-white" onclick="FertiFind.openBooking('Jumeirah Coordination Team','Free Clinic Consultation')">
+          <button type="button" class="btn-cta-white" onclick="FertiFind.openBooking('DHCC Coordination Team','Free Clinic Consultation')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Book Free Consultation
           </button>
@@ -1708,43 +1963,46 @@
   <section class="guides-section">
     <div class="container">
       <div class="twocol-head">
-        <h2>Clinical &amp; Healthcare Guides for <span style="color:var(--primary-blue)">Jumeirah</span></h2>
+        <h2>Clinical &amp; Healthcare Guides for <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
         <p>Evidence-based patient guides, regulatory frameworks, and financial benchmarks for healthcare in Dubai.</p>
       </div>
 
       <div class="guides-grid">
         
+        <!-- Guide 1 -->
         <article class="guide-card">
           <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=500&q=80')"></div>
           <div class="guide-body">
             <div>
               <div class="guide-meta"><span>May 2026</span> &bull; <span>6 min read</span> &bull; <span>Cost Analysis</span></div>
-              <h3 class="guide-title">IVF Cost Comparison: Jumeirah Boutique Clinics vs Hospital Centers</h3>
-              <p class="guide-excerpt">Itemized tariff breakdown for private IVF treatment suites, medications, and embryology packages along Al Wasl Road.</p>
+              <h3 class="guide-title">2026 IVF Cost Guide in Dubai Healthcare City: Full DHA Tariffs</h3>
+              <p class="guide-excerpt">Itemized pricing benchmarks for ICSI cycles, medications, blastocyst biopsy, and embryo cryopreservation across DHCC centers.</p>
             </div>
             <a href="fertility-treatment-cost-dubai.html" class="guide-link">Read Full Guide &rarr;</a>
           </div>
         </article>
 
+        <!-- Guide 2 -->
         <article class="guide-card">
           <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80')"></div>
           <div class="guide-body">
             <div>
-              <div class="guide-meta"><span>April 2026</span> &bull; <span>5 min read</span> &bull; <span>Patient Privacy</span></div>
-              <h3 class="guide-title">Why Jumeirah Is the Hub for Discreet Aesthetic &amp; Fertility Care</h3>
-              <p class="guide-excerpt">Explore the clinical privacy advantages, VIP valet amenities, and international specialist teams practicing in Jumeirah medical villas.</p>
+              <div class="guide-meta"><span>April 2026</span> &bull; <span>5 min read</span> &bull; <span>Doctor Selection</span></div>
+              <h3 class="guide-title">How to Verify DHA Doctor Credentials in Dubai Healthcare City</h3>
+              <p class="guide-excerpt">Step-by-step checklist to verify reproductive consultant licensure, clinical fellowship standing, and malpractice safety ratings.</p>
             </div>
             <a href="fertifind_dubai_directory_search_page.html" class="guide-link">Read Full Guide &rarr;</a>
           </div>
         </article>
 
+        <!-- Guide 3 -->
         <article class="guide-card">
           <div class="guide-img" style="background-image:url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=500&q=80')"></div>
           <div class="guide-body">
             <div>
-              <div class="guide-meta"><span>March 2026</span> &bull; <span>7 min read</span> &bull; <span>Home Care</span></div>
-              <h3 class="guide-title">DHA Mobile Phlebotomy &amp; Doctor House Calls in Jumeirah</h3>
-              <p class="guide-excerpt">How to schedule certified laboratory technicians to collect blood samples for hormone screens at your home in Jumeirah.</p>
+              <div class="guide-meta"><span>March 2026</span> &bull; <span>7 min read</span> &bull; <span>UAE Law</span></div>
+              <h3 class="guide-title">UAE Federal Fertility Law: Egg Freezing &amp; Embryo Storage Rules</h3>
+              <p class="guide-excerpt">Comprehensive legal overview of female fertility preservation rights, consent documentation, and export regulations under DHCR.</p>
             </div>
             <a href="fertifind_dubai_directory_search_page.html" class="guide-link">Read Full Guide &rarr;</a>
           </div>
@@ -1759,10 +2017,11 @@
     <div class="container">
       <div class="dual-cta-grid">
 
+        <!-- Column 1: For Clinic Owners & Medical Practitioners -->
         <div class="dual-cta-card owner">
           <div>
             <div style="font-size:11px;font-weight:850;color:var(--primary-blue);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">For Practice Owners &amp; Clinics</div>
-            <h3>List Your Medical Center in Jumeirah</h3>
+            <h3>List Your Medical Center in <span class="loc-name-active">Dubai Healthcare City</span></h3>
             <p>Connect with over 45,000 active monthly patients searching for verified fertility specialists, polyclinics, and diagnostic laboratories.</p>
             <ul class="dual-checklist">
               <li>
@@ -1777,15 +2036,20 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 <span>Dedicated doctor profile showcase with consultation tariff control</span>
               </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Exposure to high-intent international DXH medical tourism patients</span>
+              </li>
             </ul>
           </div>
           <a href="submit-business.html" class="btn btn-primary" style="padding:12px;font-size:13px;width:100%;text-align:center">List Your Practice Free &rarr;</a>
         </div>
 
+        <!-- Column 2: For Patients & Families -->
         <div class="dual-cta-card patient">
           <div>
             <div style="font-size:11px;font-weight:850;color:var(--primary-blue);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px">For Patients &amp; Families</div>
-            <h3>Book an Appointment with a Specialist in Jumeirah</h3>
+            <h3>Book an Appointment with a Specialist in <span class="loc-name-active">DHCC</span></h3>
             <p>Schedule your clinical consultation, fertility evaluation, or diagnostic blood testing in under 60 seconds with certified Dubai specialists.</p>
             <ul class="dual-checklist">
               <li>
@@ -1800,6 +2064,10 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 <span>Priority clinic scheduling &amp; convenient valet parking options</span>
               </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complimentary multilingual care coordination via WhatsApp</span>
+              </li>
             </ul>
           </div>
           <button type="button" class="btn btn-primary" style="padding:12px;font-size:13px;width:100%" onclick="FertiFind.openBooking()">Book Appointment Now &rarr;</button>
@@ -1813,30 +2081,59 @@
   <section class="faq-section">
     <div class="container">
       <div class="faq-head">
-        <h2>Frequently Asked Questions About Healthcare in <span style="color:var(--primary-blue)">Jumeirah Dubai</span></h2>
+        <h2>Frequently Asked Questions About Healthcare in <span class="loc-name-active" style="color:var(--primary-blue)">Dubai Healthcare City</span></h2>
         <p>Essential clinical information, licensing verification, insurance coverage, and transit details.</p>
       </div>
 
-      <div class="faq-2col-grid">
+      <!-- Strict 2-Column Desktop Grid -->
+      <div class="faq-2col-grid" id="loc-faq-grid">
 
+        <!-- FAQ 1 -->
         <div class="faq-card">
-          <h3 class="faq-q">Why is Jumeirah popular for fertility and day surgery clinics?</h3>
-          <p class="faq-a">Jumeirah combines discreet standalone medical villas along Al Wasl Road and Jumeirah Beach Road with high levels of privacy, attracting leading international reproductive endocrinologists and day surgery centers with private suites and on-site valet parking.</p>
+          <h3 class="faq-q">What makes Dubai Healthcare City (DHCC) the premier medical hub in Dubai?</h3>
+          <p class="faq-a">DHCC is the world's largest specialized healthcare freezone, established by royal decree and regulated by the Dubai Healthcare City Authority (DHCR) in coordination with DHA. It brings together over 160 accredited clinical facilities, teaching hospitals, and internationally recognized fertility institutes within a walkable, centralized medical district.</p>
         </div>
 
+        <!-- FAQ 2 -->
         <div class="faq-card">
-          <h3 class="faq-q">Is parking easily accessible at medical clinics in Jumeirah?</h3>
-          <p class="faq-a">Yes. Almost all licensed clinics and day surgery centers along Jumeirah Beach Road and Al Wasl Road provide private on-site patient parking and complimentary valet attendants, ensuring effortless arrival.</p>
+          <h3 class="faq-q">How do I verify if a fertility doctor in DHCC holds an active license?</h3>
+          <p class="faq-a">All doctors featured on FertiFind Dubai carry verified DHCR/DHA professional licenses. You can verify any specialist's license number through the official Dubai Health Authority registry (Sheryan portal) or the DHCR professional register, ensuring active board certification and clinical privileges.</p>
         </div>
 
+        <!-- FAQ 3 -->
         <div class="faq-card">
-          <h3 class="faq-q">Do Jumeirah clinics offer home blood sample collection?</h3>
-          <p class="faq-a">Yes. Diagnostic centers and fertility clinics in Jumeirah provide DHA-licensed mobile phlebotomy services across Jumeirah 1, 2, 3, Umm Suqeim, and City Walk for routine AMH hormone checks and prenatal testing.</p>
+          <h3 class="faq-q">What are the standard consultation fees for fertility specialists in DHCC?</h3>
+          <p class="faq-a">Specialist consultation tariffs in DHCC typically range between AED 500 and AED 750 for an initial 45-to-60 minute evaluation with an internationally board-certified consultant. Subsequent follow-up visits generally range from AED 350 to AED 500, aligning with DHA tariff benchmarks.</p>
         </div>
 
+        <!-- FAQ 4 -->
         <div class="faq-card">
-          <h3 class="faq-q">How do I verify a fertility doctor's credentials in Jumeirah?</h3>
-          <p class="faq-a">Every specialist featured on FertiFind Dubai has an active DHA license verified against the official Dubai Health Authority registry. You can also view physician fellowship credentials and patient reviews directly on each doctor's profile page.</p>
+          <h3 class="faq-q">Do clinics in DHCC accept UAE health insurance for fertility appointments?</h3>
+          <p class="faq-a">Yes. While elective IVF cycles require specialized riders or out-of-pocket payment, primary diagnostic workups—including hormonal blood panels, ultrasound scans, hysteroscopy, and underlying endocrine treatments—are widely covered under major UAE insurance networks such as Saada, Enaya, NextCare, MetLife, Cigna, AXA, and Daman.</p>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Can diagnostic labs in DHCC collect blood and semen samples from home?</h3>
+          <p class="faq-a">Yes. Multiple premier diagnostic centers located in DHCC (including PureHealth and Al Borg) provide licensed phlebotomist house calls across all Dubai districts for routine blood collection, AMH hormone testing, prenatal screenings, and temperature-controlled sample transit.</p>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-card">
+          <h3 class="faq-q">What metro transit and parking facilities are available in DHCC?</h3>
+          <p class="faq-a">Dubai Healthcare City has its own dedicated Metro Station on the Green Line, offering direct covered pedestrian access to clinical buildings 27, 33, 47, and 64 (Al Razi Complex). In addition, all major medical buildings feature dedicated valet parking services and multi-story RTA parking structures.</p>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Are telemedicine and remote video consultations available for doctors in DHCC?</h3>
+          <p class="faq-a">Yes. Most senior consultants in DHCC offer DHA-compliant telehealth video consultations for initial case reviews, second opinions on previous IVF cycles, and review of diagnostic ultrasound or lab findings before in-person procedures.</p>
+        </div>
+
+        <!-- FAQ 8 -->
+        <div class="faq-card">
+          <h3 class="faq-q">Can international patients travel to DHCC for medical tourism treatment?</h3>
+          <p class="faq-a">Dubai Healthcare City is the flagship hub for Dubai Health Experience (DXH). Clinics provide fast-track medical tourism visas, dedicated international patient liaisons, translation services, airport transfers, and bundled treatment packages for overseas patients.</p>
         </div>
 
       </div>
@@ -1847,16 +2144,16 @@
   <aside class="sticky-action-bar" id="stickyActionBar">
     <div class="sticky-bar-inner container">
       <div class="sticky-provider-meta">
-        <div class="sticky-avatar" style="background:#0757d9;color:#fff;font-weight:850">JU</div>
+        <div class="sticky-avatar" style="background:#0757d9;color:#fff;font-weight:850">DH</div>
         <div class="sticky-info">
-          <h4>Healthcare in Jumeirah Dubai</h4>
+          <h4 id="stickyBarTitle">Healthcare in Dubai Healthcare City</h4>
           <p>Verified Clinics &bull; Top Doctors &bull; Rapid Diagnostics</p>
         </div>
       </div>
       <div class="sticky-btns">
         <div class="sticky-reveal-wrap">
-          <span class="masked-num" id="sticky-bar-phone">+971 4 349 ••••</span>
-          <button type="button" class="btn-reveal-num" onclick="revealContact('sticky-bar-phone', '+971 4 349 7600')">📞 Call</button>
+          <span class="masked-num" id="sticky-bar-phone">+971 4 382 ••••</span>
+          <button type="button" class="btn-reveal-num" onclick="revealContact('sticky-bar-phone', '+971 4 382 9900')">📞 Call</button>
         </div>
         <a href="https://wa.me/971501234567" target="_blank" class="btn btn-whatsapp" style="font-size:12px;padding:8px 14px">💬 WhatsApp</a>
         <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking()" style="font-size:12px;padding:8px 16px">Book Consultation</button>
@@ -1880,8 +2177,8 @@
         <div>
           <h4 style="font-size:13px;font-weight:850;color:var(--navy-heading);margin-bottom:12px">Popular Locations</h4>
           <ul style="list-style:none;padding:0;margin:0;font-size:12px;display:flex;flex-direction:column;gap:6px">
-            <li><a href="ivf-fertility-doctors-in-dubai-healthcare-city.html" style="color:#64748b">Dubai Healthcare City (DHCC)</a></li>
-            <li><a href="ivf-clinics-in-jumeirah-dubai.html" style="color:#64748b">Jumeirah &amp; Al Wasl</a></li>
+            <li><a href="location.html?location=dubai-healthcare-city" style="color:#64748b">Dubai Healthcare City (DHCC)</a></li>
+            <li><a href="location.html?location=jumeirah" style="color:#64748b">Jumeirah &amp; Al Wasl</a></li>
             <li><a href="location.html?location=dubai-marina" style="color:#64748b">Dubai Marina &amp; JBR</a></li>
             <li><a href="location.html?location=downtown-dubai" style="color:#64748b">Downtown Dubai &amp; Business Bay</a></li>
             <li><a href="location.html?location=dubai-hills" style="color:#64748b">Dubai Hills &amp; Al Barsha</a></li>
@@ -1918,7 +2215,7 @@
     <div style="background:#ffffff;border-radius:18px;max-width:480px;width:92%;padding:24px;box-shadow:0 20px 60px rgba(16,42,99,0.2);position:relative">
       <button type="button" onclick="closeBookingModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#64748b">&times;</button>
       <h3 style="margin:0 0 6px;font-size:18px;color:var(--navy-heading);font-weight:850" id="bm-title">Book Doctor Consultation</h3>
-      <p style="margin:0 0 16px;font-size:12.5px;color:#64748b" id="bm-sub">Schedule your appointment with certified DHA healthcare providers in Jumeirah.</p>
+      <p style="margin:0 0 16px;font-size:12.5px;color:#64748b" id="bm-sub">Schedule your appointment with certified DHA healthcare providers.</p>
       
       <form id="bookingModalForm" onsubmit="submitBookingModal(event)" style="display:flex;flex-direction:column;gap:12px">
         <input type="hidden" name="provider_target" id="bm-target" value="">
@@ -1941,6 +2238,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <script>
+    // Global FertiFind Helper
     window.FertiFind = window.FertiFind || {
       openBooking: function(targetName, procedure) {
         const modal = document.getElementById('bookingModalBackdrop');
@@ -1949,12 +2247,12 @@
         const hiddenTarget = document.getElementById('bm-target');
         if (targetName) {
           title.textContent = 'Book with ' + targetName;
-          sub.textContent = procedure ? 'Requested Service: ' + procedure : 'Schedule direct consultation in Jumeirah.';
+          sub.textContent = procedure ? 'Requested Service: ' + procedure : 'Schedule direct consultation in Dubai.';
           hiddenTarget.value = targetName + (procedure ? ' - ' + procedure : '');
         } else {
           title.textContent = 'Book Doctor Consultation';
-          sub.textContent = 'Schedule your appointment with certified DHA healthcare providers in Jumeirah.';
-          hiddenTarget.value = 'Jumeirah Clinic Consultation';
+          sub.textContent = 'Schedule your appointment with certified DHA healthcare providers.';
+          hiddenTarget.value = 'General Location Booking';
         }
         modal.style.display = 'grid';
       }
@@ -1971,6 +2269,7 @@
       e.target.reset();
     }
 
+    // Masked Contact Reveal
     function revealContact(elementId, fullNumber) {
       const el = document.getElementById(elementId);
       if (el) {
@@ -1980,6 +2279,7 @@
       }
     }
 
+    // Horizontal Slider Scroller Helper
     function slideContainer(containerId, offset) {
       const el = document.getElementById(containerId);
       if (el) {
@@ -1987,27 +2287,130 @@
       }
     }
 
-    // Leaflet Map Initialization for Jumeirah
-    const JUMEIRAH_COORDS = [25.2048, 55.2444];
-    const JUMEIRAH_FACILITIES = [
-      { name: 'Fakih IVF Fertility Centre Jumeirah', type: 'clinic', lat: 25.2055, lng: 55.2450, rating: '4.96 ★', address: 'Al Wasl Road, Jumeirah 2', url: 'fertifind_hospital_profile_page.html' },
-      { name: 'Dr. Sarah Jenkins, FRCOG', type: 'doc', lat: 25.2040, lng: 55.2435, rating: '4.97 ★', address: 'Consultant &bull; Jumeirah 1', url: 'fertifind_doctor_profile_page.html' },
-      { name: 'HealthPlus Fertility Center Jumeirah', type: 'clinic', lat: 25.2065, lng: 55.2462, rating: '4.93 ★', address: 'Jumeirah Beach Road, Villa 410', url: 'fertifind_hospital_profile_page.html' },
-      { name: 'Al Zahra Diagnostic Lab Jumeirah', type: 'lab', lat: 25.2032, lng: 55.2428, rating: '4.92 ★', address: 'Al Wasl Medical Plaza', url: 'fertifind_labs_profile_page.html' }
-    ];
+    // ==========================================
+    // Location Data & Programmatic System
+    // ==========================================
+    const LOCATION_DATABASE = {
+      'dubai-healthcare-city': {
+        name: 'Dubai Healthcare City (DHCC)',
+        shortName: 'Dubai Healthcare City',
+        zone: 'Bur Dubai / Oud Metha',
+        coords: [25.2341, 55.3218],
+        clinicsCount: '160+',
+        docsCount: '1,200+',
+        summary: 'Explore verified fertility specialists, licensed reproductive endocrinologists, accredited IVF day-surgery clinics, and clinical diagnostic laboratories in Dubai Healthcare City (DHCC). Regulated under Dubai Healthcare City Authority (DHCR) and DHA licensing standards.',
+        transitTime: '🚘 14 mins drive (9.8 km via Sheikh Zayed Rd) • 🚇 22 mins (Green Line)'
+      },
+      'jumeirah': {
+        name: 'Jumeirah (Jumeirah 1, 2, 3 & Al Wasl)',
+        shortName: 'Jumeirah',
+        zone: 'Coastal Central Dubai',
+        coords: [25.2048, 55.2444],
+        clinicsCount: '110+',
+        docsCount: '850+',
+        summary: 'Discover premier boutique IVF clinics, aesthetic reproductive medicine suites, and board-certified fertility consultants located along Jumeirah Beach Road and Al Wasl Road. Exclusive privacy with complimentary valet service.',
+        transitTime: '🚘 12 mins drive (7.5 km via Al Wasl Rd) • 🚌 25 mins (RTA Bus 8 / 88)'
+      },
+      'dubai-marina': {
+        name: 'Dubai Marina & JBR',
+        shortName: 'Dubai Marina',
+        zone: 'New Dubai Coast',
+        coords: [25.0784, 55.1388],
+        clinicsCount: '75+',
+        docsCount: '450+',
+        summary: 'Access modern fertility polyclinics, women\'s health centers, and clinical diagnostics located in Dubai Marina, Jumeirah Beach Residence (JBR), and Jumeirah Lake Towers (JLT). Direct Dubai Tram and Metro connectivity.',
+        transitTime: '🚘 24 mins drive (22 km via Sheikh Zayed Rd) • 🚇 35 mins (Red Line)'
+      },
+      'downtown-dubai': {
+        name: 'Downtown Dubai & Business Bay',
+        shortName: 'Downtown Dubai',
+        zone: 'Central Business District',
+        coords: [25.1972, 55.2744],
+        clinicsCount: '90+',
+        docsCount: '620+',
+        summary: 'Explore world-class fertility consultants, multi-specialty day surgery centers, and pathology hubs situated around Burj Khalifa Boulevard and Business Bay medical towers.',
+        transitTime: '🚘 10 mins drive (6.2 km via Financial Centre Rd) • 🚇 18 mins (Red Line)'
+      },
+      'dubai-hills': {
+        name: 'Dubai Hills Estate & Al Barsha',
+        shortName: 'Dubai Hills',
+        zone: 'South-Central Dubai',
+        coords: [25.1112, 55.2536],
+        clinicsCount: '65+',
+        docsCount: '380+',
+        summary: 'Premier family healthcare networks, reproductive medicine institutes, and diagnostic imaging centers serving Dubai Hills Estate, Al Barsha, and Arabian Ranches.',
+        transitTime: '🚘 16 mins drive (15 km via Al Khail Rd) • 🚘 18 mins (E44)'
+      }
+    };
 
+    // District Medical Facilities Pins Data for Leaflet Map
+    const MAP_FACILITIES = {
+      'dubai-healthcare-city': [
+        { name: 'Orchid Reproductive Clinic & IVF', type: 'clinic', lat: 25.2352, lng: 55.3225, rating: '4.96 ★', address: 'Bldg 64, Al Razi, DHCC', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Dr. Michael Al-Husseini, MD', type: 'doc', lat: 25.2345, lng: 55.3212, rating: '4.98 ★', address: 'Consultant &bull; Orchid DHCC', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'Bourn Hall Fertility Centre', type: 'clinic', lat: 25.2338, lng: 55.3230, rating: '4.92 ★', address: 'Bldg 64, 7th Fl, DHCC', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'PureHealth Diagnostics & Genetics Lab', type: 'lab', lat: 25.2332, lng: 55.3208, rating: '4.95 ★', address: 'Building 33, DHCC', url: 'fertifind_labs_profile_page.html' },
+        { name: 'Dr. Layla Mahmoud, FACOG', type: 'doc', lat: 25.2360, lng: 55.3218, rating: '4.97 ★', address: 'Reproductive Endocrinology &bull; Bldg 27', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'Al Borg Diagnostics Centre', type: 'lab', lat: 25.2348, lng: 55.3235, rating: '4.90 ★', address: 'Al Razi Bldg, Block B', url: 'fertifind_labs_profile_page.html' },
+        { name: 'Conceive Fertility Hospital', type: 'clinic', lat: 25.2325, lng: 55.3215, rating: '4.91 ★', address: 'Building 27, DHCC', url: 'fertifind_hospital_profile_page.html' }
+      ],
+      'jumeirah': [
+        { name: 'Fakih IVF Fertility Centre Jumeirah', type: 'clinic', lat: 25.2055, lng: 55.2450, rating: '4.94 ★', address: 'Al Wasl Road, Jumeirah 2', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Dr. Sarah Jenkins, FRCOG', type: 'doc', lat: 25.2040, lng: 55.2435, rating: '4.96 ★', address: 'IVF Specialist &bull; Jumeirah 1', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'HealthPlus Fertility Center', type: 'clinic', lat: 25.2065, lng: 55.2462, rating: '4.92 ★', address: 'Jumeirah Beach Road', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Al Zahra Diagnostic Lab Jumeirah', type: 'lab', lat: 25.2032, lng: 55.2428, rating: '4.91 ★', address: 'Al Wasl Medical Plaza', url: 'fertifind_labs_profile_page.html' }
+      ],
+      'dubai-marina': [
+        { name: 'Emirates Hospital Day Surgery Marina', type: 'clinic', lat: 25.0792, lng: 55.1395, rating: '4.93 ★', address: 'Al Habtoor Tower, Marina Walk', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Dr. Kareem Hegazy, CABOG', type: 'doc', lat: 25.0775, lng: 55.1378, rating: '4.95 ★', address: 'Reproductive Surgeon &bull; JBR', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'Marina Diagnostic & Pathology Lab', type: 'lab', lat: 25.0805, lng: 55.1410, rating: '4.90 ★', address: 'Marina Plaza, Dubai Marina', url: 'fertifind_labs_profile_page.html' }
+      ],
+      'downtown-dubai': [
+        { name: 'Mediclinic Downtown Medical Center', type: 'clinic', lat: 25.1980, lng: 55.2755, rating: '4.95 ★', address: 'Dubai Mall Medical Floor', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Dr. Noor Al-Sabah, MRCOG', type: 'doc', lat: 25.1965, lng: 55.2735, rating: '4.97 ★', address: 'Consultant OB-GYN &bull; Downtown', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'Downtown Genetics & Pathology Hub', type: 'lab', lat: 25.1950, lng: 55.2760, rating: '4.92 ★', address: 'Business Bay Tower 1', url: 'fertifind_labs_profile_page.html' }
+      ],
+      'dubai-hills': [
+        { name: 'Kings College Hospital London Dubai Hills', type: 'clinic', lat: 25.1120, lng: 55.2545, rating: '4.96 ★', address: 'Dubai Hills Estate, Al Khail Rd', url: 'fertifind_hospital_profile_page.html' },
+        { name: 'Dr. David Evans, FRCOG', type: 'doc', lat: 25.1105, lng: 55.2525, rating: '4.94 ★', address: 'Fertility Director &bull; Dubai Hills', url: 'fertifind_doctor_profile_page.html' },
+        { name: 'Dubai Hills Clinical Reference Lab', type: 'lab', lat: 25.1130, lng: 55.2560, rating: '4.93 ★', address: 'Medical Boulevard, Dubai Hills', url: 'fertifind_labs_profile_page.html' }
+      ]
+    };
+
+    // Leaflet Map Controller
     let osmMap = null;
+    let markersLayer = null;
     let userMarker = null;
     let routeLine = null;
+    let currentLocationSlug = 'dubai-healthcare-city';
 
-    function initJumeirahMap() {
-      osmMap = L.map('location-osm-map').setView(JUMEIRAH_COORDS, 15);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(osmMap);
+    function initLeafletMap(locSlug) {
+      currentLocationSlug = locSlug || 'dubai-healthcare-city';
+      const locData = LOCATION_DATABASE[currentLocationSlug] || LOCATION_DATABASE['dubai-healthcare-city'];
+      
+      const mapContainer = document.getElementById('location-osm-map');
+      if (!mapContainer) return;
 
-      JUMEIRAH_FACILITIES.forEach(fac => {
+      if (!osmMap) {
+        osmMap = L.map('location-osm-map').setView(locData.coords, 14);
+        
+        // OpenStreetMap Crisp Tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(osmMap);
+
+        markersLayer = L.layerGroup().addTo(osmMap);
+      } else {
+        osmMap.setView(locData.coords, 14);
+        markersLayer.clearLayers();
+        if (routeLine) { osmMap.removeLayer(routeLine); routeLine = null; }
+        if (userMarker) { osmMap.removeLayer(userMarker); userMarker = null; }
+      }
+
+      // Render pins for this location
+      const facilities = MAP_FACILITIES[currentLocationSlug] || MAP_FACILITIES['dubai-healthcare-city'];
+      facilities.forEach(fac => {
         let pinIconHtml = '🏥';
         let pinClass = 'clinic';
         if (fac.type === 'doc') { pinIconHtml = '👨‍⚕️'; pinClass = 'doc'; }
@@ -2032,26 +2435,30 @@
 
         L.marker([fac.lat, fac.lng], { icon: customIcon })
           .bindPopup(popupContent)
-          .addTo(osmMap);
+          .addTo(markersLayer);
       });
     }
 
+    // Geolocation Request & Real Distance Calculation
     function requestUserGPS() {
       const btn = document.getElementById('btn-detect-gps');
+      const badge = document.getElementById('travel-result-display');
       btn.textContent = 'Locating...';
 
       if (!navigator.geolocation) {
-        alert('Geolocation is not supported by your browser. Please select a starting area from the dropdown.');
+        alert('Geolocation is not supported by your browser. Please pick a starting area from the dropdown.');
         btn.textContent = '📍 Use My Location';
         return;
       }
 
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
+        (position) => {
           btn.textContent = '✅ Location Detected';
-          updateTravelEstimate(pos.coords.latitude, pos.coords.longitude, 'Your Current Location');
+          const userLat = position.coords.latitude;
+          const userLng = position.coords.longitude;
+          updateTravelEstimate(userLat, userLng, 'Your Current Location');
         },
-        () => {
+        (error) => {
           btn.textContent = '📍 Use My Location';
           alert('Location permission denied or unavailable. Please pick a Dubai area from the dropdown to see travel times.');
         },
@@ -2059,33 +2466,39 @@
       );
     }
 
-    function calculatePresetRoute(val) {
-      if (!val) return;
-      const [latStr, lngStr] = val.split(',');
-      const sel = document.getElementById('origin-preset-select');
-      const originName = sel.options[sel.selectedIndex].text;
+    // Preset Starting Area Calculator
+    function calculatePresetRoute(presetCoordStr) {
+      if (!presetCoordStr) return;
+      const [latStr, lngStr] = presetCoordStr.split(',');
+      const select = document.getElementById('origin-preset-select');
+      const originName = select.options[select.selectedIndex].text;
       updateTravelEstimate(parseFloat(latStr), parseFloat(lngStr), originName);
     }
 
+    // Haversine Distance & Route Calculation
     function updateTravelEstimate(userLat, userLng, originLabel) {
-      const destLat = JUMEIRAH_COORDS[0];
-      const destLng = JUMEIRAH_COORDS[1];
+      const locData = LOCATION_DATABASE[currentLocationSlug] || LOCATION_DATABASE['dubai-healthcare-city'];
+      const destLat = locData.coords[0];
+      const destLng = locData.coords[1];
 
-      const R = 6371;
+      // Haversine formula
+      const R = 6371; // km
       const dLat = (destLat - userLat) * Math.PI / 180;
       const dLon = (destLng - userLng) * Math.PI / 180;
       const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                 Math.cos(userLat * Math.PI / 180) * Math.cos(destLat * Math.PI / 180) *
                 Math.sin(dLon/2) * Math.sin(dLon/2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      const distanceKm = (R * c * 1.25).toFixed(1);
+      const distanceKm = (R * c * 1.25).toFixed(1); // 1.25 road curvature factor
 
+      // Estimated drive time (avg speed 42 km/h in Dubai city traffic + 4 min buffer)
       const driveMins = Math.round((distanceKm / 42) * 60 + 4);
-      const busMins = Math.round((distanceKm / 24) * 60 + 10);
+      const metroMins = Math.round((distanceKm / 32) * 60 + 8);
 
       const badge = document.getElementById('travel-result-display');
-      badge.innerHTML = `🚘 <b>${driveMins} mins drive</b> (${distanceKm} km from ${originLabel}) &bull; 🚌 <b>${busMins} mins bus</b>`;
+      badge.innerHTML = `🚘 <b>${driveMins} mins drive</b> (${distanceKm} km from ${originLabel}) &bull; 🚇 <b>${metroMins} mins metro</b>`;
 
+      // Update Map View with User Pin and Route Line
       if (userMarker) osmMap.removeLayer(userMarker);
       if (routeLine) osmMap.removeLayer(routeLine);
 
@@ -2110,25 +2523,72 @@
       osmMap.fitBounds([[userLat, userLng], [destLat, destLng]], { padding: [40, 40] });
     }
 
-    function handleJumeirahSearch(e) {
+    // ==========================================
+    // Location Switcher (Dynamic & Programmatic)
+    // ==========================================
+    function switchLocationPage(locSlug) {
+      const locData = LOCATION_DATABASE[locSlug];
+      if (!locData) return;
+
+      currentLocationSlug = locSlug;
+
+      // Update URL without reload
+      const url = new URL(window.location);
+      url.searchParams.set('location', locSlug);
+      window.history.pushState({}, '', url);
+
+      // Update Page Content
+      document.title = `Doctors, IVF Clinics & Diagnostic Labs in ${locData.name} | FertiFind Dubai`;
+      document.getElementById('hero-crumb-loc').textContent = locData.name;
+      document.getElementById('hero-loc-title').textContent = locData.name;
+      document.getElementById('hero-summary-text').textContent = locData.summary;
+      document.getElementById('stat-clinics-count').textContent = locData.clinicsCount;
+      document.getElementById('stat-docs-count').textContent = locData.docsCount;
+      document.getElementById('travel-result-display').innerHTML = locData.transitTime;
+      document.getElementById('search-location').value = locSlug;
+
+      // Update all inline location name spans
+      document.querySelectorAll('.loc-name-active').forEach(el => {
+        el.textContent = locData.shortName;
+      });
+
+      // Update Sticky Bar
+      document.getElementById('stickyBarTitle').textContent = `Healthcare in ${locData.shortName}`;
+
+      // Re-init map
+      initLeafletMap(locSlug);
+    }
+
+    // Hero Search Handler
+    function handleLocationSearch(e) {
       e.preventDefault();
       const q = document.getElementById('search-q').value.toLowerCase().trim();
       const type = document.getElementById('search-type').value;
+      const spec = document.getElementById('search-specialty').value;
+      
       const cards = document.querySelectorAll('#main-provider-cards .provider-card');
-      let visible = 0;
+      let visibleCount = 0;
 
       cards.forEach(card => {
-        let match = true;
-        const cType = card.getAttribute('data-type');
-        const cName = card.getAttribute('data-name').toLowerCase();
-        if (type !== 'all' && cType !== type) match = false;
-        if (q && !cName.includes(q)) match = false;
-        card.style.display = match ? 'flex' : 'none';
-        if (match) visible++;
+        let matches = true;
+        const cardType = card.getAttribute('data-type');
+        const cardName = card.getAttribute('data-name').toLowerCase();
+
+        if (type !== 'all' && cardType !== type) matches = false;
+        if (q && !cardName.includes(q)) matches = false;
+
+        if (matches) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
       });
-      document.getElementById('results-count-title').innerHTML = `Showing ${visible} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Jumeirah</span>`;
+
+      document.getElementById('results-count-title').innerHTML = `Showing ${visibleCount} Verified Healthcare Facilities in <span class="loc-name-active" style="color:var(--primary-blue)">${LOCATION_DATABASE[currentLocationSlug].shortName}</span>`;
     }
 
+    // Quick Tag Filter
     function filterByTag(tag, btn) {
       document.querySelectorAll('.loc-q-tag').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -2140,28 +2600,34 @@
         let show = false;
         if (tag === 'all' || tag === 'dha' || tag === 'today') show = true;
         else if (cType === tag) show = true;
+
         card.style.display = show ? 'flex' : 'none';
         if (show) count++;
       });
-      document.getElementById('results-count-title').innerHTML = `Showing ${count} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Jumeirah</span>`;
+      document.getElementById('results-count-title').innerHTML = `Showing ${count} Verified Healthcare Facilities in <span class="loc-name-active" style="color:var(--primary-blue)">${LOCATION_DATABASE[currentLocationSlug].shortName}</span>`;
     }
 
+    // Sidebar Filter Application
     function applySidebarFilters() {
       const checkedTypes = Array.from(document.querySelectorAll('input[name="sb_type"]:checked')).map(cb => cb.value);
       const minRating = parseFloat(document.querySelector('input[name="sb_rating"]:checked')?.value || '0');
+
       const cards = document.querySelectorAll('#main-provider-cards .provider-card');
       let visible = 0;
 
       cards.forEach(card => {
         const cType = card.getAttribute('data-type');
         const cRating = parseFloat(card.getAttribute('data-rating') || '0');
+
         let show = true;
         if (checkedTypes.length > 0 && !checkedTypes.includes(cType)) show = false;
         if (cRating < minRating) show = false;
+
         card.style.display = show ? 'flex' : 'none';
         if (show) visible++;
       });
-      document.getElementById('results-count-title').innerHTML = `Showing ${visible} Verified Healthcare Facilities in <span style="color:var(--primary-blue)">Jumeirah</span>`;
+
+      document.getElementById('results-count-title').innerHTML = `Showing ${visible} Verified Healthcare Facilities in <span class="loc-name-active" style="color:var(--primary-blue)">${LOCATION_DATABASE[currentLocationSlug].shortName}</span>`;
     }
 
     function resetSidebarFilters() {
@@ -2175,6 +2641,7 @@
     function sortProviderCards(sortType) {
       const container = document.getElementById('main-provider-cards');
       const cards = Array.from(container.children);
+
       cards.sort((a, b) => {
         if (sortType === 'rating') {
           return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
@@ -2183,11 +2650,19 @@
         }
         return 0;
       });
+
       cards.forEach(card => container.appendChild(card));
     }
 
+    // Initialize Page from URL Parameters
     window.addEventListener('DOMContentLoaded', () => {
-      initJumeirahMap();
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialLoc = urlParams.get('location') || 'dubai-healthcare-city';
+      if (LOCATION_DATABASE[initialLoc]) {
+        switchLocationPage(initialLoc);
+      } else {
+        initLeafletMap('dubai-healthcare-city');
+      }
     });
   </script>
 

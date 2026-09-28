@@ -22,7 +22,7 @@
   --bg: #f7faff;
   --card: #ffffff;
   --white: #ffffff;
-  --gold: #f2ad2e;
+  --star-amber: #f59e0b;
   --shadow: 0 14px 45px rgba(27, 62, 116, 0.10);
   --shadow-sm: 0 4px 18px rgba(27, 62, 116, 0.06);
   --shadow-lg: 0 24px 60px rgba(16, 42, 99, 0.16);
@@ -406,57 +406,57 @@ nav.main-nav > a:hover, nav.main-nav > a.active {
   white-space: nowrap;
 }
 
-.btn-primary, .btn.primary, .btn-gold {
-  background: linear-gradient(135deg, #c28b1e 0%, #b8860b 55%, #996e05 100%);
+.btn-primary, .btn.primary {
+  background: linear-gradient(135deg, #0757d9 0%, #0645ad 100%);
   color: #ffffff !important;
   font-weight: 850;
-  border: 1px solid #a6790a;
-  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.28);
+  border: 1px solid #0645ad;
+  box-shadow: 0 6px 20px rgba(7, 87, 217, 0.28);
 }
 
-.btn-primary:hover, .btn.primary:hover, .btn-gold:hover {
-  background: linear-gradient(135deg, #cf9726 0%, #c49012 55%, #a87907 100%);
+.btn-primary:hover, .btn.primary:hover {
+  background: linear-gradient(135deg, #0963f4 0%, #0752cf 100%);
   color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(184, 134, 11, 0.38);
+  box-shadow: 0 10px 26px rgba(7, 87, 217, 0.38);
 }
 
-.btn-copper {
-  background: linear-gradient(135deg, #b35a38 0%, #9c4b2c 100%);
+.btn-teal, .btn.teal {
+  background: linear-gradient(135deg, #10b4a5 0%, #087e76 100%);
   color: #ffffff !important;
   font-weight: 850;
-  border: 1px solid #8e4225;
-  box-shadow: 0 6px 18px rgba(179, 90, 56, 0.25);
+  border: 1px solid #087e76;
+  box-shadow: 0 6px 18px rgba(16, 180, 165, 0.25);
 }
-.btn-copper:hover {
-  background: linear-gradient(135deg, #c26541 0%, #a85231 100%);
+.btn-teal:hover {
+  background: linear-gradient(135deg, #14c7b7 0%, #0a968c 100%);
   color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(179, 90, 56, 0.35);
+  box-shadow: 0 10px 24px rgba(16, 180, 165, 0.35);
 }
 
 .btn-soft, .btn.soft {
-  background: #fbf6ec;
-  color: #8c6b12;
-  border: 1px solid #eedec3;
+  background: #eef5ff;
+  color: #0757d9;
+  border: 1px solid #d4e4fc;
 }
 
 .btn-soft:hover, .btn.soft:hover {
-  background: #f5edd7;
-  color: #6d5208;
-  border-color: #b8860b;
+  background: #e1edfe;
+  color: #0540a3;
+  border-color: #0757d9;
 }
 
 .btn-outline, .btn.outline {
   background: #ffffff;
-  border: 1px solid #ecdcc0;
-  color: #8c6b12;
+  border: 1px solid #cbdcf7;
+  color: #0757d9;
 }
 
 .btn-outline:hover, .btn.outline:hover {
-  border-color: #b8860b;
-  background: #fbf6ec;
-  color: #634b07;
+  border-color: #0757d9;
+  background: #f0f6ff;
+  color: #0645ad;
 }
 
 .btn-whatsapp, .btn.whatsapp {
@@ -492,7 +492,7 @@ nav.main-nav > a:hover, nav.main-nav > a.active {
 }
 
 .stars {
-  color: var(--gold);
+  color: var(--star-amber);
   letter-spacing: 1px;
   font-weight: 900;
 }
@@ -1388,8 +1388,8 @@ html, body {
   background: linear-gradient(180deg, #f4fcfb 0%, #ffffff 40%);
 }
 .trio-cta-card.card-home-tech {
-  border-top: 4px solid var(--gold);
-  background: linear-gradient(180deg, #fffdf5 0%, #ffffff 40%);
+  border-top: 4px solid var(--blue2);
+  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 40%);
 }
 .trio-icon {
   font-size: 26px;
@@ -1567,8 +1567,8 @@ html, body {
 }
 
 .btn-reveal-num {
-  border: 1px solid #ede4d3;
-  background: #fffcf5;
+  border: 1px solid var(--line);
+  background: #f8fbff;
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 11px;
@@ -1582,8 +1582,9 @@ html, body {
 }
 
 .btn-reveal-num:hover {
-  background: #fbf5e6;
-  border-color: var(--gold-primary, #b8860b);
+  background: #eef5ff;
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
 .btn-reveal-wa {
@@ -1669,13 +1670,13 @@ html, body {
 }
 .quick-cta-pill {
   background: #ffffff;
-  border: 1px solid #ebd9bc;
+  border: 1px solid #d8e5f8;
   border-radius: 99px;
   padding: 8px 16px;
   font-size: 12px;
   font-weight: 800;
-  color: #8c6b12;
-  box-shadow: 0 2px 8px rgba(184, 134, 11, 0.08);
+  color: var(--navy);
+  box-shadow: 0 2px 8px rgba(7, 87, 217, 0.06);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1684,16 +1685,16 @@ html, body {
   cursor: pointer;
 }
 .quick-cta-pill:hover {
-  background: #fbf5e8;
-  border-color: #b8860b;
-  color: #634b07;
+  background: #f0f6ff;
+  border-color: var(--blue);
+  color: var(--blue);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.16);
+  box-shadow: 0 4px 12px rgba(7, 87, 217, 0.14);
 }
 .quick-cta-pill.active, .quick-cta-pill.highlight {
-  background: linear-gradient(135deg, #c28b1e 0%, #b8860b 100%);
+  background: linear-gradient(135deg, #0757d9 0%, #0645ad 100%);
   color: #ffffff;
-  border-color: #a6790a;
+  border-color: #0645ad;
 }
 
 

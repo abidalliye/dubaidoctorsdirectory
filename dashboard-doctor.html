@@ -9,7 +9,7 @@
   <style>
     /* ==========================================================================
        Hospital & Doctor Practice BI Dashboard - Clean Light Mode Luxury Theme
-       Palette: Pure White, Warm Desert Sand (#fdfbf7, #f7f3ec), Elegant Gold (#b8860b),
+       Palette: Pure White, Warm Desert Sand (#fdfbf7, #f7f3ec), Elegant Gold (#0757d9),
                 Soft Copper (#c87d55), Warm Jade (#0d9488), Deep Navy Text (#1c2a38)
        ========================================================================== */
     :root {
@@ -17,7 +17,7 @@
       --bi-card: #ffffff;
       --bi-border: #ede4d3;
       --bi-border-light: #f5efe6;
-      --bi-gold: #b8860b;
+      --bi-gold: #0757d9;
       --bi-gold-light: #fbf5e6;
       --bi-gold-border: #f0deb3;
       --bi-copper: #c87d55;
@@ -416,7 +416,7 @@
     .badge-completed { background: var(--bi-blue-light); color: var(--bi-blue); border: 1px solid #bfdbfe; }
 
     /* Action Buttons */
-    .btn-gold {
+    .btn-primary {
       background: linear-gradient(135deg, var(--bi-gold) 0%, #9e7308 100%);
       color: #ffffff;
       font-weight: 800;
@@ -431,7 +431,7 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-    .btn-gold:hover {
+    .btn-primary:hover {
       box-shadow: 0 4px 12px rgba(184, 134, 11, 0.25);
       transform: translateY(-1px);
     }
@@ -531,7 +531,7 @@
 
     <div class="bi-actions-top">
       <a class="btn-sand" href="fertifind_dubai_directory_search_page.html" target="_blank">View Live Directory ↗</a>
-      <a class="btn-gold" href="submit-business.html">+ Update DHA Details</a>
+      <a class="btn-primary" href="submit-business.html">+ Update DHA Details</a>
     </div>
   </header>
 
@@ -554,7 +554,7 @@
       </div>
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
         <button type="button" class="btn-sand" onclick="exportDoctorBIReport()">📊 Export Monthly BI PDF</button>
-        <button type="button" class="btn-gold" onclick="openPracticeSettingsModal()">⚙️ Manage Consultation Fees</button>
+        <button type="button" class="btn-primary" onclick="openPracticeSettingsModal()">⚙️ Manage Consultation Fees</button>
       </div>
     </section>
 
@@ -671,20 +671,20 @@
             <polygon points="60,165 140,150 220,135 300,120 380,100 460,85 540,65 620,45 620,180 60,180" fill="rgba(184, 134, 11, 0.08)"/>
             
             <!-- Revenue Line (Gold) -->
-            <polyline points="60,165 140,150 220,135 300,120 380,100 460,85 540,65 620,45" fill="none" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/>
+            <polyline points="60,165 140,150 220,135 300,120 380,100 460,85 540,65 620,45" fill="none" stroke="#0757d9" stroke-width="3" stroke-linecap="round"/>
 
             <!-- Consultation Volume Line (Teal) -->
             <polyline points="60,170 140,160 220,150 300,135 380,125 460,110 540,95 620,80" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5" stroke-linecap="round"/>
 
             <!-- Data Dots -->
-            <circle cx="60" cy="165" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="140" cy="150" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="220" cy="135" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="300" cy="120" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="380" cy="100" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="460" cy="85" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="540" cy="65" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
-            <circle cx="620" cy="45" r="5" fill="#b8860b" stroke="#ffffff" stroke-width="2"/>
+            <circle cx="60" cy="165" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="140" cy="150" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="220" cy="135" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="300" cy="120" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="380" cy="100" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="460" cy="85" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="540" cy="65" r="4" fill="#ffffff" stroke="#0757d9" stroke-width="2"/>
+            <circle cx="620" cy="45" r="5" fill="#0757d9" stroke="#ffffff" stroke-width="2"/>
 
             <!-- X Axis Labels -->
             <text x="60" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Sep</text>
@@ -694,7 +694,7 @@
             <text x="380" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Jan</text>
             <text x="460" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Feb</text>
             <text x="540" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Mar</text>
-            <text x="620" y="200" font-size="11" fill="#b8860b" font-weight="bold" text-anchor="middle">Apr (Curr)</text>
+            <text x="620" y="200" font-size="11" fill="#0757d9" font-weight="bold" text-anchor="middle">Apr (Curr)</text>
           </svg>
         </div>
       </div>
@@ -712,7 +712,7 @@
           <svg width="150" height="150" viewBox="0 0 42 42">
             <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f5ede0" stroke-width="6"/>
             <!-- IVF/ICSI 42% (Gold) -->
-            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#b8860b" stroke-width="6" stroke-dasharray="42 58" stroke-dashoffset="25"/>
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0757d9" stroke-width="6" stroke-dasharray="42 58" stroke-dashoffset="25"/>
             <!-- Egg Freezing 26% (Teal) -->
             <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0d9488" stroke-width="6" stroke-dasharray="26 74" stroke-dashoffset="83"/>
             <!-- PGT-A Genetics 18% (Copper) -->
@@ -727,7 +727,7 @@
           <div class="donut-legend">
             <div class="donut-item">
               <div class="donut-label-wrap">
-                <span class="donut-dot" style="background:#b8860b"></span>
+                <span class="donut-dot" style="background:#0757d9"></span>
                 <span>IVF & ICSI Cycles</span>
               </div>
               <span class="donut-percent">42%</span>
@@ -768,7 +768,7 @@
             <h3 class="bi-card-title">📅 Live Patient Consultation Queue</h3>
             <p class="bi-card-subtitle">Scheduled appointments and inquiries synced with Supabase PostgreSQL</p>
           </div>
-          <button type="button" class="btn-gold" onclick="openNewBookingModal()">+ Book Patient</button>
+          <button type="button" class="btn-primary" onclick="openNewBookingModal()">+ Book Patient</button>
         </div>
 
         <div class="bi-table-wrap">
@@ -904,7 +904,7 @@
           <option>04:30 PM</option>
         </select>
         <input type="text" id="docAddPatService" name="service" required placeholder="Consultation Service" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
-        <button type="submit" class="btn-gold" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Save Appointment to Supabase →</button>
+        <button type="submit" class="btn-primary" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Save Appointment to Supabase →</button>
       </form>
     </div>
   </div>
@@ -921,7 +921,7 @@
         <input type="text" id="setFeeUltrasound" name="ultrasound_scan" required placeholder="Ultrasound Scan Fee" value="AED 650" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
         <input type="text" id="setFeeIvf" name="ivf_package" required placeholder="Full IVF Package" value="AED 28,000" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
         <input type="text" id="setInsurance" name="accepted_insurance" required placeholder="Accepted Insurance Networks" value="Daman, NextCare, MetLife, AXA, Sukoon" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
-        <button type="submit" class="btn-gold" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Update Practice Tariffs →</button>
+        <button type="submit" class="btn-primary" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Update Practice Tariffs →</button>
       </form>
     </div>
   </div>
