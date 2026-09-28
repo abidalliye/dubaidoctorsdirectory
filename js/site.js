@@ -766,7 +766,7 @@
 
       // Update nav-actions across desktop
       document.querySelectorAll('.nav-actions').forEach(nav => {
-        let authBtn = nav.querySelector('.btn-signin, .user-badge-nav');
+        let authBtn = nav.querySelector('.btn-signin, .user-badge-nav, button[onclick*="openAuth"]');
         if (user) {
           const badgeHtml = `
             <div class="user-badge-nav">
@@ -782,13 +782,12 @@
             nav.insertBefore(wrap.firstElementChild, nav.firstChild);
           }
         } else {
-          const signInHtml = `<button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')" style="padding:8px 12px;font-size:12px">Sign In</button>`;
-          if (authBtn && authBtn.classList.contains('user-badge-nav')) {
+          const existingSignIn = nav.querySelector('.btn-signin, button[onclick*="openAuth"]');
+          if (existingSignIn) {
+            existingSignIn.classList.add('btn-signin');
+          } else if (authBtn && authBtn.classList.contains('user-badge-nav')) {
+            const signInHtml = `<button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')" style="padding:8px 12px;font-size:12px">Sign In</button>`;
             authBtn.outerHTML = signInHtml;
-          } else if (!authBtn) {
-            const wrap = document.createElement('div');
-            wrap.innerHTML = signInHtml;
-            nav.insertBefore(wrap.firstElementChild, nav.firstChild);
           }
         }
       });

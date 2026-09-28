@@ -100,7 +100,7 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 9px 0;
+  padding: 9px 18px;
 }
 
 .topbar span, .top span {
