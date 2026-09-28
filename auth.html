@@ -135,9 +135,10 @@
             <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
 
             <div class="demo-auth-strip">
-              <span>Quick Access:</span>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Demo Doctor</button>
-              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">⚡ Admin Dashboard</a>
+              <span>Quick Role Access:</span>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Doctor Portal</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('patient')">👤 Patient Portal</button>
+              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">👑 Admin Center</a>
             </div>
 
             <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
@@ -380,12 +381,24 @@
 
     function handleLogin(e) {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      const role = email.includes('clinic') || email.includes('dr') || email.includes('doctor') ? 'doctor' : 'patient';
-      const name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : 'Mariam Al Falasi';
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      let role = 'patient';
+      let name = 'Mariam Al Falasi';
+      let targetUrl = 'dashboard-patient.html';
+
+      if (email.includes('admin')) {
+        role = 'admin';
+        name = 'Directory Admin';
+        targetUrl = 'admin.html';
+      } else if (email.includes('clinic') || email.includes('dr') || email.includes('doctor') || email.includes('hospital') || email.includes('lab')) {
+        role = 'doctor';
+        name = 'Dr. Partha Sarathi (DHCC)';
+        targetUrl = 'dashboard-doctor.html';
+      }
+
       localStorage.setItem('ff_user', JSON.stringify({ name, email, role, loggedInAt: new Date().toISOString() }));
-      FertiFind.toast(`Welcome back, ${name}! Signed in successfully.`);
-      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+      FertiFind.toast(`Welcome back, ${name}! Redirecting to dashboard...`);
+      setTimeout(() => { window.location.href = targetUrl; }, 800);
     }
 
     function handleRegister(e) {
@@ -412,10 +425,10 @@
         FertiFind.toast(`Account created for ${name}! Please submit your practice details.`, 4000);
         setTimeout(() => {
           window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}&mobile=${encodeURIComponent(mobile)}`;
-        }, 1000);
+        }, 800);
       } else {
         FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
-        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+        setTimeout(() => { window.location.href = 'dashboard-patient.html'; }, 800);
       }
     }
 
@@ -426,15 +439,31 @@
     }
 
     function demoLogin(role) {
-      const user = {
-        name: 'Dr. Partha Sarathi Das',
-        email: 'dr.das@orchidfertility.ae',
-        role: 'doctor',
-        loggedInAt: new Date().toISOString()
-      };
-      localStorage.setItem('ff_user', JSON.stringify(user));
-      FertiFind.toast(`Logged in as ${user.name} (DOCTOR)`);
-      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+      if (role === 'doctor') {
+        const user = {
+          name: 'Dr. Partha Sarathi Das',
+          email: 'dr.das@orchidfertility.ae',
+          role: 'doctor',
+          facility: 'Orchid Fertility Clinic (DHCC)',
+          loggedInAt: new Date().toISOString()
+        };
+        localStorage.setItem('ff_user', JSON.stringify(user));
+        FertiFind.toast(`Signed in as Dr. Partha Sarathi Das (Doctor)`);
+        setTimeout(() => { window.location.href = 'dashboard-doctor.html'; }, 600);
+      } else if (role === 'patient') {
+        const user = {
+          name: 'Mariam Al Hashemi',
+          email: 'mariam.hashemi@example.ae',
+          role: 'patient',
+          dhaId: 'DXB-PAT-881920',
+          loggedInAt: new Date().toISOString()
+        };
+        localStorage.setItem('ff_user', JSON.stringify(user));
+        FertiFind.toast(`Signed in as Mariam Al Hashemi (Patient)`);
+        setTimeout(() => { window.location.href = 'dashboard-patient.html'; }, 600);
+      } else if (role === 'admin') {
+        window.location.href = 'admin.html';
+      }
     }
 
     // Hash router
