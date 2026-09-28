@@ -13,3 +13,6 @@ $RECYCLE.BIN/
 # Node
 node_modules/
 npm-debug.log
+
+# Surge local domain cache
+CNAME
