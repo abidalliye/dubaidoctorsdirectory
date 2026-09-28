@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "hospitals",
+    "name": "Multi-Specialty & Tertiary Hospitals",
+    "nameAr": "المستشفيات العامة والتخصصية",
+    "dhaFacilityType": "General Hospital (RDL 4-6)",
+    "icon": "🏥",
+    "summary": "Full-service multi-specialty and tertiary teaching hospitals in Dubai providing 24/7 emergency departments, intensive care units (ICU/NICU), inpatient surgical suites, blood banks, and advanced diagnostic imaging.",
+    "dhaStandards": "Must maintain 24/7 emergency medicine, continuous in-house consultant coverage, accredited pharmacy services, and NABIDH electronic health system integration.",
+    "topFacilities": ["American Hospital Dubai", "King's College Hospital London Dubai", "Fakeeh University Hospital", "Saudi German Hospital Dubai", "Al Zahra Hospital Dubai"],
+    "faqs": [
+      {
+        "q": "What accreditation standards do Dubai private hospitals follow?",
+        "a": "Dubai private hospitals are accredited by international bodies such as Joint Commission International (JCI), Australian Healthcare Standards (ACHSI), or Canadian Healthcare Standards (AC), alongside DHA regulatory licensure."
+      },
+      {
+        "q": "Do private hospitals in Dubai accept emergency walk-in patients?",
+        "a": "Yes, all licensed hospitals with emergency departments accept urgent and critical walk-in patients 24 hours a day, 7 days a week."
+      }
+    ]
+  },
+  {
+    "slug": "clinics",
+    "name": "Specialty Clinics & Polyclinics",
+    "nameAr": "العيادات التخصصية والمراكز الطبية",
+    "dhaFacilityType": "Polyclinic / Specialty Clinic (RDL 2-3)",
+    "icon": "🏢",
+    "summary": "Outpatient medical clinics and polyclinics offering specialist doctor consultations, routine diagnostic workups, day-case monitoring, and preventative health checks with shorter wait times and personalized care.",
+    "dhaStandards": "Must feature dedicated consultation rooms, clinical treatment rooms, automated external defibrillators (AED), and DHA-licensed nursing staff.",
+    "topFacilities": ["Aster Clinic Network", "Prime Medical Centers", "Emirates Hospital Clinics", "Mediclinic Clinics", "HealthPlus Specialty Centers"],
+    "faqs": [
+      {
+        "q": "What is the difference between a polyclinic and a hospital in Dubai?",
+        "a": "A polyclinic focuses on outpatient consultations, minor procedures, and daytime investigations without overnight inpatient hospital admissions."
+      },
+      {
+        "q": "Can polyclinics in Dubai perform minor surgeries?",
+        "a": "DHA-licensed polyclinics can perform minor outpatient procedures under local anesthesia (wound suturing, mole excisions, joint injections)."
+      }
+    ]
+  },
+  {
+    "slug": "diagnostic-labs",
+    "name": "Diagnostic Pathology Laboratories",
+    "nameAr": "مختبرات التحاليل الطبية والتشخيصية",
+    "dhaFacilityType": "Clinical Diagnostic Laboratory",
+    "icon": "🧪",
+    "summary": "Specialized laboratory facilities accredited by CAP and ISO-15189, offering routine biochemistry, molecular PCR genetics, hormone panels, microbiology, and mobile home sample collection across Dubai.",
+    "dhaStandards": "Must participate in international external quality assessment schemes (EQAS), employ licensed clinical laboratory scientists, and operate verified cold-chain logistics.",
+    "topFacilities": ["Smart Lab Dubai", "Alpha Genetics & Pathology", "Igenomix Dubai", "National Reference Laboratory (NRL)", "Al Borg Diagnostics"],
+    "faqs": [
+      {
+        "q": "Are laboratory test results in Dubai integrated into my digital medical file?",
+        "a": "Yes, through the DHA NABIDH platform, licensed diagnostic laboratories automatically sync verified test reports directly to your unified electronic medical record."
+      },
+      {
+        "q": "Can I book home phlebotomy directly through diagnostic laboratories?",
+        "a": "Yes, licensed diagnostic labs dispatch certified mobile phlebotomists for convenient home sample collection with digital results delivered within hours."
+      }
+    ]
+  },
+  {
+    "slug": "home-healthcare",
+    "name": "Home Healthcare & Nursing Providers",
+    "nameAr": "شركات ومراكز الرعاية الصحية المنزلية",
+    "dhaFacilityType": "Home Healthcare Facility",
+    "icon": "⌂",
+    "summary": "Accredited home healthcare agencies providing doctor house calls, skilled clinical nurses, post-operative rehabilitation, elderly daily assistance, and at-home infusion treatments in patient residences.",
+    "dhaStandards": "Requires dedicated DHA Home Healthcare licensure, continuous nurse clinical supervision by a licensed medical director, and emergency transfer protocols.",
+    "topFacilities": ["First Care Home Healthcare", "Manzil Health Dubai", "Sublime Home Health", "Emirates Home Nursing", "HealthCall Dubai"],
+    "faqs": [
+      {
+        "q": "Can doctors prescribe medication during a home visit in Dubai?",
+        "a": "Yes, DHA-licensed home healthcare physicians can conduct physical examinations, prescribe medications via digital e-Rx, and arrange laboratory testing on-site."
+      },
+      {
+        "q": "How can I book an at-home nursing service in Dubai?",
+        "a": "You can request home nursing by specifying the required hours (4, 12, or 24-hour shifts) and medical requirements through our direct booking portal or WhatsApp."
+      }
+    ]
+  }
+]

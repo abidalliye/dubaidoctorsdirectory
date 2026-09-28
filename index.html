@@ -676,6 +676,10 @@
       <nav class="main-nav">
         <a href="index.html" class="active">Home</a>
         <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+        <a href="services.html">30 DHA Services</a>
+        <a href="locations.html">Districts</a>
+        <a href="specialists.html">Specialists</a>
+        <a href="categories.html">Categories</a>
 
         <!-- Mega Menu: Find Care -->
         <div class="nav-dropdown">
@@ -791,8 +795,9 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
+        <a class="btn btn-outline" href="submit-business.html">💼 List Practice</a>
         <button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')">Sign In</button>
-        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">Book Appointment →</button>
+        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">📅 Book Appointment</button>
         <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
       </div>
     </div>
@@ -801,6 +806,10 @@
     <div class="mobile-drawer" id="mobileDrawer">
       <a href="index.html" class="active">🏠 Home</a>
       <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
+      <a href="services.html">📋 All 30 DHA Services</a>
+      <a href="locations.html">📍 Dubai Districts</a>
+      <a href="specialists.html">🩺 Specialists</a>
+      <a href="categories.html">🏢 Facility Categories</a>
       <a href="fertifind_dubai_directory_search_page.html?type=doctor">🩺 Doctors & Specialists</a>
       <a href="fertifind_dubai_directory_search_page.html?type=hospital">🏥 Hospitals & Centers</a>
       <a href="fertifind_dubai_directory_search_page.html?type=clinic">🏢 Clinics & Polyclinics</a>
@@ -862,6 +871,16 @@
               <option value="Deira">Deira</option>
             </select>
             <button class="btn-search" onclick="handleHeroSearch()">Search Providers →</button>
+          </div>
+
+          <!-- Quick Action CTA Pill Bar -->
+          <div class="hero-cta-quick-bar">
+            <span style="font-size:12px;font-weight:800;color:var(--muted)">⚡ Quick Booking:</span>
+            <button type="button" class="quick-cta-pill highlight" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">📅 Book Doctor In-Clinic</button>
+            <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Telehealth Network Dubai','Video Consultation with Live Doctor')">💻 Live Doctor Video Call</button>
+            <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Home Healthcare Dubai','Doctor at Home Medical Check')">⌂ Doctor at Home Visit</button>
+            <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Diagnostic Labs Dubai','Home Sample Collection')">🧪 Lab Sample from Home</button>
+            <a class="quick-cta-pill" href="submit-business.html">💼 List Practice</a>
           </div>
 
           <div class="trust-row">

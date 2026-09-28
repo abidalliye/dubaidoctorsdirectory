@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "ivf-specialist",
+    "name": "Reproductive Endocrinologist & IVF Consultant",
+    "nameAr": "استشاري طب الخصوبة والغدد الصماء التناسلية",
+    "dhaPqrTier": "Tier 1 Specialist / Consultant",
+    "icon": "👶",
+    "avgFeeAed": "AED 450 - AED 800",
+    "experienceReq": "Minimum 5-8 years specialized clinical experience post-fellowship with subspecialty board certification (e.g., CCT/Subspecialty RCOG, American Board REI).",
+    "summary": "Specialist physicians dedicated to diagnosing and treating male and female infertility, recurrent pregnancy loss, hormonal imbalances, and conducting assisted reproductive treatments including IVF, ICSI, and fertility preservation.",
+    "topConditions": ["Polycystic Ovary Syndrome (PCOS)", "Diminished Ovarian Reserve (DOR)", "Male Factor Oligoasthenoteratozoospermia", "Endometriosis", "Unexplained Infertility", "Recurrent Miscarriages"],
+    "faqs": [
+      {
+        "q": "What qualifications should I check for an IVF doctor in Dubai?",
+        "a": "Check that the physician holds a Consultant or Specialist license from the Dubai Health Authority (DHA) or DHCR, with formal fellowship training in Reproductive Endocrinology and Infertility (REI)."
+      },
+      {
+        "q": "When should couples consult a fertility specialist in Dubai?",
+        "a": "Couples are advised to seek evaluation if they haven't conceived after 12 months of unprotected intercourse (or after 6 months if the female partner is 35 or older)."
+      }
+    ]
+  },
+  {
+    "slug": "cardiologist",
+    "name": "Consultant Cardiologist & Heart Specialist",
+    "nameAr": "استشاري أمراض القلب والأوعية الدموية",
+    "dhaPqrTier": "Tier 1 Consultant Cardiologist",
+    "icon": "❤️",
+    "avgFeeAed": "AED 500 - AED 950",
+    "experienceReq": "Board certification in Cardiovascular Disease (American Board, UK CCT/MRCP, European Board of Cardiology) with ACLS master credentialing.",
+    "summary": "Expert physicians managing coronary artery disease, heart failure, cardiac arrhythmias, high blood pressure, and performing non-invasive echocardiography and interventional cardiac catheterization.",
+    "topConditions": ["Coronary Artery Atherosclerosis", "Cardiac Arrhythmias & Atrial Fibrillation", "Hypertension & Hyperlipidemia", "Congestive Heart Failure", "Valvular Heart Disease"],
+    "faqs": [
+      {
+        "q": "What does a first cardiology consultation in Dubai include?",
+        "a": "A standard initial consultation includes a comprehensive cardiovascular risk assessment, resting 12-lead ECG, blood pressure evaluation, and review of lipid blood markers."
+      },
+      {
+        "q": "How can I prepare for a treadmill cardiac stress test?",
+        "a": "Wear comfortable running shoes and lightweight clothing, avoid heavy meals and caffeine for 4 hours before the test, and consult your doctor about taking morning blood pressure medications."
+      }
+    ]
+  },
+  {
+    "slug": "orthopedic-surgeon",
+    "name": "Consultant Orthopedic & Joint Surgeon",
+    "nameAr": "استشاري جراحة العظام والمفاصل والعمود الفقري",
+    "dhaPqrTier": "Tier 1 Surgical Consultant",
+    "icon": "🦴",
+    "avgFeeAed": "AED 500 - AED 1,000",
+    "experienceReq": "Fellowship in Orthopedic Surgery (FRCS Orth, American Board of Orthopaedic Surgery, German Facharzt) with verified surgical logbooks.",
+    "summary": "Specialized surgeons performing robotic joint replacements, keyhole arthroscopy for ACL tears, rotator cuff repairs, complex trauma fixation, and spinal disc surgeries.",
+    "topConditions": ["Knee Osteoarthritis", "Anterior Cruciate Ligament (ACL) Tears", "Rotator Cuff Tendon Tears", "Lumbar Herniated Discs & Sciatica", "Bone Fractures & Sports Sprains"],
+    "faqs": [
+      {
+        "q": "How do I know if I need total knee replacement surgery?",
+        "a": "Surgery is indicated when severe knee arthritis causes constant debilitating pain that limits everyday walking, cannot be controlled by medications or injections, and shows bone-on-bone contact on X-rays."
+      },
+      {
+        "q": "What is the recovery period for an ACL reconstruction in Dubai?",
+        "a": "Patients walk with braces within days, achieve full knee flexion by 6 weeks, and return to competitive pivoting sports between 6 to 9 months with guided sports physiotherapy."
+      }
+    ]
+  },
+  {
+    "slug": "dermatologist",
+    "name": "Consultant Dermatologist & Aesthetic Specialist",
+    "nameAr": "استشاري الأمراض الجلدية والليزر والتجميل",
+    "dhaPqrTier": "Tier 1 Consultant Dermatologist",
+    "icon": "✨",
+    "avgFeeAed": "AED 400 - AED 800",
+    "experienceReq": "Specialist or Consultant Dermatology licensing (American Board of Dermatology, Arab Board, MRCP Derm, European Board).",
+    "summary": "Physicians specializing in clinical disorders of skin, hair, and nails, providing advanced medical treatments for chronic skin conditions, laser therapy, and evidence-based aesthetic rejuvenation.",
+    "topConditions": ["Cystic Acne & Acne Scarring", "Atopic Eczema & Contact Dermatitis", "Psoriasis Vulgaris", "Suspicious Moles & Melanoma Screening", "Alopecia Areata & Hair Thinning"],
+    "faqs": [
+      {
+        "q": "Does a dermatologist treat severe hair loss in Dubai?",
+        "a": "Yes, dermatologists specialize in trichology, diagnosing androgenetic alopecia, telogen effluvium, and alopecia areata via trichoscopy and prescribing PRP, minoxidil, and targeted biological treatments."
+      },
+      {
+        "q": "What is the difference between a dermatologist and a cosmetologist?",
+        "a": "A dermatologist is a medical doctor (MD) licensed to diagnose skin diseases, perform skin biopsies, and prescribe medical drugs; a cosmetologist focuses on non-medical cosmetic and surface beauty treatments."
+      }
+    ]
+  }
+]

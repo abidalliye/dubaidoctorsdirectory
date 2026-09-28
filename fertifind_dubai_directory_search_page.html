@@ -631,6 +631,10 @@
       <nav class="main-nav">
         <a href="index.html">Home</a>
         <a href="fertifind_dubai_directory_search_page.html" class="active">Directory</a>
+        <a href="services.html">30 DHA Services</a>
+        <a href="locations.html">Districts</a>
+        <a href="specialists.html">Specialists</a>
+        <a href="categories.html">Categories</a>
 
         <!-- Mega Menu: Find Care -->
         <div class="nav-dropdown">
@@ -746,8 +750,9 @@
 
       <!-- Nav Actions -->
       <div class="nav-actions">
+        <a class="btn btn-outline" href="submit-business.html">💼 List Practice</a>
         <button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')">Sign In</button>
-        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">Book Appointment →</button>
+        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">📅 Book Appointment</button>
         <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
       </div>
     </div>
@@ -756,6 +761,10 @@
     <div class="mobile-drawer" id="mobileDrawer">
       <a href="index.html">🏠 Home Directory</a>
       <a href="fertifind_dubai_directory_search_page.html" class="active">🔍 Search Directory</a>
+      <a href="services.html">📋 All 30 DHA Services</a>
+      <a href="locations.html">📍 Dubai Districts</a>
+      <a href="specialists.html">🩺 Specialists</a>
+      <a href="categories.html">🏢 Facility Categories</a>
       <a href="fertifind_dubai_directory_search_page.html?type=doctor">🩺 Doctors & Specialists</a>
       <a href="fertifind_dubai_directory_search_page.html?type=hospital">🏥 Hospitals & Centers</a>
       <a href="fertifind_dubai_directory_search_page.html?type=clinic">🏢 Clinics & Polyclinics</a>
@@ -770,9 +779,9 @@
         <a href="dashboard-patient.html">👤 Patient Care BI</a>
         <a href="admin.html">👑 Super Admin BI</a>
       </div>
-      <a href="submit-business.html">📝 Submit Practice Details</a>
+      <a href="submit-business.html">💼 Submit Practice Details</a>
       <a href="auth.html">🔐 Sign In / Register</a>
-      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">Book Appointment</button>
+      <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">📅 Book Appointment</button>
     </div>
   </header>
 
@@ -816,6 +825,16 @@
           <option value="Deira">Deira</option>
         </select>
         <button class="btn btn-primary" id="searchBtn">Search Providers →</button>
+      </div>
+
+      <!-- Quick Action CTA Pill Bar -->
+      <div class="hero-cta-quick-bar">
+        <span style="font-size:12px;font-weight:800;color:var(--muted)">⚡ Quick Actions:</span>
+        <button type="button" class="quick-cta-pill highlight" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">📅 Book Doctor In-Clinic</button>
+        <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Telehealth Network Dubai','Video Consultation with Live Doctor')">💻 Live Doctor Video Call</button>
+        <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Home Healthcare Dubai','Doctor at Home Medical Check')">⌂ Doctor at Home Visit</button>
+        <button type="button" class="quick-cta-pill" onclick="FertiFind.openBooking('Diagnostic Labs Dubai','Home Sample Collection')">🧪 Lab Sample from Home</button>
+        <a class="quick-cta-pill" href="submit-business.html">💼 List Your Practice</a>
       </div>
     </div>
   </section>
@@ -954,7 +973,7 @@
               <div class="card-info">
                 <span class="type-badge">Cardiologist</span>
                 <span class="badge badge-mint">✓ DHA Consultant</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=Farida+Al+Hosani">Dr. Farida Al Hosani</a></h3>
+                <h3><a href="fertifind_doctor_profile_page.html?name=Dr.+Farida+Al+Hosani">Dr. Farida Al Hosani</a></h3>
                 <div class="card-sub">Cardiology & Heart Health • American Hospital</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>4.95</b> <span class="muted">(214 reviews)</span></div>
                 <div class="card-location">📍 <b>Oud Metha</b> • 18+ Yrs Exp</div>
@@ -984,8 +1003,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Farida Al Hosani')">Review</button>
-                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=Farida+Al+Hosani">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Farida Al Hosani','Cardiology Specialist Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html?name=Dr.+Farida+Al+Hosani">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Farida Al Hosani','Cardiology Specialist Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1003,7 +1022,7 @@
               <div class="card-info">
                 <span class="type-badge">Orthopedic Surgeon</span>
                 <span class="badge badge-mint">✓ Board Certified</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=Tariq+Mansoor">Dr. Tariq Mansoor</a></h3>
+                <h3><a href="fertifind_doctor_profile_page.html?name=Dr.+Tariq+Mansoor">Dr. Tariq Mansoor</a></h3>
                 <div class="card-sub">Orthopedic Surgery • King's College Hospital</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>4.92</b> <span class="muted">(318 reviews)</span></div>
                 <div class="card-location">📍 <b>Dubai Hills & Marina</b> • 22+ Yrs Exp</div>
@@ -1033,8 +1052,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Tariq Mansoor')">Review</button>
-                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=Tariq+Mansoor">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','Orthopedic Surgical Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html?name=Dr.+Tariq+Mansoor">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','Orthopedic Surgical Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1052,7 +1071,7 @@
               <div class="card-info">
                 <span class="type-badge">Dermatologist</span>
                 <span class="badge badge-mint">✓ DHA Specialist</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=Laila+Al+Otaiba">Dr. Laila Al Otaiba</a></h3>
+                <h3><a href="fertifind_doctor_profile_page.html?name=Dr.+Laila+Al+Otaiba">Dr. Laila Al Otaiba</a></h3>
                 <div class="card-sub">Dermatology & Aesthetic Laser • DHCC Medical</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>4.88</b> <span class="muted">(196 reviews)</span></div>
                 <div class="card-location">📍 <b>Dubai Healthcare City</b> • 14 Yrs Exp</div>
@@ -1072,8 +1091,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Laila Al Otaiba')">Review</button>
-                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=Laila+Al+Otaiba">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Laila Al Otaiba','Dermatology Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html?name=Dr.+Laila+Al+Otaiba">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Laila Al Otaiba','Dermatology Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1092,7 +1111,7 @@
               <div class="card-info">
                 <span class="type-badge">Bariatric Surgeon</span>
                 <span class="badge badge-mint">✓ Laparoscopic Fellow</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=Ahmed+Radwan">Dr. Ahmed Radwan</a></h3>
+                <h3><a href="fertifind_doctor_profile_page.html?name=Dr.+Ahmed+Radwan">Dr. Ahmed Radwan</a></h3>
                 <div class="card-sub">Bariatric & Laparoscopic Surgery • Saudi German Hosp</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>4.91</b> <span class="muted">(260 reviews)</span></div>
                 <div class="card-location">📍 <b>Al Barsha 3</b> • 20+ Yrs Exp</div>
@@ -1112,8 +1131,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Ahmed Radwan')">Review</button>
-                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=Ahmed+Radwan">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Ahmed Radwan','Surgical Evaluation Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html?name=Dr.+Ahmed+Radwan">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Ahmed Radwan','Surgical Evaluation Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1254,7 +1273,7 @@
               <div class="card-info">
                 <span class="type-badge">Allied Technicians</span>
                 <span class="badge badge-mint">✓ DHA Licensed</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=Apex+Physical">Apex Physical Therapy & Rehab</a></h3>
+                <h3><a href="fertifind_doctor_profile_page.html?name=Apex+Physical+Therapy+&+Rehab">Apex Physical Therapy & Rehab</a></h3>
                 <div class="card-sub">Sports Rehabilitation • Manual Therapy • Post-Op</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>4.94</b> <span class="muted">(175 reviews)</span></div>
                 <div class="card-location">📍 <b>Dubai Marina</b> • Marina Walk</div>
@@ -1314,8 +1333,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Sara Al Maktoum')">Review</button>
-                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Sara Al Maktoum','IVF Specialist Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Sara Al Maktoum','IVF Specialist Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1355,8 +1374,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Orchid Fertility Clinic')">Review</button>
-                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Fertility Clinic','IVF Specialist Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Fertility Clinic','IVF Specialist Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1395,8 +1414,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Michael Fakih')">Review</button>
-                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Michael Fakih','Senior Specialist Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Michael Fakih','Senior Specialist Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1435,8 +1454,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Fakih IVF Fertility Center')">Review</button>
-                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Fakih IVF Fertility Center','Initial Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_hospital_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Fakih IVF Fertility Center','Initial Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1475,8 +1494,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Igenomix Dubai')">Review</button>
-                <a class="btn btn-soft" href="fertifind_labs_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">Book Test</button>
+                <a class="btn btn-soft" href="fertifind_labs_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">🧪 Book Test</button>
               </div>
             </div>
             <div class="card-footer">
@@ -1515,8 +1534,8 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('Dr. Partha Sarathi Das')">Review</button>
-                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View profile</a>
-                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Fertility Consultation')">Book</button>
+                <a class="btn btn-soft" href="fertifind_doctor_profile_page.html">View Profile →</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','Fertility Consultation')">📅 Book Appointment</button>
               </div>
             </div>
             <div class="card-footer">
@@ -2105,7 +2124,7 @@
               <div class="card-info">
                 <span class="type-badge">${item.category || 'Provider'}</span>
                 <span class="badge badge-mint">✓ ${item.dhaLicense || 'DHA Verified'}</span>
-                <h3><a href="fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(item.name)}">${item.name}</a></h3>
+                <h3><a href="${item.type === \'hospital\' || item.type === \'clinic\' ? \'fertifind_hospital_profile_page.html\' : item.type === \'lab\' ? \'fertifind_labs_profile_page.html\' : \'fertifind_doctor_profile_page.html\'}?name=${encodeURIComponent(item.name)}">${item.name}</a></h3>
                 <div class="card-sub">${item.leadDoctor || 'Lead Specialist'} • ${item.address || item.area || 'Dubai'}</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>5.0</b> <span class="muted">(New Verified Listing)</span></div>
                 <div class="card-location">📍 <b>${item.area || 'Dubai'}</b> • ${item.yearsInDubai || '1+'} Yrs Established</div>
@@ -2131,7 +2150,7 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('${item.name}')">Review</button>
-                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(item.name)}">View profile</a>
+                <a class="btn btn-soft" href="${item.type === \'hospital\' || item.type === \'clinic\' ? \'fertifind_hospital_profile_page.html\' : item.type === \'lab\' ? \'fertifind_labs_profile_page.html\' : \'fertifind_doctor_profile_page.html\'}?name=${encodeURIComponent(item.name)}">View Profile →</a>
                 <button class="btn btn-primary" onclick="FertiFind.openBooking('${item.name}','Consultation')">Book</button>
               </div>
             </div>

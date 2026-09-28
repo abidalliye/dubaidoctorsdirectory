@@ -1,0 +1,157 @@
+[
+  {
+    "slug": "dubai-healthcare-city",
+    "name": "Dubai Healthcare City (DHCC)",
+    "nameAr": "مدينة دبي الطبية",
+    "zone": "Bur Dubai / Oud Metha",
+    "heroImage": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=85",
+    "summary": "The world's largest dedicated healthcare freezone, established by royal decree, housing over 160 clinical facilities, tertiary teaching hospitals, and international specialist centers regulated under Dubai Healthcare City Authority (DHCR).",
+    "doctorCount": "1,200+",
+    "clinicCount": "160+",
+    "hospitalCount": "6",
+    "topSpecialties": ["Reproductive Endocrinology & IVF", "Interventional Cardiology", "Orthopedic Surgery", "Medical Oncology", "Pediatric Subspecialties", "Dermatology"],
+    "transit": "Direct Dubai Metro Green Line (Dubai Healthcare City Station); valet parking across all major medical complexes (Bldg 27, Bldg 64, Al Razi Bldg 64).",
+    "faqs": [
+      {
+        "q": "What makes Dubai Healthcare City (DHCC) different from other medical areas in Dubai?",
+        "a": "DHCC operates as a dedicated global healthcare ecosystem with specialized regulatory oversight (DHCR/DHA), bringing together internationally board-certified specialists, research institutes, and multi-specialty hospitals in a single walkable healthcare district."
+      },
+      {
+        "q": "Are medical services in DHCC covered by Dubai private insurance?",
+        "a": "Yes, nearly all major clinical facilities and hospitals in DHCC accept UAE network insurances including Saada, Enaya, NextCare, MetLife, Cigna, AXA, and Daman."
+      },
+      {
+        "q": "Which metro station serves Dubai Healthcare City?",
+        "a": "The Dubai Healthcare City Metro Station on the Green Line provides direct covered pedestrian access to clinical buildings 27, 33, 47, and 64."
+      },
+      {
+        "q": "Can international patients travel to DHCC for medical tourism?",
+        "a": "Yes, DHCC is the premier hub for Dubai Health Experience (DXH) medical tourism, providing fast-track medical visas, translation assistance, and dedicated international patient concierges."
+      }
+    ]
+  },
+  {
+    "slug": "jumeirah",
+    "name": "Jumeirah (Jumeirah 1, 2, 3 & Al Wasl)",
+    "nameAr": "جميرا والوصل",
+    "zone": "Coastal Central Dubai",
+    "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
+    "summary": "Dubai's premier coastal medical boulevard along Jumeirah Beach Road and Al Wasl Road, famous for luxury boutique day-surgery centers, world-class fertility clinics, aesthetic dermatology institutes, and pediatric polyclinics.",
+    "doctorCount": "850+",
+    "clinicCount": "110+",
+    "hospitalCount": "4",
+    "topSpecialties": ["Aesthetic Dermatology & Plastic Surgery", "In Vitro Fertilization (IVF)", "Dental Implantology", "Maternity & OB-GYN", "Executive Wellness"],
+    "transit": "Accessible via Al Wasl Road and Jumeirah Beach Road; RTA Bus routes 8, 81, 88; dedicated patient curbside parking and valet services at all villas and medical plazas.",
+    "faqs": [
+      {
+        "q": "Why is Jumeirah popular for fertility and aesthetic clinics?",
+        "a": "Jumeirah combines discreet boutique medical villas with premium clinical privacy, attracting high-profile international and regional specialists in reproductive medicine, cosmetic surgery, and preventative wellness."
+      },
+      {
+        "q": "Is parking easily accessible at medical clinics in Jumeirah?",
+        "a": "Yes, clinical villas along Jumeirah Beach Road and Al Wasl Road provide private on-site patient parking and complimentary valet attendants."
+      },
+      {
+        "q": "Do Jumeirah medical centers offer home doctor visits?",
+        "a": "Yes, several premier Jumeirah clinics provide DHA-licensed mobile doctor and nursing house calls across Jumeirah 1, 2, 3, Umm Suqeim, and City Walk."
+      },
+      {
+        "q": "Are clinics in Jumeirah open on weekends?",
+        "a": "Many Jumeirah polyclinics and diagnostic centers operate Saturday through Thursday, with select urgent dental and pediatric clinics open on Fridays."
+      }
+    ]
+  },
+  {
+    "slug": "dubai-marina",
+    "name": "Dubai Marina & JBR",
+    "nameAr": "دبي مارينا وجميرا بيتش ريزيدنس",
+    "zone": "New Dubai Coast",
+    "heroImage": "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=85",
+    "summary": "Modern waterfront healthcare hub serving a dense resident and tourist population with 24/7 polyclinics, walk-in urgent care, family medicine, orthopedic sports clinics, and telemedicine hubs.",
+    "doctorCount": "420+",
+    "clinicCount": "65+",
+    "hospitalCount": "2",
+    "topSpecialties": ["General Medicine & Urgent Care", "Orthopedics & Sports Rehab", "Dermatology", "Pediatrics", "Dental Care"],
+    "transit": "Direct access via Dubai Tram (Marina Mall, JBR 1 & 2 stations) and Dubai Metro Red Line (DMCC & Sobha Realty stations).",
+    "faqs": [
+      {
+        "q": "Can I find walk-in clinics in Dubai Marina without prior appointment?",
+        "a": "Yes, several multi-specialty clinics in Marina Mall, Silverene Tower, and along the Marina Promenade accept walk-in patients for immediate consultations."
+      },
+      {
+        "q": "Is urgent care available 24/7 in Dubai Marina?",
+        "a": "Yes, several facilities operate 24-hour urgent medical care with on-site pharmacies and rapid diagnostic blood labs."
+      },
+      {
+        "q": "Do doctors in Dubai Marina speak European languages?",
+        "a": "Given the diverse multinational resident community, physicians in Dubai Marina routinely practice in English, Russian, French, German, Italian, and Arabic."
+      },
+      {
+        "q": "Are home nurse and doctor calls available in high-rise towers in Marina?",
+        "a": "Yes, mobile medical services regularly attend to residents in Dubai Marina and JBR apartment towers for home IV therapy, blood draws, and GP checks."
+      }
+    ]
+  },
+  {
+    "slug": "downtown-dubai",
+    "name": "Downtown Dubai & Business Bay",
+    "nameAr": "وسط مدينة دبي والخليج التجاري",
+    "zone": "Central Financial District",
+    "heroImage": "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=85",
+    "summary": "High-density corporate medical centers and premium specialty polyclinics located around Burj Khalifa, Dubai Mall, and Business Bay canal towers, providing executive health screenings and urgent ambulatory care.",
+    "doctorCount": "510+",
+    "clinicCount": "75+",
+    "hospitalCount": "2",
+    "topSpecialties": ["Executive Health Screening", "Cardiology", "Dermatology & Laser", "Orthopedics & Spine", "Clinical Psychology"],
+    "transit": "Connected via Dubai Metro Red Line (Burj Khalifa/Dubai Mall & Business Bay stations); extensive mall and tower parking.",
+    "faqs": [
+      {
+        "q": "Where can I find executive health checks in Downtown Dubai?",
+        "a": "Clinics in Dubai Mall (Medical Hub) and Bay Square Business Bay offer same-day comprehensive executive health screening packages with immediate lab reports."
+      },
+      {
+        "q": "Can Business Bay corporate workers get workplace vaccinations and occupational health checks?",
+        "a": "Yes, DHA-licensed occupational health clinics provide on-site employee health evaluations, flu vaccinations, and ergonomic posture assessments."
+      },
+      {
+        "q": "Are evening doctor appointments available in Business Bay?",
+        "a": "Yes, many clinics cater to professional working hours with evening consultations available until 9:00 PM."
+      },
+      {
+        "q": "What diagnostic radiology is available in Downtown Dubai?",
+        "a": "Diagnostic centers in the area provide digital X-rays, 3D ultrasounds, and rapid cardiac ECGs with immediate digital report delivery."
+      }
+    ]
+  },
+  {
+    "slug": "dubai-hills",
+    "name": "Dubai Hills Estate & Al Barsha",
+    "nameAr": "دبي هيلز والبرشاء",
+    "zone": "South-Central Dubai",
+    "heroImage": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=85",
+    "summary": "A premier healthcare corridor anchored by King's College Hospital London Dubai, Saudi German Hospital, and Al Zahra Hospital, delivering comprehensive tertiary medical and surgical care.",
+    "doctorCount": "920+",
+    "clinicCount": "95+",
+    "hospitalCount": "5",
+    "topSpecialties": ["Robotic Joint Replacement", "Pediatrics & NICU", "Maternal Fetal Medicine", "General Laparoscopy", "Gastroenterology"],
+    "transit": "Direct access via Al Khail Road (E44) and Sheikh Zayed Road (E11); close to Mashreq & Mall of the Emirates Metro Stations.",
+    "faqs": [
+      {
+        "q": "What major tertiary hospitals are located in Dubai Hills and Al Barsha?",
+        "a": "Key tertiary facilities include King's College Hospital London (Dubai Hills), Saudi German Hospital Dubai, and Al Zahra Hospital Dubai."
+      },
+      {
+        "q": "Is 24/7 pediatric emergency care available in this district?",
+        "a": "Yes, both King's College Hospital and Saudi German Hospital feature dedicated 24/7 pediatric emergency departments with pediatric consultants on site."
+      },
+      {
+        "q": "Are advanced robotic surgeries performed in Al Barsha hospitals?",
+        "a": "Yes, hospitals in this zone specialize in robotic total knee/hip replacements, da Vinci robotic abdominal surgery, and laparoscopic procedures."
+      },
+      {
+        "q": "Can I access maternity and delivery suites in Dubai Hills?",
+        "a": "Yes, the area boasts modern labor and delivery suites, private postnatal suites, and Level III neonatal intensive care units (NICU)."
+      }
+    ]
+  }
+]
