@@ -118,20 +118,18 @@
         <div class="auth-view active" id="viewLogin">
           <form class="ff-form" onsubmit="handleLogin(event)">
             <div>
-              <label>Email Address or Mobile Number</label>
-              <input type="text" id="loginEmail" required placeholder="doctor@clinic.ae or patient@example.com">
+              <input type="text" id="loginEmail" name="email" required placeholder="Email or Mobile">
             </div>
             <div>
-              <label>Password</label>
               <div class="input-pass-wrap">
-                <input type="password" id="loginPass" required placeholder="••••••••">
+                <input type="password" id="loginPass" name="password" required placeholder="Enter Password">
                 <button type="button" class="pass-toggle-btn" onclick="togglePass('loginPass', this)">👁</button>
               </div>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:2px 0">
-              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
-                <input type="checkbox" checked style="width:14px;height:14px;margin:0"> Remember me
-              </label>
+              <div style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
+                <input type="checkbox" name="remember_me" checked style="width:14px;height:14px;margin:0"> <span>Remember me</span>
+              </div>
               <a href="javascript:void(0)" onclick="switchPageTab('forgot')" style="color:var(--blue);font-weight:700">Forgot Password?</a>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
@@ -152,7 +150,7 @@
         <div class="auth-view" id="viewRegister">
           <form class="ff-form" onsubmit="handleRegister(event)">
             <div>
-              <label>I am registering as:</label>
+              <div style="font-size:12px;font-weight:750;color:var(--navy);margin-bottom:6px">Registering As</div>
               <div class="role-picker">
                 <div class="role-chip active" id="p-chip-patient" onclick="selectPageRole('patient')">
                   <span class="role-ico">👤</span>
@@ -171,7 +169,7 @@
                   <span>Hospital/Lab</span>
                 </div>
               </div>
-              <input type="hidden" id="pRegRole" value="patient">
+              <input type="hidden" id="pRegRole" name="role" value="patient">
             </div>
 
             <!-- Provider Notice -->
@@ -184,42 +182,37 @@
             </div>
 
             <div>
-              <label id="pRegNameLabel">Full Name</label>
-              <input type="text" id="pRegName" required placeholder="e.g. Dr. Sarah Mansoori">
+              <input type="text" id="pRegName" name="full_name" required placeholder="Full Name">
             </div>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Email Address</label>
-                <input type="email" id="pRegEmail" required placeholder="name@domain.ae">
+                <input type="email" id="pRegEmail" name="email" required placeholder="Email Address">
               </div>
               <div>
-                <label>Mobile (+971 UAE)</label>
-                <input type="tel" id="pRegMobile" required placeholder="+971 50 XXX XXXX">
+                <input type="tel" id="pRegMobile" name="mobile" required placeholder="Mobile Number">
               </div>
             </div>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Password</label>
                 <div class="input-pass-wrap">
-                  <input type="password" id="pRegPass" required placeholder="••••••••">
+                  <input type="password" id="pRegPass" name="password" required placeholder="Create Password">
                   <button type="button" class="pass-toggle-btn" onclick="togglePass('pRegPass', this)">👁</button>
                 </div>
               </div>
               <div>
-                <label>Confirm Password</label>
                 <div class="input-pass-wrap">
-                  <input type="password" id="pRegPassConf" required placeholder="••••••••">
+                  <input type="password" id="pRegPassConf" name="confirm_password" required placeholder="Confirm Password">
                   <button type="button" class="pass-toggle-btn" onclick="togglePass('pRegPassConf', this)">👁</button>
                 </div>
               </div>
             </div>
 
-            <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);cursor:pointer;margin-top:2px">
-              <input type="checkbox" required checked style="width:15px;height:15px;margin-top:1px">
+            <div style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);margin-top:2px">
+              <input type="checkbox" name="terms" required checked style="width:15px;height:15px;margin-top:1px">
               <span>I agree to FertiFind's <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')" style="color:var(--blue);font-weight:700">Terms of Service</a> & UAE Healthcare Guidelines.</span>
-            </label>
+            </div>
 
             <button type="submit" class="btn btn-primary" id="pRegSubmitBtn" style="width:100%;padding:13px">Create Account →</button>
 
@@ -236,8 +229,7 @@
               🔑 Enter your registered email address or mobile phone number. We will send a secure password reset link and 6-digit verification code.
             </div>
             <div>
-              <label>Registered Email or Phone</label>
-              <input type="text" id="forgotContact" required placeholder="name@clinic.ae or +971 50 XXX XXXX">
+              <input type="text" id="forgotContact" name="contact" required placeholder="Email or Mobile">
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Send Password Reset Code →</button>
 
@@ -357,20 +349,20 @@
       document.getElementById('pRegRole').value = role;
 
       const notice = document.getElementById('pProviderNotice');
-      const nameLabel = document.getElementById('pRegNameLabel');
+      const nameInput = document.getElementById('pRegName');
       const submitBtn = document.getElementById('pRegSubmitBtn');
 
       if (role === 'doctor') {
         if (notice) notice.style.display = 'flex';
-        if (nameLabel) nameLabel.textContent = 'Doctor Full Name & Title';
+        if (nameInput) nameInput.placeholder = 'Doctor Full Name';
         if (submitBtn) submitBtn.textContent = 'Register Doctor & Continue →';
       } else if (role === 'clinic' || role === 'hospital') {
         if (notice) notice.style.display = 'flex';
-        if (nameLabel) nameLabel.textContent = 'Practice / Facility Name';
+        if (nameInput) nameInput.placeholder = 'Facility Name';
         if (submitBtn) submitBtn.textContent = 'Register Practice & Continue →';
       } else {
         if (notice) notice.style.display = 'none';
-        if (nameLabel) nameLabel.textContent = 'Full Name';
+        if (nameInput) nameInput.placeholder = 'Full Name';
         if (submitBtn) submitBtn.textContent = 'Create Patient Account →';
       }
     }

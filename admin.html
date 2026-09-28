@@ -255,6 +255,43 @@
       box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.1);
     }
 
+    /* Multi-Role BI Switcher Pill */
+    .bi-role-switcher {
+      display: flex;
+      align-items: center;
+      background: #fbf5e6;
+      border: 1px solid #e8d7ad;
+      border-radius: 30px;
+      padding: 3px 4px;
+      gap: 3px;
+    }
+    .bi-role-btn {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .bi-role-btn.active {
+      background: #ffffff;
+      color: #b8860b;
+      box-shadow: 0 2px 6px rgba(184, 134, 11, 0.15);
+    }
+    .bi-role-btn:hover:not(.active) {
+      color: #1a2736;
+    }
+    @media (max-width: 960px) {
+      .bi-role-switcher { display: none; }
+    }
+
     .header-actions {
       display: flex;
       align-items: center;
@@ -879,8 +916,21 @@
     <header class="dash-header">
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
-        <input type="text" id="globalSearch" placeholder="Search doctors, patients, appointments..." oninput="handleGlobalSearch(this.value)">
+        <input type="text" id="globalSearch" name="global_search" placeholder="Search Directory Records" oninput="handleGlobalSearch(this.value)">
       </div>
+
+      <!-- Multi-Role BI Switcher -->
+      <nav class="bi-role-switcher" aria-label="Portal Mode">
+        <a class="bi-role-btn" href="dashboard-doctor.html">
+          <span>🩺</span> Doctor & Clinic BI
+        </a>
+        <a class="bi-role-btn" href="dashboard-patient.html">
+          <span>👤</span> Patient Health BI
+        </a>
+        <a class="bi-role-btn active" href="admin.html">
+          <span>👑</span> Admin BI Center
+        </a>
+      </nav>
 
       <div class="header-actions">
         <!-- Theme Toggle (Light Mode vs Screenshot Navy Sidebar) -->
@@ -1005,7 +1055,7 @@
           <div class="chart-card">
             <div class="chart-head">
               <div class="chart-title">Appointments Overview</div>
-              <select class="chart-select">
+              <select class="chart-select" name="appointments_range">
                 <option>Last 7 Days</option>
                 <option>Last 30 Days</option>
                 <option>This Year</option>
@@ -1118,7 +1168,7 @@
           <div class="chart-card">
             <div class="chart-head">
               <div class="chart-title">Revenue Overview</div>
-              <select class="chart-select">
+              <select class="chart-select" name="revenue_range">
                 <option>Last 30 Days</option>
                 <option>Last 7 Days</option>
               </select>
@@ -1594,10 +1644,10 @@
           <!-- Supabase Credentials Form -->
           <form onsubmit="handleSaveSupabaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
             <div>
-              <input type="url" id="cfgSupabaseUrl" required placeholder="Supabase Project URL (e.g. https://xyzprojectid.supabase.co)" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+              <input type="url" id="cfgSupabaseUrl" name="supabase_url" required placeholder="Supabase Project URL" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
             </div>
             <div>
-              <input type="text" id="cfgSupabaseKey" required placeholder="Supabase Anon Public API Key (ey...)" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+              <input type="text" id="cfgSupabaseKey" name="supabase_key" required placeholder="Supabase Anon Key" style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
             </div>
             <div style="grid-column:1 / -1;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
               <button type="submit" class="btn btn-primary">Save Supabase Credentials</button>
@@ -1638,10 +1688,10 @@
           </div>
 
           <form onsubmit="handleSaveFirebaseConfig(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
-            <input type="text" id="cfgApiKey" placeholder="Firebase API Key (apiKey)" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            <input type="text" id="cfgProjectId" placeholder="Project ID (projectId)" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            <input type="text" id="cfgAuthDomain" placeholder="Auth Domain" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
-            <input type="text" id="cfgStorageBucket" placeholder="Storage Bucket" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgApiKey" name="api_key" placeholder="Firebase API Key" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgProjectId" name="project_id" placeholder="Firebase Project ID" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgAuthDomain" name="auth_domain" placeholder="Firebase Auth Domain" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
+            <input type="text" id="cfgStorageBucket" name="storage_bucket" placeholder="Firebase Storage Bucket" style="padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px">
             <div style="grid-column:1 / -1;display:flex;gap:12px;margin-top:4px">
               <button type="submit" class="btn btn-outline btn-sm">Save Firebase Config</button>
               <button type="button" class="btn btn-outline btn-sm" onclick="testFirebaseLiveConnection()">Test Firebase</button>
@@ -1661,12 +1711,12 @@
   <div class="admin-modal" id="modalAddDoctor">
     <div class="admin-modal-box" style="max-width:640px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-        <h3 style="margin:0;font-size:18px;font-weight:700">Add New Doctor to Directory</h3>
+        <h3 style="margin:0;font-size:18px;font-weight:700">Add New Doctor</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddDoctor')">✕</button>
       </div>
       <form onsubmit="handleCreateDoctor(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input type="text" id="docName" required placeholder="Doctor Full Name & Title (e.g. Dr. Zaid Al Mansoor)" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <select id="docSpec" required style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="docName" name="doctor_name" required placeholder="Doctor Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <select id="docSpec" name="specialty" required style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
           <option value="" disabled selected>Select Medical Specialty</option>
           <option value="Cardiology">Cardiology</option>
           <option value="Dermatology">Dermatology</option>
@@ -1677,10 +1727,10 @@
           <option value="Urology">Urology</option>
           <option value="General Medicine">General Medicine</option>
         </select>
-        <input type="text" id="docLicense" required placeholder="DHA License (e.g. DHA-P-0019284)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="text" id="docClinic" required placeholder="Affiliated Clinic / Hospital" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="number" id="docFee" required placeholder="Consultation Fee in AED (e.g. 500)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Save Doctor to Database & PagesCMS →</button>
+        <input type="text" id="docLicense" name="dha_license" required placeholder="DHA License" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="docClinic" name="clinic_name" required placeholder="Affiliated Clinic" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="number" id="docFee" name="consultation_fee" required placeholder="Consultation Fee" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Save Doctor to Database →</button>
       </form>
     </div>
   </div>
@@ -1689,14 +1739,14 @@
   <div class="admin-modal" id="modalAddPatient">
     <div class="admin-modal-box" style="max-width:580px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-        <h3 style="margin:0;font-size:18px;font-weight:700">Register Patient in Database</h3>
+        <h3 style="margin:0;font-size:18px;font-weight:700">Register Patient</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddPatient')">✕</button>
       </div>
       <form onsubmit="handleCreatePatient(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input type="text" id="patName" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="tel" id="patPhone" required placeholder="Mobile Phone (+971 50 XXX XXXX)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="email" id="patEmail" required placeholder="Email Address (patient@example.com)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Register Patient to Database →</button>
+        <input type="text" id="patName" name="patient_name" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="tel" id="patPhone" name="phone" required placeholder="Mobile Phone" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="email" id="patEmail" name="email" required placeholder="Email Address" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Register Patient →</button>
       </form>
     </div>
   </div>
@@ -1705,16 +1755,16 @@
   <div class="admin-modal" id="modalBookAppointment">
     <div class="admin-modal-box" style="max-width:640px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-        <h3 style="margin:0;font-size:18px;font-weight:700">Create Appointment Booking</h3>
+        <h3 style="margin:0;font-size:18px;font-weight:700">Book Appointment</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalBookAppointment')">✕</button>
       </div>
       <form onsubmit="handleCreateAppointment(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input type="text" id="aptPatName" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="text" id="aptDocName" required placeholder="Doctor / Specialist Name (e.g. Dr. Ahmed Khan)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="text" id="aptSpecialty" required placeholder="Medical Specialty (e.g. Cardiology, IVF)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="date" id="aptDateTime" required placeholder="Appointment Date" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="tel" id="aptPhone" required placeholder="Patient Mobile (+971 50 XXX XXXX)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Confirm & Save Booking to Database →</button>
+        <input type="text" id="aptPatName" name="patient_name" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="aptDocName" name="doctor_name" required placeholder="Doctor Name" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="aptSpecialty" name="specialty" required placeholder="Medical Specialty" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="date" id="aptDateTime" name="date" required placeholder="Appointment Date" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="tel" id="aptPhone" name="phone" required placeholder="Patient Mobile" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Confirm Booking →</button>
       </form>
     </div>
   </div>
@@ -1723,17 +1773,17 @@
   <div class="admin-modal" id="modalAddBlog">
     <div class="admin-modal-box" style="max-width:600px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-        <h3 style="margin:0;font-size:18px;font-weight:700">Publish New Medical Blog Post</h3>
+        <h3 style="margin:0;font-size:18px;font-weight:700">Publish Blog Article</h3>
         <button class="icon-btn" onclick="closeAdminModal('modalAddBlog')">✕</button>
       </div>
       <form onsubmit="handleCreateBlog(event)" class="ff-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input type="text" id="blgTitle" required placeholder="Article Title (e.g. Understanding IVF Success Rates in Dubai)" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <input type="text" id="blgAuthor" required placeholder="Author Credentials (e.g. Dr. Sara Al Maktoum)" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
-        <select id="blgStatus" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="blgTitle" name="title" required placeholder="Article Title" style="grid-column:1 / -1;padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <input type="text" id="blgAuthor" name="author" required placeholder="Author Name" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
+        <select id="blgStatus" name="status" style="padding:12px;border:1px solid #cbd5e1;border-radius:8px">
           <option value="Published">Published</option>
           <option value="Draft">Draft</option>
         </select>
-        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Publish Article to Database →</button>
+        <button type="submit" class="btn btn-primary" style="grid-column:1 / -1;padding:12px;margin-top:6px;font-size:14px">Publish Article →</button>
       </form>
     </div>
   </div>
@@ -2176,7 +2226,7 @@
               <span class="badge-status ${a.status==='Confirmed'?'badge-confirmed':a.status==='Pending'?'badge-pending':'badge-cancelled'}">${a.status}</span>
             </td>
             <td>
-              <select onchange="updateStatus('${a.id}', this.value)" style="padding:4px 6px;border-radius:6px;font-size:11px">
+              <select name="appointment_status" onchange="updateStatus('${a.id}', this.value)" style="padding:4px 6px;border-radius:6px;font-size:11px">
                 <option value="Confirmed" ${a.status==='Confirmed'?'selected':''}>Confirm</option>
                 <option value="Pending" ${a.status==='Pending'?'selected':''}>Pending</option>
                 <option value="Cancelled" ${a.status==='Cancelled'?'selected':''}>Cancel</option>

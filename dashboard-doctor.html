@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital & Doctor Practice BI Dashboard | FertiFind Dubai</title>
+  <meta name="description" content="Business Intelligence and clinical practice performance analytics for doctors, fertility clinics, and hospital departments in Dubai.">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ==========================================================================
+       Hospital & Doctor Practice BI Dashboard - Clean Light Mode Luxury Theme
+       Palette: Pure White, Warm Desert Sand (#fdfbf7, #f7f3ec), Elegant Gold (#b8860b),
+                Soft Copper (#c87d55), Warm Jade (#0d9488), Deep Navy Text (#1c2a38)
+       ========================================================================== */
+    :root {
+      --bi-bg: #fdfbf7;
+      --bi-card: #ffffff;
+      --bi-border: #ede4d3;
+      --bi-border-light: #f5efe6;
+      --bi-gold: #b8860b;
+      --bi-gold-light: #fbf5e6;
+      --bi-gold-border: #f0deb3;
+      --bi-copper: #c87d55;
+      --bi-copper-light: #fcf2eb;
+      --bi-teal: #0d9488;
+      --bi-teal-light: #effbf9;
+      --bi-blue: #1e5bb8;
+      --bi-blue-light: #eef5ff;
+      --bi-text: #1a2736;
+      --bi-sub: #6c5f4f;
+      --bi-muted: #8c7f6f;
+      --bi-shadow: 0 4px 20px rgba(184, 134, 11, 0.05);
+      --bi-radius: 14px;
+    }
+
+    body {
+      background: var(--bi-bg);
+      color: var(--bi-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Top Global Header Bar */
+    .bi-topbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--bi-border);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .bi-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bi-brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--bi-gold-light) 0%, #fff 100%);
+      border: 1px solid var(--bi-gold-border);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: var(--bi-gold);
+    }
+    .bi-brand-text h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--bi-text);
+      letter-spacing: -0.02em;
+    }
+    .bi-brand-text span {
+      font-size: 11px;
+      color: var(--bi-gold);
+      font-weight: 750;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Role Switcher Pill */
+    .bi-role-switcher {
+      display: flex;
+      align-items: center;
+      background: var(--bi-gold-light);
+      border: 1px solid var(--bi-gold-border);
+      border-radius: 30px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .bi-role-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      border: none;
+      background: transparent;
+      color: var(--bi-sub);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .bi-role-btn.active {
+      background: #ffffff;
+      color: var(--bi-gold);
+      box-shadow: 0 2px 6px rgba(184, 134, 11, 0.15);
+    }
+    .bi-role-btn:hover:not(.active) {
+      color: var(--bi-text);
+    }
+
+    .bi-actions-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Layout Container */
+    .bi-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Provider Profile Banner */
+    .provider-banner {
+      background: linear-gradient(135deg, #ffffff 0%, #fefcf9 60%, var(--bi-gold-light) 100%);
+      border: 1px solid var(--bi-gold-border);
+      border-radius: var(--bi-radius);
+      padding: 22px 26px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: var(--bi-shadow);
+    }
+    .provider-info-main {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .provider-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 2px solid var(--bi-gold);
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      box-shadow: 0 4px 12px rgba(184, 134, 11, 0.12);
+    }
+    .provider-title-group h2 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 850;
+      color: var(--bi-text);
+    }
+    .provider-title-group p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--bi-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .provider-meta-pill {
+      background: #ffffff;
+      border: 1px solid var(--bi-border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 750;
+      color: var(--bi-text);
+    }
+    .dha-badge-gold {
+      background: var(--bi-gold-light);
+      border: 1px solid var(--bi-gold-border);
+      color: var(--bi-gold);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* KPI Metrics Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--bi-card);
+      border: 1px solid var(--bi-border);
+      border-radius: var(--bi-radius);
+      padding: 18px;
+      box-shadow: var(--bi-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184, 134, 11, 0.08);
+      border-color: var(--bi-gold-border);
+    }
+    .kpi-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--bi-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .kpi-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+    .kpi-val {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--bi-text);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .kpi-trend {
+      font-size: 11px;
+      font-weight: 750;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .trend-up { color: var(--bi-teal); }
+    .trend-gold { color: var(--bi-gold); }
+    .trend-sub { color: var(--bi-muted); font-weight: 600; }
+
+    /* Visual BI Charts Grid */
+    .bi-charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .bi-chart-card {
+      background: var(--bi-card);
+      border: 1px solid var(--bi-border);
+      border-radius: var(--bi-radius);
+      padding: 22px;
+      box-shadow: var(--bi-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .bi-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .bi-card-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--bi-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bi-card-subtitle {
+      margin: 3px 0 0;
+      font-size: 12px;
+      color: var(--bi-sub);
+    }
+    .bi-time-select {
+      background: #ffffff;
+      border: 1px solid var(--bi-border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 750;
+      color: var(--bi-sub);
+      cursor: pointer;
+    }
+
+    /* SVG Chart Canvas */
+    .bi-svg-wrap {
+      flex: 1;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg.bi-chart-canvas {
+      width: 100%;
+      height: 220px;
+      overflow: visible;
+    }
+
+    /* Donut Chart and Legend */
+    .donut-layout {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      justify-content: center;
+      height: 100%;
+    }
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+    }
+    .donut-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .donut-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--bi-sub);
+      font-weight: 700;
+    }
+    .donut-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .donut-percent {
+      font-weight: 850;
+      color: var(--bi-text);
+    }
+
+    /* Operational Section Grid */
+    .operational-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* Table Component */
+    .bi-table-wrap {
+      overflow-x: auto;
+    }
+    table.bi-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 12px;
+    }
+    table.bi-table th {
+      background: #faf6f0;
+      color: var(--bi-sub);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--bi-border);
+    }
+    table.bi-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--bi-border-light);
+      color: var(--bi-text);
+      vertical-align: middle;
+    }
+    table.bi-table tr:hover td {
+      background: #fdfbf7;
+    }
+
+    /* Status Badges */
+    .badge-status {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 14px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-confirmed { background: var(--bi-teal-light); color: var(--bi-teal); border: 1px solid #bbf7d0; }
+    .badge-pending { background: var(--bi-gold-light); color: var(--bi-gold); border: 1px solid var(--bi-gold-border); }
+    .badge-completed { background: var(--bi-blue-light); color: var(--bi-blue); border: 1px solid #bfdbfe; }
+
+    /* Action Buttons */
+    .btn-gold {
+      background: linear-gradient(135deg, var(--bi-gold) 0%, #9e7308 100%);
+      color: #ffffff;
+      font-weight: 800;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-gold:hover {
+      box-shadow: 0 4px 12px rgba(184, 134, 11, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-sand {
+      background: #ffffff;
+      border: 1px solid var(--bi-border);
+      color: var(--bi-text);
+      font-weight: 750;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .btn-sand:hover {
+      background: var(--bi-gold-light);
+      border-color: var(--bi-gold-border);
+      color: var(--bi-gold);
+    }
+
+    /* Doctor Availability Slots */
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .slot-card {
+      background: #ffffff;
+      border: 1px solid var(--bi-border);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .slot-card.active {
+      border-color: var(--bi-teal);
+      background: var(--bi-teal-light);
+    }
+    .slot-time { font-size: 12px; font-weight: 800; color: var(--bi-text); }
+    .slot-status { font-size: 10px; font-weight: 750; color: var(--bi-teal); }
+
+    /* Review Card */
+    .doc-review-card {
+      border: 1px solid var(--bi-border-light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+    .doc-review-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .doc-review-user { font-weight: 800; font-size: 12px; color: var(--bi-text); }
+    .doc-review-stars { color: #f59e0b; font-size: 13px; }
+    .doc-review-text { margin: 0; font-size: 12px; color: var(--bi-sub); line-height: 1.5; font-style: italic; }
+
+    @media (max-width: 1000px) {
+      .bi-charts-grid { grid-template-columns: 1fr; }
+      .operational-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Global Role Switcher -->
+  <header class="bi-topbar">
+    <div class="bi-brand-wrap">
+      <div class="bi-brand-icon">🩺</div>
+      <div class="bi-brand-text">
+        <h1>FertiFind Provider BI</h1>
+        <span>🇦🇪 DHA Healthcare Intelligence Network</span>
+      </div>
+    </div>
+
+    <!-- Multi-Role BI Switcher -->
+    <nav class="bi-role-switcher" aria-label="Portal Mode">
+      <a class="bi-role-btn active" href="dashboard-doctor.html">
+        <span>🩺</span> Doctor & Clinic BI
+      </a>
+      <a class="bi-role-btn" href="dashboard-patient.html">
+        <span>👤</span> Patient Health BI
+      </a>
+      <a class="bi-role-btn" href="admin.html">
+        <span>👑</span> Admin BI Center
+      </a>
+    </nav>
+
+    <div class="bi-actions-top">
+      <a class="btn-sand" href="fertifind_dubai_directory_search_page.html" target="_blank">View Live Directory ↗</a>
+      <a class="btn-gold" href="submit-business.html">+ Update DHA Details</a>
+    </div>
+  </header>
+
+  <!-- Main BI Dashboard Body -->
+  <main class="bi-container">
+
+    <!-- Provider Verified Profile Showcase -->
+    <section class="provider-banner">
+      <div class="provider-info-main">
+        <div class="provider-avatar">👩‍⚕️</div>
+        <div class="provider-title-group">
+          <h2>Dr. Sara Al Maktoum — Orchid Fertility Clinic</h2>
+          <p>
+            <span>Consultant Reproductive Endocrinologist & Medical Director</span>
+            <span class="provider-meta-pill">📍 Dubai Healthcare City (DHCC)</span>
+            <span class="dha-badge-gold">✓ DHA Licensed: DHA-P-0028193</span>
+            <span class="provider-meta-pill">⭐ 4.96 Rating (312 Reviews)</span>
+          </p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button type="button" class="btn-sand" onclick="exportDoctorBIReport()">📊 Export Monthly BI PDF</button>
+        <button type="button" class="btn-gold" onclick="openPracticeSettingsModal()">⚙️ Manage Consultation Fees</button>
+      </div>
+    </section>
+
+    <!-- 6 Executive KPI Metric Cards -->
+    <section class="kpi-grid">
+      <!-- 1. Monthly Revenue -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">Consultation Revenue</span>
+          <div class="kpi-icon" style="background:var(--bi-gold-light);color:var(--bi-gold)">💰</div>
+        </div>
+        <div class="kpi-val">AED 348,500</div>
+        <div class="kpi-trend trend-up">
+          <span>↑ +21.4%</span>
+          <span class="trend-sub">vs last 30 days</span>
+        </div>
+      </div>
+
+      <!-- 2. Patient Inquiries -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">Patient Inquiries</span>
+          <div class="kpi-icon" style="background:var(--bi-teal-light);color:var(--bi-teal)">💬</div>
+        </div>
+        <div class="kpi-val">582</div>
+        <div class="kpi-trend trend-up">
+          <span>↑ +18.2%</span>
+          <span class="trend-sub">394 via WhatsApp</span>
+        </div>
+      </div>
+
+      <!-- 3. Confirmed Consultations -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">Confirmed Bookings</span>
+          <div class="kpi-icon" style="background:var(--bi-blue-light);color:var(--bi-blue)">📅</div>
+        </div>
+        <div class="kpi-val">214</div>
+        <div class="kpi-trend trend-up">
+          <span>36.8% conv.</span>
+          <span class="trend-sub">18 today scheduled</span>
+        </div>
+      </div>
+
+      <!-- 4. Patient Satisfaction -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">Satisfaction Score</span>
+          <div class="kpi-icon" style="background:#fef3c7;color:#d97706">⭐</div>
+        </div>
+        <div class="kpi-val">4.96 <span style="font-size:16px;color:var(--bi-sub)">/ 5.0</span></div>
+        <div class="kpi-trend trend-gold">
+          <span>★ 98.4%</span>
+          <span class="trend-sub">verified patient praise</span>
+        </div>
+      </div>
+
+      <!-- 5. Average Response Time -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">Lead Response Time</span>
+          <div class="kpi-icon" style="background:var(--bi-copper-light);color:var(--bi-copper)">⚡</div>
+        </div>
+        <div class="kpi-val">7.5 mins</div>
+        <div class="kpi-trend trend-up">
+          <span>✓ Top 5%</span>
+          <span class="trend-sub">Dubai speed benchmark</span>
+        </div>
+      </div>
+
+      <!-- 6. DHA Quality Score -->
+      <div class="kpi-card">
+        <div class="kpi-head">
+          <span class="kpi-label">DHA Audit Status</span>
+          <div class="kpi-icon" style="background:var(--bi-teal-light);color:var(--bi-teal)">🛡️</div>
+        </div>
+        <div class="kpi-val">100%</div>
+        <div class="kpi-trend trend-up">
+          <span>✓ Full Compliance</span>
+          <span class="trend-sub">CAP Laboratory</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual BI Charts Grid -->
+    <section class="bi-charts-grid">
+      <!-- Chart 1: Revenue & Consultation Trend -->
+      <div class="bi-chart-card">
+        <div class="bi-card-head">
+          <div>
+            <h3 class="bi-card-title">📈 Consultation Volume & Revenue Trajectory</h3>
+            <p class="bi-card-subtitle">Monthly patient consultation billing performance across 2025/2026</p>
+          </div>
+          <select class="bi-time-select" id="revenuePeriod" name="revenue_period" onchange="renderRevenueChart(this.value)">
+            <option value="6m">Last 6 Months</option>
+            <option value="12m" selected>Full Year 2025/26</option>
+          </select>
+        </div>
+        <div class="bi-svg-wrap">
+          <svg class="bi-chart-canvas" viewBox="0 0 700 220" id="doctorRevenueSvg">
+            <!-- Grid lines -->
+            <line x1="40" y1="30" x2="680" y2="30" stroke="#f2ebd9" stroke-dasharray="4"/>
+            <line x1="40" y1="80" x2="680" y2="80" stroke="#f2ebd9" stroke-dasharray="4"/>
+            <line x1="40" y1="130" x2="680" y2="130" stroke="#f2ebd9" stroke-dasharray="4"/>
+            <line x1="40" y1="180" x2="680" y2="180" stroke="#f2ebd9"/>
+
+            <!-- Y Axis labels -->
+            <text x="35" y="34" font-size="10" fill="#8c7f6f" text-anchor="end">400k</text>
+            <text x="35" y="84" font-size="10" fill="#8c7f6f" text-anchor="end">300k</text>
+            <text x="35" y="134" font-size="10" fill="#8c7f6f" text-anchor="end">200k</text>
+            <text x="35" y="184" font-size="10" fill="#8c7f6f" text-anchor="end">100k</text>
+
+            <!-- Revenue Area Fill (Warm Gold) -->
+            <polygon points="60,165 140,150 220,135 300,120 380,100 460,85 540,65 620,45 620,180 60,180" fill="rgba(184, 134, 11, 0.08)"/>
+            
+            <!-- Revenue Line (Gold) -->
+            <polyline points="60,165 140,150 220,135 300,120 380,100 460,85 540,65 620,45" fill="none" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Consultation Volume Line (Teal) -->
+            <polyline points="60,170 140,160 220,150 300,135 380,125 460,110 540,95 620,80" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="5" stroke-linecap="round"/>
+
+            <!-- Data Dots -->
+            <circle cx="60" cy="165" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="140" cy="150" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="220" cy="135" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="300" cy="120" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="380" cy="100" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="460" cy="85" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="540" cy="65" r="4" fill="#ffffff" stroke="#b8860b" stroke-width="2"/>
+            <circle cx="620" cy="45" r="5" fill="#b8860b" stroke="#ffffff" stroke-width="2"/>
+
+            <!-- X Axis Labels -->
+            <text x="60" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Sep</text>
+            <text x="140" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Oct</text>
+            <text x="220" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Nov</text>
+            <text x="300" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Dec</text>
+            <text x="380" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Jan</text>
+            <text x="460" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Feb</text>
+            <text x="540" y="200" font-size="11" fill="#6c5f4f" text-anchor="middle">Mar</text>
+            <text x="620" y="200" font-size="11" fill="#b8860b" font-weight="bold" text-anchor="middle">Apr (Curr)</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Chart 2: Treatment & Specialty Demand Breakdown -->
+      <div class="bi-chart-card">
+        <div class="bi-card-head">
+          <div>
+            <h3 class="bi-card-title">🧬 Treatment Demand</h3>
+            <p class="bi-card-subtitle">Inquiry volume by procedure category</p>
+          </div>
+        </div>
+        <div class="donut-layout">
+          <!-- SVG Donut Chart -->
+          <svg width="150" height="150" viewBox="0 0 42 42">
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f5ede0" stroke-width="6"/>
+            <!-- IVF/ICSI 42% (Gold) -->
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#b8860b" stroke-width="6" stroke-dasharray="42 58" stroke-dashoffset="25"/>
+            <!-- Egg Freezing 26% (Teal) -->
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0d9488" stroke-width="6" stroke-dasharray="26 74" stroke-dashoffset="83"/>
+            <!-- PGT-A Genetics 18% (Copper) -->
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#c87d55" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="57"/>
+            <!-- Andrology 14% (Blue) -->
+            <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#1e5bb8" stroke-width="6" stroke-dasharray="14 86" stroke-dashoffset="39"/>
+            <text x="21" y="23" text-anchor="middle" font-size="6" font-weight="900" fill="#1a2736">582</text>
+            <text x="21" y="27" text-anchor="middle" font-size="3" fill="#8c7f6f">LEADS</text>
+          </svg>
+
+          <!-- Legend -->
+          <div class="donut-legend">
+            <div class="donut-item">
+              <div class="donut-label-wrap">
+                <span class="donut-dot" style="background:#b8860b"></span>
+                <span>IVF & ICSI Cycles</span>
+              </div>
+              <span class="donut-percent">42%</span>
+            </div>
+            <div class="donut-item">
+              <div class="donut-label-wrap">
+                <span class="donut-dot" style="background:#0d9488"></span>
+                <span>Egg Freezing</span>
+              </div>
+              <span class="donut-percent">26%</span>
+            </div>
+            <div class="donut-item">
+              <div class="donut-label-wrap">
+                <span class="donut-dot" style="background:#c87d55"></span>
+                <span>PGT-A Genetics</span>
+              </div>
+              <span class="donut-percent">18%</span>
+            </div>
+            <div class="donut-item">
+              <div class="donut-label-wrap">
+                <span class="donut-dot" style="background:#1e5bb8"></span>
+                <span>Male Andrology</span>
+              </div>
+              <span class="donut-percent">14%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Management Row: Patient Queue & Slot Availability -->
+    <section class="operational-grid">
+
+      <!-- Module 1: Live Patient Consultation Queue -->
+      <div class="bi-chart-card">
+        <div class="bi-card-head">
+          <div>
+            <h3 class="bi-card-title">📅 Live Patient Consultation Queue</h3>
+            <p class="bi-card-subtitle">Scheduled appointments and inquiries synced with Supabase PostgreSQL</p>
+          </div>
+          <button type="button" class="btn-gold" onclick="openNewBookingModal()">+ Book Patient</button>
+        </div>
+
+        <div class="bi-table-wrap">
+          <table class="bi-table">
+            <thead>
+              <tr>
+                <th>Patient Name</th>
+                <th>Clinical Service</th>
+                <th>Date & Slot</th>
+                <th>Patient Contact</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="doctorQueueTbody">
+              <tr>
+                <td><b>Mariam Al Hashemi</b><br><small style="color:var(--bi-muted)">ID: PAT-1001</small></td>
+                <td>Initial IVF Consultation</td>
+                <td>2026-03-29 • 10:00 AM</td>
+                <td>+971 50 123 4567</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
+                <td>
+                  <a class="btn-sand" href="https://wa.me/971501234567" target="_blank" style="padding:4px 8px;font-size:11px">💬 WhatsApp</a>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Sarah Jenkins</b><br><small style="color:var(--bi-muted)">ID: PAT-1002</small></td>
+                <td>Egg Freezing Assessment</td>
+                <td>2026-03-29 • 11:30 AM</td>
+                <td>+971 52 987 6543</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
+                <td>
+                  <a class="btn-sand" href="https://wa.me/971529876543" target="_blank" style="padding:4px 8px;font-size:11px">💬 WhatsApp</a>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Noura Al Falasi</b><br><small style="color:var(--bi-muted)">ID: PAT-1003</small></td>
+                <td>Follicle Ultrasound Scan</td>
+                <td>2026-03-30 • 02:00 PM</td>
+                <td>+971 55 456 7890</td>
+                <td><span class="badge-status badge-pending">Pending</span></td>
+                <td>
+                  <button type="button" class="btn-sand" onclick="confirmAppointment('PAT-1003')" style="padding:4px 8px;font-size:11px">✓ Confirm</button>
+                </td>
+              </tr>
+              <tr>
+                <td><b>Elena Rostova</b><br><small style="color:var(--bi-muted)">ID: PAT-1004</small></td>
+                <td>PGT-A Results Consultation</td>
+                <td>2026-03-31 • 04:30 PM</td>
+                <td>+971 54 321 0987</td>
+                <td><span class="badge-status badge-completed">Completed</span></td>
+                <td>
+                  <span style="font-size:11px;color:var(--bi-teal);font-weight:750">Archived</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Module 2: Slot Availability & Reviews -->
+      <div class="bi-chart-card">
+        <div class="bi-card-head">
+          <div>
+            <h3 class="bi-card-title">⏰ Slot Availability & Reviews</h3>
+            <p class="bi-card-subtitle">Real-time consultation slot management</p>
+          </div>
+        </div>
+
+        <!-- Consultation Slots Toggle -->
+        <div style="font-size:12px;font-weight:800;color:var(--bi-text);margin-bottom:6px">Active Daily Consultation Slots</div>
+        <div class="slot-grid">
+          <div class="slot-card active" onclick="this.classList.toggle('active')">
+            <span class="slot-time">09:00 AM – 12:00 PM</span>
+            <span class="slot-status">✓ Morning Active</span>
+          </div>
+          <div class="slot-card active" onclick="this.classList.toggle('active')">
+            <span class="slot-time">01:00 PM – 04:00 PM</span>
+            <span class="slot-status">✓ Afternoon Active</span>
+          </div>
+          <div class="slot-card active" onclick="this.classList.toggle('active')">
+            <span class="slot-time">05:00 PM – 08:00 PM</span>
+            <span class="slot-status">✓ Evening Active</span>
+          </div>
+          <div class="slot-card" onclick="this.classList.toggle('active')">
+            <span class="slot-time">Weekend Slots</span>
+            <span class="slot-status" style="color:var(--bi-muted)">○ Closed</span>
+          </div>
+        </div>
+
+        <!-- Recent Verified Reviews -->
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--bi-border-light)">
+          <div style="font-size:12px;font-weight:800;color:var(--bi-text);margin-bottom:10px">Recent Patient Feedback</div>
+
+          <div class="doc-review-card">
+            <div class="doc-review-head">
+              <span class="doc-review-user">Mariam A. (DHCC Patient)</span>
+              <span class="doc-review-stars">★★★★★</span>
+            </div>
+            <p class="doc-review-text">"Dr. Sara Al Maktoum and the Orchid team guided us with utter transparency and compassion. Successful blastocyst transfer!"</p>
+          </div>
+
+          <div class="doc-review-card">
+            <div class="doc-review-head">
+              <span class="doc-review-user">Rashid & Laila K.</span>
+              <span class="doc-review-stars">★★★★★</span>
+            </div>
+            <p class="doc-review-text">"Punctual appointments, clear diagrammatic explanations of PGT-A results, and dedicated nursing care throughout."</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Modal: Book New Patient Appointment -->
+  <div class="ff-modal" id="modalDoctorNewBooking" style="display:none;position:fixed;inset:0;background:rgba(184,134,11,0.15);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#ffffff;border:1px solid var(--bi-gold-border);border-radius:14px;max-width:540px;width:100%;padding:26px;box-shadow:0 20px 45px rgba(0,0,0,0.1)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px;font-weight:850;color:var(--bi-text)">Schedule Patient Consultation</h3>
+        <button type="button" class="btn-sand" onclick="closeNewBookingModal()" style="padding:4px 8px">✕</button>
+      </div>
+      <form onsubmit="handleDoctorAddBooking(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="docAddPatName" name="patient_name" required placeholder="Patient Full Name" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="tel" id="docAddPatPhone" name="phone" required placeholder="Mobile Phone" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="email" id="docAddPatEmail" name="email" required placeholder="Email Address" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="date" id="docAddPatDate" name="date" required placeholder="Appointment Date" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <select id="docAddPatSlot" name="time_slot" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+          <option>10:00 AM</option>
+          <option>11:30 AM</option>
+          <option>02:00 PM</option>
+          <option>04:30 PM</option>
+        </select>
+        <input type="text" id="docAddPatService" name="service" required placeholder="Consultation Service" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <button type="submit" class="btn-gold" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Save Appointment to Supabase →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Practice Fee & Tariff Settings -->
+  <div class="ff-modal" id="modalPracticeSettings" style="display:none;position:fixed;inset:0;background:rgba(184,134,11,0.15);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#ffffff;border:1px solid var(--bi-gold-border);border-radius:14px;max-width:540px;width:100%;padding:26px;box-shadow:0 20px 45px rgba(0,0,0,0.1)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h3 style="margin:0;font-size:18px;font-weight:850;color:var(--bi-text)">Practice Fees & Tariffs</h3>
+        <button type="button" class="btn-sand" onclick="closePracticeSettingsModal()" style="padding:4px 8px">✕</button>
+      </div>
+      <form onsubmit="handleSavePracticeFees(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <input type="text" id="setFeeConsult" name="initial_consultation" required placeholder="Initial Consultation Fee" value="AED 750" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="text" id="setFeeUltrasound" name="ultrasound_scan" required placeholder="Ultrasound Scan Fee" value="AED 650" style="padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="text" id="setFeeIvf" name="ivf_package" required placeholder="Full IVF Package" value="AED 28,000" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <input type="text" id="setInsurance" name="accepted_insurance" required placeholder="Accepted Insurance Networks" value="Daman, NextCare, MetLife, AXA, Sukoon" style="grid-column:1 / -1;padding:12px;border:1px solid var(--bi-border);border-radius:8px">
+        <button type="submit" class="btn-gold" style="grid-column:1 / -1;padding:13px;font-size:14px;justify-content:center">Update Practice Tariffs →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Supabase & Data Binding Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+    function openNewBookingModal() {
+      const m = document.getElementById('modalDoctorNewBooking');
+      if (m) m.style.display = 'flex';
+    }
+    function closeNewBookingModal() {
+      const m = document.getElementById('modalDoctorNewBooking');
+      if (m) m.style.display = 'none';
+    }
+
+    function openPracticeSettingsModal() {
+      const m = document.getElementById('modalPracticeSettings');
+      if (m) m.style.display = 'flex';
+    }
+    function closePracticeSettingsModal() {
+      const m = document.getElementById('modalPracticeSettings');
+      if (m) m.style.display = 'none';
+    }
+
+    async function handleDoctorAddBooking(e) {
+      e.preventDefault();
+      const appt = {
+        patientName: document.getElementById('docAddPatName').value.trim(),
+        phone: document.getElementById('docAddPatPhone').value.trim(),
+        email: document.getElementById('docAddPatEmail').value.trim(),
+        dateTime: document.getElementById('docAddPatDate').value,
+        timeSlot: document.getElementById('docAddPatSlot').value,
+        doctorName: 'Dr. Sara Al Maktoum',
+        specialty: 'Reproductive Endocrinology',
+        service: document.getElementById('docAddPatService').value.trim(),
+        status: 'Confirmed'
+      };
+
+      if (window.FertiSupabase) {
+        await FertiSupabase.bookAppointment(appt);
+      }
+
+      alert('✓ Patient appointment booked and synced with Supabase!');
+      closeNewBookingModal();
+      loadLiveDoctorQueue();
+    }
+
+    function handleSavePracticeFees(e) {
+      e.preventDefault();
+      alert('✓ Practice tariffs updated successfully in directory database!');
+      closePracticeSettingsModal();
+    }
+
+    function confirmAppointment(patId) {
+      alert(`✓ Appointment for ${patId} marked Confirmed!`);
+    }
+
+    function exportDoctorBIReport() {
+      alert('📄 Generating Official Dubai Healthcare Practice Performance BI Report (PDF)...\nDownloaded: Orchid_Fertility_BI_March2026.pdf');
+    }
+
+    async function loadLiveDoctorQueue() {
+      if (window.FertiSupabase) {
+        const apts = await FertiSupabase.getAppointments();
+        const tbody = document.getElementById('doctorQueueTbody');
+        if (tbody && apts && apts.length) {
+          tbody.innerHTML = apts.slice(0, 5).map(a => `
+            <tr>
+              <td><b>${a.patientName}</b><br><small style="color:var(--bi-muted)">ID: ${a.id}</small></td>
+              <td>${a.service || a.specialty || 'IVF Consultation'}</td>
+              <td>${a.dateTime} • ${a.timeSlot || '10:00 AM'}</td>
+              <td>${a.phone}</td>
+              <td><span class="badge-status ${a.status==='Confirmed'?'badge-confirmed':a.status==='Pending'?'badge-pending':'badge-completed'}">${a.status}</span></td>
+              <td>
+                <a class="btn-sand" href="https://wa.me/${(a.phone||'').replace(/[^0-9]/g,'')}" target="_blank" style="padding:4px 8px;font-size:11px">💬 WhatsApp</a>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLiveDoctorQueue();
+    });
+  </script>
+</body>
+</html>

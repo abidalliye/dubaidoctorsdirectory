@@ -262,9 +262,15 @@
 
   <!-- Topbar -->
   <div class="topbar">
-    <div class="container">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
       <span>🇦🇪 FertiFind Provider Network • Dubai Health Authority Directory</span>
-      <span>Doctor Registrations & Practice Lead Generation</span>
+      <div style="display:flex;gap:12px;font-size:11px;font-weight:750">
+        <a href="dashboard-doctor.html" style="color:inherit;text-decoration:none">🩺 Doctor BI</a>
+        <span>•</span>
+        <a href="dashboard-patient.html" style="color:inherit;text-decoration:none">👤 Patient BI</a>
+        <span>•</span>
+        <a href="admin.html" style="color:inherit;text-decoration:none">👑 Admin BI</a>
+      </div>
     </div>
   </div>
 
@@ -285,11 +291,12 @@
         <a href="fertifind_labs_profile_page.html">Labs & Diagnostics</a>
         <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
         <a href="for-doctors.html" class="active">For Doctors</a>
+        <a href="dashboard-doctor.html" style="color:#b8860b;font-weight:800">✨ BI Portals</a>
       </nav>
 
       <!-- Nav Actions -->
       <div class="nav-actions">
-        <button class="btn btn-outline" onclick="FertiFind.openClaimProfile()">Claim Existing Listing</button>
+        <a class="btn btn-outline" href="dashboard-doctor.html">Open Provider BI</a>
         <button class="btn btn-primary" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">List Your Practice →</button>
         <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
       </div>
@@ -304,6 +311,12 @@
       <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Labs</a>
       <a href="fertility-treatment-cost-dubai.html">💰 Cost & Package Guide</a>
       <a href="for-doctors.html" class="active">💼 For Doctors & Clinics</a>
+      <div style="padding:8px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin:6px 0;display:flex;flex-direction:column;gap:4px">
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;color:#8a99ad;letter-spacing:.05em">Healthcare BI Portals</span>
+        <a href="dashboard-doctor.html">🩺 Doctor & Clinic BI</a>
+        <a href="dashboard-patient.html">👤 Patient Care BI</a>
+        <a href="admin.html">👑 Super Admin BI</a>
+      </div>
       <button class="btn btn-outline" style="width:100%" onclick="FertiFind.openClaimProfile()">Claim Profile</button>
       <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('joinForm').scrollIntoView({behavior:'smooth'})">Register Practice</button>
     </div>
@@ -342,23 +355,20 @@
 
         <form class="ff-form" onsubmit="event.preventDefault(); FertiFind.toast('Practice submitted! Our verification team will review your DHA credentials.'); this.reset();">
           <div>
-            <label>Doctor / Medical Facility Name</label>
-            <input type="text" required placeholder="e.g. Dr. Fatima Al Mansoori or Orchid Clinic">
+            <input type="text" name="facility_name" required placeholder="Medical Facility Name">
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div>
-              <label>Medical Specialty</label>
-              <select required>
-                <option value="fertility">Reproductive Medicine / IVF</option>
+              <select name="specialty" required>
+                <option value="fertility">Reproductive Medicine</option>
                 <option value="obgyn">Obstetrics & Gynecology</option>
-                <option value="andrology">Andrology / Male Fertility</option>
-                <option value="genetics">Genetics / Embryology</option>
+                <option value="andrology">Male Fertility</option>
+                <option value="genetics">Genetics Laboratory</option>
               </select>
             </div>
             <div>
-              <label>Primary Dubai District</label>
-              <select required>
-                <option>Dubai Healthcare City (DHCC)</option>
+              <select name="district" required>
+                <option>Dubai Healthcare City</option>
                 <option>Jumeirah</option>
                 <option>Oud Metha</option>
                 <option>Dubai Marina</option>
@@ -371,24 +381,20 @@
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <div>
-              <label>DHA Professional License</label>
-              <input type="text" required placeholder="DHA-P-XXXXXXX">
+              <input type="text" name="dha_license" required placeholder="DHA License">
             </div>
             <div>
-              <label>Direct WhatsApp Number</label>
-              <input type="tel" required placeholder="+971 50 XXX XXXX">
+              <input type="tel" name="whatsapp" required placeholder="WhatsApp Number">
             </div>
           </div>
           <div>
-            <label>Official Practice Email</label>
-            <input type="email" required placeholder="coordinator@clinic.ae">
+            <input type="email" name="email" required placeholder="Email Address">
           </div>
           <div>
-            <label>Select Listing Tier</label>
-            <select id="selectedPlan">
-              <option value="featured">Featured Specialist (AED 499 / mo) — Recommended</option>
+            <select id="selectedPlan" name="plan">
+              <option value="featured">Featured Specialist (AED 499 / mo)</option>
               <option value="free">Verified Free Listing (AED 0)</option>
-              <option value="clinic">Clinic / Hospital Showcase (AED 1,499 / mo)</option>
+              <option value="clinic">Clinic Showcase (AED 1,499 / mo)</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">

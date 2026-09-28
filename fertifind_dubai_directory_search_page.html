@@ -511,9 +511,15 @@
 
   <!-- Top Notification Bar -->
   <div class="topbar">
-    <div class="container">
-      <span>🇦🇪 Dubai Fertility & Healthcare Directory</span>
-      <span>Verified DHA Licensing • Independent Discovery • Patient-Focused Search</span>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <span>🇦🇪 Dubai Fertility & Healthcare Directory • Verified DHA Licensing</span>
+      <div style="display:flex;gap:12px;font-size:11px;font-weight:750">
+        <a href="dashboard-doctor.html" style="color:inherit;text-decoration:none">🩺 Doctor BI</a>
+        <span>•</span>
+        <a href="dashboard-patient.html" style="color:inherit;text-decoration:none">👤 Patient BI</a>
+        <span>•</span>
+        <a href="admin.html" style="color:inherit;text-decoration:none">👑 Admin BI</a>
+      </div>
     </div>
   </div>
 
@@ -534,6 +540,7 @@
         <a href="fertifind_labs_profile_page.html">Diagnostics</a>
         <a href="fertility-treatment-cost-dubai.html">Cost Guide</a>
         <a href="for-doctors.html">For Doctors</a>
+        <a href="dashboard-doctor.html" style="color:#b8860b;font-weight:800">✨ BI Portals</a>
       </nav>
 
       <!-- Nav Actions -->
@@ -551,9 +558,15 @@
       <a href="fertifind_dubai_directory_search_page.html?type=doctor">👩‍⚕️ Fertility Doctors</a>
       <a href="fertifind_hospital_profile_page.html">🏥 American Hospital & Orchid</a>
       <a href="fertifind_doctor_profile_page.html">⭐ Dr. Partha Sarathi Das</a>
-      <a href="fertifind_labs_profile_page.html">🧪 Igenomix Dubai & Genetics</a>
+      <a href="fertifind_labs_profile_page.html">🧪 Diagnostic Labs</a>
       <a href="fertility-treatment-cost-dubai.html">💰 Cost & Pricing Guide</a>
       <a href="for-doctors.html">💼 For Doctors & Clinics</a>
+      <div style="padding:8px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin:6px 0;display:flex;flex-direction:column;gap:4px">
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;color:#8a99ad;letter-spacing:.05em">Healthcare BI Portals</span>
+        <a href="dashboard-doctor.html">🩺 Doctor & Clinic BI</a>
+        <a href="dashboard-patient.html">👤 Patient Care BI</a>
+        <a href="admin.html">👑 Super Admin BI</a>
+      </div>
       <a href="ivf-fertility-doctors-in-dubai-healthcare-city.html">📍 DHCC Doctors Hub</a>
       <a href="ivf-clinics-in-jumeirah-dubai.html">📍 Jumeirah Clinics Hub</a>
       <a href="submit-business.html">📝 Submit Practice Details</a>
@@ -581,15 +594,15 @@
 
       <!-- Live Searchbar -->
       <div class="searchbar">
-        <input id="q" placeholder="Search doctor, clinic, IVF treatment, AMH test or district…" aria-label="Search">
-        <select id="type">
+        <input id="q" name="search_query" placeholder="Search Doctors Clinics" aria-label="Search">
+        <select id="type" name="provider_type">
           <option value="all">All provider types</option>
           <option value="doctor">Doctors & Specialists</option>
           <option value="clinic">Fertility Clinics</option>
           <option value="hospital">Hospitals</option>
           <option value="lab">Diagnostic Labs</option>
         </select>
-        <select id="area">
+        <select id="area" name="district">
           <option value="all">All Dubai Districts</option>
           <option value="Dubai Healthcare City">Dubai Healthcare City (DHCC)</option>
           <option value="Oud Metha">Oud Metha</option>
@@ -618,42 +631,42 @@
 
         <div class="filter-group">
           <div class="filter-title">Provider Type</div>
-          <label class="filter-check"><input type="checkbox" value="doctor" class="typeFilter"> Doctors & specialists</label>
-          <label class="filter-check"><input type="checkbox" value="clinic" class="typeFilter"> Fertility & IVF clinics</label>
-          <label class="filter-check"><input type="checkbox" value="hospital" class="typeFilter"> Women's hospitals</label>
-          <label class="filter-check"><input type="checkbox" value="lab" class="typeFilter"> Genetic laboratories</label>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="type_doctor" value="doctor" class="typeFilter"> Doctors & specialists</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="type_clinic" value="clinic" class="typeFilter"> Fertility & IVF clinics</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="type_hospital" value="hospital" class="typeFilter"> Women's hospitals</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="type_lab" value="lab" class="typeFilter"> Genetic laboratories</span>
         </div>
 
         <div class="filter-group">
           <div class="filter-title">Clinical Specialty</div>
-          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="fertility"> Fertility & reproductive medicine</label>
-          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="ivf"> IVF / assisted reproduction</label>
-          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="obgyn"> Obstetrics & gynecology</label>
-          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="andrology"> Andrology / male fertility</label>
-          <label class="filter-check"><input type="checkbox" class="specialtyFilter" value="genetics"> Genetics & embryo diagnostics</label>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="spec_fertility" class="specialtyFilter" value="fertility"> Fertility & reproductive medicine</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="spec_ivf" class="specialtyFilter" value="ivf"> IVF / assisted reproduction</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="spec_obgyn" class="specialtyFilter" value="obgyn"> Obstetrics & gynecology</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="spec_andrology" class="specialtyFilter" value="andrology"> Andrology / male fertility</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="spec_genetics" class="specialtyFilter" value="genetics"> Genetics & embryo diagnostics</span>
         </div>
 
         <div class="filter-group">
           <div class="filter-title">Services & Treatments</div>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="ivf"> IVF & ICSI</label>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="pgt"> PGT-A / PGT-M genetic screening</label>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="freezing"> Egg & sperm freezing</label>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="iui"> IUI Insemination</label>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="testing"> AMH & Hormone testing</label>
-          <label class="filter-check"><input type="checkbox" class="serviceFilter" value="home"> Home sample collection</label>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_ivf" class="serviceFilter" value="ivf"> IVF & ICSI</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_pgt" class="serviceFilter" value="pgt"> PGT-A / PGT-M genetic screening</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_freezing" class="serviceFilter" value="freezing"> Egg & sperm freezing</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_iui" class="serviceFilter" value="iui"> IUI Insemination</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_testing" class="serviceFilter" value="testing"> AMH & Hormone testing</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="srv_home" class="serviceFilter" value="home"> Home sample collection</span>
         </div>
 
         <div class="filter-group">
           <div class="filter-title">Distance Radius</div>
           <div class="range-row">
-            <select id="radius">
+            <select id="radius" name="radius">
               <option value="100">Any radius</option>
               <option value="3">Within 3 km</option>
               <option value="6">Within 6 km</option>
               <option value="10">Within 10 km</option>
               <option value="20">Within 20 km</option>
             </select>
-            <select id="originArea">
+            <select id="originArea" name="origin_area">
               <option value="all">From: Near me</option>
               <option value="DHCC">DHCC</option>
               <option value="Jumeirah">Jumeirah</option>
@@ -665,15 +678,15 @@
 
         <div class="filter-group">
           <div class="filter-title">Appointment Availability</div>
-          <label class="filter-check"><input type="checkbox" id="today"> Available this week</label>
-          <label class="filter-check"><input type="checkbox" id="online"> Video tele-consultation</label>
-          <label class="filter-check"><input type="checkbox" id="homeOnly"> Home blood collection</label>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="avail_today" id="today"> Available this week</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="avail_online" id="online"> Video tele-consultation</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="avail_home" id="homeOnly"> Home blood collection</span>
         </div>
 
         <div class="filter-group">
           <div class="filter-title">Patient Rating</div>
-          <label class="filter-check"><input type="checkbox" class="ratingFilter" value="4.8"> 4.8+ rating</label>
-          <label class="filter-check"><input type="checkbox" class="ratingFilter" value="4.5"> 4.5+ rating</label>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="rating_48" class="ratingFilter" value="4.8"> 4.8+ rating</span>
+          <span class="filter-check" style="cursor:pointer;display:flex;align-items:center;gap:8px;margin-bottom:6px"><input type="checkbox" name="rating_45" class="ratingFilter" value="4.5"> 4.5+ rating</span>
         </div>
 
         <div class="filter-group">
@@ -697,7 +710,7 @@
             <p id="resultCount">Showing verified research providers</p>
           </div>
           <div class="view-tools">
-            <select class="sort" id="sort">
+            <select class="sort" id="sort" name="sort_order">
               <option value="recommended">Sort: Recommended</option>
               <option value="rating">Sort: Highest rated</option>
               <option value="reviews">Sort: Most reviewed</option>

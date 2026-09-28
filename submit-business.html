@@ -285,34 +285,29 @@
           </div>
 
           <div>
-            <label>Practice / Doctor / Facility Name *</label>
-            <input type="text" id="bizName" required placeholder="e.g. Orchid Fertility Clinic or Dr. Partha Sarathi Das">
+            <input type="text" id="bizName" name="facility_name" required placeholder="Facility Name">
           </div>
 
           <div class="grid2">
             <div>
-              <label>Provider Classification *</label>
-              <select id="bizCategory" required>
-                <option value="doctor">Consultant Doctor / Specialist</option>
-                <option value="clinic" selected>Fertility & IVF Clinic</option>
-                <option value="hospital">Women's / Multi-Specialty Hospital</option>
-                <option value="lab">Genetics & Diagnostic Laboratory</option>
+              <select id="bizCategory" name="category" required>
+                <option value="doctor">Consultant Specialist</option>
+                <option value="clinic" selected>Fertility Clinic</option>
+                <option value="hospital">Specialty Hospital</option>
+                <option value="lab">Genetics Laboratory</option>
               </select>
             </div>
             <div>
-              <label>Medical Director / Lead Specialist</label>
-              <input type="text" id="bizLeadDoctor" placeholder="e.g. Dr. Michael Fakih / Dr. Partha Sarathi">
+              <input type="text" id="bizLeadDoctor" name="lead_doctor" placeholder="Lead Specialist">
             </div>
           </div>
 
           <div class="grid2">
             <div>
-              <label>Year Established / Years in Practice</label>
-              <input type="text" id="bizYears" placeholder="e.g. Est. 2012 (14+ Years)">
+              <input type="text" id="bizYears" name="years_in_dubai" placeholder="Years Established">
             </div>
             <div>
-              <label>Facility Accreditations</label>
-              <input type="text" id="bizAccred" placeholder="e.g. JCI, CAP, ISO 15189, ESHRE">
+              <input type="text" id="bizAccred" name="accreditations" placeholder="Accreditations (JCI/CAP)">
             </div>
           </div>
 
@@ -323,10 +318,9 @@
 
           <div class="grid2">
             <div>
-              <label>Dubai District / Medical Zone *</label>
-              <select id="bizDistrict" required>
-                <option value="Dubai Healthcare City">Dubai Healthcare City (DHCC)</option>
-                <option value="Jumeirah">Jumeirah (1, 2, 3 & Al Wasl)</option>
+              <select id="bizDistrict" name="area" required>
+                <option value="Dubai Healthcare City">Dubai Healthcare City</option>
+                <option value="Jumeirah">Jumeirah</option>
                 <option value="Oud Metha">Oud Metha</option>
                 <option value="Dubai Marina">Dubai Marina</option>
                 <option value="Al Barsha">Al Barsha</option>
@@ -336,23 +330,20 @@
               </select>
             </div>
             <div>
-              <label>Building Name & Suite / Unit Number *</label>
-              <input type="text" id="bizUnit" required placeholder="e.g. Ibn Sina Bldg 27, Block D, Unit 201">
+              <input type="text" id="bizUnit" name="unit_number" required placeholder="Unit Suite">
             </div>
           </div>
 
           <div class="grid2">
             <div>
-              <label>Street Address & Landmark</label>
-              <input type="text" id="bizStreet" placeholder="e.g. 26th Street, near DHCC Metro Station">
+              <input type="text" id="bizStreet" name="street_address" placeholder="Street Address">
             </div>
             <div>
-              <label>Patient Parking Options</label>
-              <select id="bizParking">
-                <option>Valet Parking Available</option>
-                <option>Dedicated Private Driveway</option>
-                <option>Building Covered Patient Bays</option>
-                <option>RTA Street Parking</option>
+              <select id="bizParking" name="parking">
+                <option>Valet Parking</option>
+                <option>Private Parking</option>
+                <option>Building Bays</option>
+                <option>RTA Parking</option>
               </select>
             </div>
           </div>
@@ -364,29 +355,24 @@
 
           <div class="grid2">
             <div>
-              <label>DHA License Number *</label>
-              <input type="text" id="bizDhaLicense" required placeholder="DHA-F-XXXXXXX or DHA-P-XXXXXXX">
+              <input type="text" id="bizDhaLicense" name="dha_license" required placeholder="DHA License">
             </div>
             <div>
-              <label>Direct WhatsApp for Patient Inquiries *</label>
-              <input type="tel" id="bizWhatsApp" required placeholder="+971 50 XXX XXXX">
+              <input type="tel" id="bizWhatsApp" name="whatsapp" required placeholder="WhatsApp Number">
             </div>
           </div>
 
           <div class="grid2">
             <div>
-              <label>Clinic Switchboard Landline</label>
-              <input type="tel" id="bizPhone" placeholder="+971 4 XXX XXXX">
+              <input type="tel" id="bizPhone" name="phone" placeholder="Phone Number">
             </div>
             <div>
-              <label>Official Practice Email *</label>
-              <input type="email" id="bizEmail" required placeholder="reception@clinic.ae">
+              <input type="email" id="bizEmail" name="email" required placeholder="Email Address">
             </div>
           </div>
 
           <div>
-            <label>Official Website URL</label>
-            <input type="url" id="bizWebsite" placeholder="https://www.yourclinic.ae">
+            <input type="url" id="bizWebsite" name="website" placeholder="Website URL">
           </div>
 
           <!-- Section 4 -->
@@ -394,26 +380,24 @@
             <span class="num">4</span> Clinical Specialties, Services & Tariffs
           </div>
 
-          <label style="margin-bottom:8px;display:block">Select Key Clinical Services Offered:</label>
+          <div style="font-size:12px;font-weight:750;color:var(--navy);margin-bottom:8px">Clinical Services Offered</div>
           <div class="checkbox-grid">
-            <label class="cb-item"><input type="checkbox" name="services" value="ivf" checked> IVF / ICSI Cycles</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="pgt" checked> PGT-A Genetic Screening</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="freezing" checked> Egg Freezing & Preservation</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="andrology" checked> Semen Analysis & Male Fertility</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="iui"> IUI Insemination</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="ovarian"> Ovarian Rejuvenation & PRP</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="laparoscopy"> Reproductive Laparoscopy</label>
-            <label class="cb-item"><input type="checkbox" name="services" value="home"> Home Sample Phlebotomy</label>
+            <span class="cb-item"><input type="checkbox" name="services" value="ivf" checked> IVF/ICSI Cycles</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="pgt" checked> PGT-A Screening</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="freezing" checked> Egg Freezing</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="andrology" checked> Male Fertility</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="iui"> IUI Insemination</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="ovarian"> Ovarian Rejuvenation</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="laparoscopy"> Reproductive Laparoscopy</span>
+            <span class="cb-item"><input type="checkbox" name="services" value="home"> Home Phlebotomy</span>
           </div>
 
           <div class="grid2" style="margin-top:14px">
             <div>
-              <label>Initial Specialist Consultation Fee (AED)</label>
-              <input type="text" id="bizFee" placeholder="e.g. AED 450 – 650">
+              <input type="text" id="bizFee" name="consultation_fee" placeholder="Consultation Fee">
             </div>
             <div>
-              <label>Accepted Insurance Networks</label>
-              <input type="text" id="bizInsurance" placeholder="e.g. Thiqa, NextCare, MetLife, Self-Pay">
+              <input type="text" id="bizInsurance" name="insurance" placeholder="Accepted Insurance">
             </div>
           </div>
 
@@ -423,17 +407,17 @@
           </div>
 
           <div>
-            <select id="bizPlan" style="font-weight:700">
-              <option value="featured" selected>⭐ Featured Specialist (AED 499 / month) — Top Placement & Direct WhatsApp</option>
-              <option value="free">Verified Free Listing (AED 0 / forever) — Standard Search Placement</option>
-              <option value="clinic">🏥 Clinic Showcase (AED 1,499 / month) — Unlimited Doctors & Homepage Feature</option>
+            <select id="bizPlan" name="plan" style="font-weight:700">
+              <option value="featured" selected>⭐ Featured Specialist (AED 499 / month)</option>
+              <option value="free">Verified Free Listing (AED 0 / forever)</option>
+              <option value="clinic">🏥 Clinic Showcase (AED 1,499 / month)</option>
             </select>
           </div>
 
-          <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--muted);cursor:pointer;margin-top:16px">
-            <input type="checkbox" required checked style="width:16px;height:16px;margin-top:1px">
+          <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--muted);margin-top:16px">
+            <input type="checkbox" name="dha_certified" required checked style="width:16px;height:16px;margin-top:1px">
             <span>I certify that the information provided represents an active, licensed healthcare entity regulated by the Dubai Health Authority (DHA) or Dubai Healthcare City Authority (DHCA).</span>
-          </label>
+          </div>
 
           <button type="submit" class="btn btn-primary" style="width:100%;margin-top:16px;padding:15px;font-size:15px">
             Submit Practice for Verification →

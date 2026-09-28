@@ -25,51 +25,43 @@
           </div>
           <form class="ff-form" id="ffBookingForm">
             <div>
-              <label>Provider / Facility</label>
-              <input type="text" id="ffBookingProvider" readonly style="background:#f7f9fc;font-weight:700">
+              <input type="text" id="ffBookingProvider" name="provider_name" readonly style="background:#f7f9fc;font-weight:700">
             </div>
             <div>
-              <label>Service or Consultation Type</label>
-              <select id="ffBookingService" required>
-                <option value="Initial IVF / Fertility Consultation">Initial IVF / Fertility Consultation</option>
-                <option value="Video / Zoom Tele-Consultation">Video / Zoom Tele-Consultation</option>
-                <option value="Semen Analysis & Andrology">Semen Analysis & Andrology</option>
-                <option value="AMH & Reproductive Hormone Blood Panel">AMH & Reproductive Hormone Blood Panel</option>
+              <select id="ffBookingService" name="service" required>
+                <option value="Initial IVF / Fertility Consultation">Initial IVF Consultation</option>
+                <option value="Video / Zoom Tele-Consultation">Video Tele-Consultation</option>
+                <option value="Semen Analysis & Andrology">Semen Analysis</option>
+                <option value="AMH & Reproductive Hormone Blood Panel">Hormone Blood Panel</option>
                 <option value="Egg Freezing Assessment">Egg Freezing Assessment</option>
-                <option value="Home Sample Phlebotomy Collection">Home Sample Phlebotomy Collection</option>
+                <option value="Home Sample Phlebotomy Collection">Home Phlebotomy</option>
               </select>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Full Name</label>
-                <input type="text" id="ffBookingName" required placeholder="e.g. Fatima Al Mansoori">
+                <input type="text" id="ffBookingName" name="patient_name" required placeholder="Patient Full Name">
               </div>
               <div>
-                <label>Mobile Number (+971)</label>
-                <input type="tel" id="ffBookingPhone" required placeholder="+971 50 XXX XXXX">
+                <input type="tel" id="ffBookingPhone" name="phone" required placeholder="Mobile Number">
               </div>
             </div>
             <div>
-              <label>Email Address</label>
-              <input type="email" id="ffBookingEmail" required placeholder="name@example.com">
+              <input type="email" id="ffBookingEmail" name="email" required placeholder="Email Address">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Preferred Date</label>
-                <input type="date" required id="ffBookingDate">
+                <input type="date" required id="ffBookingDate" name="date">
               </div>
               <div>
-                <label>Preferred Slot</label>
-                <select id="ffBookingSlot">
-                  <option value="Morning (09:00 AM – 12:00 PM)">Morning (09:00 AM – 12:00 PM)</option>
-                  <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12:00 PM – 04:00 PM)</option>
-                  <option value="Evening (04:00 PM – 08:00 PM)">Evening (04:00 PM – 08:00 PM)</option>
+                <select id="ffBookingSlot" name="time_slot">
+                  <option value="Morning (09:00 AM – 12:00 PM)">Morning (9AM-12PM)</option>
+                  <option value="Afternoon (12:00 PM – 04:00 PM)">Afternoon (12PM-4PM)</option>
+                  <option value="Evening (04:00 PM – 08:00 PM)">Evening (4PM-8PM)</option>
                 </select>
               </div>
             </div>
             <div>
-              <label>Clinical Notes or Prior History (Optional)</label>
-              <textarea id="ffBookingNotes" placeholder="Describe previous cycles, test results, or specific questions for the doctor..."></textarea>
+              <textarea id="ffBookingNotes" name="notes" placeholder="Clinical Notes"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Confirm Booking Request →</button>
             <p style="font-size:11px;color:var(--muted);text-align:center;margin:6px 0 0">
@@ -91,40 +83,35 @@
           </div>
           <form class="ff-form" id="ffReviewForm">
             <div>
-              <label>Reviewing Provider</label>
-              <input type="text" id="ffReviewProvider" readonly style="background:#f7f9fc;font-weight:700">
+              <input type="text" id="ffReviewProvider" name="provider_name" readonly style="background:#f7f9fc;font-weight:700">
             </div>
             <div>
-              <label>Overall Experience Rating</label>
               <div style="display:flex;gap:8px;font-size:26px;color:#f2ad2e;cursor:pointer;margin:4px 0" id="ffStarSelector">
                 <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
               </div>
-              <input type="hidden" id="ffRatingValue" value="5">
+              <input type="hidden" id="ffRatingValue" name="rating" value="5">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Your Display Name</label>
-                <input type="text" id="ffReviewName" required placeholder="e.g. Fatima K. (or Verified Patient)">
+                <input type="text" id="ffReviewName" name="patient_name" required placeholder="Display Name">
               </div>
               <div>
-                <label>Treatment Received</label>
-                <select id="ffReviewTreatment">
-                  <option value="IVF / ICSI Treatment">IVF / ICSI Treatment</option>
-                  <option value="Fertility Assessment Consultation">Fertility Assessment Consultation</option>
-                  <option value="Semen Analysis / Andrology">Semen Analysis / Andrology</option>
-                  <option value="Egg Freezing Preservation">Egg Freezing Preservation</option>
-                  <option value="Diagnostic Blood Tests">Diagnostic Blood Tests</option>
+                <select id="ffReviewTreatment" name="treatment">
+                  <option value="IVF / ICSI Treatment">IVF Treatment</option>
+                  <option value="Fertility Assessment Consultation">Fertility Consultation</option>
+                  <option value="Semen Analysis / Andrology">Semen Analysis</option>
+                  <option value="Egg Freezing Preservation">Egg Freezing</option>
+                  <option value="Diagnostic Blood Tests">Blood Tests</option>
                 </select>
               </div>
             </div>
             <div>
-              <label>Your Review</label>
-              <textarea id="ffReviewComment" required placeholder="Detail the doctor's communication, waiting times, lab explanations, and overall care..."></textarea>
+              <textarea id="ffReviewComment" name="comment" required placeholder="Write Review"></textarea>
             </div>
-            <label style="display:flex;gap:8px;align-items:center;font-size:12px;cursor:pointer">
-              <input type="checkbox" required checked>
+            <div style="display:flex;gap:8px;align-items:center;font-size:12px;cursor:pointer">
+              <input type="checkbox" name="verified_experience" required checked>
               <span>I confirm this review represents a genuine patient experience.</span>
-            </label>
+            </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Submit Verified Review →</button>
           </form>
         </div>
@@ -142,22 +129,19 @@
           </div>
           <form class="ff-form" id="ffListForm">
             <div>
-              <label>Medical Practice / Doctor Name</label>
-              <input type="text" id="ffListName" required placeholder="e.g. Orchid Fertility Clinic or Dr. Name">
+              <input type="text" id="ffListName" name="practice_name" required placeholder="Practice Name">
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>Provider Type</label>
-                <select id="ffListType" required>
-                  <option value="Clinic">Fertility / IVF Clinic</option>
+                <select id="ffListType" name="provider_type" required>
+                  <option value="Clinic">Fertility Clinic</option>
                   <option value="Doctor">Consultant Specialist</option>
-                  <option value="Hospital">Women's / Multispecialty Hospital</option>
-                  <option value="Diagnostic Lab">Diagnostic / Genetics Laboratory</option>
+                  <option value="Hospital">Specialty Hospital</option>
+                  <option value="Diagnostic Lab">Genetics Laboratory</option>
                 </select>
               </div>
               <div>
-                <label>Dubai District</label>
-                <select id="ffListDistrict" required>
+                <select id="ffListDistrict" name="district" required>
                   <option value="Dubai Healthcare City">Dubai Healthcare City</option>
                   <option value="Jumeirah">Jumeirah</option>
                   <option value="Oud Metha">Oud Metha</option>
@@ -171,21 +155,17 @@
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
-                <label>DHA License Number</label>
-                <input type="text" id="ffListDhaLicense" required placeholder="DHA-XXXX-XXXX">
+                <input type="text" id="ffListDhaLicense" name="dha_license" required placeholder="DHA License">
               </div>
               <div>
-                <label>Official Phone Number</label>
-                <input type="tel" id="ffListPhone" required placeholder="+971 4 XXX XXXX">
+                <input type="tel" id="ffListPhone" name="phone" required placeholder="Phone Number">
               </div>
             </div>
             <div>
-              <label>Official Practice Email</label>
-              <input type="email" id="ffListEmail" required placeholder="contact@clinic.ae">
+              <input type="email" id="ffListEmail" name="email" required placeholder="Email Address">
             </div>
             <div>
-              <label>Key Services Offered</label>
-              <textarea id="ffListServices" placeholder="e.g. IVF, ICSI, PGT-A, Laparoscopy, TESA, Semen Analysis, Egg Freezing..."></textarea>
+              <textarea id="ffListServices" name="services" placeholder="Services Offered"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Submit for DHA Verification →</button>
           </form>
@@ -229,20 +209,18 @@
           <div class="auth-view active" id="ffAuthViewLogin">
             <form class="ff-form" id="ffLoginForm" onsubmit="FertiFind.submitLogin(event)">
               <div>
-                <label>Email Address or Mobile Number</label>
-                <input type="text" id="ffLoginEmail" required placeholder="doctor@clinic.ae or patient@example.com">
+                <input type="text" id="ffLoginEmail" name="email" required placeholder="Email or Mobile">
               </div>
               <div>
-                <label>Password</label>
                 <div class="input-pass-wrap">
-                  <input type="password" id="ffLoginPass" required placeholder="••••••••">
+                  <input type="password" id="ffLoginPass" name="password" required placeholder="Enter Password">
                   <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffLoginPass', this)" aria-label="Toggle password visibility">👁</button>
                 </div>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin:2px 0">
-                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
-                  <input type="checkbox" checked style="width:14px;height:14px;margin:0"> Remember me
-                </label>
+                <div style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--muted)">
+                  <input type="checkbox" name="remember_me" checked style="width:14px;height:14px;margin:0"> <span>Remember me</span>
+                </div>
                 <a href="javascript:void(0)" onclick="FertiFind.switchAuthTab('forgot')" style="color:var(--blue);font-weight:700">Forgot Password?</a>
               </div>
               <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">Log In to Account →</button>
@@ -263,7 +241,7 @@
           <div class="auth-view" id="ffAuthViewRegister">
             <form class="ff-form" id="ffRegisterForm" onsubmit="FertiFind.submitRegister(event)">
               <div>
-                <label>I am registering as:</label>
+                <div style="font-size:12px;font-weight:750;color:var(--navy);margin-bottom:6px">Registering As</div>
                 <div class="role-picker">
                   <div class="role-chip active" id="chip-patient" onclick="FertiFind.selectRole('patient')">
                     <span class="role-ico">👤</span>
@@ -282,7 +260,7 @@
                     <span>Hospital/Lab</span>
                   </div>
                 </div>
-                <input type="hidden" id="ffRegRole" value="patient">
+                <input type="hidden" id="ffRegRole" name="role" value="patient">
               </div>
 
               <!-- Provider notice callout -->
@@ -295,42 +273,37 @@
               </div>
 
               <div>
-                <label id="ffRegNameLabel">Full Name</label>
-                <input type="text" id="ffRegName" required placeholder="e.g. Dr. Sarah Mansoori">
+                <input type="text" id="ffRegName" name="full_name" required placeholder="Full Name">
               </div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                 <div>
-                  <label>Email Address</label>
-                  <input type="email" id="ffRegEmail" required placeholder="name@domain.ae">
+                  <input type="email" id="ffRegEmail" name="email" required placeholder="Email Address">
                 </div>
                 <div>
-                  <label>Mobile (+971 UAE)</label>
-                  <input type="tel" id="ffRegMobile" required placeholder="+971 50 XXX XXXX">
+                  <input type="tel" id="ffRegMobile" name="mobile" required placeholder="Mobile Number">
                 </div>
               </div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                 <div>
-                  <label>Password</label>
                   <div class="input-pass-wrap">
-                    <input type="password" id="ffRegPass" required placeholder="••••••••">
+                    <input type="password" id="ffRegPass" name="password" required placeholder="Create Password">
                     <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffRegPass', this)">👁</button>
                   </div>
                 </div>
                 <div>
-                  <label>Confirm Password</label>
                   <div class="input-pass-wrap">
-                    <input type="password" id="ffRegPassConf" required placeholder="••••••••">
+                    <input type="password" id="ffRegPassConf" name="confirm_password" required placeholder="Confirm Password">
                     <button type="button" class="pass-toggle-btn" onclick="FertiFind.togglePassVisibility('ffRegPassConf', this)">👁</button>
                   </div>
                 </div>
               </div>
 
-              <label style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);cursor:pointer;margin-top:2px">
-                <input type="checkbox" required checked style="width:15px;height:15px;margin-top:1px">
+              <div style="display:flex;gap:8px;align-items:flex-start;font-size:11px;color:var(--muted);margin-top:2px">
+                <input type="checkbox" name="terms" required checked style="width:15px;height:15px;margin-top:1px">
                 <span>I agree to FertiFind's <a href="javascript:void(0)" onclick="FertiFind.openInfo('privacy')" style="color:var(--blue);font-weight:700">Terms of Service</a> & UAE Healthcare Guidelines.</span>
-              </label>
+              </div>
 
               <button type="submit" class="btn btn-primary" id="ffRegSubmitBtn" style="width:100%;padding:12px">Create Account →</button>
 
@@ -347,8 +320,7 @@
                 🔑 Enter your registered email address or mobile phone number. We will send a secure password reset link and 6-digit verification code.
               </div>
               <div>
-                <label>Registered Email or Phone</label>
-                <input type="text" id="ffForgotContact" required placeholder="name@clinic.ae or +971 50 XXX XXXX">
+                <input type="text" id="ffForgotContact" name="contact" required placeholder="Email or Mobile">
               </div>
               <button type="submit" class="btn btn-primary" style="width:100%;padding:12px">Send Password Reset Code →</button>
 
@@ -604,10 +576,8 @@
           sub: "Manage practice listing and patient leads",
           body: `
             <div style="background:#f7faff;border:1px solid #e5eaf2;padding:14px;border-radius:10px">
-              <label style="font-weight:700;display:block;margin-bottom:4px;font-size:12px">Registered Provider Email / DHA ID</label>
-              <input type="text" placeholder="provider@clinic.ae" style="width:100%;padding:10px;border:1px solid #cfd9e8;border-radius:8px;margin-bottom:8px">
-              <label style="font-weight:700;display:block;margin-bottom:4px;font-size:12px">Password</label>
-              <input type="password" placeholder="••••••••" style="width:100%;padding:10px;border:1px solid #cfd9e8;border-radius:8px">
+              <input type="text" name="email" placeholder="Email or DHA" style="width:100%;padding:10px;border:1px solid #cfd9e8;border-radius:8px;margin-bottom:8px">
+              <input type="password" name="password" placeholder="Enter Password" style="width:100%;padding:10px;border:1px solid #cfd9e8;border-radius:8px">
               <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="FertiFind.closeModal('ffInfoModal');FertiFind.toast('Demo sign-in: Welcome to your provider dashboard.')">Log In to Portal</button>
             </div>
           `
@@ -667,20 +637,20 @@
       if (input) input.value = role;
 
       const notice = document.getElementById('ffProviderNotice');
-      const nameLabel = document.getElementById('ffRegNameLabel');
+      const nameInput = document.getElementById('ffRegName');
       const submitBtn = document.getElementById('ffRegSubmitBtn');
 
       if (role === 'doctor') {
         if (notice) notice.style.display = 'flex';
-        if (nameLabel) nameLabel.textContent = 'Doctor Full Name & Title';
+        if (nameInput) nameInput.placeholder = 'Doctor Full Name';
         if (submitBtn) submitBtn.textContent = 'Register Doctor & Continue →';
       } else if (role === 'clinic' || role === 'hospital') {
         if (notice) notice.style.display = 'flex';
-        if (nameLabel) nameLabel.textContent = 'Practice / Facility Name';
+        if (nameInput) nameInput.placeholder = 'Practice Name';
         if (submitBtn) submitBtn.textContent = 'Register Practice & Continue →';
       } else {
         if (notice) notice.style.display = 'none';
-        if (nameLabel) nameLabel.textContent = 'Full Name';
+        if (nameInput) nameInput.placeholder = 'Full Name';
         if (submitBtn) submitBtn.textContent = 'Create Patient Account →';
       }
     },
