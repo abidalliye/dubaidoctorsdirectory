@@ -1129,7 +1129,28 @@
             <button class="btn btn-primary" onclick="openProfileBooking('Dr. Sara Ahmed','In-Clinic Consultation')">📅 Book Appointment</button>
             <button class="btn btn-soft" onclick="openProfileBooking('Dr. Sara Ahmed','Video / Zoom Consultation')">▣ Video / Zoom Call</button>
             <button class="btn btn-outline" onclick="openProfileBooking('Dr. Sara Ahmed','Home Consultation Request')">⌂ Request Home Service</button>
-            <button class="btn btn-whatsapp" style="margin-top:7px" onclick="openProfileWhatsApp('971504773832','Dr. Sara Ahmed')">💬 WhatsApp Coordination</button>
+            
+            <div class="contact-reveal-box" style="margin:10px 0">
+              <div class="contact-reveal-row">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">☎ Clinic Direct</span>
+                  <span class="masked-num" id="docDirectTel">+971 4 385 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('docDirectTel', '+971 4 385 6009', 'tel', this)">
+                  👁️ Show
+                </button>
+              </div>
+              <div class="contact-reveal-row" style="margin-top:6px">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">💬 Verified WhatsApp</span>
+                  <span class="masked-num" id="docDirectWa">+971 50 477 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('docDirectWa', '+971 50 477 3832', 'whatsapp', this, 'Dr. Sara Ahmed')">
+                  💬 WhatsApp
+                </button>
+              </div>
+            </div>
+
             <div class="trust-micro">
               Appointment availability is subject to provider confirmation. Zero booking surcharges.
             </div>
@@ -1781,10 +1802,26 @@
             <b>🕘 Open Today</b>
             08:30 AM – 07:00 PM • By Appointment
           </div>
-          <a class="side-link-pill" href="tel:+97143856009">
-            <b>☎ Direct Hotline</b>
-            +971 4 385 6009
-          </a>
+          <div class="contact-reveal-box" style="margin-top:8px">
+            <div class="contact-reveal-row">
+              <div class="contact-masked-info">
+                <span class="contact-type-label">☎ Direct Hotline</span>
+                <span class="masked-num" id="sideDocTel">+971 4 385 ••••</span>
+              </div>
+              <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('sideDocTel', '+971 4 385 6009', 'tel', this)">
+                👁️ Show Number
+              </button>
+            </div>
+            <div class="contact-reveal-row" style="margin-top:8px">
+              <div class="contact-masked-info">
+                <span class="contact-type-label">💬 WhatsApp Desk</span>
+                <span class="masked-num" id="sideDocWa">+971 50 477 ••••</span>
+              </div>
+              <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('sideDocWa', '+971 50 477 3832', 'whatsapp', this, 'Dr. Sara Ahmed')">
+                💬 WhatsApp
+              </button>
+            </div>
+          </div>
           <a class="side-link-pill" href="https://maps.google.com" target="_blank" rel="noopener">
             <b>📍 Get Directions</b>
             Villa 42, Jumeirah 1, Dubai
@@ -2145,6 +2182,66 @@
         mobileDrawer.classList.toggle('open');
       });
     }
+
+    document.body.classList.add('has-sticky-bar');
+
+    // Auto-link submitted listings if visited with ?name= or ?id=
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const queryName = params.get('name') || params.get('q');
+      if (queryName && window.FertiFind && FertiFind.getSubmittedListings) {
+        const submitted = FertiFind.getSubmittedListings();
+        const match = submitted.find(item => item.name && item.name.toLowerCase().includes(queryName.toLowerCase()));
+        if (match) {
+          const h1 = document.querySelector('.hero-profile h1');
+          if (h1) h1.textContent = match.name;
+          const sub = document.querySelector('.doctor-sub');
+          if (sub) sub.textContent = `${match.leadDoctor || 'Specialist'} • ${match.area || 'Dubai'}`;
+          const stickyName = document.getElementById('stickyDoctorName');
+          if (stickyName) stickyName.textContent = match.name;
+          const stickyClinic = document.getElementById('stickyDoctorClinic');
+          if (stickyClinic) stickyClinic.textContent = match.area || 'Dubai';
+          if (match.phone) {
+            const masked = match.phone.substring(0, match.phone.length - 4) + '••••';
+            document.querySelectorAll('#stickyTelDoc, #sideDocTel, #docDirectTel').forEach(el => el.textContent = masked);
+          }
+          if (match.whatsapp) {
+            const maskedWa = match.whatsapp.substring(0, match.whatsapp.length - 4) + '••••';
+            document.querySelectorAll('#stickyWaDoc, #sideDocWa, #docDirectWa').forEach(el => el.textContent = maskedWa);
+          }
+        }
+      }
+    });
   </script>
+
+  <!-- Sticky Bottom Quick Action Bar for Single Doctor Listing -->
+  <div class="sticky-bottom-action-bar" id="stickyListingBar">
+    <div class="container sticky-bar-inner">
+      <div class="sticky-provider-meta">
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&q=80" alt="Dr. Sara Ahmed" class="sticky-thumb" id="stickyDoctorThumb">
+        <div>
+          <div class="sticky-name"><span id="stickyDoctorName">Dr. Sara Ahmed</span> <span class="sticky-tag">✓ DHA Consultant</span></div>
+          <div class="sticky-sub"><span id="stickyDoctorClinic">Nova Fertility & IVF Centre</span> • <span id="stickyDoctorArea">Jumeirah & Oud Metha</span> • <b>From AED 350</b></div>
+        </div>
+      </div>
+      <div class="sticky-btns">
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyTelDoc">+971 4 385 ••••</span>
+          <button type="button" class="btn btn-outline sticky-btn-call" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyTelDoc', '+971 4 385 6009', 'tel', this)">
+            📞 Show Phone
+          </button>
+        </div>
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyWaDoc">+971 50 477 ••••</span>
+          <button type="button" class="btn btn-whatsapp sticky-btn-wa" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyWaDoc', '+971 50 477 3832', 'whatsapp', this, 'Dr. Sara Ahmed')">
+            💬 WhatsApp
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary" style="padding:8px 16px;font-size:12px" onclick="openProfileBooking('Dr. Sara Ahmed','In-Clinic Consultation')">
+          📅 Book Appointment →
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

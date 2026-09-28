@@ -398,12 +398,30 @@
           <div>
             <h3>Book Diagnostic Test</h3>
             <div class="open-tag">● Lab Open Sat – Thu: 08:30 AM – 06:00 PM</div>
-            <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Direct toll-free laboratory desk:</p>
-            <div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 800 50342</div>
+            
+            <div class="contact-reveal-box" style="margin:10px 0">
+              <div class="contact-reveal-row">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">☎ Toll-Free Lab Desk</span>
+                  <span class="masked-num" id="labActionTel">+971 800 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('labActionTel', '+971 800 50342', 'tel', this)">
+                  👁️ Show
+                </button>
+              </div>
+              <div class="contact-reveal-row" style="margin-top:6px">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">💬 WhatsApp Desk</span>
+                  <span class="masked-num" id="labActionWa">+971 50 477 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('labActionWa', '+971 50 477 3832', 'whatsapp', this, 'Igenomix Dubai')">
+                  💬 WhatsApp
+                </button>
+              </div>
+            </div>
           </div>
           <div>
             <button class="btn btn-primary" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">Book Lab Test →</button>
-            <button class="btn btn-whatsapp" style="width:100%;margin-top:6px" onclick="FertiFind.openWhatsApp('971504773832','Igenomix Dubai')">WhatsApp Lab Desk</button>
             <button class="btn btn-soft" style="margin-top:6px" onclick="FertiFind.openBooking('Igenomix Dubai','Home Sample Phlebotomy Collection')">Schedule Home Blood Draw</button>
             <div class="micro">🔒 DHA Licensed Laboratory • Fast Reports • <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile('Igenomix Dubai')" style="color:var(--muted);text-decoration:underline">Claim profile</a></div>
           </div>
@@ -653,9 +671,26 @@
         </div>
 
         <h4 style="margin:16px 0 8px;font-size:13px;color:var(--navy)">Lab Coordination</h4>
-        <p style="font-size:12px;color:var(--muted);margin:0 0 6px">Toll-free customer care:</p>
-        <div style="font-size:13px;font-weight:800;color:var(--navy)">☎ +971 800 50342</div>
-        <div style="font-size:12px;color:#087e76;margin-top:4px">💬 WhatsApp: +971 50 477 3832</div>
+        <div class="contact-reveal-box" style="margin-top:6px">
+          <div class="contact-reveal-row">
+            <div class="contact-masked-info">
+              <span class="contact-type-label">☎ Toll-Free Lab Desk</span>
+              <span class="masked-num" id="sideLabTel">+971 800 ••••</span>
+            </div>
+            <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('sideLabTel', '+971 800 50342', 'tel', this)">
+              👁️ Show
+            </button>
+          </div>
+          <div class="contact-reveal-row" style="margin-top:6px">
+            <div class="contact-masked-info">
+              <span class="contact-type-label">💬 WhatsApp Desk</span>
+              <span class="masked-num" id="sideLabWa">+971 50 477 ••••</span>
+            </div>
+            <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('sideLabWa', '+971 50 477 3832', 'whatsapp', this, 'Igenomix Dubai')">
+              💬 WhatsApp
+            </button>
+          </div>
+        </div>
       </div>
 
     </aside>
@@ -743,12 +778,63 @@
   <!-- Scripts -->
   <script src="js/site.js"></script>
   <script>
-    document.querySelectorAll('.tabs a').forEach(tab => {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.tabs a').forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-      });
+    document.body.classList.add('has-sticky-bar');
+
+    // Auto-link submitted listings if visited with ?name= or ?id=
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const queryName = params.get('name') || params.get('q');
+      if (queryName && window.FertiFind && FertiFind.getSubmittedListings) {
+        const submitted = FertiFind.getSubmittedListings();
+        const match = submitted.find(item => item.name && item.name.toLowerCase().includes(queryName.toLowerCase()));
+        if (match) {
+          const h1 = document.querySelector('.hero h1');
+          if (h1) h1.textContent = match.name;
+          const stickyName = document.getElementById('stickyLabName');
+          if (stickyName) stickyName.textContent = match.name;
+          const stickyArea = document.getElementById('stickyLabArea');
+          if (stickyArea) stickyArea.textContent = match.area || 'Dubai';
+          if (match.phone) {
+            const masked = match.phone.substring(0, match.phone.length - 4) + '••••';
+            document.querySelectorAll('#stickyTelLab, #sideLabTel, #labActionTel').forEach(el => el.textContent = masked);
+          }
+          if (match.whatsapp) {
+            const maskedWa = match.whatsapp.substring(0, match.whatsapp.length - 4) + '••••';
+            document.querySelectorAll('#stickyWaLab, #sideLabWa, #labActionWa').forEach(el => el.textContent = maskedWa);
+          }
+        }
+      }
     });
   </script>
+
+  <!-- Sticky Bottom Quick Action Bar for Single Lab Listing -->
+  <div class="sticky-bottom-action-bar" id="stickyListingBar">
+    <div class="container sticky-bar-inner">
+      <div class="sticky-provider-meta">
+        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=120&q=80" alt="Igenomix Dubai" class="sticky-thumb" id="stickyLabThumb">
+        <div>
+          <div class="sticky-name"><span id="stickyLabName">Igenomix Dubai</span> <span class="sticky-tag">✓ DHA & CAP Accredited</span></div>
+          <div class="sticky-sub"><span id="stickyLabArea">Dubai Healthcare City</span> • <b>Genetic & Reproductive Lab</b></div>
+        </div>
+      </div>
+      <div class="sticky-btns">
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyTelLab">+971 800 ••••</span>
+          <button type="button" class="btn btn-outline sticky-btn-call" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyTelLab', '+971 800 50342', 'tel', this)">
+            📞 Show Phone
+          </button>
+        </div>
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyWaLab">+971 50 477 ••••</span>
+          <button type="button" class="btn btn-whatsapp sticky-btn-wa" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyWaLab', '+971 50 477 3832', 'whatsapp', this, 'Igenomix Dubai')">
+            💬 WhatsApp
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary" style="padding:8px 16px;font-size:12px" onclick="FertiFind.openBooking('Igenomix Dubai','Diagnostic Genetic Panel')">
+          📅 Book Lab Test →
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

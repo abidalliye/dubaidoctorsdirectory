@@ -834,6 +834,43 @@
       if (drawer) {
         drawer.classList.toggle('open');
       }
+    },
+
+    revealNumber: function (elementId, fullNumber, actionType, buttonEl, providerName) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        if (actionType === 'tel') {
+          el.innerHTML = `<a href="tel:${fullNumber.replace(/[^0-9+]/g, '')}" class="revealed-num-link">📞 ${fullNumber}</a>`;
+        } else {
+          el.innerHTML = `<a href="javascript:void(0)" onclick="FertiFind.openWhatsApp('${fullNumber.replace(/[^0-9]/g, '')}','${providerName || 'Provider'}')" class="revealed-num-link" style="color:#087e76">💬 ${fullNumber}</a>`;
+        }
+      }
+      if (buttonEl) {
+        if (actionType === 'tel') {
+          buttonEl.outerHTML = `<a href="tel:${fullNumber.replace(/[^0-9+]/g, '')}" class="btn btn-primary" style="padding:6px 12px;font-size:11px;text-decoration:none">📞 Call Now</a>`;
+        } else if (actionType === 'whatsapp') {
+          buttonEl.outerHTML = `<button type="button" class="btn btn-whatsapp" style="padding:6px 12px;font-size:11px" onclick="FertiFind.openWhatsApp('${fullNumber.replace(/[^0-9]/g, '')}','${providerName || 'Provider'}')">💬 Chat Now</button>`;
+          FertiFind.openWhatsApp(fullNumber.replace(/[^0-9]/g, ''), providerName || 'Provider');
+        }
+      }
+    },
+
+    saveSubmittedListing: function (listing) {
+      try {
+        let listings = JSON.parse(localStorage.getItem('ff_submitted_listings') || '[]');
+        listings.unshift(listing);
+        localStorage.setItem('ff_submitted_listings', JSON.stringify(listings));
+      } catch (err) {
+        console.warn('Storage error', err);
+      }
+    },
+
+    getSubmittedListings: function () {
+      try {
+        return JSON.parse(localStorage.getItem('ff_submitted_listings') || '[]');
+      } catch (e) {
+        return [];
+      }
     }
   };
 

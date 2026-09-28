@@ -774,6 +774,10 @@
         submittedAt: new Date().toISOString()
       };
 
+      if (window.FertiFind && FertiFind.saveSubmittedListing) {
+        FertiFind.saveSubmittedListing(submissionPayload);
+      }
+
       if (window.FertiSupabase) {
         await FertiSupabase.submitPractice(submissionPayload);
       }
@@ -781,7 +785,7 @@
         await FertiFirebase.recordSubmission(submissionPayload);
       }
 
-      FertiFind.toast(`Practice submission received & saved to Supabase! Reference #${ref}`);
+      FertiFind.toast(`Practice submission received & saved! Reference #${ref}`);
     }
   </script>
 </body>

@@ -1300,15 +1300,33 @@
           <div>
             <h3>Contact & Appointments</h3>
             <div class="emergency-status">● Open 24 Hours • Emergency Services Available</div>
-            <p style="font-size:11px;color:var(--muted);margin:0 0 6px">Hospital appointments desk:</p>
-            <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:8px">☎ +971 4 555 0188</div>
+            
+            <div class="contact-reveal-box" style="margin:10px 0">
+              <div class="contact-reveal-row">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">☎ Appointments Desk</span>
+                  <span class="masked-num" id="hospActionTel">+971 4 555 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('hospActionTel', '+971 4 555 0188', 'tel', this)">
+                  👁️ Show
+                </button>
+              </div>
+              <div class="contact-reveal-row" style="margin-top:6px">
+                <div class="contact-masked-info">
+                  <span class="contact-type-label">💬 Hospital WhatsApp</span>
+                  <span class="masked-num" id="hospActionWa">+971 50 477 ••••</span>
+                </div>
+                <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('hospActionWa', '+971 50 477 3832', 'whatsapp', this, 'CityCare Women\'s Hospital')">
+                  💬 WhatsApp
+                </button>
+              </div>
+            </div>
           </div>
 
           <div>
             <button class="btn btn-primary" onclick="openHospitalBooking('CityCare Women\'s Hospital','Hospital General Visit')">📅 Book Hospital Visit</button>
             <button class="btn btn-soft" onclick="openHospitalBooking('CityCare Women\'s Hospital','Consult Specialist Doctor')">👨‍⚕️ Choose a Doctor</button>
             <button class="btn btn-outline" onclick="openHospitalContactModal('CityCare Women\'s Hospital')">☎ Contact Hospital</button>
-            <button class="btn btn-whatsapp" style="margin-top:7px" onclick="openHospitalWhatsApp('971504773832','CityCare Women\'s Hospital')">💬 WhatsApp Coordinator</button>
             <div class="trust-micro-copy">
               Direct hospital scheduling. Zero booking surcharges.
             </div>
@@ -2245,10 +2263,26 @@
             <b>CityCare Women's Hospital</b>
             Healthcare City, Dubai, UAE
           </div>
-          <a class="side-detail-pill" href="tel:+97145550188">
-            <b>☎ Direct Hotline</b>
-            +971 4 555 0188
-          </a>
+          <div class="contact-reveal-box" style="margin-top:6px">
+            <div class="contact-reveal-row">
+              <div class="contact-masked-info">
+                <span class="contact-type-label">☎ Direct Hotline</span>
+                <span class="masked-num" id="sideHospTel">+971 4 555 ••••</span>
+              </div>
+              <button type="button" class="btn-reveal-num" onclick="FertiFind.revealNumber('sideHospTel', '+971 4 555 0188', 'tel', this)">
+                👁️ Show
+              </button>
+            </div>
+            <div class="contact-reveal-row" style="margin-top:6px">
+              <div class="contact-masked-info">
+                <span class="contact-type-label">💬 WhatsApp Desk</span>
+                <span class="masked-num" id="sideHospWa">+971 50 477 ••••</span>
+              </div>
+              <button type="button" class="btn-reveal-num btn-reveal-wa" onclick="FertiFind.revealNumber('sideHospWa', '+971 50 477 3832', 'whatsapp', this, 'CityCare Women\'s Hospital')">
+                💬 WhatsApp
+              </button>
+            </div>
+          </div>
           <div class="side-detail-pill">
             <b>🕘 Emergency Hours</b>
             Open 24/7 • Emergency triage active
@@ -2657,6 +2691,64 @@
         mobileDrawer.classList.toggle('open');
       });
     }
+
+    document.body.classList.add('has-sticky-bar');
+
+    // Auto-link submitted listings if visited with ?name= or ?id=
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const queryName = params.get('name') || params.get('q');
+      if (queryName && window.FertiFind && FertiFind.getSubmittedListings) {
+        const submitted = FertiFind.getSubmittedListings();
+        const match = submitted.find(item => item.name && item.name.toLowerCase().includes(queryName.toLowerCase()));
+        if (match) {
+          const h1 = document.querySelector('.hospital-header-grid h1');
+          if (h1) h1.textContent = match.name;
+          const stickyName = document.getElementById('stickyHospName');
+          if (stickyName) stickyName.textContent = match.name;
+          const stickyArea = document.getElementById('stickyHospArea');
+          if (stickyArea) stickyArea.textContent = match.area || 'Dubai';
+          if (match.phone) {
+            const masked = match.phone.substring(0, match.phone.length - 4) + '••••';
+            document.querySelectorAll('#stickyTelHosp, #sideHospTel, #hospActionTel').forEach(el => el.textContent = masked);
+          }
+          if (match.whatsapp) {
+            const maskedWa = match.whatsapp.substring(0, match.whatsapp.length - 4) + '••••';
+            document.querySelectorAll('#stickyWaHosp, #sideHospWa, #hospActionWa').forEach(el => el.textContent = maskedWa);
+          }
+        }
+      }
+    });
   </script>
+
+  <!-- Sticky Bottom Quick Action Bar for Single Hospital Listing -->
+  <div class="sticky-bottom-action-bar" id="stickyListingBar">
+    <div class="container sticky-bar-inner">
+      <div class="sticky-provider-meta">
+        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=120&q=80" alt="CityCare Women's Hospital" class="sticky-thumb" id="stickyHospThumb">
+        <div>
+          <div class="sticky-name"><span id="stickyHospName">CityCare Women's Hospital</span> <span class="sticky-tag">✓ DHA Tertiary Facility</span></div>
+          <div class="sticky-sub"><span id="stickyHospArea">Healthcare City & Oud Metha</span> • <b>24/7 Emergency Care</b></div>
+        </div>
+      </div>
+      <div class="sticky-btns">
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyTelHosp">+971 4 555 ••••</span>
+          <button type="button" class="btn btn-outline sticky-btn-call" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyTelHosp', '+971 4 555 0188', 'tel', this)">
+            📞 Show Phone
+          </button>
+        </div>
+        <div class="sticky-reveal-wrap">
+          <span class="sticky-masked-tel" id="stickyWaHosp">+971 50 477 ••••</span>
+          <button type="button" class="btn btn-whatsapp sticky-btn-wa" style="padding:6px 12px;font-size:11px" onclick="FertiFind.revealNumber('stickyWaHosp', '+971 50 477 3832', 'whatsapp', this, 'CityCare Women\'s Hospital')">
+            💬 WhatsApp
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary" style="padding:8px 16px;font-size:12px" onclick="openHospitalBooking('CityCare Women\'s Hospital','Hospital General Visit')">
+          📅 Book Visit →
+        </button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

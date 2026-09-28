@@ -296,10 +296,10 @@
       font-weight: 750;
     }
 
-    /* Cards Grid */
+    /* Cards Grid - 2 per row on desktop, keeps 1 listing from expanding full width */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       width: 100%;
       max-width: 100%;
@@ -594,7 +594,7 @@
     @media (max-width: 992px) {
       .layout { grid-template-columns: 1fr; gap: 20px; }
       .filters { position: static; width: 100%; }
-      .cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .grid4 { grid-template-columns: repeat(2, 1fr); }
       .trust-strip { grid-template-columns: repeat(2, 1fr); }
       .searchbar { grid-template-columns: 1fr 1fr; }
@@ -967,6 +967,16 @@
                 <span class="service-tag">Echocardiogram</span>
                 <span class="service-tag">Heart Checkup</span>
               </div>
+              <div class="card-contact-strip">
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="cTel-1">📞 +971 4 377 ••••</span>
+                  <button type="button" class="btn-reveal-micro" onclick="FertiFind.revealNumber('cTel-1', '+971 4 377 5500', 'tel', this)">Show</button>
+                </div>
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="cWa-1">💬 +971 50 477 ••••</span>
+                  <button type="button" class="btn-reveal-micro wa" onclick="FertiFind.revealNumber('cWa-1', '+971 50 477 3832', 'whatsapp', this, 'Dr. Farida Al Hosani')">WhatsApp</button>
+                </div>
+              </div>
               <div class="meta-row">
                 <span>🕘 <b>Open Sat – Thu</b></span>
                 <span>💻 Video consult</span>
@@ -981,7 +991,6 @@
             <div class="card-footer">
               <span>Consultation from <b>AED 500</b> • <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile('Dr. Farida Al Hosani')" style="color:var(--muted);text-decoration:underline">Claim</a></span>
               <div style="display:flex;gap:6px;align-items:center">
-                <button class="btn btn-whatsapp" style="padding:4px 9px;font-size:11px" onclick="FertiFind.openWhatsApp('971504773832','Dr. Farida Al Hosani')">WhatsApp</button>
                 <button class="heart" onclick="FertiFind.toggleShortlist('Dr. Farida Al Hosani', this)" aria-label="Shortlist">♡</button>
               </div>
             </div>
@@ -1007,6 +1016,16 @@
                 <span class="service-tag">Sports Injury</span>
                 <span class="service-tag">ACL Reconstruction</span>
               </div>
+              <div class="card-contact-strip">
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="cTel-2">📞 +971 4 519 ••••</span>
+                  <button type="button" class="btn-reveal-micro" onclick="FertiFind.revealNumber('cTel-2', '+971 4 519 9999', 'tel', this)">Show</button>
+                </div>
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="cWa-2">💬 +971 50 293 ••••</span>
+                  <button type="button" class="btn-reveal-micro wa" onclick="FertiFind.revealNumber('cWa-2', '+971 50 293 8411', 'whatsapp', this, 'Dr. Tariq Mansoor')">WhatsApp</button>
+                </div>
+              </div>
               <div class="meta-row">
                 <span>🕘 <b>Available this week</b></span>
                 <span>🔪 Surgery theater</span>
@@ -1021,7 +1040,6 @@
             <div class="card-footer">
               <span>Consultation from <b>AED 600</b> • <a href="javascript:void(0)" onclick="FertiFind.openClaimProfile('Dr. Tariq Mansoor')" style="color:var(--muted);text-decoration:underline">Claim</a></span>
               <div style="display:flex;gap:6px;align-items:center">
-                <button class="btn btn-whatsapp" style="padding:4px 9px;font-size:11px" onclick="FertiFind.openWhatsApp('971504773832','Dr. Tariq Mansoor')">WhatsApp</button>
                 <button class="heart" onclick="FertiFind.toggleShortlist('Dr. Tariq Mansoor', this)" aria-label="Shortlist">♡</button>
               </div>
             </div>
@@ -2055,8 +2073,80 @@
   <script>
     // --- Live Filter Logic & URL Parameter Parser ---
     (function () {
-      const cards = [...document.querySelectorAll('.provider')];
       const cardsWrap = document.getElementById('cards');
+
+      // Dynamically load submitted listings from localStorage so newly registered providers appear immediately
+      if (window.FertiFind && FertiFind.getSubmittedListings) {
+        const submitted = FertiFind.getSubmittedListings();
+        submitted.forEach((item, idx) => {
+          if (!item.name) return;
+          const art = document.createElement('article');
+          art.className = 'provider-card provider';
+          art.dataset.type = item.category || 'doctor';
+          art.dataset.specialty = (item.leadDoctor || item.category || 'general').toLowerCase();
+          art.dataset.services = (item.services || []).join(' ').toLowerCase();
+          art.dataset.area = item.area || 'Dubai';
+          art.dataset.distance = '1.8';
+          art.dataset.rating = '5.0';
+          art.dataset.reviews = '1';
+          art.dataset.today = '1';
+          art.dataset.online = (item.services && item.services.some(s => s.toLowerCase().includes('video'))) ? '1' : '0';
+          art.dataset.home = (item.services && item.services.some(s => s.toLowerCase().includes('home'))) ? '1' : '0';
+          art.dataset.name = item.name;
+
+          const telMasked = item.phone ? item.phone.substring(0, Math.max(0, item.phone.length - 4)) + '••••' : '+971 4 •••••••';
+          const waMasked = item.whatsapp ? item.whatsapp.substring(0, Math.max(0, item.whatsapp.length - 4)) + '••••' : '+971 50 •••••••';
+          const telFull = item.phone || '+97143856009';
+          const waFull = item.whatsapp || '+971504773832';
+
+          art.innerHTML = `
+            <div class="card-top">
+              <div class="card-photo" style="background-image:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=700&q=85')"></div>
+              <div class="card-info">
+                <span class="type-badge">${item.category || 'Provider'}</span>
+                <span class="badge badge-mint">✓ ${item.dhaLicense || 'DHA Verified'}</span>
+                <h3><a href="fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(item.name)}">${item.name}</a></h3>
+                <div class="card-sub">${item.leadDoctor || 'Lead Specialist'} • ${item.address || item.area || 'Dubai'}</div>
+                <div class="card-rating"><span class="stars">★★★★★</span> <b>5.0</b> <span class="muted">(New Verified Listing)</span></div>
+                <div class="card-location">📍 <b>${item.area || 'Dubai'}</b> • ${item.yearsInDubai || '1+'} Yrs Established</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-services">
+                ${(item.services && item.services.length ? item.services : ['General Consultation', 'DHA Verified']).map(s => `<span class="service-tag">${s}</span>`).join('')}
+              </div>
+              <div class="card-contact-strip">
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="dynTel-${idx}">📞 ${telMasked}</span>
+                  <button type="button" class="btn-reveal-micro" onclick="FertiFind.revealNumber('dynTel-${idx}', '${telFull}', 'tel', this)">Show</button>
+                </div>
+                <div class="contact-pill-wrap">
+                  <span class="masked-num" id="dynWa-${idx}">💬 ${waMasked}</span>
+                  <button type="button" class="btn-reveal-micro wa" onclick="FertiFind.revealNumber('dynWa-${idx}', '${waFull}', 'whatsapp', this, '${item.name}')">WhatsApp</button>
+                </div>
+              </div>
+              <div class="meta-row">
+                <span>🕘 <b>Open Today</b></span>
+                <span>📋 <b>${item.insurance || 'All Insurances'}</b></span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-outline" onclick="FertiFind.openReview('${item.name}')">Review</button>
+                <a class="btn btn-soft" href="fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(item.name)}">View profile</a>
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('${item.name}','Consultation')">Book</button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Consultation fee: <b>AED ${item.fee || '350'}</b></span>
+              <div style="display:flex;gap:6px;align-items:center">
+                <button class="heart" onclick="FertiFind.toggleShortlist('${item.name}', this)" aria-label="Shortlist">♡</button>
+              </div>
+            </div>
+          `;
+          cardsWrap.insertBefore(art, cardsWrap.firstChild);
+        });
+      }
+
+      const cards = [...document.querySelectorAll('.provider')];
       const q = document.getElementById('q'), type = document.getElementById('type'), area = document.getElementById('area');
       const resultCount = document.getElementById('resultCount'), resultTitle = document.getElementById('resultTitle'), empty = document.getElementById('empty');
       const qFilters = document.querySelectorAll('.q-filter');
