@@ -15,6 +15,13 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
 
+  <!-- Enterprise RBAC Auth Guard -->
+  <script src="js/auth-guard.js"></script>
+  <script>
+    // Enforce Super Admin role verification
+    const currentAdmin = AuthGuard.protect('admin');
+  </script>
+
   <style>
     /* ==========================================================================
        Doctors Directory Admin Dashboard Styles
@@ -919,21 +926,14 @@
         <input type="text" id="globalSearch" name="global_search" placeholder="Search Directory Records" oninput="handleGlobalSearch(this.value)">
       </div>
 
-      <!-- Multi-Role Switcher -->
-      <nav class="bi-role-switcher" aria-label="Portal Mode">
-        <a class="bi-role-btn active" href="admin.html">
-          <span>👑</span> Admin Center
-        </a>
-        <a class="bi-role-btn" href="dashboard-hospital.html">
-          <span>🏥</span> Hospital & Clinic
-        </a>
-        <a class="bi-role-btn" href="dashboard-doctor.html">
-          <span>🩺</span> Doctor Specialist
-        </a>
-        <a class="bi-role-btn" href="dashboard-patient.html">
-          <span>👤</span> Patient Portal
-        </a>
-      </nav>
+      <!-- Authenticated Session Indicator -->
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="status-badge" style="background:#eef5ff;color:#0757d9;border:1px solid #d4e4fc;font-weight:800">
+          <span>👑</span>
+          <span>Super Admin Active Session</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-xs" onclick="AuthGuard.logout()" style="padding:6px 12px;border-radius:20px;font-size:11px;font-weight:800;color:#dc2626;border-color:#fca5a5">Sign Out</button>
+      </div>
 
       <div class="header-actions">
         <!-- Theme Toggle (Light Mode vs Screenshot Navy Sidebar) -->
@@ -1869,9 +1869,8 @@
 
     // Logout
     function handleAdminLogout() {
-      localStorage.removeItem('ff_user');
       showToast('Logged out of Admin Dashboard');
-      setTimeout(() => { window.location.href = 'index.html'; }, 900);
+      setTimeout(() => { AuthGuard.logout('auth.html'); }, 600);
     }
 
     // Global Search

@@ -7,6 +7,13 @@
   <meta name="description" content="Doctor & Specialist Clinical Practice Dashboard - Real-time management of consultations, video telehealth, patient case notes, tariffs, and DHA credentials.">
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- Enterprise RBAC Auth Guard -->
+  <script src="js/auth-guard.js"></script>
+  <script>
+    // Enforce Doctor Specialist role authentication
+    const currentDoctor = AuthGuard.protect('doctor');
+  </script>
+
   <style>
     /* ==========================================================================
        Doctor & Specialist Dashboard - Unified Design Language
@@ -213,43 +220,6 @@
       box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.1);
     }
 
-    /* Multi-Role Switcher Pill */
-    .bi-role-switcher {
-      display: flex;
-      align-items: center;
-      background: #eef5ff;
-      border: 1px solid #d4e4fc;
-      border-radius: 30px;
-      padding: 3px 4px;
-      gap: 3px;
-    }
-    .bi-role-btn {
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 800;
-      border: none;
-      background: transparent;
-      color: #64748b;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.2s;
-    }
-    .bi-role-btn.active {
-      background: #ffffff;
-      color: #0757d9;
-      box-shadow: 0 2px 6px rgba(7, 87, 217, 0.15);
-    }
-    .bi-role-btn:hover:not(.active) {
-      color: #1a2736;
-    }
-    @media (max-width: 960px) {
-      .bi-role-switcher { display: none; }
-    }
-
     .header-actions {
       display: flex;
       align-items: center;
@@ -343,6 +313,15 @@
     .admin-meta small {
       color: var(--dash-sub);
       font-size: 10px;
+    }
+
+    /* Views Framework */
+    .dash-view {
+      display: none;
+    }
+    .dash-view.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in;
     }
 
     /* Main Content Body */
@@ -544,6 +523,7 @@
       border-radius: 14px;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      margin-bottom: 20px;
     }
     .box-head {
       display: flex;
@@ -616,7 +596,7 @@
       border: 1px solid #fecaca;
     }
 
-    /* Patient Follow-up Row */
+    /* Patient Row */
     .patient-row {
       display: flex;
       align-items: center;
@@ -739,6 +719,27 @@
       font-size: 20px;
     }
 
+    /* Form Layouts inside Subviews */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--dash-border);
+      font-size: 13px;
+      outline: none;
+      background: #f8fafc;
+      color: var(--dash-text);
+    }
+    .input-field:focus {
+      background: #ffffff;
+      border-color: var(--dash-accent-blue);
+    }
+
     /* Modal Styling */
     .ff-modal-overlay {
       position: fixed;
@@ -793,19 +794,6 @@
       flex-direction: column;
       gap: 14px;
     }
-    .ff-modal-body input, .ff-modal-body select, .ff-modal-body textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--dash-border);
-      font-size: 13px;
-      outline: none;
-      background: #f8fafc;
-    }
-    .ff-modal-body input:focus, .ff-modal-body select:focus, .ff-modal-body textarea:focus {
-      background: #ffffff;
-      border-color: var(--dash-accent-blue);
-    }
     .ff-modal-footer {
       padding: 14px 24px;
       background: #f8fafc;
@@ -827,6 +815,7 @@
       .metrics-grid { grid-template-columns: 1fr 1fr; }
       .dash-content { padding: 16px; }
       .dash-header { padding: 12px 16px; }
+      .form-grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -910,21 +899,14 @@
         <input type="text" name="doctor_search" placeholder="Search patient cases" oninput="handleSearch(this.value)">
       </div>
 
-      <!-- Multi-Role Switcher -->
-      <nav class="bi-role-switcher" aria-label="Portal Mode">
-        <a class="bi-role-btn" href="admin.html">
-          <span>👑</span> Admin Center
-        </a>
-        <a class="bi-role-btn" href="dashboard-hospital.html">
-          <span>🏥</span> Hospital & Clinic
-        </a>
-        <a class="bi-role-btn active" href="dashboard-doctor.html">
-          <span>🩺</span> Doctor Specialist
-        </a>
-        <a class="bi-role-btn" href="dashboard-patient.html">
-          <span>👤</span> Patient Portal
-        </a>
-      </nav>
+      <!-- Authenticated Session Indicator -->
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="status-badge" style="background:#eef5ff;color:#0757d9;border:1px solid #d4e4fc;font-weight:800">
+          <span>🩺</span>
+          <span>Consultant Specialist Session</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-xs" onclick="AuthGuard.logout()" style="padding:6px 12px;border-radius:20px;font-size:11px;font-weight:800;color:#dc2626;border-color:#fca5a5">Sign Out</button>
+      </div>
 
       <div class="header-actions">
         <!-- DHA License Badge -->
@@ -943,8 +925,8 @@
         <div class="admin-pill">
           <div class="admin-avatar">👨‍⚕️</div>
           <div class="admin-meta">
-            <b>Dr. Ahmed Khan</b>
-            <small>Consultant Specialist</small>
+            <b class="auth-user-name">Dr. Ahmed Khan</b>
+            <small class="auth-user-role">Consultant Specialist</small>
           </div>
         </div>
       </div>
@@ -953,481 +935,749 @@
     <!-- Main Content Canvas -->
     <div class="dash-content">
 
-      <!-- Welcome Banner -->
-      <div class="welcome-row">
-        <div class="welcome-text">
-          <h1>Welcome Back, Dr. Ahmed Khan</h1>
-          <p>Here's your clinical practice performance and consultation schedule today.</p>
-        </div>
-        <div class="time-selector">
-          <span>📅</span>
-          <span>Last 30 Days</span>
-          <span style="font-size:10px">▼</span>
-        </div>
-      </div>
-
-      <!-- 5 KPI Stat Cards -->
-      <div class="metrics-grid">
-        <!-- Card 1: Active Patients -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#eef5ff; color:#0757d9;">
-            👥
+      <!-- ====================================================================
+           VIEW 1: OVERVIEW DASHBOARD
+           ==================================================================== -->
+      <section class="dash-view active" id="view-overview">
+        <!-- Welcome Banner -->
+        <div class="welcome-row">
+          <div class="welcome-text">
+            <h1>Welcome Back, <span class="auth-welcome-name">Dr. Ahmed Khan</span></h1>
+            <p>Here's your clinical practice performance and consultation schedule today.</p>
           </div>
-          <div class="metric-info">
-            <div class="metric-label">Active Patients</div>
-            <div class="metric-val">342</div>
-            <div class="metric-change">
-              <span class="change-up">↑ 14%</span>
-              <span class="change-sub">vs last 30 days</span>
+          <div class="time-selector">
+            <span>📅</span>
+            <span>Last 30 Days</span>
+            <span style="font-size:10px">▼</span>
+          </div>
+        </div>
+
+        <!-- 5 KPI Stat Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#eef5ff; color:#0757d9;">👥</div>
+            <div class="metric-info">
+              <div class="metric-label">Active Patients</div>
+              <div class="metric-val">342</div>
+              <div class="metric-change">
+                <span class="change-up">↑ 14%</span>
+                <span class="change-sub">vs last 30 days</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Card 2: Consultations This Month -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#e9fbf8; color:#10b981;">
-            📅
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Consultations</div>
-            <div class="metric-val">128</div>
-            <div class="metric-change">
-              <span class="change-up">↑ 20%</span>
-              <span class="change-sub">vs last 30 days</span>
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#e9fbf8; color:#10b981;">📅</div>
+            <div class="metric-info">
+              <div class="metric-label">Consultations</div>
+              <div class="metric-val">128</div>
+              <div class="metric-change">
+                <span class="change-up">↑ 20%</span>
+                <span class="change-sub">vs last 30 days</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Card 3: Telehealth Sessions -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#f5f3ff; color:#8b5cf6;">
-            📹
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Telehealth Calls</div>
-            <div class="metric-val">46</div>
-            <div class="metric-change">
-              <span class="change-up">↑ 32%</span>
-              <span class="change-sub">vs last 30 days</span>
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#f5f3ff; color:#8b5cf6;">📹</div>
+            <div class="metric-info">
+              <div class="metric-label">Telehealth Calls</div>
+              <div class="metric-val">46</div>
+              <div class="metric-change">
+                <span class="change-up">↑ 32%</span>
+                <span class="change-sub">vs last 30 days</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Card 4: Patient Rating -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#fffbeb; color:#f59e0b;">
-            ⭐
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Doctor Rating</div>
-            <div class="metric-val">4.96</div>
-            <div class="metric-change">
-              <span class="change-up">★ 214 reviews</span>
-              <span class="change-sub">Verified DHA</span>
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#fffbeb; color:#f59e0b;">⭐</div>
+            <div class="metric-info">
+              <div class="metric-label">Doctor Rating</div>
+              <div class="metric-val">4.96</div>
+              <div class="metric-change">
+                <span class="change-up">★ 214 reviews</span>
+                <span class="change-sub">Verified DHA</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Card 5: Practice Earnings -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#ecfeff; color:#0891b2;">
-            💳
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Doctor Earnings</div>
-            <div class="metric-val">AED 64.8k</div>
-            <div class="metric-change">
-              <span class="change-up">↑ 26%</span>
-              <span class="change-sub">vs last 30 days</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 Analytics Charts Grid -->
-      <div class="charts-grid">
-        <!-- Chart 1: Weekly Consultations & Video Telehealth -->
-        <div class="chart-card">
-          <div class="chart-head">
-            <span class="chart-title">Consultations Overview</span>
-            <select class="chart-select" name="consult_trend_filter">
-              <option>Last 7 Days</option>
-              <option>Last 30 Days</option>
-            </select>
-          </div>
-          <div class="chart-svg-wrap">
-            <svg class="chart-line" viewBox="0 0 500 180">
-              <defs>
-                <linearGradient id="docLineGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0757d9" stop-opacity="0.25"/>
-                  <stop offset="100%" stop-color="#0757d9" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <line x1="40" y1="20" x2="480" y2="20" stroke="#f1f5f9" stroke-width="1" />
-              <line x1="40" y1="60" x2="480" y2="60" stroke="#f1f5f9" stroke-width="1" />
-              <line x1="40" y1="100" x2="480" y2="100" stroke="#f1f5f9" stroke-width="1" />
-              <line x1="40" y1="140" x2="480" y2="140" stroke="#f1f5f9" stroke-width="1" />
-              
-              <text x="15" y="24" fill="#94a3b8" font-size="10">35</text>
-              <text x="15" y="64" fill="#94a3b8" font-size="10">25</text>
-              <text x="15" y="104" fill="#94a3b8" font-size="10">15</text>
-              <text x="15" y="144" fill="#94a3b8" font-size="10">5</text>
-              
-              <path d="M 60 120 Q 120 90, 180 80 T 300 55 T 420 30 L 420 150 L 60 150 Z" fill="url(#docLineGrad)" />
-              <path d="M 60 120 Q 120 90, 180 80 T 300 55 T 420 30" fill="none" stroke="#0757d9" stroke-width="3" stroke-linecap="round" />
-              
-              <circle cx="60" cy="120" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="180" cy="80" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="300" cy="55" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="420" cy="30" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-
-              <text x="50" y="165" fill="#94a3b8" font-size="10">Mon</text>
-              <text x="110" y="165" fill="#94a3b8" font-size="10">Tue</text>
-              <text x="170" y="165" fill="#94a3b8" font-size="10">Wed</text>
-              <text x="230" y="165" fill="#94a3b8" font-size="10">Thu</text>
-              <text x="290" y="165" fill="#94a3b8" font-size="10">Fri</text>
-              <text x="350" y="165" fill="#94a3b8" font-size="10">Sat</text>
-              <text x="410" y="165" fill="#94a3b8" font-size="10">Sun</text>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Chart 2: Patient Conditions Demographics -->
-        <div class="chart-card">
-          <div class="chart-head">
-            <span class="chart-title">Cases by Condition</span>
-          </div>
-          <div class="chart-svg-wrap">
-            <div class="chart-donut-wrap">
-              <svg width="140" height="140" viewBox="0 0 140 140">
-                <circle cx="70" cy="70" r="54" fill="none" stroke="#f1f5f9" stroke-width="18"/>
-                <circle cx="70" cy="70" r="54" fill="none" stroke="#0757d9" stroke-width="18"
-                        stroke-dasharray="128 212" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
-                <circle cx="70" cy="70" r="54" fill="none" stroke="#10b981" stroke-width="18"
-                        stroke-dasharray="82 258" stroke-dashoffset="-128" transform="rotate(-90 70 70)"/>
-                <circle cx="70" cy="70" r="54" fill="none" stroke="#8b5cf6" stroke-width="18"
-                        stroke-dasharray="55 285" stroke-dashoffset="-210" transform="rotate(-90 70 70)"/>
-                <circle cx="70" cy="70" r="54" fill="none" stroke="#f59e0b" stroke-width="18"
-                        stroke-dasharray="41 299" stroke-dashoffset="-265" transform="rotate(-90 70 70)"/>
-                <text x="70" y="66" text-anchor="middle" font-size="16" font-weight="900" fill="#1b254b">342</text>
-                <text x="70" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#707eae">Cases</text>
-              </svg>
-              <div class="donut-legend">
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#0757d9"></span> IVF & Infertility</span> <span>38%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#10b981"></span> PCOS Care</span> <span>24%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#8b5cf6"></span> Endometriosis</span> <span>16%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#f59e0b"></span> Male Factor</span> <span>12%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#cbd5e1"></span> Routine Check</span> <span>10%</span></div>
+          <div class="metric-card">
+            <div class="metric-icon-wrap" style="background:#ecfeff; color:#0891b2;">💳</div>
+            <div class="metric-info">
+              <div class="metric-label">Doctor Earnings</div>
+              <div class="metric-val">AED 64.8k</div>
+              <div class="metric-change">
+                <span class="change-up">↑ 26%</span>
+                <span class="change-sub">vs last 30 days</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Chart 3: Monthly Practice Earnings -->
-        <div class="chart-card">
-          <div class="chart-head">
-            <span class="chart-title">Revenue Overview</span>
-            <select class="chart-select" name="revenue_month_filter">
-              <option>Last 30 Days</option>
-              <option>Quarterly</option>
-            </select>
+        <!-- 3 Analytics Charts Grid -->
+        <div class="charts-grid">
+          <!-- Chart 1: Weekly Consultations & Video Telehealth -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <span class="chart-title">Consultations Overview</span>
+              <select class="chart-select" name="consult_trend_filter">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+              </select>
+            </div>
+            <div class="chart-svg-wrap">
+              <svg class="chart-line" viewBox="0 0 500 180">
+                <defs>
+                  <linearGradient id="docLineGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0757d9" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#0757d9" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <line x1="40" y1="20" x2="480" y2="20" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="60" x2="480" y2="60" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="100" x2="480" y2="100" stroke="#f1f5f9" stroke-width="1" />
+                <line x1="40" y1="140" x2="480" y2="140" stroke="#f1f5f9" stroke-width="1" />
+                
+                <text x="15" y="24" fill="#94a3b8" font-size="10">35</text>
+                <text x="15" y="64" fill="#94a3b8" font-size="10">25</text>
+                <text x="15" y="104" fill="#94a3b8" font-size="10">15</text>
+                <text x="15" y="144" fill="#94a3b8" font-size="10">5</text>
+                
+                <path d="M 60 120 Q 120 90, 180 80 T 300 55 T 420 30 L 420 150 L 60 150 Z" fill="url(#docLineGrad)" />
+                <path d="M 60 120 Q 120 90, 180 80 T 300 55 T 420 30" fill="none" stroke="#0757d9" stroke-width="3" stroke-linecap="round" />
+                
+                <circle cx="60" cy="120" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+                <circle cx="180" cy="80" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+                <circle cx="300" cy="55" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+                <circle cx="420" cy="30" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+
+                <text x="50" y="165" fill="#94a3b8" font-size="10">Mon</text>
+                <text x="110" y="165" fill="#94a3b8" font-size="10">Tue</text>
+                <text x="170" y="165" fill="#94a3b8" font-size="10">Wed</text>
+                <text x="230" y="165" fill="#94a3b8" font-size="10">Thu</text>
+                <text x="290" y="165" fill="#94a3b8" font-size="10">Fri</text>
+                <text x="350" y="165" fill="#94a3b8" font-size="10">Sat</text>
+                <text x="410" y="165" fill="#94a3b8" font-size="10">Sun</text>
+              </svg>
+            </div>
           </div>
-          <div class="chart-svg-wrap">
-            <svg class="chart-bar" viewBox="0 0 280 180">
-              <line x1="30" y1="30" x2="270" y2="30" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="30" y1="80" x2="270" y2="80" stroke="#f1f5f9" stroke-width="1"/>
-              <line x1="30" y1="130" x2="270" y2="130" stroke="#f1f5f9" stroke-width="1"/>
-              
-              <text x="10" y="34" fill="#94a3b8" font-size="9">70k</text>
-              <text x="10" y="84" fill="#94a3b8" font-size="9">35k</text>
-              <text x="10" y="134" fill="#94a3b8" font-size="9">10k</text>
 
-              <rect x="50" y="70" width="28" height="70" rx="4" fill="#0757d9"/>
-              <text x="64" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jun</text>
+          <!-- Chart 2: Patient Conditions Demographics -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <span class="chart-title">Cases by Condition</span>
+            </div>
+            <div class="chart-svg-wrap">
+              <div class="chart-donut-wrap">
+                <svg width="140" height="140" viewBox="0 0 140 140">
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="#f1f5f9" stroke-width="18"/>
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="#0757d9" stroke-width="18"
+                          stroke-dasharray="128 212" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="#10b981" stroke-width="18"
+                          stroke-dasharray="82 258" stroke-dashoffset="-128" transform="rotate(-90 70 70)"/>
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="#8b5cf6" stroke-width="18"
+                          stroke-dasharray="55 285" stroke-dashoffset="-210" transform="rotate(-90 70 70)"/>
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="#f59e0b" stroke-width="18"
+                          stroke-dasharray="41 299" stroke-dashoffset="-265" transform="rotate(-90 70 70)"/>
+                  <text x="70" y="66" text-anchor="middle" font-size="16" font-weight="900" fill="#1b254b">342</text>
+                  <text x="70" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#707eae">Cases</text>
+                </svg>
+                <div class="donut-legend">
+                  <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#0757d9"></span> IVF & Infertility</span> <span>38%</span></div>
+                  <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#10b981"></span> PCOS Care</span> <span>24%</span></div>
+                  <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#8b5cf6"></span> Endometriosis</span> <span>16%</span></div>
+                  <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#f59e0b"></span> Male Factor</span> <span>12%</span></div>
+                  <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#cbd5e1"></span> Routine Check</span> <span>10%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <rect x="105" y="60" width="28" height="80" rx="4" fill="#0757d9"/>
-              <text x="119" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jul</text>
+          <!-- Chart 3: Monthly Practice Earnings -->
+          <div class="chart-card">
+            <div class="chart-head">
+              <span class="chart-title">Revenue Overview</span>
+              <select class="chart-select" name="revenue_month_filter">
+                <option>Last 30 Days</option>
+                <option>Quarterly</option>
+              </select>
+            </div>
+            <div class="chart-svg-wrap">
+              <svg class="chart-bar" viewBox="0 0 280 180">
+                <line x1="30" y1="30" x2="270" y2="30" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="30" y1="80" x2="270" y2="80" stroke="#f1f5f9" stroke-width="1"/>
+                <line x1="30" y1="130" x2="270" y2="130" stroke="#f1f5f9" stroke-width="1"/>
+                
+                <text x="10" y="34" fill="#94a3b8" font-size="9">70k</text>
+                <text x="10" y="84" fill="#94a3b8" font-size="9">35k</text>
+                <text x="10" y="134" fill="#94a3b8" font-size="9">10k</text>
 
-              <rect x="160" y="50" width="28" height="90" rx="4" fill="#0757d9"/>
-              <text x="174" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Aug</text>
+                <rect x="50" y="70" width="28" height="70" rx="4" fill="#0757d9"/>
+                <text x="64" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jun</text>
 
-              <rect x="215" y="35" width="28" height="105" rx="4" fill="#2563eb"/>
-              <text x="229" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Sep</text>
-            </svg>
+                <rect x="105" y="60" width="28" height="80" rx="4" fill="#0757d9"/>
+                <text x="119" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jul</text>
+
+                <rect x="160" y="50" width="28" height="90" rx="4" fill="#0757d9"/>
+                <text x="174" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Aug</text>
+
+                <rect x="215" y="35" width="28" height="105" rx="4" fill="#2563eb"/>
+                <text x="229" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Sep</text>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Middle Row: Today's Appointments, Priority Follow-ups, Patient Reviews -->
-      <div class="middle-grid">
-        <!-- Box 1: Today's Appointments -->
+        <!-- Middle Row: Today's Appointments, Priority Follow-ups, Patient Reviews -->
+        <div class="middle-grid">
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">Today's Clinical Consultations</h2>
+              <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('schedule')">View All</a>
+            </div>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Mode</th>
+                  <th>Slot Time</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Sarah Johnson</b></td>
+                  <td><span class="badge-status badge-confirmed">Video Call</span></td>
+                  <td>10:00 AM</td>
+                  <td>IVF Cycle Review</td>
+                  <td><a href="javascript:void(0)" onclick="switchDoctorTab('telehealth')" style="color:var(--dash-accent-blue);font-weight:800">Launch Call</a></td>
+                </tr>
+                <tr>
+                  <td><b>Michael Brown</b></td>
+                  <td><span class="badge-status badge-pending">In-Clinic</span></td>
+                  <td>11:30 AM</td>
+                  <td>Ultrasound Scan</td>
+                  <td><span class="badge-status badge-confirmed">Checked In</span></td>
+                </tr>
+                <tr>
+                  <td><b>Emily Davis</b></td>
+                  <td><span class="badge-status badge-confirmed">Video Call</span></td>
+                  <td>02:00 PM</td>
+                  <td>Hormone Results</td>
+                  <td><span class="badge-status badge-pending">Scheduled</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">Priority Follow-up Cases</h2>
+              <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('patients')">View All</a>
+            </div>
+            <div>
+              <div class="patient-row">
+                <div class="patient-info-wrap">
+                  <div class="patient-avatar">👩</div>
+                  <div>
+                    <div class="patient-name">Sarah Johnson</div>
+                    <div class="patient-spec">AMH & Follicle Monitoring</div>
+                  </div>
+                </div>
+                <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
+              </div>
+
+              <div class="patient-row">
+                <div class="patient-info-wrap">
+                  <div class="patient-avatar">👨</div>
+                  <div>
+                    <div class="patient-name">Michael Brown</div>
+                    <div class="patient-spec">Semen DNA Fragmentation</div>
+                  </div>
+                </div>
+                <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">Patient Testimonials</h2>
+              <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('reviews')">View All</a>
+            </div>
+            <div>
+              <div class="rev-row">
+                <div class="rev-head">
+                  <div class="rev-user">
+                    <div class="rev-avatar">SJ</div>
+                    <span>Sarah Johnson</span>
+                  </div>
+                  <div class="rev-stars">★★★★★</div>
+                </div>
+                <p class="rev-text">"Dr. Ahmed Khan is exceptionally thorough, gentle, and transparent. He answered all our questions regarding our IVF treatment plan."</p>
+                <div class="rev-time">Yesterday • Verified Patient</div>
+              </div>
+
+              <div class="rev-row">
+                <div class="rev-head">
+                  <div class="rev-user">
+                    <div class="rev-avatar">MB</div>
+                    <span>Michael Brown</span>
+                  </div>
+                  <div class="rev-stars">★★★★★</div>
+                </div>
+                <p class="rev-text">"Best consultant cardiologist in Dubai. Outstanding bedside manner and precise diagnostic workup."</p>
+                <div class="rev-time">2 days ago • Verified Patient</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Recent Prescriptions, Clinical Articles, Doctor Quick Actions -->
+        <div class="bottom-grid">
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">Recent Clinical Records & Rx</h2>
+              <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('notes')">View All</a>
+            </div>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Order / Rx</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Sarah Johnson</b></td>
+                  <td>Gonal-F 300 IU Protocol</td>
+                  <td>Sep 28</td>
+                </tr>
+                <tr>
+                  <td><b>Michael Brown</b></td>
+                  <td>Lipid & Troponin Panel</td>
+                  <td>Sep 27</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">My Published Medical Guides</h2>
+              <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('articles')">View All</a>
+            </div>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Article Title</th>
+                  <th>Status</th>
+                  <th>Reads</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>AMH Levels & Ovarian Reserve in 2026</b></td>
+                  <td><span class="badge-status badge-confirmed">Published</span></td>
+                  <td>1,420</td>
+                </tr>
+                <tr>
+                  <td><b>Managing Male Factor Infertility in Dubai</b></td>
+                  <td><span class="badge-status badge-confirmed">Published</span></td>
+                  <td>980</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dash-box">
+            <div class="box-head">
+              <h2 class="box-title">Doctor Quick Actions</h2>
+            </div>
+            <div class="actions-grid">
+              <button type="button" class="action-btn-tile" onclick="openDoctorModal('newPatientModal')">
+                <span class="action-ico">👤</span>
+                <span>New Patient Case</span>
+              </button>
+              <button type="button" class="action-btn-tile" onclick="switchDoctorTab('telehealth')">
+                <span class="action-ico">📹</span>
+                <span>Launch Telehealth</span>
+              </button>
+              <button type="button" class="action-btn-tile" onclick="openDoctorModal('slotsModal')">
+                <span class="action-ico">📅</span>
+                <span>Set Working Slots</span>
+              </button>
+              <button type="button" class="action-btn-tile" onclick="openDoctorModal('tariffModal')">
+                <span class="action-ico">💳</span>
+                <span>Update Tariff Fee</span>
+              </button>
+              <button type="button" class="action-btn-tile" onclick="openDoctorModal('newRxModal')">
+                <span class="action-ico">💊</span>
+                <span>Prescribe Rx / Lab</span>
+              </button>
+              <button type="button" class="action-btn-tile" onclick="switchDoctorTab('profile')">
+                <span class="action-ico">🏥</span>
+                <span>DHA Credentials</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: SPECIALIST PROFILE & DHA CREDENTIALS
+           ==================================================================== -->
+      <section class="dash-view" id="view-profile">
+        <div class="dash-box" style="max-width:750px">
+          <div class="box-head">
+            <h2 class="box-title">Doctor Specialist Profile & Licensure</h2>
+          </div>
+          <form onsubmit="handleFormSubmit(event, 'Physician profile saved to directory')">
+            <div class="form-grid-2">
+              <input type="text" class="input-field" name="doc_full_name" placeholder="Full Name" value="Dr. Ahmed Khan, MD" required>
+              <input type="text" class="input-field" name="doc_specialty" placeholder="Clinical Specialty" value="Consultant Cardiologist & Reproductive Medicine" required>
+            </div>
+            <div class="form-grid-2" style="margin-top:14px">
+              <input type="text" class="input-field" name="dha_lic_num" placeholder="DHA License Number" value="DHA-P-0019284" required>
+              <input type="text" class="input-field" name="affiliated_clinic" placeholder="Affiliated Hospital" value="American Hospital & King's College Hospital" required>
+            </div>
+            <div class="form-grid-2" style="margin-top:14px">
+              <input type="email" class="input-field" name="doc_email" placeholder="Professional Email" value="dr.ahmed.khan@ahdubai.com" required>
+              <input type="tel" class="input-field" name="doc_phone" placeholder="Contact Mobile" value="+971 4 377 5500" required>
+            </div>
+            <div style="margin-top:18px">
+              <button type="submit" class="btn btn-primary" style="padding:10px 20px">Save Physician Profile →</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: CLINICAL CONSULTATION SCHEDULE
+           ==================================================================== -->
+      <section class="dash-view" id="view-schedule">
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">Today's Clinical Consultations</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('schedule')">View All</a>
+            <h2 class="box-title">Weekly Consultation Slots & Hours</h2>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openDoctorModal('slotsModal')">+ Add Time Slot</button>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>Mode</th>
-                <th>Slot Time</th>
-                <th>Reason</th>
+                <th>Day</th>
+                <th>Working Hours</th>
+                <th>Slot Duration</th>
+                <th>Consultation Mode</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>Sarah Johnson</b></td>
-                <td><span class="badge-status badge-confirmed">Video Call</span></td>
-                <td>10:00 AM</td>
-                <td>IVF Cycle Review</td>
-                <td><a href="javascript:void(0)" onclick="launchTelehealthCall('Sarah Johnson')" style="color:var(--dash-accent-blue);font-weight:800">Launch Call</a></td>
+                <td><b>Monday</b></td>
+                <td>09:00 AM - 05:00 PM</td>
+                <td>30 Minutes</td>
+                <td>In-Clinic & Video Telehealth</td>
+                <td><span class="badge-status badge-confirmed">Active</span></td>
               </tr>
               <tr>
-                <td><b>Michael Brown</b></td>
-                <td><span class="badge-status badge-pending">In-Clinic</span></td>
-                <td>11:30 AM</td>
-                <td>Ultrasound Scan</td>
-                <td><span class="badge-status badge-confirmed">Checked In</span></td>
+                <td><b>Tuesday</b></td>
+                <td>09:00 AM - 05:00 PM</td>
+                <td>30 Minutes</td>
+                <td>In-Clinic Procedures</td>
+                <td><span class="badge-status badge-confirmed">Active</span></td>
               </tr>
               <tr>
-                <td><b>Emily Davis</b></td>
-                <td><span class="badge-status badge-confirmed">Video Call</span></td>
-                <td>02:00 PM</td>
-                <td>Hormone Results</td>
-                <td><span class="badge-status badge-pending">Scheduled</span></td>
+                <td><b>Wednesday</b></td>
+                <td>10:00 AM - 06:00 PM</td>
+                <td>45 Minutes</td>
+                <td>Video Telehealth Dedicated</td>
+                <td><span class="badge-status badge-confirmed">Active</span></td>
               </tr>
               <tr>
-                <td><b>James Wilson</b></td>
-                <td><span class="badge-status badge-pending">In-Clinic</span></td>
-                <td>04:30 PM</td>
-                <td>Initial Consultation</td>
-                <td><span class="badge-status badge-pending">Scheduled</span></td>
+                <td><b>Thursday</b></td>
+                <td>09:00 AM - 02:00 PM</td>
+                <td>30 Minutes</td>
+                <td>In-Clinic Consultations</td>
+                <td><span class="badge-status badge-confirmed">Active</span></td>
               </tr>
               <tr>
-                <td><b>Olivia Martinez</b></td>
-                <td><span class="badge-status badge-cancelled">Rescheduled</span></td>
-                <td>05:15 PM</td>
-                <td>Follow-up Rx</td>
-                <td><span class="badge-status badge-cancelled">Cancelled</span></td>
+                <td><b>Friday</b></td>
+                <td>Off / Hospital Rounds</td>
+                <td>-</td>
+                <td>Emergency On-Call Only</td>
+                <td><span class="badge-status badge-pending">On-Call</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
 
-        <!-- Box 2: Priority Follow-up Cases -->
+      <!-- ====================================================================
+           VIEW 4: MY PATIENTS REGISTRY
+           ==================================================================== -->
+      <section class="dash-view" id="view-patients">
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">Priority Follow-up Cases</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('patients')">View All</a>
-          </div>
-          <div>
-            <div class="patient-row">
-              <div class="patient-info-wrap">
-                <div class="patient-avatar">👩</div>
-                <div>
-                  <div class="patient-name">Sarah Johnson</div>
-                  <div class="patient-spec">AMH & Follicle Monitoring</div>
-                </div>
-              </div>
-              <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
-            </div>
-
-            <div class="patient-row">
-              <div class="patient-info-wrap">
-                <div class="patient-avatar">👨</div>
-                <div>
-                  <div class="patient-name">Michael Brown</div>
-                  <div class="patient-spec">Semen DNA Fragmentation</div>
-                </div>
-              </div>
-              <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
-            </div>
-
-            <div class="patient-row">
-              <div class="patient-info-wrap">
-                <div class="patient-avatar">👩</div>
-                <div>
-                  <div class="patient-name">Fatima Noor</div>
-                  <div class="patient-spec">Blastocyst Transfer Day-5</div>
-                </div>
-              </div>
-              <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
-            </div>
-
-            <div class="patient-row">
-              <div class="patient-info-wrap">
-                <div class="patient-avatar">👩</div>
-                <div>
-                  <div class="patient-name">Zainab K.</div>
-                  <div class="patient-spec">Post-OP Laparoscopy Check</div>
-                </div>
-              </div>
-              <button type="button" class="patient-action-btn" onclick="openDoctorModal('newRxModal')">Add Rx</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Box 3: Doctor Patient Reviews -->
-        <div class="dash-box">
-          <div class="box-head">
-            <h2 class="box-title">Patient Testimonials</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('reviews')">View All</a>
-          </div>
-          <div>
-            <div class="rev-row">
-              <div class="rev-head">
-                <div class="rev-user">
-                  <div class="rev-avatar">SJ</div>
-                  <span>Sarah Johnson</span>
-                </div>
-                <div class="rev-stars">★★★★★</div>
-              </div>
-              <p class="rev-text">"Dr. Ahmed Khan is exceptionally thorough, gentle, and transparent. He answered all our questions regarding our IVF treatment plan."</p>
-              <div class="rev-time">Yesterday • Verified Patient</div>
-            </div>
-
-            <div class="rev-row">
-              <div class="rev-head">
-                <div class="rev-user">
-                  <div class="rev-avatar">MB</div>
-                  <span>Michael Brown</span>
-                </div>
-                <div class="rev-stars">★★★★★</div>
-              </div>
-              <p class="rev-text">"Best consultant cardiologist in Dubai. Outstanding bedside manner and precise diagnostic workup."</p>
-              <div class="rev-time">2 days ago • Verified Patient</div>
-            </div>
-
-            <div class="rev-row">
-              <div class="rev-head">
-                <div class="rev-user">
-                  <div class="rev-avatar">ED</div>
-                  <span>Emily Davis</span>
-                </div>
-                <div class="rev-stars">★★★★★</div>
-              </div>
-              <p class="rev-text">"Very short waiting time in clinic. Telehealth follow-up was smooth and crystal clear on mobile."</p>
-              <div class="rev-time">4 days ago • Verified Patient</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Row: Recent Prescriptions, Clinical Articles, Doctor Quick Actions -->
-      <div class="bottom-grid">
-        <!-- Panel 1: Prescriptions & Diagnostic Orders -->
-        <div class="dash-box">
-          <div class="box-head">
-            <h2 class="box-title">Recent Clinical Records & Rx</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('notes')">View All</a>
+            <h2 class="box-title">Assigned Patients Care Registry</h2>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openDoctorModal('newPatientModal')">+ New Patient</button>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>Order / Rx</th>
-                <th>Date</th>
+                <th>Patient Name</th>
+                <th>Emirates ID</th>
+                <th>Primary Diagnosis</th>
+                <th>Last Visit</th>
+                <th>Next Action</th>
+                <th>Care Record</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><b>Sarah Johnson</b></td>
-                <td>Gonal-F 300 IU Protocol</td>
-                <td>Sep 28</td>
+                <td>784-1988-1234567-1</td>
+                <td>Ovarian Reserve Monitoring</td>
+                <td>Sep 25, 2026</td>
+                <td>Video Follow-up Tomorrow</td>
+                <td><button type="button" class="btn btn-outline btn-xs" onclick="switchDoctorTab('notes')">View Chart</button></td>
               </tr>
               <tr>
                 <td><b>Michael Brown</b></td>
-                <td>Lipid & Troponin Panel</td>
-                <td>Sep 27</td>
+                <td>784-1982-9988776-2</td>
+                <td>Lipid & Coronary Risk</td>
+                <td>Sep 20, 2026</td>
+                <td>Review Blood Panel</td>
+                <td><button type="button" class="btn btn-outline btn-xs" onclick="switchDoctorTab('notes')">View Chart</button></td>
               </tr>
               <tr>
-                <td><b>Fatima Noor</b></td>
-                <td>Progesterone Pessaries 400mg</td>
-                <td>Sep 26</td>
-              </tr>
-              <tr>
-                <td><b>James Wilson</b></td>
-                <td>Thyroid Panel TSH/FT4</td>
-                <td>Sep 25</td>
+                <td><b>Fatima Al Mansoori</b></td>
+                <td>784-1990-9988776-3</td>
+                <td>PCOS Ovulation Protocol</td>
+                <td>Sep 18, 2026</td>
+                <td>Cycle Day 3 Lab Order</td>
+                <td><button type="button" class="btn btn-outline btn-xs" onclick="switchDoctorTab('notes')">View Chart</button></td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
 
-        <!-- Panel 2: Clinical Guides & Articles -->
+      <!-- ====================================================================
+           VIEW 5: VIDEO TELEHEALTH ROOM
+           ==================================================================== -->
+      <section class="dash-view" id="view-telehealth">
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">My Published Medical Guides</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchDoctorTab('articles')">View All</a>
+            <h2 class="box-title">Encrypted Video Telehealth Suite</h2>
+            <span class="badge-status badge-confirmed">Camera & Mic Ready</span>
+          </div>
+          <div style="background:#102244;border-radius:12px;padding:40px 20px;text-align:center;color:#ffffff;margin-bottom:20px">
+            <div style="font-size:48px;margin-bottom:12px">📹</div>
+            <h3 style="margin:0 0 8px;font-size:18px">Virtual Consultation Room #TELE-881</h3>
+            <p style="font-size:13px;color:#9bb2db;margin:0 0 20px">Patient Sarah Johnson is in the virtual waiting room with audio/video verified.</p>
+            <button type="button" class="btn btn-primary" onclick="showToast('Connecting encrypted HD video stream...')">Start Video Consultation Now →</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--dash-border)">
+              <b style="font-size:13px">Upcoming Virtual Appointments</b>
+              <p style="font-size:12px;color:var(--dash-sub);margin:6px 0 0">Sarah Johnson • 10:00 AM<br>Emily Davis • 02:00 PM</p>
+            </div>
+            <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--dash-border)">
+              <b style="font-size:13px">DHA Telemedicine Compliance</b>
+              <p style="font-size:12px;color:var(--dash-sub);margin:6px 0 0">End-to-End 256-bit encryption compliant with UAE Health Data Law (Federal Law No. 2 of 2019).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 6: CLINICAL CASE NOTES & RX
+           ==================================================================== -->
+      <section class="dash-view" id="view-notes">
+        <div class="dash-box">
+          <div class="box-head">
+            <h2 class="box-title">Clinical Notes & Digital Prescription (Rx)</h2>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openDoctorModal('newRxModal')">+ Write New Rx</button>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Rx Code</th>
+                <th>Patient Name</th>
+                <th>Medication / Test</th>
+                <th>Dosage & Frequency</th>
+                <th>Date Issued</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#RX-4401</td>
+                <td><b>Sarah Johnson</b></td>
+                <td>Gonal-F 300 IU Injection</td>
+                <td>Subcutaneous daily at 20:00</td>
+                <td>Sep 28, 2026</td>
+                <td><span class="badge-status badge-confirmed">Transmitted</span></td>
+              </tr>
+              <tr>
+                <td>#RX-4402</td>
+                <td><b>Michael Brown</b></td>
+                <td>Rosuvastatin 10mg Tablets</td>
+                <td>1 tablet at bedtime</td>
+                <td>Sep 27, 2026</td>
+                <td><span class="badge-status badge-confirmed">Transmitted</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 7: PATIENT REVIEWS & TESTIMONIALS
+           ==================================================================== -->
+      <section class="dash-view" id="view-reviews">
+        <div class="dash-box">
+          <div class="box-head">
+            <h2 class="box-title">Verified Patient Reviews for Dr. Ahmed Khan</h2>
+          </div>
+          <div class="rev-row">
+            <div class="rev-head">
+              <div class="rev-user">
+                <div class="rev-avatar">SJ</div>
+                <span>Sarah Johnson</span>
+              </div>
+              <div class="rev-stars">★★★★★</div>
+            </div>
+            <p class="rev-text">"Dr. Ahmed Khan is exceptionally thorough, gentle, and transparent. He answered all our questions regarding our IVF treatment plan."</p>
+            <div class="rev-time">Yesterday • Verified Review</div>
+          </div>
+          <div class="rev-row">
+            <div class="rev-head">
+              <div class="rev-user">
+                <div class="rev-avatar">MB</div>
+                <span>Michael Brown</span>
+              </div>
+              <div class="rev-stars">★★★★★</div>
+            </div>
+            <p class="rev-text">"Best consultant cardiologist in Dubai. Outstanding bedside manner and precise diagnostic workup."</p>
+            <div class="rev-time">2 days ago • Verified Review</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 8: TARIFFS & PAYOUTS
+           ==================================================================== -->
+      <section class="dash-view" id="view-tariffs">
+        <div class="dash-box" style="max-width:750px">
+          <div class="box-head">
+            <h2 class="box-title">Consultation Tariffs & Bank Payout Ledger</h2>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openDoctorModal('tariffModal')">Update Tariffs</button>
+          </div>
+          <div class="form-grid-2" style="margin-bottom:20px">
+            <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--dash-border)">
+              <div style="font-size:11px;font-weight:750;color:var(--dash-sub)">In-Clinic Tariff</div>
+              <div style="font-size:22px;font-weight:900;color:var(--dash-text)">AED 500</div>
+            </div>
+            <div style="background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--dash-border)">
+              <div style="font-size:11px;font-weight:750;color:var(--dash-sub)">Video Telehealth Tariff</div>
+              <div style="font-size:22px;font-weight:900;color:var(--dash-text)">AED 350</div>
+            </div>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Payout Batch</th>
+                <th>Period</th>
+                <th>Consultations</th>
+                <th>Net Amount (AED)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#PAY-2291</td>
+                <td>Sep 15 - Sep 22</td>
+                <td>28 Consults</td>
+                <td>AED 12,450</td>
+                <td><span class="badge-status badge-confirmed">Deposited</span></td>
+              </tr>
+              <tr>
+                <td>#PAY-2290</td>
+                <td>Sep 08 - Sep 15</td>
+                <td>32 Consults</td>
+                <td>AED 14,250</td>
+                <td><span class="badge-status badge-confirmed">Deposited</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           VIEW 9: MEDICAL ARTICLES & GUIDES
+           ==================================================================== -->
+      <section class="dash-view" id="view-articles">
+        <div class="dash-box">
+          <div class="box-head">
+            <h2 class="box-title">Published Medical Articles & Clinical Guides</h2>
+            <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Editor opened for new medical guide')">+ Write Article</button>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
                 <th>Article Title</th>
+                <th>Target Category</th>
+                <th>Published Date</th>
+                <th>Patient Reads</th>
                 <th>Status</th>
-                <th>Reads</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><b>AMH Levels & Ovarian Reserve in 2026</b></td>
-                <td><span class="badge-status badge-confirmed">Published</span></td>
-                <td>1,420</td>
+                <td>Reproductive Medicine</td>
+                <td>Sep 15, 2026</td>
+                <td>1,420 Readers</td>
+                <td><span class="badge-status badge-confirmed">Live in Hub</span></td>
               </tr>
               <tr>
                 <td><b>Managing Male Factor Infertility in Dubai</b></td>
-                <td><span class="badge-status badge-confirmed">Published</span></td>
-                <td>980</td>
-              </tr>
-              <tr>
-                <td><b>Dietary Protocols for PCOS Management</b></td>
-                <td><span class="badge-status badge-confirmed">Published</span></td>
-                <td>2,150</td>
-              </tr>
-              <tr>
-                <td><b>Cardiovascular Safety During Pregnancy</b></td>
-                <td><span class="badge-status badge-confirmed">Published</span></td>
-                <td>740</td>
+                <td>Urology & Andrology</td>
+                <td>Aug 28, 2026</td>
+                <td>980 Readers</td>
+                <td><span class="badge-status badge-confirmed">Live in Hub</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
 
-        <!-- Panel 3: Quick Actions -->
-        <div class="dash-box">
+      <!-- ====================================================================
+           VIEW 10: PRACTICE SETTINGS
+           ==================================================================== -->
+      <section class="dash-view" id="view-settings">
+        <div class="dash-box" style="max-width:750px">
           <div class="box-head">
-            <h2 class="box-title">Doctor Quick Actions</h2>
+            <h2 class="box-title">Practice Settings & Alert Preferences</h2>
           </div>
-          <div class="actions-grid">
-            <button type="button" class="action-btn-tile" onclick="openDoctorModal('newPatientModal')">
-              <span class="action-ico">👤</span>
-              <span>New Patient Case</span>
-            </button>
-            <button type="button" class="action-btn-tile" onclick="launchTelehealthCall('Next Patient')">
-              <span class="action-ico">📹</span>
-              <span>Launch Telehealth</span>
-            </button>
-            <button type="button" class="action-btn-tile" onclick="openDoctorModal('slotsModal')">
-              <span class="action-ico">📅</span>
-              <span>Set Working Slots</span>
-            </button>
-            <button type="button" class="action-btn-tile" onclick="openDoctorModal('tariffModal')">
-              <span class="action-ico">💳</span>
-              <span>Update Tariff Fee</span>
-            </button>
-            <button type="button" class="action-btn-tile" onclick="openDoctorModal('newRxModal')">
-              <span class="action-ico">💊</span>
-              <span>Prescribe Rx / Lab</span>
-            </button>
-            <button type="button" class="action-btn-tile" onclick="openDoctorModal('dhaModal')">
-              <span class="action-ico">🏥</span>
-              <span>DHA License Sync</span>
-            </button>
-          </div>
+          <form onsubmit="handleFormSubmit(event, 'Practice settings saved')">
+            <div class="form-grid-2">
+              <input type="text" class="input-field" name="booking_notice" placeholder="Minimum Booking Notice" value="2 Hours Notice" required>
+              <input type="text" class="input-field" name="daily_limit" placeholder="Max Consults Daily" value="16 Patients" required>
+            </div>
+            <div style="margin-top:14px">
+              <input type="tel" class="input-field" name="sms_number" placeholder="Mobile Number" value="+971 50 112 3344" required>
+            </div>
+            <div style="margin-top:18px">
+              <button type="submit" class="btn btn-primary" style="padding:10px 20px">Save Settings →</button>
+            </div>
+          </form>
         </div>
-      </div>
+      </section>
 
     </div>
   </main>
@@ -1445,10 +1695,10 @@
       </div>
       <form onsubmit="handleFormSubmit(event, 'Clinical patient record saved to directory database')">
         <div class="ff-modal-body">
-          <input type="text" name="patient_name" placeholder="Patient Full Name" required>
-          <input type="text" name="emirates_id" placeholder="Emirates ID Number" required>
-          <input type="tel" name="patient_phone" placeholder="Patient Mobile Number" required>
-          <select name="clinical_condition">
+          <input type="text" class="input-field" name="patient_name" placeholder="Patient Full Name" required>
+          <input type="text" class="input-field" name="emirates_id" placeholder="Emirates ID Number" required>
+          <input type="tel" class="input-field" name="patient_phone" placeholder="Patient Mobile Number" required>
+          <select class="input-field" name="clinical_condition">
             <option>Select Chief Condition</option>
             <option>Infertility & IVF Candidate</option>
             <option>PCOS & Ovulatory Dysfunction</option>
@@ -1456,7 +1706,7 @@
             <option>Male Factor Infertility</option>
             <option>Cardiovascular Consultation</option>
           </select>
-          <textarea name="clinical_notes" placeholder="Initial clinical findings" rows="3"></textarea>
+          <textarea class="input-field" name="clinical_notes" placeholder="Initial clinical findings" rows="3"></textarea>
         </div>
         <div class="ff-modal-footer">
           <button type="button" class="btn btn-outline btn-sm" onclick="closeDoctorModal('newPatientModal')">Cancel</button>
@@ -1475,15 +1725,15 @@
       </div>
       <form onsubmit="handleFormSubmit(event, 'Prescription and Lab Order transmitted to patient portal')">
         <div class="ff-modal-body">
-          <input type="text" name="patient_target" placeholder="Patient Name" required>
-          <select name="order_type">
+          <input type="text" class="input-field" name="patient_target" placeholder="Patient Name" required>
+          <select class="input-field" name="order_type">
             <option>Prescription Medication</option>
             <option>Diagnostic Laboratory Test</option>
             <option>Ultrasound Imaging Order</option>
             <option>Semen Analysis Request</option>
           </select>
-          <input type="text" name="medication_item" placeholder="Medication or Test" required>
-          <textarea name="dosage_instructions" placeholder="Dosage and instructions" rows="3" required></textarea>
+          <input type="text" class="input-field" name="medication_item" placeholder="Medication or Test" required>
+          <textarea class="input-field" name="dosage_instructions" placeholder="Dosage and instructions" rows="3" required></textarea>
         </div>
         <div class="ff-modal-footer">
           <button type="button" class="btn btn-outline btn-sm" onclick="closeDoctorModal('newRxModal')">Cancel</button>
@@ -1502,13 +1752,9 @@
       </div>
       <form onsubmit="handleFormSubmit(event, 'Consultation tariffs updated live on directory profile')">
         <div class="ff-modal-body">
-          <input type="number" name="in_clinic_fee" placeholder="In-Clinic Fee (AED)" value="500" required>
-          <input type="number" name="video_consult_fee" placeholder="Video Telehealth Fee" value="350" required>
-          <input type="number" name="followup_fee" placeholder="Follow-up Fee (AED)" value="250" required>
-          <select name="payout_frequency">
-            <option>Weekly Direct Bank Deposit</option>
-            <option>Monthly Automated Payout</option>
-          </select>
+          <input type="number" class="input-field" name="in_clinic_fee" placeholder="In-Clinic Fee (AED)" value="500" required>
+          <input type="number" class="input-field" name="video_consult_fee" placeholder="Video Telehealth Fee" value="350" required>
+          <input type="number" class="input-field" name="followup_fee" placeholder="Follow-up Fee (AED)" value="250" required>
         </div>
         <div class="ff-modal-footer">
           <button type="button" class="btn btn-outline btn-sm" onclick="closeDoctorModal('tariffModal')">Cancel</button>
@@ -1527,16 +1773,15 @@
       </div>
       <form onsubmit="handleFormSubmit(event, 'Clinical availability schedule saved')">
         <div class="ff-modal-body">
-          <select name="active_days">
+          <select class="input-field" name="active_days">
             <option>Monday - Friday (Full Time)</option>
             <option>Saturday - Wednesday</option>
             <option>Sunday - Thursday</option>
           </select>
-          <input type="text" name="hours_range" placeholder="Hours 09:00-18:00" value="09:00 AM - 06:00 PM" required>
-          <select name="slot_duration">
+          <input type="text" class="input-field" name="hours_range" placeholder="Hours 09:00-18:00" value="09:00 AM - 06:00 PM" required>
+          <select class="input-field" name="slot_duration">
             <option>30 Minutes per Consult</option>
             <option>45 Minutes per Consult</option>
-            <option>60 Minutes per Comprehensive Intake</option>
           </select>
         </div>
         <div class="ff-modal-footer">
@@ -1547,28 +1792,7 @@
     </div>
   </div>
 
-  <!-- Modal 5: DHA License Sync -->
-  <div class="ff-modal-overlay" id="dhaModal">
-    <div class="ff-modal-card">
-      <div class="ff-modal-header">
-        <h3>DHA Professional License Sync</h3>
-        <button type="button" class="icon-btn" onclick="closeDoctorModal('dhaModal')">✕</button>
-      </div>
-      <form onsubmit="handleFormSubmit(event, 'DHA License details synchronized with Sheryan registry')">
-        <div class="ff-modal-body">
-          <input type="text" name="dha_num" placeholder="DHA License DHA-P-0019284" value="DHA-P-0019284" required>
-          <input type="text" name="lic_title" placeholder="Title Consultant Physician" value="Consultant Reproductive Medicine" required>
-          <input type="date" name="expiry_date" value="2027-12-31" required>
-        </div>
-        <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closeDoctorModal('dhaModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm">Synchronize DHA →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal 6: Notifications Modal -->
+  <!-- Modal 5: Notifications Modal -->
   <div class="ff-modal-overlay" id="notifModal">
     <div class="ff-modal-card">
       <div class="ff-modal-header">
@@ -1585,9 +1809,6 @@
         <div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
           <b>⭐ 5.0 Star Review:</b> Sarah Johnson published a verified patient testimonial.
         </div>
-        <div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
-          <b>💳 Payout Processed:</b> AED 14,250 deposited to your Emirates NBD account.
-        </div>
       </div>
       <div class="ff-modal-footer">
         <button type="button" class="btn btn-primary btn-sm" onclick="closeDoctorModal('notifModal')">Mark All Read</button>
@@ -1599,6 +1820,22 @@
   <div id="docToast" style="position:fixed;bottom:24px;right:24px;background:#102244;color:#ffffff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;display:none;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,0.2)"></div>
 
   <script>
+    // Tab and Subview Switcher
+    function switchDoctorTab(viewName) {
+      document.querySelectorAll('.dash-view').forEach(v => v.classList.remove('active'));
+      const target = document.getElementById('view-' + viewName);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.classList.toggle('active', text.includes(viewName));
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function openDoctorModal(modalId) {
       const modal = document.getElementById(modalId);
       if (modal) modal.classList.add('active');
@@ -1625,14 +1862,6 @@
       showToast(successMsg);
     }
 
-    function switchDoctorTab(tab) {
-      showToast(`Navigating to ${tab.toUpperCase()} clinical module...`);
-    }
-
-    function launchTelehealthCall(patient) {
-      showToast(`Connecting secure encrypted telehealth session with ${patient}...`);
-    }
-
     function handleSearch(val) {
       if (val.length > 2) {
         showToast(`Searching clinical cases for: "${val}"`);
@@ -1640,9 +1869,7 @@
     }
 
     function handleDoctorLogout() {
-      if (confirm('Log out from Physician Specialist Portal?')) {
-        window.location.href = 'auth.html';
-      }
+      AuthGuard.logout('auth.html');
     }
   </script>
 </body>

@@ -107,6 +107,44 @@
         <h1 class="auth-page-title" id="pageAuthTitle">FertiFind Account</h1>
         <p class="auth-page-sub" id="pageAuthSub">Log in to manage appointments or list your healthcare practice</p>
 
+        <!-- Access Guard Callout (Shown when redirected by AuthGuard) -->
+        <div id="authNoticeBanner" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:#1e40af;line-height:1.5">
+          <div style="font-weight:800;display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <span>🔒 Protected Portal Access</span>
+            <span class="badge badge-primary" id="noticeRoleBadge" style="font-size:10px;text-transform:uppercase">Auth Guard</span>
+          </div>
+          <span id="noticeMsgText">Authentication is required to view this portal. Please log in with an authorized account below.</span>
+        </div>
+
+        <!-- 19 Registered Users Status Card -->
+        <div class="registry-summary-card" style="background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:12px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:6px">
+              <span>🛡️ Platform Authentication Registry</span>
+              <span class="badge badge-mint" style="font-size:10px">19 Verified</span>
+            </span>
+            <button type="button" onclick="toggleAccountsModal()" style="background:none;border:none;color:var(--blue);font-size:11px;font-weight:700;cursor:pointer;padding:0">All 19 Accounts ▾</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;font-size:11px">
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
+              <div style="font-weight:800;color:var(--blue);font-size:13px">1</div>
+              <div style="color:var(--muted);font-size:10px">👑 Admin</div>
+            </div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
+              <div style="font-weight:800;color:var(--blue);font-size:13px">6</div>
+              <div style="color:var(--muted);font-size:10px">🏥 Hospital</div>
+            </div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
+              <div style="font-weight:800;color:var(--blue);font-size:13px">7</div>
+              <div style="color:var(--muted);font-size:10px">🩺 Doctor</div>
+            </div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
+              <div style="font-weight:800;color:var(--blue);font-size:13px">5</div>
+              <div style="color:var(--muted);font-size:10px">👤 Patient</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Auth Tabs -->
         <div class="auth-tabs" style="justify-content:center">
           <button type="button" class="auth-tab active" id="tabLogin" onclick="switchPageTab('login')">Log In</button>
@@ -116,6 +154,9 @@
 
         <!-- View 1: Log In -->
         <div class="auth-view active" id="viewLogin">
+          <!-- Inline Error Box -->
+          <div id="loginErrorBox" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:12px;color:#dc2626;line-height:1.4;margin-bottom:12px"></div>
+
           <form class="ff-form" onsubmit="handleLogin(event)">
             <div>
               <input type="text" id="loginEmail" name="email" required placeholder="Email or Mobile">
@@ -132,14 +173,20 @@
               </div>
               <a href="javascript:void(0)" onclick="switchPageTab('forgot')" style="color:var(--blue);font-weight:700">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
+            <button type="submit" class="btn btn-primary" id="loginSubmitBtn" style="width:100%;padding:13px">Log In to Account →</button>
 
-            <div class="demo-auth-strip" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0">
-              <span style="font-size:11px;font-weight:750;color:var(--muted)">Quick 4-Role Access:</span>
-              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">👑 Super Admin</a>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('hospital')">🏥 Hospital & Clinic</button>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Doctor Specialist</button>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('patient')">👤 Patient Portal</button>
+            <!-- 1-Click Fast Role Sign-In (Authenticates with real credentials) -->
+            <div style="background:#f1f7ff;border:1px dashed #bfdbfe;border-radius:8px;padding:10px 12px;margin:16px 0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-size:11px;font-weight:800;color:var(--navy)">⚡ 1-Click Role Login:</span>
+                <span style="font-size:10px;color:var(--muted)">Signs in & sets auth session</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('admin')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">👑 Super Admin</button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('hospital')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">🏥 Hospital & Clinic</button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('doctor')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">🩺 Doctor Specialist</button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('patient')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">👤 Patient Portal</button>
+              </div>
             </div>
 
             <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
@@ -245,6 +292,41 @@
     </div>
   </main>
 
+  <!-- 19 Registered Accounts Interactive Modal -->
+  <div id="accountsModal" style="display:none;position:fixed;inset:0;background:rgba(16,34,68,0.55);z-index:9999;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#ffffff;border-radius:14px;max-width:620px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 48px rgba(0,0,0,0.2);overflow:hidden;border:1px solid var(--line)">
+      <div style="padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:#f8fafc">
+        <div>
+          <div style="font-size:16px;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:6px">
+            <span>🛡️ 19 Registered Platform Accounts</span>
+            <span class="badge badge-mint" style="font-size:10px">Live Database</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Click "Login As" on any role to immediately authenticate and access its portal</div>
+        </div>
+        <button type="button" onclick="toggleAccountsModal()" style="border:none;background:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1">×</button>
+      </div>
+
+      <!-- Role Filters -->
+      <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:6px;background:#ffffff;flex-wrap:wrap">
+        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('all')" id="modalFilter-all" style="border-radius:16px;background:#eef5ff;color:var(--blue);font-weight:800">All (19)</button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('admin')" id="modalFilter-admin" style="border-radius:16px">👑 Admin (1)</button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('hospital')" id="modalFilter-hospital" style="border-radius:16px">🏥 Hospitals (6)</button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('doctor')" id="modalFilter-doctor" style="border-radius:16px">🩺 Doctors (7)</button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('patient')" id="modalFilter-patient" style="border-radius:16px">👤 Patients (5)</button>
+      </div>
+
+      <!-- Accounts List Container -->
+      <div id="accountsListContainer" style="padding:14px 16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div style="padding:12px 18px;border-top:1px solid var(--line);background:#f8fafc;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;color:var(--muted)">All passwords follow standard secure convention (Role + 2026!)</span>
+        <button type="button" class="btn btn-outline btn-xs" onclick="toggleAccountsModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Unified Footer -->
   <footer>
     <div class="container">
@@ -317,6 +399,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
+  <script src="js/auth-guard.js"></script>
   <script src="js/site.js"></script>
   <script>
     function switchPageTab(tab) {
@@ -380,33 +463,188 @@
       }
     }
 
-    function handleLogin(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-      let role = 'patient';
-      let name = 'Sarah Johnson';
-      let targetUrl = 'dashboard-patient.html';
+    let currentModalFilter = 'all';
 
-      if (email.includes('admin')) {
-        role = 'admin';
-        name = 'Super Admin';
-        targetUrl = 'admin.html';
-      } else if (email.includes('hospital') || email.includes('clinic') || email.includes('facility')) {
-        role = 'hospital';
-        name = "King's College Hospital";
-        targetUrl = 'dashboard-hospital.html';
-      } else if (email.includes('dr') || email.includes('doctor') || email.includes('specialist')) {
-        role = 'doctor';
-        name = 'Dr. Ahmed Khan';
-        targetUrl = 'dashboard-doctor.html';
+    function toggleAccountsModal() {
+      const modal = document.getElementById('accountsModal');
+      if (!modal) return;
+      const isOpen = modal.style.display === 'flex';
+      modal.style.display = isOpen ? 'none' : 'flex';
+      if (!isOpen) {
+        renderModalAccounts(currentModalFilter);
       }
-
-      localStorage.setItem('ff_user', JSON.stringify({ name, email, role, loggedInAt: new Date().toISOString() }));
-      FertiFind.toast(`Welcome back, ${name}! Redirecting to ${role.toUpperCase()} dashboard...`);
-      setTimeout(() => { window.location.href = targetUrl; }, 800);
     }
 
-    function handleRegister(e) {
+    function filterModalAccounts(role) {
+      currentModalFilter = role;
+      ['all', 'admin', 'hospital', 'doctor', 'patient'].forEach(r => {
+        const btn = document.getElementById('modalFilter-' + r);
+        if (btn) {
+          if (r === role) {
+            btn.style.background = '#eef5ff';
+            btn.style.color = 'var(--blue)';
+            btn.style.fontWeight = '800';
+          } else {
+            btn.style.background = '#ffffff';
+            btn.style.color = 'var(--navy)';
+            btn.style.fontWeight = '600';
+          }
+        }
+      });
+      renderModalAccounts(role);
+    }
+
+    function renderModalAccounts(filterRole = 'all') {
+      const container = document.getElementById('accountsListContainer');
+      if (!container) return;
+      const users = window.AuthGuard ? window.AuthGuard.getUsers() : [];
+      const filtered = filterRole === 'all' 
+        ? users 
+        : users.filter(u => {
+            if (filterRole === 'hospital') return u.role === 'hospital' || u.role === 'clinic';
+            return u.role === filterRole;
+          });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px">No registered accounts in this category.</div>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(u => {
+        const roleIcon = u.role === 'admin' ? '👑' : (u.role === 'hospital' || u.role === 'clinic') ? '🏥' : u.role === 'doctor' ? '🩺' : '👤';
+        const roleBadge = u.role === 'admin' ? 'badge-primary' : (u.role === 'hospital' || u.role === 'clinic') ? 'badge-blue' : u.role === 'doctor' ? 'badge-mint' : 'badge-slate';
+        const metaText = u.facility || u.specialty || (u.dhaId ? 'DHA: ' + u.dhaId : 'Verified Account');
+
+        html += `
+          <div style="background:#ffffff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px">
+            <div style="min-width:0;flex:1">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <span style="font-size:13px;font-weight:800;color:var(--navy)">${roleIcon} ${u.name}</span>
+                <span class="badge ${roleBadge}" style="font-size:10px;text-transform:uppercase">${u.role}</span>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span>${metaText}</span> • <span style="color:var(--navy);font-family:monospace">${u.email}</span>
+              </div>
+              <div style="font-size:11px;color:#0284c7;font-family:monospace;margin-top:2px">
+                Pass: <b>${u.password || '••••••••'}</b>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline btn-xs" onclick="selectAccountAndLogin('${u.email}', '${u.password || ''}')" style="white-space:nowrap;padding:6px 12px;font-weight:800">
+              Login As →
+            </button>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function selectAccountAndLogin(email, pass) {
+      toggleAccountsModal();
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPass').value = pass;
+      processLogin(email, pass);
+    }
+
+    function quickFillAndLogin(role) {
+      let email = '';
+      let pass = '';
+      if (role === 'admin') {
+        email = 'admin@dubaidoctorsdirectory.ae';
+        pass = 'Admin2026!';
+      } else if (role === 'hospital') {
+        email = 'admin@kingscollegehospital.ae';
+        pass = 'Hospital2026!';
+      } else if (role === 'doctor') {
+        email = 'dr.ahmed.khan@ahdubai.com';
+        pass = 'Doctor2026!';
+      } else if (role === 'patient') {
+        email = 'sarah.johnson@example.ae';
+        pass = 'Patient2026!';
+      }
+
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginPass').value = pass;
+      processLogin(email, pass);
+    }
+
+    async function processLogin(email, password) {
+      const errBox = document.getElementById('loginErrorBox');
+      const submitBtn = document.getElementById('loginSubmitBtn');
+      if (errBox) {
+        errBox.style.display = 'none';
+        errBox.textContent = '';
+      }
+
+      if (!window.AuthGuard) {
+        alert('Authentication system initializing. Please refresh and try again.');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying Credentials...';
+      }
+
+      const res = await window.AuthGuard.login(email, password);
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Log In to Account →';
+      }
+
+      if (!res.success) {
+        if (errBox) {
+          errBox.innerHTML = `<b>Access Denied:</b> ${res.error}`;
+          errBox.style.display = 'block';
+        } else {
+          alert('Access Denied: ' + res.error);
+        }
+        return false;
+      }
+
+      // Successful authentication
+      const user = res.user;
+      if (window.FertiFind && FertiFind.toast) {
+        FertiFind.toast(`Authenticated as ${user.name} (${user.role.toUpperCase()})! Redirecting...`);
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+
+      let targetUrl = 'dashboard-patient.html';
+      if (user.role === 'admin') {
+        targetUrl = 'admin.html';
+      } else if (user.role === 'hospital' || user.role === 'clinic') {
+        targetUrl = 'dashboard-hospital.html';
+      } else if (user.role === 'doctor') {
+        targetUrl = 'dashboard-doctor.html';
+      } else if (user.role === 'patient') {
+        targetUrl = 'dashboard-patient.html';
+      }
+
+      // If user came from a protected link and their role matches, return them there
+      if (redirect) {
+        if (redirect.includes('admin') && user.role === 'admin') targetUrl = redirect;
+        else if (redirect.includes('hospital') && (user.role === 'hospital' || user.role === 'clinic' || user.role === 'admin')) targetUrl = redirect;
+        else if (redirect.includes('doctor') && (user.role === 'doctor' || user.role === 'admin')) targetUrl = redirect;
+        else if (redirect.includes('patient') && (user.role === 'patient' || user.role === 'admin')) targetUrl = redirect;
+      }
+
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 500);
+      return true;
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      processLogin(email, pass);
+    }
+
+    async function handleRegister(e) {
       e.preventDefault();
       const name = document.getElementById('pRegName').value.trim();
       const email = document.getElementById('pRegEmail').value.trim();
@@ -420,79 +658,109 @@
         return;
       }
 
-      const userData = { name, email, mobile, role, registeredAt: new Date().toISOString() };
-      if (window.FertiFirebase) {
-        FertiFirebase.registerUser(userData);
+      if (!window.AuthGuard) {
+        alert('Authentication system unavailable. Please refresh.');
+        return;
       }
-      localStorage.setItem('ff_user', JSON.stringify(userData));
+
+      const submitBtn = document.getElementById('pRegSubmitBtn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Registering Account...';
+      }
+
+      const res = await window.AuthGuard.register({
+        name: name,
+        email: email,
+        phone: mobile,
+        role: role,
+        password: pass
+      });
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account →';
+      }
+
+      if (!res.success) {
+        alert('Registration Error: ' + res.error);
+        return;
+      }
+
+      if (window.FertiFirebase) {
+        FertiFirebase.registerUser(res.user);
+      }
 
       if (role === 'doctor') {
-        FertiFind.toast(`Doctor account created for ${name}! Please complete credential submission.`, 4000);
+        if (window.FertiFind && FertiFind.toast) {
+          FertiFind.toast(`Doctor account created for ${name}! Please complete credential submission.`, 4000);
+        }
         setTimeout(() => {
           window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=doctor&mobile=${encodeURIComponent(mobile)}`;
-        }, 800);
+        }, 600);
       } else if (role === 'clinic' || role === 'hospital') {
-        FertiFind.toast(`Facility account created for ${name}! Please submit facility licensure.`, 4000);
+        if (window.FertiFind && FertiFind.toast) {
+          FertiFind.toast(`Facility account created for ${name}! Please submit facility licensure.`, 4000);
+        }
         setTimeout(() => {
           window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=clinic&mobile=${encodeURIComponent(mobile)}`;
-        }, 800);
+        }, 600);
       } else {
-        FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
-        setTimeout(() => { window.location.href = 'dashboard-patient.html'; }, 800);
+        if (window.FertiFind && FertiFind.toast) {
+          FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
+        }
+        setTimeout(() => { 
+          window.location.href = 'dashboard-patient.html'; 
+        }, 600);
       }
     }
 
     function handleForgot(e) {
       e.preventDefault();
       const contact = document.getElementById('forgotContact').value.trim();
-      FertiFind.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
-    }
-
-    function demoLogin(role) {
-      if (role === 'hospital') {
-        const user = {
-          name: "King's College Hospital Dubai",
-          email: 'admin@kingscollegehospital.ae',
-          role: 'hospital',
-          facility: "King's College Hospital (Dubai Hills & Marina)",
-          loggedInAt: new Date().toISOString()
-        };
-        localStorage.setItem('ff_user', JSON.stringify(user));
-        FertiFind.toast(`Signed in as King's College Hospital (Facility Director)`);
-        setTimeout(() => { window.location.href = 'dashboard-hospital.html'; }, 600);
-      } else if (role === 'doctor') {
-        const user = {
-          name: 'Dr. Ahmed Khan',
-          email: 'dr.ahmed.khan@kingscollegehospital.ae',
-          role: 'doctor',
-          facility: 'King\'s College Hospital & Dubai Hills Clinic',
-          loggedInAt: new Date().toISOString()
-        };
-        localStorage.setItem('ff_user', JSON.stringify(user));
-        FertiFind.toast(`Signed in as Dr. Ahmed Khan (Consultant Specialist)`);
-        setTimeout(() => { window.location.href = 'dashboard-doctor.html'; }, 600);
-      } else if (role === 'patient') {
-        const user = {
-          name: 'Sarah Johnson',
-          email: 'sarah.johnson@example.ae',
-          role: 'patient',
-          dhaId: 'DXB-PAT-881920',
-          loggedInAt: new Date().toISOString()
-        };
-        localStorage.setItem('ff_user', JSON.stringify(user));
-        FertiFind.toast(`Signed in as Sarah Johnson (Verified Patient)`);
-        setTimeout(() => { window.location.href = 'dashboard-patient.html'; }, 600);
-      } else if (role === 'admin') {
-        window.location.href = 'admin.html';
+      if (window.FertiFind && FertiFind.toast) {
+        FertiFind.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
+      } else {
+        alert(`Password reset code sent to ${contact}.`);
       }
     }
 
-    // Hash router
+    function demoLogin(role) {
+      quickFillAndLogin(role);
+    }
+
+    // Page Initialization & Auth Guard Query Inspector
     window.addEventListener('DOMContentLoaded', () => {
+      // 1. Check for URL redirect parameters
+      const params = new URLSearchParams(window.location.search);
+      const isError = params.get('error') === 'unauthenticated';
+      const requiredRole = params.get('required_role');
+      const redirect = params.get('redirect');
+
+      if (isError) {
+        const banner = document.getElementById('authNoticeBanner');
+        const badge = document.getElementById('noticeRoleBadge');
+        const text = document.getElementById('noticeMsgText');
+        if (banner) {
+          banner.style.display = 'block';
+          if (requiredRole) {
+            badge.textContent = requiredRole.toUpperCase() + ' REQUIRED';
+            text.innerHTML = `You attempted to access a protected portal. Please log in with a verified <b>${requiredRole.toUpperCase()}</b> account to continue.`;
+          } else {
+            badge.textContent = 'AUTH REQUIRED';
+            text.innerHTML = `You must be logged in with an authorized account to access that section.`;
+          }
+        }
+      }
+
+      // 2. Hash router for tabs
       const hash = window.location.hash.replace('#', '');
       if (hash === 'register' || hash === 'forgot' || hash === 'login') {
         switchPageTab(hash);
       }
+
+      // 3. Pre-render modal accounts list
+      renderModalAccounts('all');
     });
   </script>
 </body>
