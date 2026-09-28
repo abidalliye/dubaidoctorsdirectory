@@ -77,9 +77,11 @@ button {
    Top Notification Bar
    ========================================================================== */
 .topbar, .top {
-  background: var(--navy);
-  color: #dce8ff;
-  font-size: 13px;
+  background: #fbf5e6;
+  color: #5c4308;
+  border-bottom: 1px solid #e8d7ad;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .topbar .container, .top .container {
@@ -379,24 +381,25 @@ nav.main-nav a.active::after {
 .cta {
   border-radius: var(--radius-lg);
   padding: 44px;
-  background: linear-gradient(135deg, #0c3c98, #0757d9 58%, #11a99f);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #fbf5e6 50%, #f7f3ec 100%);
+  border: 1px solid #e8d7ad;
+  color: #1a2736;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 28px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 10px 30px rgba(184, 134, 11, 0.08);
 }
 
 .cta h2 {
   margin: 0 0 8px;
   font-size: clamp(24px, 2.8vw, 34px);
-  color: #ffffff;
+  color: #1a2736;
 }
 
 .cta p {
   margin: 0;
-  color: #dce9ff;
+  color: #5c6b7d;
   max-width: 680px;
   font-size: 15px;
 }
@@ -621,11 +624,12 @@ nav.main-nav a.active::after {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: var(--navy);
-  color: #ffffff;
+  background: #ffffff;
+  color: #1a2736;
+  border: 1px solid #e8d7ad;
   padding: 14px 20px;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 14px 40px rgba(184, 134, 11, 0.16);
   display: none;
   z-index: 2000;
   font-size: 13px;
@@ -645,11 +649,12 @@ nav.main-nav a.active::after {
 }
 
 /* ==========================================================================
-   Footer (Original Dark Navy)
+   Footer (Clean Luxury Light Mode: Warm Desert Sand & Gold)
    ========================================================================== */
 footer {
-  background: var(--navy-dark);
-  color: #b8c9e5;
+  background: #f7f3ec;
+  color: #5c6b7d;
+  border-top: 1px solid #ede4d3;
   padding: 55px 0 25px;
 }
 
@@ -660,7 +665,7 @@ footer {
 }
 
 .footer-title {
-  color: #ffffff;
+  color: #1a2736;
   font-weight: 900;
   margin-bottom: 14px;
   font-size: 14px;
@@ -673,20 +678,20 @@ footer {
 }
 
 .footer-links a {
-  color: #b8c9e5;
+  color: #5c6b7d;
 }
 
 .footer-links a:hover {
-  color: #ffffff;
+  color: #b8860b;
   transform: translateX(2px);
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid #ede4d3;
   margin-top: 38px;
   padding-top: 18px;
   font-size: 12px;
-  color: #8da5cb;
+  color: #7a8b9e;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -700,13 +705,13 @@ footer {
   gap: 6px;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-top: 1px dashed #ede4d3;
 }
 
 .footer-areas-strip span {
   font-size: 11px;
   font-weight: 800;
-  color: #ffffff;
+  color: #1a2736;
   margin-right: 6px;
   display: flex;
   align-items: center;
@@ -715,10 +720,16 @@ footer {
 .footer-areas-strip a {
   font-size: 11px;
   padding: 4px 9px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #ffffff;
+  border: 1px solid #ede4d3;
   border-radius: 6px;
-  color: #d2e1f8;
+  color: #5c6b7d;
+}
+
+.footer-areas-strip a:hover {
+  color: #b8860b;
+  border-color: #b8860b;
+  background: #fdfbf7;
 }
 
 .footer-areas-strip a:hover {

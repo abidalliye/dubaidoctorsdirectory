@@ -19,7 +19,7 @@
           <div class="ff-modal-head">
             <div>
               <h3 id="ffBookingTitle" style="color:var(--navy);font-size:20px;margin:0">Book an Appointment</h3>
-              <p id="ffBookingSubtitle" style="color:var(--muted);font-size:13px;margin:4px 0 0">Verified fertility care navigation across Dubai</p>
+              <p id="ffBookingSubtitle" style="color:var(--muted);font-size:13px;margin:4px 0 0">Verified doctors, hospitals, clinics & labs across Dubai</p>
             </div>
             <button class="ff-close" onclick="FertiFind.closeModal('ffBookingModal')" aria-label="Close">✕</button>
           </div>
@@ -29,12 +29,14 @@
             </div>
             <div>
               <select id="ffBookingService" name="service" required>
-                <option value="Initial IVF / Fertility Consultation">Initial IVF Consultation</option>
-                <option value="Video / Zoom Tele-Consultation">Video Tele-Consultation</option>
-                <option value="Semen Analysis & Andrology">Semen Analysis</option>
-                <option value="AMH & Reproductive Hormone Blood Panel">Hormone Blood Panel</option>
-                <option value="Egg Freezing Assessment">Egg Freezing Assessment</option>
-                <option value="Home Sample Phlebotomy Collection">Home Phlebotomy</option>
+                <option value="Doctor In-Clinic Consultation">Doctor In-Clinic Consultation</option>
+                <option value="Video Tele-Consultation">Video Tele-Consultation</option>
+                <option value="Hospital Specialist Visit">Hospital Specialist Visit</option>
+                <option value="Surgical Evaluation Consultation">Surgical Evaluation</option>
+                <option value="Diagnostic Lab Blood Test">Diagnostic Lab Test</option>
+                <option value="Home Sample Phlebotomy">Home Sample Phlebotomy</option>
+                <option value="Physiotherapy Rehab Session">Physiotherapy Session</option>
+                <option value="IVF Fertility Consultation">IVF Fertility Consultation</option>
               </select>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -97,11 +99,13 @@
               </div>
               <div>
                 <select id="ffReviewTreatment" name="treatment">
-                  <option value="IVF / ICSI Treatment">IVF Treatment</option>
-                  <option value="Fertility Assessment Consultation">Fertility Consultation</option>
-                  <option value="Semen Analysis / Andrology">Semen Analysis</option>
-                  <option value="Egg Freezing Preservation">Egg Freezing</option>
-                  <option value="Diagnostic Blood Tests">Blood Tests</option>
+                  <option value="Doctor Specialist Consultation">Specialist Doctor Consultation</option>
+                  <option value="Video Tele-Consultation">Video Tele-Consultation</option>
+                  <option value="Hospital Clinical Care">Hospital Clinical Care</option>
+                  <option value="Diagnostic Laboratory Test">Diagnostic Lab Test</option>
+                  <option value="Surgical Procedure Care">Surgical Procedure Care</option>
+                  <option value="Physiotherapy Allied Health">Physiotherapy Allied Health</option>
+                  <option value="IVF Reproductive Medicine">IVF Reproductive Medicine</option>
                 </select>
               </div>
             </div>
@@ -123,7 +127,7 @@
           <div class="ff-modal-head">
             <div>
               <h3 style="color:var(--navy);font-size:20px;margin:0">List or Claim Your Practice</h3>
-              <p style="color:var(--muted);font-size:13px;margin:4px 0 0">Join Dubai's verified fertility & reproductive care directory</p>
+              <p style="color:var(--muted);font-size:13px;margin:4px 0 0">Join Dubai's verified doctors, hospitals, clinics & labs directory</p>
             </div>
             <button class="ff-close" onclick="FertiFind.closeModal('ffListBusinessModal')" aria-label="Close">✕</button>
           </div>
@@ -134,10 +138,12 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <select id="ffListType" name="provider_type" required>
-                  <option value="Clinic">Fertility Clinic</option>
-                  <option value="Doctor">Consultant Specialist</option>
-                  <option value="Hospital">Specialty Hospital</option>
-                  <option value="Diagnostic Lab">Genetics Laboratory</option>
+                  <option value="Doctor">Doctor / Specialist</option>
+                  <option value="Hospital">Hospital / Medical Center</option>
+                  <option value="Clinic">Clinic / Polyclinic</option>
+                  <option value="Diagnostic Lab">Diagnostic Lab / Imaging</option>
+                  <option value="Technician">Technician / Allied Health</option>
+                  <option value="Surgeon">Surgical Center / Surgeon</option>
                 </select>
               </div>
               <div>
@@ -843,8 +849,16 @@
         e.preventDefault();
         const card = document.getElementById('heroSearch');
         const q = card.querySelector('input') ? card.querySelector('input').value : '';
-        const area = card.querySelector('select') ? card.querySelector('select').value : 'all';
-        window.location.href = `fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(q)}&area=${encodeURIComponent(area)}`;
+        const selects = card.querySelectorAll('select');
+        let typeParam = 'all';
+        let area = 'all';
+        if (selects.length >= 2) {
+          typeParam = selects[0].value;
+          area = selects[1].value;
+        } else if (selects.length === 1) {
+          area = selects[0].value;
+        }
+        window.location.href = `fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(q)}&type=${encodeURIComponent(typeParam)}&area=${encodeURIComponent(area)}`;
       });
     }
 
@@ -860,11 +874,15 @@
         const area = selects[1] ? selects[1].value : 'all';
 
         let typeParam = 'all';
-        if (type.toLowerCase().includes('doctor')) typeParam = 'doctor';
-        else if (type.toLowerCase().includes('clinic')) typeParam = 'clinic';
-        else if (type.toLowerCase().includes('hospital')) typeParam = 'hospital';
-        else if (type.toLowerCase().includes('diagnostic') || type.toLowerCase().includes('lab')) typeParam = 'lab';
-        else if (type.toLowerCase().includes('home')) typeParam = 'home';
+        const typeLower = type.toLowerCase();
+        if (typeLower.includes('doctor')) typeParam = 'doctor';
+        else if (typeLower.includes('hospital')) typeParam = 'hospital';
+        else if (typeLower.includes('clinic')) typeParam = 'clinic';
+        else if (typeLower.includes('diagnostic') || typeLower.includes('lab')) typeParam = 'lab';
+        else if (typeLower.includes('technician') || typeLower.includes('allied')) typeParam = 'technician';
+        else if (typeLower.includes('surgeon')) typeParam = 'surgeon';
+        else if (typeLower.includes('video')) typeParam = 'video';
+        else if (typeLower.includes('home')) typeParam = 'home';
 
         window.location.href = `fertifind_dubai_directory_search_page.html?q=${encodeURIComponent(q)}&type=${encodeURIComponent(typeParam)}&area=${encodeURIComponent(area)}`;
       });
