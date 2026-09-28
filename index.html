@@ -3,35 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dubai Doctors Directory | Find Doctors, Hospitals, Clinics & Labs in Dubai</title>
+  <title>Find Doctor Dubai | Verified Doctors, Hospitals, Clinics & Diagnostic Labs</title>
   <meta name="description" content="Discover verified doctors, top hospitals, clinics, diagnostic labs, surgeons, and healthcare technicians across Dubai. Instant appointment booking, video consultations, transparent prices, and patient reviews.">
-  <meta name="theme-color" content="#b8860b">
+  <meta name="theme-color" content="#0757d9">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Clean Luxury Light Mode Theme Variables */
-    :root {
-      --gold-primary: #b8860b;
-      --gold-light: #fbf5e6;
-      --gold-border: #e8d7ad;
-      --sand-bg: #fdfbf7;
-      --sand-card: #f7f3ec;
-      --sand-border: #ede4d3;
-      --cream: #faf6f0;
-      --copper: #c87d55;
-      --ink: #1a2736;
-      --ink-muted: #5c6b7d;
-    }
-
-    body {
-      background-color: var(--sand-bg);
-      color: var(--ink);
-    }
-
-    /* Hero Section (Warm Desert Sand & Subtle Gold Gradient) */
+    /* Hero Section (Original FertiFind Blue/Teal Gradient) */
     .hero {
       padding: 60px 0 45px;
-      background: linear-gradient(180deg, #fdfbf7 0%, #faf6f0 55%, #f7f3ec 100%);
-      border-bottom: 1px solid var(--sand-border);
+      background: radial-gradient(circle at 90% 10%, #dff5ff 0, transparent 35%),
+                  linear-gradient(135deg, #eef5ff 0%, #ffffff 55%, #eafbf8 100%);
+      border-bottom: 1px solid var(--line);
     }
     .hero-grid {
       display: grid;
@@ -43,64 +25,72 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--gold-primary);
+      color: var(--teal);
       font-size: 12px;
       font-weight: 850;
       letter-spacing: .06em;
       text-transform: uppercase;
-      background: var(--gold-light);
-      border: 1px solid var(--gold-border);
+      background: var(--mint);
+      border: 1px solid #c2ede7;
       padding: 5px 14px;
       border-radius: 99px;
     }
     h1 {
-      font-size: clamp(34px, 4.4vw, 56px);
+      font-size: clamp(34px, 4.2vw, 54px);
       line-height: 1.1;
       letter-spacing: -.03em;
       margin: 16px 0 16px;
-      color: var(--ink);
+      color: var(--navy);
       font-weight: 900;
     }
     h1 span {
-      color: var(--gold-primary);
+      color: var(--blue);
     }
     .hero-copy {
       font-size: 16px;
-      color: var(--ink-muted);
+      color: #556682;
       max-width: 620px;
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
     }
 
-    /* Hero Multi-Parameter Search Card */
+    /* Hero Search Card */
     .search-card-hero {
       background: #ffffff;
-      border: 1px solid var(--gold-border);
-      border-radius: 18px;
-      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px;
       display: grid;
       grid-template-columns: 1.4fr 1fr 1fr auto;
       gap: 10px;
-      box-shadow: 0 12px 35px rgba(184, 134, 11, 0.08);
+      box-shadow: var(--shadow);
       max-width: 820px;
     }
     .search-card-hero input, .search-card-hero select {
-      border: 1px solid var(--sand-border);
+      border: 1px solid var(--line-light);
       outline: none;
-      background: #ffffff;
+      background: #f8fbff;
       border-radius: 10px;
       padding: 12px 14px;
       font: inherit;
       color: var(--ink);
       font-size: 13px;
       transition: border-color 0.2s;
+      min-width: 0;
     }
     .search-card-hero input:focus, .search-card-hero select:focus {
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(7, 87, 217, 0.12);
+      background: #ffffff;
     }
     .btn-search {
-      background: linear-gradient(135deg, var(--gold-primary) 0%, #9e7308 100%);
+      background: linear-gradient(135deg, var(--blue) 0%, #0645ad 100%);
       color: #ffffff;
       font-weight: 850;
       border: none;
@@ -112,23 +102,24 @@
       align-items: center;
       gap: 6px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .btn-search:hover {
-      box-shadow: 0 4px 14px rgba(184, 134, 11, 0.3);
+      box-shadow: 0 4px 14px rgba(7, 87, 217, 0.3);
       transform: translateY(-1px);
     }
 
     .trust-row {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       flex-wrap: wrap;
-      margin-top: 20px;
-      color: var(--ink-muted);
+      margin-top: 18px;
+      color: #556682;
       font-size: 12px;
       font-weight: 750;
     }
     .trust-row b {
-      color: var(--ink);
+      color: var(--navy);
     }
 
     /* Hero Visual Card */
@@ -136,427 +127,409 @@
       position: relative;
     }
     .hero-photo {
-      height: 440px;
+      height: 420px;
       border-radius: 28px;
-      background: linear-gradient(135deg, rgba(184, 134, 11, 0.08), rgba(200, 125, 85, 0.12)), url("https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=85") center/cover;
-      box-shadow: 0 20px 50px rgba(184, 134, 11, 0.12);
+      background: linear-gradient(135deg, rgba(7, 87, 217, 0.08), rgba(22, 185, 173, 0.12)),
+                  url("https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=85") center/cover;
+      box-shadow: var(--shadow-lg);
       border: 2px solid #ffffff;
     }
     .float-card-hero {
       position: absolute;
       background: #ffffff;
-      border: 1px solid var(--gold-border);
+      border: 1px solid var(--line);
       border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(184, 134, 11, 0.12);
+      box-shadow: var(--shadow);
       padding: 12px 16px;
+      z-index: 2;
     }
-    .float-card-hero.one { left: -20px; bottom: 30px; }
-    .float-card-hero.two { right: -16px; top: 30px; }
-    .float-title { font-size: 11px; color: var(--ink-muted); font-weight: 750; text-transform: uppercase; }
-    .float-value { font-size: 17px; font-weight: 900; color: var(--gold-primary); margin-top: 2px; }
+    .float-card-hero.one { left: -16px; bottom: 28px; }
+    .float-card-hero.two { right: -16px; top: 28px; }
+    .float-title { font-size: 11px; color: var(--muted); font-weight: 750; text-transform: uppercase; }
+    .float-value { font-size: 16px; font-weight: 900; color: var(--navy); margin-top: 2px; }
 
-    /* Quick Access 6 Customer Shortcuts */
-    .quick-access-section {
-      margin-top: -28px;
+    /* Finder Section (Floating) */
+    .finder {
+      margin-top: -24px;
       position: relative;
       z-index: 10;
-      padding-bottom: 30px;
+      padding-bottom: 20px;
     }
-    .quick-grid-6 {
+    .finder-box {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+    }
+    .finder-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: 1.4fr 1fr 1fr auto;
       gap: 12px;
     }
+    .finder-grid input, .finder-grid select {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #f8fbff;
+      font: inherit;
+      font-size: 13px;
+      min-width: 0;
+    }
+    .finder-grid input:focus, .finder-grid select:focus {
+      border-color: var(--blue);
+      outline: none;
+      background: #ffffff;
+    }
+
+    /* Quick Access 4-per-row Box Cards */
     .quick-card {
       background: #ffffff;
-      border: 1px solid var(--sand-border);
-      border-radius: 14px;
-      padding: 16px 14px;
-      box-shadow: 0 6px 18px rgba(184, 134, 11, 0.06);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 16px;
+      box-shadow: var(--shadow-sm);
       text-align: center;
       transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
       text-decoration: none;
-      color: inherit;
+      min-width: 0;
     }
     .quick-card:hover {
       transform: translateY(-3px);
-      border-color: var(--gold-primary);
-      box-shadow: 0 10px 25px rgba(184, 134, 11, 0.12);
+      box-shadow: var(--shadow);
+      border-color: #bcd5f8;
     }
     .quick-ico {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
-      background: var(--gold-light);
-      color: var(--gold-primary);
-      display: grid;
-      place-items: center;
-      font-size: 20px;
-      border: 1px solid var(--gold-border);
-    }
-    .quick-title {
-      font-size: 13px;
-      font-weight: 850;
-      color: var(--ink);
-      line-height: 1.25;
-    }
-    .quick-sub {
-      font-size: 10px;
-      color: var(--ink-muted);
-      line-height: 1.35;
-    }
-
-    /* 6 Core Healthcare Pillars */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 24px;
-    }
-    .pillar-card {
-      background: #ffffff;
-      border: 1px solid var(--sand-border);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.04);
-      transition: transform 0.2s, border-color 0.2s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .pillar-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--gold-primary);
-      box-shadow: 0 10px 28px rgba(184, 134, 11, 0.09);
-    }
-    .pillar-head {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-    .pillar-ico {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: var(--gold-light);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-primary);
+      background: var(--blue-soft);
       display: grid;
       place-items: center;
       font-size: 22px;
-      flex-shrink: 0;
+      margin-bottom: 12px;
     }
-    .pillar-title h3 {
-      margin: 0;
-      font-size: 17px;
+    .quick-title {
+      font-size: 15px;
       font-weight: 850;
-      color: var(--ink);
+      color: var(--navy);
+      margin-bottom: 4px;
     }
-    .pillar-title span {
-      font-size: 11px;
-      color: var(--gold-primary);
-      font-weight: 750;
-    }
-    .pillar-desc {
-      font-size: 13px;
-      color: var(--ink-muted);
-      line-height: 1.55;
-      margin: 0 0 16px;
-    }
-    .pillar-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 18px;
-    }
-    .pillar-tag {
-      background: var(--cream);
-      border: 1px solid var(--sand-border);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 750;
-      color: var(--ink);
-    }
-    .pillar-link {
+    .quick-sub {
       font-size: 12px;
-      font-weight: 850;
-      color: var(--gold-primary);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      color: var(--muted);
+      line-height: 1.4;
     }
-    .pillar-link:hover { text-decoration: underline; }
 
-    /* Specialties Grid */
-    .specialties-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .spec-item {
+    /* Specialty Card */
+    .spec-card {
       background: #ffffff;
-      border: 1px solid var(--sand-border);
-      border-radius: 12px;
-      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
       text-decoration: none;
-      color: inherit;
-      transition: all 0.2s;
+      min-width: 0;
     }
-    .spec-item:hover {
-      border-color: var(--gold-primary);
-      background: var(--gold-light);
+    .spec-card:hover {
+      border-color: var(--blue);
+      background: #f8fbff;
       transform: translateY(-2px);
     }
     .spec-ico {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eafbf8;
+      color: var(--teal);
+      display: grid;
+      place-items: center;
       font-size: 20px;
+      flex-shrink: 0;
     }
-    .spec-text b {
-      display: block;
-      font-size: 13px;
-      color: var(--ink);
+    .spec-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
     }
-    .spec-text small {
+    .spec-count {
       font-size: 11px;
-      color: var(--ink-muted);
+      color: var(--muted);
+      margin-top: 2px;
     }
 
-    /* Provider Cards Grid */
-    .providers-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 24px;
-    }
-    .provider-card-home {
+    /* Doctor Card */
+    .doc-card {
       background: #ffffff;
-      border: 1px solid var(--sand-border);
+      border: 1px solid var(--line);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.05);
+      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.2s ease;
+      min-width: 0;
     }
-    .provider-card-home:hover {
+    .doc-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 26px rgba(184, 134, 11, 0.1);
-      border-color: var(--gold-border);
+      box-shadow: var(--shadow);
+      border-color: #bcd5f8;
     }
-    .provider-img-wrap {
-      height: 180px;
-      position: relative;
+    .doc-photo {
+      height: 190px;
       background: center/cover no-repeat;
+      position: relative;
     }
-    .provider-badge-float {
+    .doc-badge {
       position: absolute;
       top: 10px;
-      left: 10px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid var(--gold-border);
-      color: var(--gold-primary);
-      font-size: 10px;
-      font-weight: 850;
-      padding: 3px 9px;
-      border-radius: 20px;
-    }
-    .provider-tele-float {
-      position: absolute;
-      bottom: 10px;
       right: 10px;
-      background: #eefbf8;
-      border: 1px solid #9cead9;
-      color: #0b5e52;
+      background: rgba(255, 255, 255, 0.95);
       font-size: 10px;
       font-weight: 850;
+      color: #087e76;
       padding: 3px 8px;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      border-radius: 6px;
     }
-    .provider-body-home {
+    .doc-body {
       padding: 16px;
       display: flex;
       flex-direction: column;
       flex: 1;
-      justify-content: space-between;
     }
-    .provider-role-pill {
-      font-size: 10px;
-      font-weight: 800;
+    .doc-spec {
+      font-size: 11px;
+      font-weight: 850;
       text-transform: uppercase;
-      letter-spacing: .04em;
-      color: var(--gold-primary);
+      letter-spacing: .05em;
+      color: var(--blue);
       margin-bottom: 4px;
     }
-    .provider-name-home {
-      font-size: 15px;
-      font-weight: 850;
-      color: var(--ink);
-      margin: 0 0 4px;
-      line-height: 1.25;
+    .doc-name {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 4px;
     }
-    .provider-meta-home {
+    .doc-hosp {
       font-size: 12px;
-      color: var(--ink-muted);
-      margin-bottom: 8px;
-    }
-    .provider-stars {
-      color: #f59e0b;
-      font-size: 12px;
-      font-weight: 800;
+      color: var(--muted);
       margin-bottom: 10px;
     }
-    .provider-price-tag {
-      background: var(--cream);
-      border: 1px solid var(--sand-border);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 11px;
-      color: var(--ink-muted);
-      margin-bottom: 12px;
-    }
-    .provider-price-tag b {
-      color: var(--ink);
+    .doc-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 12px;
+      padding: 8px 0;
+      border-top: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+      margin-bottom: 14px;
     }
-    .provider-actions-home {
+    .doc-fee {
+      font-weight: 850;
+      color: var(--navy);
+    }
+    .doc-rating {
+      color: #f2ad2e;
+      font-weight: 800;
+    }
+    .doc-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      gap: 8px;
+      margin-top: auto;
     }
-    .btn-sand-sm {
-      background: #ffffff;
-      border: 1px solid var(--sand-border);
-      color: var(--ink);
-      font-size: 11px;
-      font-weight: 750;
-      padding: 7px 10px;
-      border-radius: 8px;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .btn-sand-sm:hover {
-      background: var(--cream);
-      border-color: var(--gold-border);
-    }
-    .btn-gold-sm {
-      background: linear-gradient(135deg, var(--gold-primary) 0%, #9e7308 100%);
-      color: #ffffff;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 7px 10px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-    }
-    .btn-gold-sm:hover {
-      box-shadow: 0 3px 10px rgba(184, 134, 11, 0.25);
+    .doc-actions .btn {
+      padding: 8px 10px;
+      font-size: 12px;
     }
 
-    /* Pricing & Procedure Guides Table */
-    .pricing-table-card {
+    /* Split Labs Section */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .photo-split {
+      min-height: 380px;
+      border-radius: 24px;
+      background: center/cover no-repeat;
+      box-shadow: var(--shadow);
+    }
+    .photo-split.lab {
+      background-image: url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85");
+    }
+    .checklist {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 24px;
+    }
+    .check-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: #40516f;
+    }
+    .check-item b {
+      color: var(--navy);
+    }
+    .check-ico {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #eafbf8;
+      color: #087e76;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* How It Works Steps */
+    .step-card {
       background: #ffffff;
-      border: 1px solid var(--sand-border);
+      border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.05);
-      margin-top: 24px;
+      padding: 22px 18px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
     }
-    .pricing-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid #f1ece4;
-    }
-    .pricing-row:last-child { border-bottom: none; }
-    .pricing-name b {
-      display: block;
-      font-size: 14px;
-      color: var(--ink);
-    }
-    .pricing-name span {
-      font-size: 11px;
-      color: var(--ink-muted);
-    }
-    .pricing-range {
-      font-size: 14px;
+    .step-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
       font-weight: 900;
-      color: var(--gold-primary);
-      text-align: right;
+      font-size: 14px;
+      margin-bottom: 14px;
     }
-    .pricing-range small {
-      display: block;
-      font-size: 10px;
-      color: var(--ink-muted);
-      font-weight: 600;
-    }
-
-    /* IVF Hub Special Callout Banner */
-    .ivf-hub-banner {
-      background: linear-gradient(135deg, #fdfbf7 0%, var(--gold-light) 60%, #f7f3ec 100%);
-      border: 2px solid var(--gold-border);
-      border-radius: 20px;
-      padding: 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      box-shadow: 0 10px 30px rgba(184, 134, 11, 0.08);
-      margin: 40px 0;
-    }
-    .ivf-hub-text h3 {
-      font-size: 24px;
+    .step-card h3 {
+      font-size: 15px;
+      color: var(--navy);
       margin: 0 0 6px;
-      color: var(--ink);
-      font-weight: 900;
     }
-    .ivf-hub-text p {
+    .step-card p {
+      font-size: 12px;
+      color: var(--muted);
       margin: 0;
-      font-size: 14px;
-      color: var(--ink-muted);
       line-height: 1.5;
     }
-    .ivf-hub-btns {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+
+    /* Pricing Table Card */
+    .pricing-table-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    .price-table th {
+      background: #f8fbff;
+      color: var(--navy);
+      font-weight: 850;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--line);
+    }
+    .price-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line-light);
+      color: #40516f;
+    }
+    .price-table tr:hover td {
+      background: #fdfdfd;
     }
 
-    /* Responsive */
-    @media (max-width: 1100px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .search-card-hero { grid-template-columns: 1fr 1fr; }
-      .quick-grid-6 { grid-template-columns: repeat(3, 1fr); }
-      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
-      .specialties-grid { grid-template-columns: repeat(2, 1fr); }
-      .providers-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-photo { height: 350px; }
+    /* District Area Card */
+    .area-card-clean {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--navy);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      min-width: 0;
+    }
+    .area-card-clean:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #f8fbff;
+      transform: translateX(3px);
+    }
+
+    /* Review Card */
+    .card.review {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      overflow: hidden;
+      word-break: break-word;
+    }
+    .stars {
+      color: #f2ad2e;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .reviewer .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .hero-photo { height: 360px; }
+      .search-card-hero, .finder-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 650px) {
-      .search-card-hero { grid-template-columns: 1fr; }
-      .quick-grid-6 { grid-template-columns: repeat(2, 1fr); }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .specialties-grid { grid-template-columns: 1fr; }
-      .providers-grid { grid-template-columns: 1fr; }
-      .ivf-hub-banner { flex-direction: column; text-align: center; }
-      .ivf-hub-btns { justify-content: center; }
+      .search-card-hero, .finder-grid { grid-template-columns: 1fr; }
+      .hero-photo { height: 280px; }
       .float-card-hero.one { left: 8px; bottom: 12px; }
       .float-card-hero.two { right: 8px; top: 12px; }
     }
@@ -564,54 +537,155 @@
 </head>
 <body>
 
-  <!-- Topbar: DHA Registry & Role Switcher -->
+  <!-- Top Notification Bar (Clean, Zero Clutter) -->
   <div class="topbar">
     <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <span>🇦🇪 Dubai Doctors & Healthcare Directory • DHA Verified Registry</span>
-      <div style="display:flex;gap:12px;font-size:11px;font-weight:750">
-        <a href="dashboard-doctor.html" style="color:inherit;text-decoration:none">🩺 Doctor BI</a>
-        <span>•</span>
-        <a href="dashboard-patient.html" style="color:inherit;text-decoration:none">👤 Patient BI</a>
-        <span>•</span>
-        <a href="admin.html" style="color:inherit;text-decoration:none">👑 Admin BI</a>
-      </div>
+      <span>🇦🇪 Find Doctor • UAE Healthcare Directory • DHA & MOH Verified Registry</span>
+      <span style="font-size:12px;opacity:0.9">Direct WhatsApp Booking • Verified Doctors</span>
     </div>
   </div>
 
-  <!-- Header & Navigation -->
+  <!-- Header -->
   <header>
     <div class="container nav">
-      <a class="logo" href="index.html" style="color:var(--ink);display:flex;align-items:center;gap:10px">
-        <span class="logo-mark" style="background:var(--gold-light);color:var(--gold-primary);border:1px solid var(--gold-border);width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-weight:900">🏥</span>
-        <span style="font-weight:900;letter-spacing:-.02em">Dubai Doctors <small style="color:var(--gold-primary);font-size:12px;font-weight:750">Directory</small></span>
+      <a class="logo" href="index.html">
+        <span class="logo-mark">✚</span>
+        Find Doctor <small>Dubai</small>
       </a>
 
-      <!-- Desktop Navigation Menu -->
+      <!-- Desktop Navigation Mega Menu (Zero Screen Overflow) -->
       <nav class="main-nav">
         <a href="index.html" class="active">Home</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=doctor">Doctors</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=hospital">Hospitals</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=clinic">Clinics</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=lab">Diagnostic Labs</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=technician">Technicians</a>
-        <a href="fertifind_dubai_directory_search_page.html?type=surgeon">Surgeons</a>
-        <a href="fertifind_dubai_directory_search_page.html?feature=video">Video Consult</a>
-        <a href="#pricing-guides">Prices & Guides</a>
-        <a href="ivf_fertility_directory_landing_page.html" style="color:var(--copper);font-weight:800">👶 IVF Hub</a>
-        <a href="dashboard-doctor.html" style="color:var(--gold-primary);font-weight:800">✨ BI Portals</a>
+        <a href="fertifind_dubai_directory_search_page.html">Directory</a>
+
+        <!-- Mega Menu: Find Care -->
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-btn">
+            Find Care <span class="caret">▼</span>
+          </button>
+          <div class="mega-menu">
+            <div class="mega-grid-2">
+              <div>
+                <div class="mega-col-title">🏥 Healthcare Providers</div>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=doctor">
+                  <span class="m-ico">🩺</span>
+                  <div class="m-text"><b>Doctors & Specialists</b><small>Cardiology, Ortho, Derm & more</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=hospital">
+                  <span class="m-ico">🏥</span>
+                  <div class="m-text"><b>Hospitals & Centers</b><small>Tertiary multi-specialty care</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=clinic">
+                  <span class="m-ico">🏢</span>
+                  <div class="m-text"><b>Clinics & Polyclinics</b><small>Outpatient & day practices</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=lab">
+                  <span class="m-ico">🧪</span>
+                  <div class="m-text"><b>Diagnostic Labs</b><small>Pathology, blood tests & AMH</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=technician">
+                  <span class="m-ico">🧑‍🔬</span>
+                  <div class="m-text"><b>Technicians & Allied</b><small>Physiotherapy & rehabilitation</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?type=surgeon">
+                  <span class="m-ico">🔪</span>
+                  <div class="m-text"><b>Surgeons & Operating</b><small>General & specialty surgery</small></div>
+                </a>
+              </div>
+              <div>
+                <div class="mega-col-title">⚡ Quick Access & Services</div>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?feature=video">
+                  <span class="m-ico">💻</span>
+                  <div class="m-text"><b>Video Consultation</b><small>Instant virtual telehealth visits</small></div>
+                </a>
+                <a class="mega-link" href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">
+                  <span class="m-ico">📍</span>
+                  <div class="m-text"><b>Doctors Near Me</b><small>Discover clinics by district</small></div>
+                </a>
+                <a class="mega-link" href="ivf_fertility_directory_landing_page.html" style="background:var(--blue-soft);border:1px solid #cbdcf7">
+                  <span class="m-ico">👶</span>
+                  <div class="m-text"><b style="color:var(--blue)">IVF & Fertility Hub</b><small>IVF, ICSI & reproductive care</small></div>
+                </a>
+                <a class="mega-link" href="#pricing-guides">
+                  <span class="m-ico">💰</span>
+                  <div class="m-text"><b>Price & Cost Guide</b><small>AED benchmark tariffs</small></div>
+                </a>
+                <a class="mega-link" href="#reviews">
+                  <span class="m-ico">⭐</span>
+                  <div class="m-text"><b>Patient Reviews</b><small>Moderated clinical ratings</small></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emirates Switcher Dropdown -->
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-btn">
+            Emirates <span class="caret">▼</span>
+          </button>
+          <div class="mega-menu" style="min-width:300px">
+            <div class="mega-col-title">🇦🇪 Select UAE Emirate</div>
+            <a class="mega-link" href="fertifind_dubai_directory_search_page.html?area=all">
+              <span class="m-ico">🏙️</span>
+              <div class="m-text"><b>Dubai</b><small>DHCC, Jumeirah, Marina, Deira</small></div>
+            </a>
+            <a class="mega-link" href="fertifind_dubai_directory_search_page.html?area=all">
+              <span class="m-ico">🏛️</span>
+              <div class="m-text"><b>Abu Dhabi</b><small>Capital healthcare network</small></div>
+            </a>
+            <a class="mega-link" href="fertifind_dubai_directory_search_page.html?area=all">
+              <span class="m-ico">🕌</span>
+              <div class="m-text"><b>Sharjah</b><small>Northern Emirates doctors</small></div>
+            </a>
+            <a class="mega-link" href="fertifind_dubai_directory_search_page.html?area=all">
+              <span class="m-ico">🏖️</span>
+              <div class="m-text"><b>Ajman, RAK & Fujairah</b><small>Regional clinics & hospitals</small></div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Portals Dropdown -->
+        <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown-btn">
+            Portals <span class="caret">▼</span>
+          </button>
+          <div class="mega-menu align-right" style="min-width:320px">
+            <div class="mega-col-title">📊 Clinical & Patient Portals</div>
+            <a class="mega-link" href="dashboard-doctor.html">
+              <span class="m-ico">🩺</span>
+              <div class="m-text"><b>Doctor Clinical BI</b><small>Practice KPIs & booking pipeline</small></div>
+            </a>
+            <a class="mega-link" href="dashboard-patient.html">
+              <span class="m-ico">👤</span>
+              <div class="m-text"><b>Patient Care BI</b><small>Prescriptions & appointment history</small></div>
+            </a>
+            <a class="mega-link" href="admin.html">
+              <span class="m-ico">👑</span>
+              <div class="m-text"><b>Super Admin BI</b><small>Platform control & verified database</small></div>
+            </a>
+            <a class="mega-link" href="auth.html">
+              <span class="m-ico">🔐</span>
+              <div class="m-text"><b>Sign In / Register</b><small>Account login & security portal</small></div>
+            </a>
+          </div>
+        </div>
+
+        <a href="submit-business.html">List Practice</a>
       </nav>
 
-      <!-- Nav Actions -->
+      <!-- Nav Actions (Fits neatly within viewport!) -->
       <div class="nav-actions">
-        <a class="btn btn-outline" href="submit-business.html" style="font-size:12px">List Practice</a>
-        <button class="btn btn-primary" onclick="FertiFind.openBooking('Dubai Doctors Directory','General Doctor In-Clinic Consultation')">Book Appointment →</button>
-        <button class="menu-btn mobile-toggle" aria-label="Menu">☰</button>
+        <button type="button" class="btn btn-outline" onclick="FertiFind.openAuth('login')">Sign In</button>
+        <button type="button" class="btn btn-primary" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">Book Appointment →</button>
+        <button class="menu-btn mobile-toggle" aria-label="Toggle Menu">☰</button>
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
+    <!-- Mobile Drawer -->
     <div class="mobile-drawer" id="mobileDrawer">
-      <a href="index.html" class="active">🏠 Home Directory</a>
+      <a href="index.html" class="active">🏠 Home</a>
+      <a href="fertifind_dubai_directory_search_page.html">🔍 Search Directory</a>
       <a href="fertifind_dubai_directory_search_page.html?type=doctor">🩺 Doctors & Specialists</a>
       <a href="fertifind_dubai_directory_search_page.html?type=hospital">🏥 Hospitals & Centers</a>
       <a href="fertifind_dubai_directory_search_page.html?type=clinic">🏢 Clinics & Polyclinics</a>
@@ -619,34 +693,36 @@
       <a href="fertifind_dubai_directory_search_page.html?type=technician">🧑‍🔬 Technicians & Allied</a>
       <a href="fertifind_dubai_directory_search_page.html?type=surgeon">🔪 Surgeons & Surgery</a>
       <a href="fertifind_dubai_directory_search_page.html?feature=video">💻 Video Consultations</a>
-      <a href="#pricing-guides">💰 Price & Procedure Guides</a>
-      <a href="ivf_fertility_directory_landing_page.html" style="color:var(--copper);font-weight:800">👶 IVF & Fertility Care Hub</a>
-      <div style="padding:8px 0;border-top:1px solid #ede4d3;border-bottom:1px solid #ede4d3;margin:6px 0;display:flex;flex-direction:column;gap:4px">
-        <span style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--gold-primary);letter-spacing:.05em">Healthcare BI Portals</span>
-        <a href="dashboard-doctor.html">🩺 Doctor & Clinic BI</a>
+      <a href="ivf_fertility_directory_landing_page.html" style="color:var(--blue);font-weight:800">👶 IVF & Fertility Care Hub</a>
+      <div style="padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:6px 0;display:flex;flex-direction:column;gap:4px">
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--muted);letter-spacing:.05em">Healthcare Portals</span>
+        <a href="dashboard-doctor.html">🩺 Doctor Clinical BI</a>
         <a href="dashboard-patient.html">👤 Patient Care BI</a>
         <a href="admin.html">👑 Super Admin BI</a>
       </div>
       <a href="submit-business.html">📝 Submit Practice Details</a>
       <a href="auth.html">🔐 Sign In / Register</a>
-      <a class="btn btn-outline" href="submit-business.html" style="text-align:center">List Your Practice</a>
       <button class="btn btn-primary" style="width:100%" onclick="FertiFind.openBooking('General Healthcare Directory','Doctor In-Clinic Consultation')">Book Appointment</button>
     </div>
   </header>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section (Original 2-Column Layout) -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">🇦🇪 Dubai Health Authority (DHA) Verified Network</div>
-          <h1>Find & Book Top <span>Doctors, Hospitals, Clinics</span> & Labs in Dubai.</h1>
-          <p class="hero-copy">Discover verified medical doctors, top hospitals, surgical specialists, diagnostic laboratories, and healthcare technicians across Dubai. Instant appointment booking, video consultations, transparent procedure prices, and authentic patient reviews.</p>
+          <div class="eyebrow">Your healthcare journey, better connected</div>
+          <h1>Find verified <span>doctors, hospitals, clinics & labs</span> in Dubai.</h1>
+          <p class="hero-copy">Search DHA-verified specialist physicians, top hospitals, polyclinics, diagnostic pathology laboratories, video tele-consultations, and transparent tariffs across Dubai & UAE.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="fertifind_dubai_directory_search_page.html">Find a Specialist →</a>
+            <a class="btn btn-outline" href="#pricing-guides">Doctor Fees & Guides</a>
+          </div>
 
           <!-- Hero Search Box -->
           <div class="search-card-hero" id="heroSearch">
-            <input id="heroQuery" name="search_query" placeholder="Doctor Specialty Hospital" aria-label="Search">
-            <select id="heroEntityType" name="entity_type" aria-label="Entity">
+            <input id="heroQuery" name="search_query" placeholder="Search Doctors Clinics" aria-label="Search">
+            <select id="heroType" name="provider_type" aria-label="Type">
               <option value="all">All Healthcare Types</option>
               <option value="doctor">Doctors & Specialists</option>
               <option value="hospital">Hospitals & Centers</option>
@@ -671,10 +747,9 @@
 
           <div class="trust-row">
             <span>✓ <b>2,500+ Verified Doctors</b></span>
-            <span>✓ <b>120+ Hospitals & Clinics</b></span>
+            <span>✓ <b>120+ Hospitals & Labs</b></span>
             <span>✓ <b>Instant Video Consult</b></span>
             <span>✓ <b>100% DHA Regulated</b></span>
-            <span>✓ <b>Transparent AED Prices</b></span>
           </div>
         </div>
 
@@ -692,10 +767,48 @@
       </div>
     </section>
 
-    <!-- Quick Access Feature Grid (6 Essential Customer Shortcuts) -->
-    <section class="quick-access-section">
+    <!-- Finder Section (Floating Quick Bar) -->
+    <section class="finder" id="finder">
       <div class="container">
-        <div class="quick-grid-6">
+        <div class="finder-box">
+          <div class="finder-grid">
+            <input id="finderInput" name="search_query" placeholder="Search Doctors Clinics" aria-label="Search">
+            <select id="finderType" name="provider_type" aria-label="Type">
+              <option value="all">All Provider Types</option>
+              <option value="doctor">Doctors & Specialists</option>
+              <option value="hospital">Hospitals & Centers</option>
+              <option value="clinic">Clinics & Polyclinics</option>
+              <option value="lab">Diagnostic Labs</option>
+              <option value="technician">Technicians & Allied</option>
+              <option value="surgeon">Surgeons & Operating</option>
+            </select>
+            <select id="finderArea" name="district" aria-label="District">
+              <option value="all">All Dubai Districts</option>
+              <option value="Dubai Healthcare City">Dubai Healthcare City (DHCC)</option>
+              <option value="Jumeirah">Jumeirah</option>
+              <option value="Oud Metha">Oud Metha</option>
+              <option value="Dubai Marina">Dubai Marina</option>
+              <option value="Downtown Dubai">Downtown Dubai</option>
+              <option value="Deira">Deira</option>
+              <option value="Al Barsha">Al Barsha</option>
+              <option value="Business Bay">Business Bay</option>
+            </select>
+            <button class="btn btn-primary" id="finderBtn">Find Care →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Hub (Strictly 4 per row on Desktop, 1 or 2 on Mobile!) -->
+    <section class="section" id="quick-access">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Quick Healthcare Access</h2>
+            <p>Direct shortcuts to high-demand patient services, specialized surgery, and nearby clinics.</p>
+          </div>
+        </div>
+        <div class="grid-4">
           <!-- 1: Video Consultation -->
           <a class="quick-card" href="fertifind_dubai_directory_search_page.html?feature=video">
             <div class="quick-ico">💻</div>
@@ -725,9 +838,9 @@
           </a>
 
           <!-- 5: IVF & Fertility Care Hub -->
-          <a class="quick-card" href="ivf_fertility_directory_landing_page.html" style="border-color:var(--gold-border);background:var(--gold-light)">
+          <a class="quick-card" href="ivf_fertility_directory_landing_page.html" style="border-color:#bcd5f8;background:#f8fbff">
             <div class="quick-ico" style="background:#ffffff">👶</div>
-            <div class="quick-title" style="color:var(--gold-primary)">IVF & Fertility Hub</div>
+            <div class="quick-title" style="color:var(--blue)">IVF & Fertility Hub</div>
             <div class="quick-sub">IVF, ICSI & reproductive care</div>
           </a>
 
@@ -737,659 +850,559 @@
             <div class="quick-title">Hospitals & 24/7 ER</div>
             <div class="quick-sub">Tertiary hospitals & emergency</div>
           </a>
+
+          <!-- 7: Technicians & Allied -->
+          <a class="quick-card" href="fertifind_dubai_directory_search_page.html?type=technician">
+            <div class="quick-ico">🧑‍🔬</div>
+            <div class="quick-title">Technicians & Allied</div>
+            <div class="quick-sub">Physiotherapy & rehabilitation</div>
+          </a>
+
+          <!-- 8: Price & Tariff Guides -->
+          <a class="quick-card" href="#pricing-guides">
+            <div class="quick-ico">💰</div>
+            <div class="quick-title">Price & Fee Guides</div>
+            <div class="quick-sub">Transparent AED consultation tariffs</div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- The 6 Main Healthcare Pillars Section -->
-    <section class="section" id="pillars" style="padding-top:20px">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Explore Dubai Healthcare by Category</h2>
-            <p>Direct navigation across verified doctors, hospitals, clinics, diagnostic labs, allied technicians, and surgeons in Dubai.</p>
-          </div>
-          <a class="link" href="fertifind_dubai_directory_search_page.html">View all directory →</a>
-        </div>
-
-        <div class="pillars-grid">
-          <!-- Pillar 1: Doctors & Medical Specialists -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🩺</div>
-                <div class="pillar-title">
-                  <h3>Doctors & Specialists</h3>
-                  <span>2,500+ Verified DHA Physicians</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Consult with board-certified consultants and specialists in Cardiology, Dermatology, Pediatrics, Orthopedics, Neurology, OB-GYN, and Internal Medicine.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">Cardiologists</span>
-                <span class="pillar-tag">Dermatologists</span>
-                <span class="pillar-tag">Pediatricians</span>
-                <span class="pillar-tag">OB-GYN</span>
-                <span class="pillar-tag">Orthopedics</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=doctor">Explore Doctors & Profiles →</a>
-          </div>
-
-          <!-- Pillar 2: Hospitals & Tertiary Care -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🏥</div>
-                <div class="pillar-title">
-                  <h3>Hospitals & Medical Centers</h3>
-                  <span>45+ JCI Accredited Hospitals</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Leading multi-specialty tertiary hospitals, 24/7 emergency care departments, intensive care units, and day surgery facilities across Dubai.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">American Hospital</span>
-                <span class="pillar-tag">King's College</span>
-                <span class="pillar-tag">Mediclinic</span>
-                <span class="pillar-tag">Saudi German</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=hospital">Explore Hospitals & ER →</a>
-          </div>
-
-          <!-- Pillar 3: Clinics & Polyclinics -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🏢</div>
-                <div class="pillar-title">
-                  <h3>Clinics & Polyclinics</h3>
-                  <span>350+ Outpatient Clinics</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Neighborhood wellness polyclinics, specialized dental studios, aesthetic laser centers, and family medical practices throughout Dubai districts.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">DHCC Medical</span>
-                <span class="pillar-tag">Jumeirah Clinics</span>
-                <span class="pillar-tag">Marina Wellness</span>
-                <span class="pillar-tag">Dental Suites</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=clinic">Explore Polyclinics →</a>
-          </div>
-
-          <!-- Pillar 4: Diagnostic Laboratories & Imaging -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🧪</div>
-                <div class="pillar-title">
-                  <h3>Diagnostic Labs & Imaging</h3>
-                  <span>80+ ISO 15189 Accredited Facilities</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Complete pathology testing, 3T MRI & CT imaging, hormonal panels, genomic screening, and certified home phlebotomy blood draw services.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">Blood Panels</span>
-                <span class="pillar-tag">MRI & CT Scans</span>
-                <span class="pillar-tag">Al Borg Labs</span>
-                <span class="pillar-tag">Home Sample</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=lab">Explore Diagnostic Labs →</a>
-          </div>
-
-          <!-- Pillar 5: Technicians & Allied Healthcare -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🧑‍🔬</div>
-                <div class="pillar-title">
-                  <h3>Technicians & Allied Health</h3>
-                  <span>Licensed Healthcare Professionals</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Connect with licensed physical therapists, sports rehabilitation specialists, clinical nutritionists, medical laboratory technicians, and audiologists.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">Physiotherapy</span>
-                <span class="pillar-tag">Sports Rehab</span>
-                <span class="pillar-tag">Dietitians</span>
-                <span class="pillar-tag">Radiology Techs</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=technician">Explore Allied Health →</a>
-          </div>
-
-          <!-- Pillar 6: Surgeons & Operating Suites -->
-          <div class="pillar-card">
-            <div>
-              <div class="pillar-head">
-                <div class="pillar-ico">🔪</div>
-                <div class="pillar-title">
-                  <h3>Surgeons & Specialized Surgery</h3>
-                  <span>Board-Certified Surgical Specialists</span>
-                </div>
-              </div>
-              <p class="pillar-desc">Find top surgeons specializing in bariatric weight-loss, cosmetic & plastic surgery, orthopedic joint replacement, neurosurgery, and laparoscopy.</p>
-              <div class="pillar-tags">
-                <span class="pillar-tag">Bariatric</span>
-                <span class="pillar-tag">Plastic Surgery</span>
-                <span class="pillar-tag">Joint Replacement</span>
-                <span class="pillar-tag">Laparoscopy</span>
-              </div>
-            </div>
-            <a class="pillar-link" href="fertifind_dubai_directory_search_page.html?type=surgeon">Explore Surgeons & Procedures →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Popular Medical Specialties Selector -->
+    <!-- Medical Specialties Grid (Strictly 4 per row on Desktop!) -->
     <section class="section alt" id="specialties">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Browse by Medical Specialty</h2>
-            <p>Find the right specialist doctor based on your clinical symptoms, health goals, or medical department.</p>
+            <h2>Explore by Medical Specialty</h2>
+            <p>Find accredited physicians and dedicated departments across all clinical fields.</p>
           </div>
+          <a class="link" href="fertifind_dubai_directory_search_page.html">View all specialties →</a>
         </div>
-        <div class="specialties-grid">
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Cardiology">
+
+        <div class="grid-4">
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=cardiology">
             <div class="spec-ico">🫀</div>
-            <div class="spec-text"><b>Cardiology & Heart Care</b><small>ECG, Echo & Heart Health</small></div>
+            <div>
+              <div class="spec-name">Cardiology & Heart</div>
+              <div class="spec-count">140+ Consultants</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Dermatology">
-            <div class="spec-ico">🧴</div>
-            <div class="spec-text"><b>Dermatology & Skin</b><small>Aesthetic, Acne & Laser</small></div>
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=dermatology">
+            <div class="spec-ico">✨</div>
+            <div>
+              <div class="spec-name">Dermatology & Skin</div>
+              <div class="spec-count">210+ Specialists</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Orthopedics">
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=orthopedics">
             <div class="spec-ico">🦴</div>
-            <div class="spec-text"><b>Orthopedics & Spine</b><small>Joints, Sports & Fractures</small></div>
+            <div>
+              <div class="spec-name">Orthopedics & Sports</div>
+              <div class="spec-count">115+ Surgeons</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Pediatrics">
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=pediatrics">
             <div class="spec-ico">🧸</div>
-            <div class="spec-text"><b>Pediatrics & Child Care</b><small>Infant Health & Vaccines</small></div>
+            <div>
+              <div class="spec-name">Pediatrics & Child Care</div>
+              <div class="spec-count">185+ Doctors</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=OBGYN">
-            <div class="spec-ico">🤰</div>
-            <div class="spec-text"><b>Obstetrics & Gynecology</b><small>Maternity & Women's Health</small></div>
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=obgyn">
+            <div class="spec-ico">🌸</div>
+            <div>
+              <div class="spec-name">Obstetrics & Gynecology</div>
+              <div class="spec-count">160+ Consultants</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Dental">
-            <div class="spec-ico">🦷</div>
-            <div class="spec-text"><b>Dental & Orthodontics</b><small>Implants, Braces & Veneers</small></div>
-          </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Ophthalmology">
-            <div class="spec-ico">👁️</div>
-            <div class="spec-text"><b>Ophthalmology & Eye Care</b><small>Lasik, Cataract & Retina</small></div>
-          </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Neurology">
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=neurology">
             <div class="spec-ico">🧠</div>
-            <div class="spec-text"><b>Neurology & Brain Health</b><small>Headaches, Stroke & Nerve</small></div>
+            <div>
+              <div class="spec-name">Neurology & Brain</div>
+              <div class="spec-count">75+ Specialists</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=ENT">
-            <div class="spec-ico">👂</div>
-            <div class="spec-text"><b>ENT & Sinus Care</b><small>Hearing, Throat & Allergy</small></div>
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=dental">
+            <div class="spec-ico">🦷</div>
+            <div>
+              <div class="spec-name">Dental & Orthodontics</div>
+              <div class="spec-count">290+ Dentists</div>
+            </div>
           </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Physiotherapy">
+
+          <a class="spec-card" href="fertifind_dubai_directory_search_page.html?specialty=physiotherapy">
             <div class="spec-ico">🏃</div>
-            <div class="spec-text"><b>Physiotherapy & Rehab</b><small>Sports Injury & Post-Op</small></div>
-          </a>
-          <a class="spec-item" href="fertifind_dubai_directory_search_page.html?q=Bariatric">
-            <div class="spec-ico">⚖️</div>
-            <div class="spec-text"><b>Bariatric & Weight Loss</b><small>Gastric Sleeve & Bypass</small></div>
-          </a>
-          <a class="spec-item" href="ivf_fertility_directory_landing_page.html">
-            <div class="spec-ico">🧬</div>
-            <div class="spec-text"><b style="color:var(--gold-primary)">IVF & Fertility Care</b><small>ICSI, PGT & Egg Freezing</small></div>
+            <div>
+              <div class="spec-name">Physiotherapy & Rehab</div>
+              <div class="spec-count">90+ Technicians</div>
+            </div>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Featured Verified Providers in Dubai (Doctors, Hospitals, Clinics, Labs, Surgeons) -->
-    <section class="section" id="featured-providers">
+    <!-- Featured Verified Doctors & Providers (Strictly 4 per row on Desktop!) -->
+    <section class="section" id="featured-doctors">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Featured Verified Healthcare Providers</h2>
-            <p>Explore DHA-licensed specialist doctors, JCI hospitals, accredited laboratories, and rehabilitation centers.</p>
+            <h2>Verified Healthcare Specialists in Dubai</h2>
+            <p>Top-rated consultant doctors, operating surgeons, diagnostic labs, and fertility centers.</p>
           </div>
-          <a class="link" href="fertifind_dubai_directory_search_page.html">Explore all 2,500+ providers →</a>
+          <a class="link" href="fertifind_dubai_directory_search_page.html">View all 2,500+ providers →</a>
         </div>
 
-        <div class="providers-grid">
-          <!-- Card 1: Dr. Farida Al Hosani (Cardiologist) -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ DHA Consultant</span>
-              <span class="provider-tele-float">💻 Video Available</span>
+        <div class="grid-4">
+          <!-- Doctor 1: Dr. Farida Al Hosani (Cardiologist) -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ DHA Consultant</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Cardiology & Heart Health</div>
-                <h3 class="provider-name-home">Dr. Farida Al Hosani</h3>
-                <div class="provider-meta-home">American Hospital Dubai • 18+ Yrs Exp</div>
-                <div class="provider-stars">★★★★★ 4.95 (214 reviews)</div>
-                <div class="provider-price-tag">Consultation from <b>AED 500</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Cardiology & Heart Care</div>
+              <div class="doc-name">Dr. Farida Al Hosani</div>
+              <div class="doc-hosp">American Hospital • Oud Metha</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.95 (214)</span>
+                <span class="doc-fee">AED 500</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_dubai_directory_search_page.html?q=Farida+Al+Hosani">View Profile</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Dr. Farida Al Hosani','Cardiology Specialist Consultation')">Book Now</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Farida Al Hosani','Cardiology In-Clinic Consultation')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_dubai_directory_search_page.html?q=Farida+Al+Hosani">Profile</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 2: Dr. Tariq Mansoor (Orthopedic Surgeon) -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ DHA Consultant</span>
-              <span class="provider-tele-float">🔪 Knee & Joint</span>
+          <!-- Doctor 2: Dr. Tariq Mansoor (Orthopedic Surgeon) -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ Board Certified</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Orthopedic & Sports Surgery</div>
-                <h3 class="provider-name-home">Dr. Tariq Mansoor</h3>
-                <div class="provider-meta-home">King's College Hospital Dubai • 22+ Yrs Exp</div>
-                <div class="provider-stars">★★★★★ 4.92 (318 reviews)</div>
-                <div class="provider-price-tag">Consultation from <b>AED 600</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Orthopedic Surgery</div>
+              <div class="doc-name">Dr. Tariq Mansoor</div>
+              <div class="doc-hosp">King's College Hospital • Dubai Hills</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.92 (318)</span>
+                <span class="doc-fee">AED 600</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_dubai_directory_search_page.html?q=Tariq+Mansoor">View Profile</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','Orthopedic Surgical Consultation')">Book Now</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Tariq Mansoor','Orthopedic Evaluation')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_dubai_directory_search_page.html?q=Tariq+Mansoor">Profile</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 3: Dr. Laila Al Otaiba (Dermatologist) -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ DHA Specialist</span>
-              <span class="provider-tele-float">💻 Video Available</span>
+          <!-- Doctor 3: Dr. Ahmed Radwan (Bariatric Surgeon) -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ Laparoscopic Fellow</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Dermatology & Aesthetic Laser</div>
-                <h3 class="provider-name-home">Dr. Laila Al Otaiba</h3>
-                <div class="provider-meta-home">Dubai Healthcare City • 14 Yrs Exp</div>
-                <div class="provider-stars">★★★★★ 4.88 (196 reviews)</div>
-                <div class="provider-price-tag">Consultation from <b>AED 450</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Bariatric & General Surgery</div>
+              <div class="doc-name">Dr. Ahmed Radwan</div>
+              <div class="doc-hosp">Saudi German Hospital • Al Barsha</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.91 (260)</span>
+                <span class="doc-fee">AED 550</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_dubai_directory_search_page.html?q=Laila+Al+Otaiba">View Profile</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Dr. Laila Al Otaiba','Dermatology Consultation')">Book Now</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Ahmed Radwan','Surgical Evaluation')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_dubai_directory_search_page.html?q=Ahmed+Radwan">Profile</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 4: Dr. Sara Al Maktoum (IVF & Reproductive Director) -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ DHA Director</span>
-              <span class="provider-tele-float">👶 IVF / ICSI</span>
+          <!-- Doctor 4: Dr. Partha Sarathi Das (IVF Specialist) -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ DHA Consultant</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Reproductive Endocrinology & IVF</div>
-                <h3 class="provider-name-home">Dr. Sara Al Maktoum</h3>
-                <div class="provider-meta-home">Orchid Fertility Clinic, DHCC • 19 Yrs Exp</div>
-                <div class="provider-stars">★★★★★ 4.96 (286 reviews)</div>
-                <div class="provider-price-tag">Consultation from <b>AED 550</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Reproductive Medicine & IVF</div>
+              <div class="doc-name">Dr. Partha Sarathi Das</div>
+              <div class="doc-hosp">Orchid Fertility Clinic • DHCC</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.98 (294)</span>
+                <span class="doc-fee">AED 650</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_doctor_profile_page.html">View Profile</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Dr. Sara Al Maktoum','IVF Specialist Consultation')">Book Now</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Dr. Partha Sarathi Das','IVF Fertility Consultation')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_dubai_directory_search_page.html?q=Partha+Sarathi">Profile</a>
               </div>
             </div>
-          </article>
-        </div>
+          </div>
 
-        <!-- 4 More Providers (Hospitals, Labs, Technicians, Surgeons) -->
-        <div class="providers-grid" style="margin-top:18px">
-          <!-- Card 5: American Hospital Dubai -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ JCI Accredited Hospital</span>
-              <span class="provider-tele-float">🚑 24/7 ER</span>
+          <!-- Provider 5: American Hospital Dubai -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ JCI Accredited</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Multi-Specialty Tertiary Hospital</div>
-                <h3 class="provider-name-home">American Hospital Dubai</h3>
-                <div class="provider-meta-home">Oud Metha, Dubai • 24/7 Emergency & ICU</div>
-                <div class="provider-stars">★★★★★ 4.84 (495 reviews)</div>
-                <div class="provider-price-tag">Specialist from <b>AED 450</b> • ER Open</div>
+            <div class="doc-body">
+              <div class="doc-spec">Tertiary Multi-Specialty Hospital</div>
+              <div class="doc-name">American Hospital Dubai</div>
+              <div class="doc-hosp">Oud Metha • 24/7 Emergency ER</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.94 (840)</span>
+                <span class="doc-fee">24/7 ER Available</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_hospital_profile_page.html">Hospital Info</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('American Hospital Dubai','Hospital Specialist Visit')">Book</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('American Hospital Dubai','Hospital Specialist Visit')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_hospital_profile_page.html">Profile</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 6: Al Borg Diagnostics Dubai -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ ISO 15189 Lab</span>
-              <span class="provider-tele-float">🏠 Home Phlebotomy</span>
+          <!-- Provider 6: Orchid Fertility Clinic -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ ISO Embryology</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Pathology & Diagnostic Laboratory</div>
-                <h3 class="provider-name-home">Al Borg Diagnostics</h3>
-                <div class="provider-meta-home">Jumeirah & DHCC • 1,200+ Blood Tests</div>
-                <div class="provider-stars">★★★★★ 4.90 (420 reviews)</div>
-                <div class="provider-price-tag">Blood Panels from <b>AED 299</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">IVF & Reproductive Clinic</div>
+              <div class="doc-name">Orchid Fertility Clinic</div>
+              <div class="doc-hosp">Dubai Healthcare City • Building 64</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.96 (312)</span>
+                <span class="doc-fee">IVF Pkg AED 32K</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_labs_profile_page.html">Lab Tests</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Al Borg Diagnostics','Diagnostic Lab Blood Test')">Book Test</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Orchid Fertility Clinic','IVF Cycle Consultation')">Book Now</button>
+                <a class="btn btn-outline" href="ivf_fertility_directory_landing_page.html">IVF Hub</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 7: Apex Physical Therapy & Rehab -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ Licensed Technicians</span>
-              <span class="provider-tele-float">🏃 Sports Rehab</span>
+          <!-- Provider 7: Al Borg Diagnostics -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1579165466791-788226ab77b6?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ CAP Accredited</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Technicians & Allied Healthcare</div>
-                <h3 class="provider-name-home">Apex Physical Therapy</h3>
-                <div class="provider-meta-home">Dubai Marina • Manual Therapy & Dry Needling</div>
-                <div class="provider-stars">★★★★★ 4.94 (175 reviews)</div>
-                <div class="provider-price-tag">Rehab Session from <b>AED 350</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Diagnostic Pathology Laboratory</div>
+              <div class="doc-name">Al Borg Diagnostics</div>
+              <div class="doc-hosp">Jumeirah & Home Visits • Dubai</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.88 (420)</span>
+                <span class="doc-fee">Home Draw AED 150</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_dubai_directory_search_page.html?q=Apex+Physical">View Center</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Apex Physical Therapy','Physiotherapy Rehab Session')">Book</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Al Borg Diagnostics','Home Sample Blood Draw')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_labs_profile_page.html">Lab Tests</a>
               </div>
             </div>
-          </article>
+          </div>
 
-          <!-- Card 8: Dr. Ahmed Radwan (Bariatric Surgeon) -->
-          <article class="provider-card-home">
-            <div class="provider-img-wrap" style="background-image:url('https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=700&q=85')">
-              <span class="provider-badge-float">✓ DHA Consultant Surgeon</span>
-              <span class="provider-tele-float">⚖️ Laparoscopic</span>
+          <!-- Provider 8: Apex Physical Therapy -->
+          <div class="doc-card">
+            <div class="doc-photo" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=85')">
+              <span class="doc-badge">✓ DHA Licensed</span>
             </div>
-            <div class="provider-body-home">
-              <div>
-                <div class="provider-role-pill">Bariatric & Laparoscopic Surgery</div>
-                <h3 class="provider-name-home">Dr. Ahmed Radwan</h3>
-                <div class="provider-meta-home">Saudi German Hospital Dubai • 20+ Yrs Exp</div>
-                <div class="provider-stars">★★★★★ 4.91 (260 reviews)</div>
-                <div class="provider-price-tag">Consultation from <b>AED 650</b></div>
+            <div class="doc-body">
+              <div class="doc-spec">Physiotherapy & Allied Health</div>
+              <div class="doc-name">Apex Physical Therapy</div>
+              <div class="doc-hosp">Dubai Marina • Marina Plaza</div>
+              <div class="doc-meta">
+                <span class="doc-rating">★★★★★ 4.90 (178)</span>
+                <span class="doc-fee">Session AED 380</span>
               </div>
-              <div class="provider-actions-home">
-                <a class="btn-sand-sm" href="fertifind_dubai_directory_search_page.html?q=Ahmed+Radwan">View Profile</a>
-                <button class="btn-gold-sm" onclick="FertiFind.openBooking('Dr. Ahmed Radwan','Surgical Evaluation Consultation')">Book</button>
+              <div class="doc-actions">
+                <button class="btn btn-primary" onclick="FertiFind.openBooking('Apex Physical Therapy','Physiotherapy Session')">Book Now</button>
+                <a class="btn btn-outline" href="fertifind_dubai_directory_search_page.html?type=technician">Technicians</a>
               </div>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Healthcare Price & Procedure Guides Section -->
+    <!-- Diagnostics & Labs Split Section -->
+    <section class="section alt" id="diagnostics">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">Accredited Clinical Pathology</div>
+          <h2>Diagnostic Testing, Genetic Screening & Home Nurse Visits</h2>
+          <p class="hero-copy">Order certified laboratory testing without waiting hours in crowded clinic waiting rooms. Book certified phlebotomists for sample collection at your home or hotel across Dubai.</p>
+
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-ico">✓</div>
+              <div><b>DHA-Licensed Home Phlebotomy:</b> Certified nurses visit your residence for routine & hormone blood draws.</div>
+            </div>
+            <div class="check-item">
+              <div class="check-ico">✓</div>
+              <div><b>Comprehensive Health Panels:</b> Full lipid, liver, renal, thyroid, vitamin, and hormone profiles.</div>
+            </div>
+            <div class="check-item">
+              <div class="check-ico">✓</div>
+              <div><b>Reproductive & AMH Testing:</b> Rapid turnaround for IVF pre-cycle assessments and genetic carrier screens.</div>
+            </div>
+            <div class="check-item">
+              <div class="check-ico">✓</div>
+              <div><b>Digital Results in Under 24h:</b> Secure PDF reports delivered directly to your phone and patient portal.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="fertifind_dubai_directory_search_page.html?type=lab">Search Diagnostic Labs →</a>
+            <button class="btn btn-outline" onclick="FertiFind.openBooking('Diagnostic Testing Service','Home Sample Phlebotomy')">Book Home Blood Draw</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="photo-split lab"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works (Strictly 4 per row on Desktop!) -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>How to Book Verified Care in Dubai</h2>
+            <p>From symptom discovery to confirmed appointment coordination in four simple steps.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="step-card">
+            <div class="step-badge">1</div>
+            <h3>Search & Filter</h3>
+            <p>Filter by medical specialty, provider type, Dubai district, or telehealth video availability.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-badge">2</div>
+            <h3>Compare Credentials & Fees</h3>
+            <p>Review verified DHA consultant licensing, clinical sub-specialties, patient reviews, and AED consultation fees.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-badge">3</div>
+            <h3>Select In-Clinic or Video</h3>
+            <p>Choose an immediate video consultation or an in-person appointment at your preferred hospital or clinic.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-badge">4</div>
+            <h3>Direct Coordination</h3>
+            <p>Receive immediate booking confirmation and WhatsApp clinic coordination with zero patient booking markups.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor Price & Procedure Transparency Benchmarks (AED) -->
     <section class="section alt" id="pricing-guides">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Doctor Guides & Transparent Procedure Prices</h2>
-            <p>Know estimated consultation fees, diagnostic test packages, and procedure costs in Dubai before booking.</p>
+            <h2>Doctor Price & Procedure Fee Guide (Dubai)</h2>
+            <p>Transparent benchmark consultation and clinical procedure tariffs across private Dubai healthcare practices.</p>
           </div>
-          <button class="btn btn-outline" onclick="FertiFind.openBooking('Dubai Doctors Directory','General Doctor In-Clinic Consultation')">Inquire Exact Pricing</button>
+          <a class="link" href="fertility-treatment-cost-dubai.html">View Detailed IVF Cost Guide →</a>
         </div>
 
         <div class="pricing-table-card">
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>General Practitioner (GP) Consultation</b>
-              <span>Routine primary care, health check, sick leave certificate, basic prescriptions</span>
-            </div>
-            <div class="pricing-range">
-              AED 150 – AED 300
-              <small>In-clinic visit</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Specialist Doctor Consultation</b>
-              <span>Cardiology, Dermatology, Orthopedics, Pediatrics, ENT, OB-GYN, Neurology</span>
-            </div>
-            <div class="pricing-range">
-              AED 350 – AED 550
-              <small>DHA Specialist</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Consultant Physician / Medical Director</b>
-              <span>Senior specialist review, complex second opinions, surgical pre-assessment</span>
-            </div>
-            <div class="pricing-range">
-              AED 500 – AED 850
-              <small>Senior Consultant</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Video Tele-Consultation (Telehealth)</b>
-              <span>Remote secure HD video call with verified DHA doctor, digital e-prescription</span>
-            </div>
-            <div class="pricing-range">
-              AED 150 – AED 350
-              <small>From home / mobile</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Comprehensive Executive Health Checkup Panel</b>
-              <span>Full blood chemistry, lipid profile, liver/kidney function, ECG, Vitamin D & B12</span>
-            </div>
-            <div class="pricing-range">
-              AED 750 – AED 2,200
-              <small>Diagnostic package</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Diagnostic MRI Scan (Single Body Region)</b>
-              <span>High-resolution 1.5T / 3T Magnetic Resonance Imaging with Radiologist report</span>
-            </div>
-            <div class="pricing-range">
-              AED 1,200 – AED 2,800
-              <small>Hospital / Imaging center</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Certified Home Phlebotomy Blood Collection</b>
-              <span>Licensed nurse visiting your home or office for painless blood specimen draw</span>
-            </div>
-            <div class="pricing-range">
-              AED 200 – AED 350
-              <small>Plus lab test fee</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Physiotherapy & Sports Rehabilitation Session</b>
-              <span>Manual joint mobilization, posture correction, dry needling, therapeutic ultrasound</span>
-            </div>
-            <div class="pricing-range">
-              AED 350 – AED 550
-              <small>45–60 min session</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Laparoscopic Day Surgery Package</b>
-              <span>Gallbladder, hernia, or diagnostic laparoscopy including surgeon fee, theater & recovery</span>
-            </div>
-            <div class="pricing-range">
-              AED 14,000 – AED 32,000
-              <small>Day surgery package</small>
-            </div>
-          </div>
-
-          <div class="pricing-row">
-            <div class="pricing-name">
-              <b>Complete IVF / ICSI Cycle Package (Specialized Hub)</b>
-              <span>Controlled stimulation, egg collection, embryology, ICSI, and embryo transfer</span>
-            </div>
-            <div class="pricing-range">
-              AED 25,000 – AED 45,000
-              <small>Fertility clinic package</small>
-            </div>
-          </div>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Healthcare Service / Procedure</th>
+                <th>Typical Dubai Price Range</th>
+                <th>DHA Benchmark Tariff</th>
+                <th>Direct Booking Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Specialist In-Clinic Consultation</b><br><small style="color:var(--muted)">Cardiology, Orthopedics, Dermatology, Pediatrics</small></td>
+                <td>AED 350 – 750</td>
+                <td><b style="color:var(--blue)">AED 500</b></td>
+                <td><button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="FertiFind.openBooking('General Directory','Doctor In-Clinic Consultation')">Book Visit</button></td>
+              </tr>
+              <tr>
+                <td><b>Telehealth Video Consultation</b><br><small style="color:var(--muted)">Virtual specialist follow-up & second opinions</small></td>
+                <td>AED 200 – 450</td>
+                <td><b style="color:var(--blue)">AED 300</b></td>
+                <td><button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="FertiFind.openBooking('General Directory','Video Tele-Consultation')">Book Video</button></td>
+              </tr>
+              <tr>
+                <td><b>Full Body Health Checkup Blood Panel</b><br><small style="color:var(--muted)">CBC, metabolic, liver, renal, lipid, thyroid, vitamins</small></td>
+                <td>AED 650 – 1,800</td>
+                <td><b style="color:var(--blue)">AED 850</b></td>
+                <td><button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="FertiFind.openBooking('Diagnostic Testing Service','Diagnostic Lab Test')">Book Panel</button></td>
+              </tr>
+              <tr>
+                <td><b>Diagnostic MRI / CT Scan</b><br><small style="color:var(--muted)">Single region scan with radiologist interpretation</small></td>
+                <td>AED 1,200 – 3,200</td>
+                <td><b style="color:var(--blue)">AED 1,600</b></td>
+                <td><button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="FertiFind.openBooking('Hospital Imaging Department','Diagnostic Lab Test')">Book Scan</button></td>
+              </tr>
+              <tr>
+                <td><b>Day Surgery / Arthroscopy Evaluation</b><br><small style="color:var(--muted)">Surgical consultation and pre-operative workup</small></td>
+                <td>AED 4,500 – 18,000</td>
+                <td><b style="color:var(--blue)">AED 8,500</b></td>
+                <td><button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="FertiFind.openBooking('Surgical Department','Surgical Evaluation')">Book Surgeon</button></td>
+              </tr>
+              <tr>
+                <td><b>IVF & ICSI Fertility Treatment Cycle</b><br><small style="color:var(--muted)">Stimulation, egg retrieval, fertilization, embryology vitrification</small></td>
+                <td>AED 24,000 – 45,000</td>
+                <td><b style="color:var(--blue)">AED 32,000</b></td>
+                <td><a class="btn btn-primary" style="padding:6px 12px;font-size:12px" href="ivf_fertility_directory_landing_page.html">Explore Hub</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- Specialized IVF & Fertility Care Hub Dedicated Banner -->
-    <section class="container">
-      <div class="ivf-hub-banner">
-        <div class="ivf-hub-text">
-          <div style="font-size:11px;font-weight:850;color:var(--gold-primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">👶 Specialized Center of Excellence</div>
-          <h3>Looking specifically for IVF & Fertility Care in Dubai?</h3>
-          <p>Explore our dedicated Dubai Fertility Directory with comprehensive doctor profiles, clinic success rates, embryology lab credentials, and procedure cost breakdowns.</p>
-        </div>
-        <div class="ivf-hub-btns">
-          <a class="btn btn-outline" href="fertility-treatment-cost-dubai.html">IVF Cost Guide</a>
-          <a class="btn btn-primary" href="ivf_fertility_directory_landing_page.html" style="background:linear-gradient(135deg,var(--gold-primary),#9e7308);border:none">Open IVF Directory Hub →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Verified Patient Reviews & Testimonials Carousel -->
-    <section class="section" id="reviews">
+    <!-- Healthcare Providers by Dubai District (Strictly 4 per row on Desktop!) -->
+    <section class="section" id="areas">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Verified Patient Reviews & Experiences</h2>
-            <p>Real feedback from patients treated by licensed Dubai doctors, hospitals, and diagnostic centers.</p>
-          </div>
-          <button class="btn btn-outline" onclick="FertiFind.openReview('Dubai Doctors Directory')">★ Submit Patient Review</button>
-        </div>
-
-        <div class="grid-3">
-          <div class="card review" style="background:#ffffff;border:1px solid var(--sand-border);border-radius:16px;padding:22px">
-            <div class="stars">★★★★★</div>
-            <p>“Booking an appointment with Dr. Farida Al Hosani at American Hospital was seamless. She listened to all my cardiac symptoms thoroughly and arranged an echocardiogram immediately.”</p>
-            <div class="reviewer">
-              <div class="avatar" style="background:var(--gold-light);color:var(--gold-primary)">M</div>
-              <div><b>Mariam K.</b><div class="meta">Oud Metha • Cardiology Review</div></div>
-            </div>
-          </div>
-
-          <div class="card review" style="background:#ffffff;border:1px solid var(--sand-border);border-radius:16px;padding:22px">
-            <div class="stars">★★★★★</div>
-            <p>“Did a video consultation with Dr. Laila Al Otaiba for my sudden skin allergy. She evaluated my condition over HD video and sent an e-prescription to my pharmacy within 20 minutes.”</p>
-            <div class="reviewer">
-              <div class="avatar" style="background:var(--gold-light);color:var(--gold-primary)">T</div>
-              <div><b>Tariq S.</b><div class="meta">Dubai Marina • Video Consult Review</div></div>
-            </div>
-          </div>
-
-          <div class="card review" style="background:#ffffff;border:1px solid var(--sand-border);border-radius:16px;padding:22px">
-            <div class="stars">★★★★★</div>
-            <p>“Al Borg Diagnostics home blood draw was punctual and professional. The phlebotomist was extremely gentle, and our comprehensive wellness results were available digitally next day.”</p>
-            <div class="reviewer">
-              <div class="avatar" style="background:var(--gold-light);color:var(--gold-primary)">R</div>
-              <div><b>Reem A.</b><div class="meta">Jumeirah • Diagnostic Lab Review</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Explore Doctors & Clinics by Dubai District -->
-    <section class="section alt" id="districts">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Find Doctors & Healthcare Near You in Dubai</h2>
-            <p>Browse licensed healthcare facilities across Dubai's primary medical and residential communities.</p>
+            <h2>Find Doctors & Hospitals by Dubai District</h2>
+            <p>Compare clinical practices by local proximity and access nearby medical centers.</p>
           </div>
           <a class="link" href="fertifind_dubai_directory_search_page.html">View all districts →</a>
         </div>
         <div class="grid-4">
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Healthcare City (DHCC) <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Jumeirah Clinics & Doctors <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Hospitals in Oud Metha <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Doctors in Dubai Marina <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Downtown Dubai Clinics <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Deira">Deira Medical Specialists <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Specialists in Al Barsha <span>→</span></a>
-          <a class="area" href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Business Bay Doctors <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Dubai+Healthcare+City">Healthcare City (DHCC) <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Jumeirah">Clinics in Jumeirah <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Oud+Metha">Oud Metha Hospitals <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Dubai+Marina">Care in Dubai Marina <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Downtown+Dubai">Downtown Dubai Care <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Deira">Hospitals in Deira <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Al+Barsha">Specialists in Al Barsha <span>→</span></a>
+          <a class="area-card-clean" href="fertifind_dubai_directory_search_page.html?area=Business+Bay">Clinics in Business Bay <span>→</span></a>
         </div>
       </div>
     </section>
 
-    <!-- Provider Registration CTA Section -->
-    <section class="section" id="list">
+    <!-- Patient Reviews & Ratings -->
+    <section class="section alt" id="reviews">
       <div class="container">
-        <div class="cta">
+        <div class="section-head">
           <div>
-            <h2>Are you a Doctor, Hospital, Clinic, Lab or Technician?</h2>
-            <p>Claim your profile, publish accurate clinical services and consultation fees, receive qualified patient leads, and expand your medical practice across Dubai.</p>
+            <h2>Verified Patient Experiences Across Dubai</h2>
+            <p>Authentic moderated reviews covering doctor bedside manner, clinical outcomes, and appointment coordination.</p>
           </div>
-          <button class="btn" style="background:linear-gradient(135deg,var(--gold-primary),#9e7308);color:#ffffff;font-weight:900;padding:14px 26px;border:none;border-radius:10px" onclick="FertiFind.openListBusiness()">List Your Practice →</button>
+          <button class="btn btn-outline" onclick="FertiFind.openReview('General Dubai Healthcare Directory')">★ Write a Review</button>
+        </div>
+        <div class="grid3">
+          <div class="card review">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+                “Booking Dr. Farida Al Hosani through the directory was seamless. The transparent consultation fee and direct coordination saved me hours of phone calls.”
+              </p>
+            </div>
+            <div class="reviewer">
+              <div class="avatar">M</div>
+              <div>
+                <b style="color:var(--navy);font-size:13px">Maryam Al Tayer</b>
+                <div class="muted" style="font-size:12px">American Hospital Patient • Cardiology</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card review">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+                “Dr. Tariq Mansoor evaluated my knee injury thoroughly and recommended a conservative rehabilitation protocol before considering surgery. Truly world-class bedside manner.”
+              </p>
+            </div>
+            <div class="reviewer">
+              <div class="avatar">R</div>
+              <div>
+                <b style="color:var(--navy);font-size:13px">Richard Vance</b>
+                <div class="muted" style="font-size:12px">King's College Hospital • Orthopedic Surgery</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card review">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p style="font-size:14px;color:#40516f;margin:12px 0;line-height:1.6">
+                “We used the IVF Care Hub to compare Orchid Fertility and Dr. Partha Sarathi. Our twin pregnancy was confirmed on cycle 1! We are forever grateful.”
+              </p>
+            </div>
+            <div class="reviewer">
+              <div class="avatar">F</div>
+              <div>
+                <b style="color:var(--navy);font-size:13px">Fatima & Tariq K.</b>
+                <div class="muted" style="font-size:12px">Orchid Fertility Clinic • IVF with PGT-A</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Frequently Asked Questions -->
-    <section class="section alt" id="faq">
+    <!-- FAQs Section (Strictly 2 Columns Everywhere!) -->
+    <section class="section" id="faq">
       <div class="container">
         <div class="section-head">
           <div>
             <h2>Frequently Asked Questions</h2>
-            <p>Everything you need to know about finding doctors, booking appointments, and healthcare in Dubai.</p>
+            <p>Common questions regarding healthcare bookings, DHA credentials, and specialist fees in Dubai.</p>
           </div>
         </div>
         <div class="faq">
           <div class="faq-item">
-            <button class="faq-q">How do I verify a doctor's DHA licensing in Dubai? <span>+</span></button>
-            <div class="faq-a">Every physician, specialist, and consultant listed on the Dubai Doctors Directory displays active Dubai Health Authority (DHA) licensing credentials, facility affiliations, and clinical specialty verification through official UAE healthcare registers.</div>
+            <button class="faq-q">Is booking an appointment through Find Doctor free? <span>+</span></button>
+            <div class="faq-a">Yes. Finding doctors and coordinating appointment requests is 100% free for patients. There are zero platform markups or hidden fees. You pay the clinic or hospital directly for your consultation.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">How do video consultations (telehealth) work? <span>+</span></button>
-            <div class="faq-a">You can choose a doctor offering video consultation, pick an available slot, and receive a secure HD video meeting link. After the consultation, the doctor issues a DHA-approved digital e-prescription valid at pharmacies across the UAE.</div>
+            <button class="faq-q">How are doctor and clinic licenses verified? <span>+</span></button>
+            <div class="faq-a">Every physician, surgeon, hospital, clinic, and laboratory listed is cross-checked against the official Dubai Health Authority (DHA) and Dubai Healthcare City Authority (DHCA) regulatory registries.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">Can diagnostic blood tests and samples be taken at home? <span>+</span></button>
-            <div class="faq-a">Yes. DHA-licensed diagnostic laboratories like Al Borg Diagnostics and Igenomix provide certified mobile phlebotomy teams that visit your home or office anywhere in Dubai.</div>
+            <button class="faq-q">How does video consultation work? <span>+</span></button>
+            <div class="faq-a">When you select Video Tele-Consultation, you receive a direct encrypted video appointment link. You can speak with certified UAE specialists from home and receive official digital prescriptions.</div>
           </div>
           <div class="faq-item">
             <button class="faq-q">Are consultation fees covered by health insurance? <span>+</span></button>
-            <div class="faq-a">Many hospitals and clinics accept direct-billing insurance (Oman Insurance/Sukoon, Nextcare, Daman, Mednet, AXA/GIG, MetLife, Cigna). Self-pay patients can also access transparent upfront consultation pricing.</div>
+            <div class="faq-a">Many hospitals and clinics accept direct-billing insurance (Sukoon, Nextcare, Daman, Mednet, AXA/GIG, MetLife, Cigna). Self-pay patients can access transparent upfront consultation pricing in AED.</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Practice Listing CTA Banner (Original Blue Gradient) -->
+    <section class="section alt">
+      <div class="container">
+        <div class="cta" id="list">
+          <div>
+            <h2>Are you a doctor, clinic, hospital or laboratory in Dubai?</h2>
+            <p>Claim your verified DHA profile, receive direct WhatsApp patient inquiries, update appointment slots, and connect with thousands of patients seeking care every day.</p>
+          </div>
+          <a class="btn btn-outline" href="submit-business.html" style="background:#ffffff;color:var(--navy);font-weight:900">
+            List Your Practice Free →
+          </a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Clean Light Mode Luxury Footer -->
+  <!-- Footer (Original Deep Navy) -->
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="logo" href="index.html" style="color:var(--ink);display:flex;align-items:center;gap:8px">
-            <span class="logo-mark" style="background:var(--gold-light);color:var(--gold-primary);border:1px solid var(--gold-border);width:30px;height:30px;border-radius:6px;display:grid;place-items:center;font-weight:900">🏥</span>
-            <b>Dubai Doctors Directory</b>
+          <a class="logo" href="index.html" style="color:#ffffff">
+            <span class="logo-mark">✚</span>
+            Find Doctor <small>Dubai</small>
           </a>
-          <p style="font-size:13px;max-width:280px;margin-top:12px;line-height:1.6;color:var(--ink-muted)">Dubai's premier healthcare directory connecting patients with verified doctors, hospitals, clinics, diagnostic labs, surgeons, and allied healthcare technicians.</p>
+          <p style="color:#b8c9e5;margin:12px 0 16px;font-size:13px;line-height:1.6">
+            Dubai & UAE's independent healthcare discovery directory. Connecting patients with verified doctors, hospitals, clinics, diagnostic labs, surgeons, and IVF centers.
+          </p>
+          <div class="badge badge-mint" style="font-size:11px">🇦🇪 Verified UAE Health Directory</div>
         </div>
 
         <div>
@@ -1428,7 +1441,7 @@
         </div>
 
         <div>
-          <div class="footer-title">BI Portals & Platform</div>
+          <div class="footer-title">Portals & BI</div>
           <div class="footer-links">
             <a href="dashboard-doctor.html">🩺 Doctor Clinical BI</a>
             <a href="dashboard-patient.html">👤 Patient Health BI</a>
@@ -1454,7 +1467,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 Dubai Doctors Directory. UAE Healthcare Discovery Network.</span>
+        <span>© 2026 Find Doctor Dubai. UAE Healthcare Discovery Network.</span>
         <span>All doctor and hospital credentials verified through the Dubai Health Authority (DHA) registry.</span>
       </div>
     </div>
