@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Patient & Family Healthcare Dashboard | Doctors Directory Dubai</title>
-  <meta name="description" content="Patient & Family Healthcare Dashboard - Manage appointments, join video telehealth, download diagnostic lab reports, and consult DHA verified doctors in Dubai.">
+  <title>Hospital & Clinic Management Dashboard | Doctors Directory Dubai</title>
+  <meta name="description" content="Hospital and Clinic Facility Management Dashboard - Real-time administration of resident doctors, inpatient admissions, OT suites, appointments, and billing.">
   <link rel="stylesheet" href="css/style.css">
 
   <style>
     /* ==========================================================================
-       Patient & Family Dashboard - Unified Design Language
+       Hospital & Clinic Management Dashboard - Unified Design Language
        Adheres to Light Mode palette with clean Navy sidebar from media_1790441929845.png
        ========================================================================== */
     :root {
@@ -531,7 +531,7 @@
       flex-shrink: 0;
     }
 
-    /* Middle Row: Appointments, Doctors, Reviews */
+    /* Middle Row: Appointments, Top Doctors, Reviews */
     .middle-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr;
@@ -616,21 +616,21 @@
       border: 1px solid #fecaca;
     }
 
-    /* Doctor Row */
-    .doc-care-row {
+    /* Doctor List Item */
+    .doc-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 0;
       border-bottom: 1px solid #f1f5f9;
     }
-    .doc-care-row:last-child { border-bottom: none; }
-    .doc-care-info {
+    .doc-row:last-child { border-bottom: none; }
+    .doc-info-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .doc-care-avatar {
+    .doc-avatar {
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -640,25 +640,29 @@
       place-items: center;
       font-size: 16px;
     }
-    .doc-care-name {
+    .doc-name {
       font-size: 13px;
       font-weight: 850;
       color: var(--dash-text);
     }
-    .doc-care-sub {
+    .doc-spec {
       font-size: 11px;
       color: var(--dash-sub);
       margin: 1px 0;
     }
-    .doc-contact-btn {
+    .doc-rating {
       font-size: 11px;
-      font-weight: 750;
-      color: var(--dash-accent-blue);
-      background: #eef5ff;
-      border: 1px solid #c8defc;
-      padding: 4px 8px;
-      border-radius: 6px;
-      cursor: pointer;
+      color: #f59e0b;
+      font-weight: 800;
+    }
+    .doc-rating span {
+      color: var(--dash-sub);
+      font-weight: 600;
+    }
+    .doc-apts {
+      font-size: 11px;
+      color: var(--dash-sub);
+      font-weight: 700;
     }
 
     /* Review Item */
@@ -698,7 +702,7 @@
       margin: 0;
     }
 
-    /* Bottom Grid: Lab Reports, Care Guides, Quick Actions */
+    /* Bottom Grid: Recent Admissions, Bulletins, Quick Actions */
     .bottom-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -833,68 +837,68 @@
 <body>
 
   <!-- ========================================================================
-       Sidebar Navigation (Patient & Family Care Navigator)
+       Sidebar Navigation (Hospital & Clinic Facility)
        ======================================================================== -->
   <aside class="dash-sidebar" id="sidebar">
     <a class="sidebar-brand" href="index.html">
-      <div class="brand-icon">👤</div>
+      <div class="brand-icon">🏥</div>
       <div class="brand-text">
         Doctors Directory
-        <span>Patient Portal</span>
+        <span>Hospital Facility</span>
       </div>
     </a>
 
     <nav class="sidebar-nav">
-      <button type="button" class="nav-item active" onclick="switchPatientTab('overview')">
+      <button type="button" class="nav-item active" onclick="switchHospitalTab('overview')">
         <span class="icon">🏠</span>
         <span>Dashboard</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('profile')">
-        <span class="icon">👤</span>
-        <span>Health Profile</span>
+      <button type="button" class="nav-item" onclick="switchHospitalTab('facility')">
+        <span class="icon">🏥</span>
+        <span>Facility & Branches</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('appointments')">
+      <button type="button" class="nav-item" onclick="switchHospitalTab('doctors')">
+        <span class="icon">👨‍⚕️</span>
+        <span>Resident Doctors</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchHospitalTab('admissions')">
+        <span class="icon">👥</span>
+        <span>Patients & Beds</span>
+      </button>
+      <button type="button" class="nav-item" onclick="switchHospitalTab('appointments')">
         <span class="icon">📅</span>
-        <span>My Appointments</span>
+        <span>OPD & OT Schedule</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('doctors')">
-        <span class="icon">🩺</span>
-        <span>My Care Team</span>
+      <button type="button" class="nav-item" onclick="switchHospitalTab('labs')">
+        <span class="icon">🔬</span>
+        <span>Diagnostic Labs</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('labs')">
-        <span class="icon">🧪</span>
-        <span>Lab Reports</span>
-      </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('prescriptions')">
-        <span class="icon">💊</span>
-        <span>Prescriptions</span>
-      </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('reviews')">
+      <button type="button" class="nav-item" onclick="switchHospitalTab('reviews')">
         <span class="icon">⭐</span>
-        <span>My Reviews</span>
+        <span>Facility Reviews</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('invoices')">
+      <button type="button" class="nav-item" onclick="switchHospitalTab('billing')">
         <span class="icon">💳</span>
-        <span>Invoices & Insurance</span>
+        <span>Billing & Claims</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('guides')">
-        <span class="icon">📚</span>
-        <span>Care Guides</span>
+      <button type="button" class="nav-item" onclick="switchHospitalTab('bulletins')">
+        <span class="icon">📝</span>
+        <span>Bulletins</span>
       </button>
-      <button type="button" class="nav-item" onclick="switchPatientTab('settings')">
+      <button type="button" class="nav-item" onclick="switchHospitalTab('settings')">
         <span class="icon">⚙️</span>
-        <span>Account Settings</span>
+        <span>Facility Settings</span>
       </button>
-      <button type="button" class="nav-item" onclick="handlePatientLogout()">
+      <button type="button" class="nav-item" onclick="handleHospitalLogout()">
         <span class="icon">🚪</span>
         <span>Logout</span>
       </button>
     </nav>
 
     <div class="sidebar-footer-card">
-      <div class="footer-card-icon">👤</div>
+      <div class="footer-card-icon">🏥</div>
       <div class="footer-card-title">Better Healthcare for a Healthier Tomorrow</div>
-      <div class="footer-card-sub">DHA Verified Patient Account</div>
+      <div class="footer-card-sub">DHA Licensed Hospital Portal</div>
     </div>
   </aside>
 
@@ -907,7 +911,7 @@
     <header class="dash-header">
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
-        <input type="text" name="patient_search" placeholder="Search my records" oninput="handleSearch(this.value)">
+        <input type="text" name="hospital_search" placeholder="Search clinic records" oninput="handleSearch(this.value)">
       </div>
 
       <!-- Multi-Role Switcher -->
@@ -915,36 +919,36 @@
         <a class="bi-role-btn" href="admin.html">
           <span>👑</span> Admin Center
         </a>
-        <a class="bi-role-btn" href="dashboard-hospital.html">
+        <a class="bi-role-btn active" href="dashboard-hospital.html">
           <span>🏥</span> Hospital & Clinic
         </a>
         <a class="bi-role-btn" href="dashboard-doctor.html">
           <span>🩺</span> Doctor Specialist
         </a>
-        <a class="bi-role-btn active" href="dashboard-patient.html">
+        <a class="bi-role-btn" href="dashboard-patient.html">
           <span>👤</span> Patient Portal
         </a>
       </nav>
 
       <div class="header-actions">
-        <!-- Patient Verified Badge -->
-        <div class="status-badge" title="DHA Patient ID Verified">
+        <!-- DHA License Badge -->
+        <div class="status-badge" title="DHA Institutional Accreditation Active">
           <span class="status-dot"></span>
-          <span>DHA Verified Patient</span>
+          <span>DHA Verified Hospital</span>
         </div>
 
         <!-- Notification Bell -->
-        <button type="button" class="icon-btn" onclick="openPatientModal('notifModal')" aria-label="Notifications">
+        <button type="button" class="icon-btn" onclick="openHospitalModal('notifModal')" aria-label="Notifications">
           🔔
-          <span class="notif-badge">2</span>
+          <span class="notif-badge">5</span>
         </button>
 
-        <!-- Patient Profile Pill -->
+        <!-- Hospital Admin Profile Pill -->
         <div class="admin-pill">
-          <div class="admin-avatar">👩</div>
+          <div class="admin-avatar">🏥</div>
           <div class="admin-meta">
-            <b>Sarah Johnson</b>
-            <small>DHA #DXB-881920</small>
+            <b>King's College Hospital</b>
+            <small>Facility Director</small>
           </div>
         </div>
       </div>
@@ -956,8 +960,8 @@
       <!-- Welcome Banner -->
       <div class="welcome-row">
         <div class="welcome-text">
-          <h1>Welcome Back, Sarah</h1>
-          <p>Here is your health care journey, upcoming appointments, and lab reports.</p>
+          <h1>Welcome Back, Facility Director</h1>
+          <p>Here's what's happening at King's College Hospital Dubai today.</p>
         </div>
         <div class="time-selector">
           <span>📅</span>
@@ -968,77 +972,77 @@
 
       <!-- 5 KPI Stat Cards -->
       <div class="metrics-grid">
-        <!-- Card 1: Upcoming Appointments -->
+        <!-- Card 1: Resident Doctors -->
         <div class="metric-card">
           <div class="metric-icon-wrap" style="background:#eef5ff; color:#0757d9;">
+            👨‍⚕️
+          </div>
+          <div class="metric-info">
+            <div class="metric-label">Resident Doctors</div>
+            <div class="metric-val">42</div>
+            <div class="metric-change">
+              <span class="change-up">↑ 8%</span>
+              <span class="change-sub">vs last 30 days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Total Patients -->
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:#e9fbf8; color:#10b981;">
+            👥
+          </div>
+          <div class="metric-info">
+            <div class="metric-label">Total Patients</div>
+            <div class="metric-val">1,280</div>
+            <div class="metric-change">
+              <span class="change-up">↑ 16%</span>
+              <span class="change-sub">vs last 30 days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Total Appointments -->
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:#f5f3ff; color:#8b5cf6;">
             📅
           </div>
           <div class="metric-info">
-            <div class="metric-label">Appointments</div>
-            <div class="metric-val">3</div>
+            <div class="metric-label">Facility Bookings</div>
+            <div class="metric-val">846</div>
             <div class="metric-change">
-              <span class="change-up">Next: Tomorrow</span>
-              <span class="change-sub">10:00 AM</span>
+              <span class="change-up">↑ 24%</span>
+              <span class="change-sub">vs last 30 days</span>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Active Care Doctors -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#e9fbf8; color:#10b981;">
-            🩺
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Care Team</div>
-            <div class="metric-val">4</div>
-            <div class="metric-change">
-              <span class="change-up">Specialists</span>
-              <span class="change-sub">Active Care</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Ready Lab Reports -->
-        <div class="metric-card">
-          <div class="metric-icon-wrap" style="background:#f5f3ff; color:#8b5cf6;">
-            🧪
-          </div>
-          <div class="metric-info">
-            <div class="metric-label">Lab Reports</div>
-            <div class="metric-val">8</div>
-            <div class="metric-change">
-              <span class="change-up">1 New Ready</span>
-              <span class="change-sub">Blood Panel</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Submitted Reviews -->
+        <!-- Card 4: Facility Rating -->
         <div class="metric-card">
           <div class="metric-icon-wrap" style="background:#fffbeb; color:#f59e0b;">
             ⭐
           </div>
           <div class="metric-info">
-            <div class="metric-label">My Reviews</div>
-            <div class="metric-val">5</div>
+            <div class="metric-label">Facility Rating</div>
+            <div class="metric-val">4.88</div>
             <div class="metric-change">
-              <span class="change-up">★ 5.0 Rating</span>
-              <span class="change-sub">Verified</span>
+              <span class="change-up">↑ 11%</span>
+              <span class="change-sub">vs last 30 days</span>
             </div>
           </div>
         </div>
 
-        <!-- Card 5: Total Health Spend -->
+        <!-- Card 5: Facility Revenue -->
         <div class="metric-card">
           <div class="metric-icon-wrap" style="background:#ecfeff; color:#0891b2;">
             💳
           </div>
           <div class="metric-info">
-            <div class="metric-label">Health Spend</div>
-            <div class="metric-val">AED 4.2k</div>
+            <div class="metric-label">Facility Billing</div>
+            <div class="metric-val">AED 485k</div>
             <div class="metric-change">
-              <span class="change-up">80% Insured</span>
-              <span class="change-sub">Oman / Daman</span>
+              <span class="change-up">↑ 19%</span>
+              <span class="change-sub">vs last 30 days</span>
             </div>
           </div>
         </div>
@@ -1046,19 +1050,20 @@
 
       <!-- 3 Analytics Charts Grid -->
       <div class="charts-grid">
-        <!-- Chart 1: Hormone & Health Markers Tracker -->
+        <!-- Chart 1: Admissions & OPD Traffic -->
         <div class="chart-card">
           <div class="chart-head">
-            <span class="chart-title">AMH & Follicle Biomarkers</span>
-            <select class="chart-select" name="biomarker_filter">
-              <option>Last 6 Months</option>
-              <option>Full Treatment</option>
+            <span class="chart-title">Admissions & OPD Traffic</span>
+            <select class="chart-select" name="traffic_filter">
+              <option>Last 7 Days</option>
+              <option>Last 30 Days</option>
+              <option>This Quarter</option>
             </select>
           </div>
           <div class="chart-svg-wrap">
             <svg class="chart-line" viewBox="0 0 500 180">
               <defs>
-                <linearGradient id="patLineGrad" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="hospLineGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="#0757d9" stop-opacity="0.25"/>
                   <stop offset="100%" stop-color="#0757d9" stop-opacity="0"/>
                 </linearGradient>
@@ -1068,62 +1073,68 @@
               <line x1="40" y1="100" x2="480" y2="100" stroke="#f1f5f9" stroke-width="1" />
               <line x1="40" y1="140" x2="480" y2="140" stroke="#f1f5f9" stroke-width="1" />
               
-              <text x="15" y="24" fill="#94a3b8" font-size="10">4.5</text>
-              <text x="15" y="64" fill="#94a3b8" font-size="10">3.2</text>
-              <text x="15" y="104" fill="#94a3b8" font-size="10">2.1</text>
-              <text x="15" y="144" fill="#94a3b8" font-size="10">1.0</text>
+              <text x="15" y="24" fill="#94a3b8" font-size="10">250</text>
+              <text x="15" y="64" fill="#94a3b8" font-size="10">180</text>
+              <text x="15" y="104" fill="#94a3b8" font-size="10">100</text>
+              <text x="15" y="144" fill="#94a3b8" font-size="10">40</text>
               
-              <path d="M 60 110 Q 140 95, 200 70 T 320 50 T 420 35 L 420 150 L 60 150 Z" fill="url(#patLineGrad)" />
-              <path d="M 60 110 Q 140 95, 200 70 T 320 50 T 420 35" fill="none" stroke="#0757d9" stroke-width="3" stroke-linecap="round" />
+              <path d="M 60 130 Q 120 100, 180 85 T 300 70 T 420 40 L 420 150 L 60 150 Z" fill="url(#hospLineGrad)" />
+              <path d="M 60 130 Q 120 100, 180 85 T 300 70 T 420 40" fill="none" stroke="#0757d9" stroke-width="3" stroke-linecap="round" />
               
-              <circle cx="60" cy="110" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="200" cy="70" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="320" cy="50" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
-              <circle cx="420" cy="35" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+              <circle cx="60" cy="130" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+              <circle cx="180" cy="85" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+              <circle cx="300" cy="70" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
+              <circle cx="420" cy="40" r="4" fill="#0757d9" stroke="#fff" stroke-width="2"/>
 
-              <text x="50" y="165" fill="#94a3b8" font-size="10">Apr</text>
-              <text x="120" y="165" fill="#94a3b8" font-size="10">May</text>
-              <text x="190" y="165" fill="#94a3b8" font-size="10">Jun</text>
-              <text x="260" y="165" fill="#94a3b8" font-size="10">Jul</text>
-              <text x="330" y="165" fill="#94a3b8" font-size="10">Aug</text>
-              <text x="400" y="165" fill="#94a3b8" font-size="10">Sep</text>
+              <text x="50" y="165" fill="#94a3b8" font-size="10">Mon</text>
+              <text x="110" y="165" fill="#94a3b8" font-size="10">Tue</text>
+              <text x="170" y="165" fill="#94a3b8" font-size="10">Wed</text>
+              <text x="230" y="165" fill="#94a3b8" font-size="10">Thu</text>
+              <text x="290" y="165" fill="#94a3b8" font-size="10">Fri</text>
+              <text x="350" y="165" fill="#94a3b8" font-size="10">Sat</text>
+              <text x="410" y="165" fill="#94a3b8" font-size="10">Sun</text>
             </svg>
           </div>
         </div>
 
-        <!-- Chart 2: Healthcare Spend Breakdown -->
+        <!-- Chart 2: Department Utilization -->
         <div class="chart-card">
           <div class="chart-head">
-            <span class="chart-title">Spend Breakdown</span>
+            <span class="chart-title">Department Utilization</span>
           </div>
           <div class="chart-svg-wrap">
             <div class="chart-donut-wrap">
               <svg width="140" height="140" viewBox="0 0 140 140">
                 <circle cx="70" cy="70" r="54" fill="none" stroke="#f1f5f9" stroke-width="18"/>
                 <circle cx="70" cy="70" r="54" fill="none" stroke="#0757d9" stroke-width="18"
-                        stroke-dasharray="152 188" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
+                        stroke-dasharray="115 225" stroke-dashoffset="0" transform="rotate(-90 70 70)"/>
                 <circle cx="70" cy="70" r="54" fill="none" stroke="#10b981" stroke-width="18"
-                        stroke-dasharray="102 238" stroke-dashoffset="-152" transform="rotate(-90 70 70)"/>
+                        stroke-dasharray="75 265" stroke-dashoffset="-115" transform="rotate(-90 70 70)"/>
                 <circle cx="70" cy="70" r="54" fill="none" stroke="#8b5cf6" stroke-width="18"
-                        stroke-dasharray="86 254" stroke-dashoffset="-254" transform="rotate(-90 70 70)"/>
-                <text x="70" y="66" text-anchor="middle" font-size="16" font-weight="900" fill="#1b254b">4.2k</text>
-                <text x="70" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#707eae">AED Total</text>
+                        stroke-dasharray="60 280" stroke-dashoffset="-190" transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="54" fill="none" stroke="#f59e0b" stroke-width="18"
+                        stroke-dasharray="48 292" stroke-dashoffset="-250" transform="rotate(-90 70 70)"/>
+                <text x="70" y="66" text-anchor="middle" font-size="16" font-weight="900" fill="#1b254b">84%</text>
+                <text x="70" y="80" text-anchor="middle" font-size="9" font-weight="700" fill="#707eae">Occupancy</text>
               </svg>
               <div class="donut-legend">
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#0757d9"></span> Specialist Consults</span> <span>45%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#10b981"></span> Diagnostic Labs</span> <span>30%</span></div>
-                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#8b5cf6"></span> Medications (Rx)</span> <span>25%</span></div>
+                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#0757d9"></span> IVF & Fertility</span> <span>34%</span></div>
+                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#10b981"></span> Cardiology</span> <span>22%</span></div>
+                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#8b5cf6"></span> Maternity & NICU</span> <span>18%</span></div>
+                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#f59e0b"></span> Orthopedics</span> <span>14%</span></div>
+                <div class="legend-item"><span class="legend-label"><span class="legend-dot" style="background:#cbd5e1"></span> Diagnostic Labs</span> <span>12%</span></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Chart 3: Monthly Care Visits -->
+        <!-- Chart 3: Branch Revenue & Claims -->
         <div class="chart-card">
           <div class="chart-head">
-            <span class="chart-title">Care Activity</span>
-            <select class="chart-select" name="care_activity_filter">
-              <option>2026 History</option>
+            <span class="chart-title">Branch Revenue</span>
+            <select class="chart-select" name="branch_revenue_filter">
+              <option>Last 30 Days</option>
+              <option>Last Quarter</option>
             </select>
           </div>
           <div class="chart-svg-wrap">
@@ -1132,290 +1143,305 @@
               <line x1="30" y1="80" x2="270" y2="80" stroke="#f1f5f9" stroke-width="1"/>
               <line x1="30" y1="130" x2="270" y2="130" stroke="#f1f5f9" stroke-width="1"/>
               
-              <text x="10" y="34" fill="#94a3b8" font-size="9">6</text>
-              <text x="10" y="84" fill="#94a3b8" font-size="9">3</text>
-              <text x="10" y="134" fill="#94a3b8" font-size="9">1</text>
+              <text x="10" y="34" fill="#94a3b8" font-size="9">200k</text>
+              <text x="10" y="84" fill="#94a3b8" font-size="9">100k</text>
+              <text x="10" y="134" fill="#94a3b8" font-size="9">20k</text>
 
-              <rect x="50" y="80" width="28" height="60" rx="4" fill="#0757d9"/>
-              <text x="64" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jun</text>
+              <!-- Dubai Hills -->
+              <rect x="50" y="45" width="28" height="95" rx="4" fill="#0757d9"/>
+              <text x="64" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Hills</text>
 
-              <rect x="105" y="60" width="28" height="80" rx="4" fill="#0757d9"/>
-              <text x="119" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jul</text>
+              <!-- Marina -->
+              <rect x="105" y="70" width="28" height="70" rx="4" fill="#14b8a6"/>
+              <text x="119" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Marina</text>
 
-              <rect x="160" y="45" width="28" height="95" rx="4" fill="#0757d9"/>
-              <text x="174" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Aug</text>
+              <!-- Jumeirah -->
+              <rect x="160" y="55" width="28" height="85" rx="4" fill="#8b5cf6"/>
+              <text x="174" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Jumeirah</text>
 
-              <rect x="215" y="30" width="28" height="110" rx="4" fill="#2563eb"/>
-              <text x="229" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">Sep</text>
+              <!-- DHCC -->
+              <rect x="215" y="90" width="28" height="50" rx="4" fill="#f59e0b"/>
+              <text x="229" y="155" text-anchor="middle" fill="#707eae" font-size="9" font-weight="700">DHCC</text>
             </svg>
           </div>
         </div>
       </div>
 
-      <!-- Middle Row: My Appointments, My Doctors, My Reviews -->
+      <!-- Middle Row: Latest Appointments, Resident Doctors, Facility Reviews -->
       <div class="middle-grid">
-        <!-- Box 1: My Appointments -->
+        <!-- Box 1: Latest Appointments -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">My Care Appointments</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchPatientTab('appointments')">View All</a>
+            <h2 class="box-title">Latest Facility Appointments</h2>
+            <a class="view-all-link" href="javascript:void(0)" onclick="switchHospitalTab('appointments')">View All</a>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Doctor</th>
-                <th>Facility</th>
+                <th>Patient</th>
+                <th>Consultant</th>
+                <th>Department</th>
                 <th>Date & Slot</th>
-                <th>Mode</th>
-                <th>Action</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>Dr. Ahmed Khan</b></td>
-                <td>King's College Hospital</td>
-                <td>Sep 29 • 10:00 AM</td>
-                <td><span class="badge-status badge-confirmed">Video Call</span></td>
-                <td><a href="javascript:void(0)" onclick="joinVideoConsult('Dr. Ahmed Khan')" style="color:var(--dash-accent-blue);font-weight:800">Join Call</a></td>
+                <td><b>Sarah Johnson</b></td>
+                <td>Dr. Farida Al Hosani</td>
+                <td>Cardiology</td>
+                <td>Sep 28 • 10:00 AM</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
               </tr>
               <tr>
-                <td><b>Dr. Farida Al Hosani</b></td>
-                <td>American Hospital</td>
-                <td>Oct 02 • 11:30 AM</td>
-                <td><span class="badge-status badge-pending">In-Clinic</span></td>
-                <td><a href="javascript:void(0)" onclick="openPatientModal('rescheduleModal')" style="color:var(--dash-sub);font-weight:700">Manage</a></td>
+                <td><b>Michael Brown</b></td>
+                <td>Dr. Partha Sarathi</td>
+                <td>IVF & Fertility</td>
+                <td>Sep 28 • 11:30 AM</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
               </tr>
               <tr>
-                <td><b>Dr. Partha Sarathi</b></td>
-                <td>Orchid Fertility DHCC</td>
-                <td>Oct 08 • 02:00 PM</td>
-                <td><span class="badge-status badge-confirmed">In-Clinic</span></td>
-                <td><a href="javascript:void(0)" onclick="openPatientModal('rescheduleModal')" style="color:var(--dash-sub);font-weight:700">Manage</a></td>
+                <td><b>Emily Davis</b></td>
+                <td>Dr. Tariq Mansoor</td>
+                <td>Orthopedics</td>
+                <td>Sep 28 • 02:00 PM</td>
+                <td><span class="badge-status badge-pending">Pending</span></td>
               </tr>
               <tr>
-                <td><b>Dr. Tariq Mansoor</b></td>
-                <td>King's College Hospital</td>
-                <td>Sep 14 • Completed</td>
-                <td><span class="badge-status badge-confirmed">Past Visit</span></td>
-                <td><a href="javascript:void(0)" onclick="openPatientModal('reviewModal')" style="color:var(--dash-accent-blue);font-weight:800">Review</a></td>
+                <td><b>James Wilson</b></td>
+                <td>Dr. Mazen Dayeh</td>
+                <td>IVF Genetics</td>
+                <td>Sep 28 • 04:30 PM</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
+              </tr>
+              <tr>
+                <td><b>Olivia Martinez</b></td>
+                <td>Dr. Aisha Patel</td>
+                <td>Maternity Suite</td>
+                <td>Sep 29 • 09:15 AM</td>
+                <td><span class="badge-status badge-confirmed">Confirmed</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Box 2: My Care Team -->
+        <!-- Box 2: Resident Specialist Doctors -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">My Specialist Care Team</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchPatientTab('doctors')">View All</a>
+            <h2 class="box-title">Department Specialists</h2>
+            <a class="view-all-link" href="javascript:void(0)" onclick="switchHospitalTab('doctors')">View All</a>
           </div>
           <div>
-            <div class="doc-care-row">
-              <div class="doc-care-info">
-                <div class="doc-care-avatar">🩺</div>
+            <div class="doc-row">
+              <div class="doc-info-wrap">
+                <div class="doc-avatar">🩺</div>
                 <div>
-                  <div class="doc-care-name">Dr. Ahmed Khan</div>
-                  <div class="doc-care-sub">Consultant Reproductive Medicine</div>
+                  <div class="doc-name">Dr. Partha Sarathi</div>
+                  <div class="doc-spec">HOD IVF & Reproductive Medicine</div>
+                  <div class="doc-rating">★ 4.96 <span>(312 reviews)</span></div>
                 </div>
               </div>
-              <button type="button" class="doc-contact-btn" onclick="joinVideoConsult('Dr. Ahmed Khan')">Message</button>
+              <div class="doc-apts">142 cases</div>
             </div>
 
-            <div class="doc-care-row">
-              <div class="doc-care-info">
-                <div class="doc-care-avatar">🫀</div>
+            <div class="doc-row">
+              <div class="doc-info-wrap">
+                <div class="doc-avatar">🫀</div>
                 <div>
-                  <div class="doc-care-name">Dr. Farida Al Hosani</div>
-                  <div class="doc-care-sub">Cardiology & Heart Health</div>
+                  <div class="doc-name">Dr. Farida Al Hosani</div>
+                  <div class="doc-spec">Consultant Cardiology</div>
+                  <div class="doc-rating">★ 4.95 <span>(214 reviews)</span></div>
                 </div>
               </div>
-              <button type="button" class="doc-contact-btn" onclick="showToast('Calling Dr. Farida clinic desk...')">Call</button>
+              <div class="doc-apts">118 cases</div>
             </div>
 
-            <div class="doc-care-row">
-              <div class="doc-care-info">
-                <div class="doc-care-avatar">🧬</div>
+            <div class="doc-row">
+              <div class="doc-info-wrap">
+                <div class="doc-avatar">🦴</div>
                 <div>
-                  <div class="doc-care-name">Dr. Partha Sarathi</div>
-                  <div class="doc-care-sub">IVF & Embryology Director</div>
+                  <div class="doc-name">Dr. Tariq Mansoor</div>
+                  <div class="doc-spec">Senior Orthopedic Surgeon</div>
+                  <div class="doc-rating">★ 4.92 <span>(318 reviews)</span></div>
                 </div>
               </div>
-              <button type="button" class="doc-contact-btn" onclick="showToast('Connecting with Orchid Fertility coordinator...')">Message</button>
+              <div class="doc-apts">95 cases</div>
             </div>
 
-            <div class="doc-care-row">
-              <div class="doc-care-info">
-                <div class="doc-care-avatar">🦴</div>
+            <div class="doc-row">
+              <div class="doc-info-wrap">
+                <div class="doc-avatar">🧬</div>
                 <div>
-                  <div class="doc-care-name">Dr. Tariq Mansoor</div>
-                  <div class="doc-care-sub">Senior Orthopedics</div>
+                  <div class="doc-name">Dr. Mazen Dayeh</div>
+                  <div class="doc-spec">Clinical Embryology Director</div>
+                  <div class="doc-rating">★ 4.89 <span>(184 reviews)</span></div>
                 </div>
               </div>
-              <button type="button" class="doc-contact-btn" onclick="showToast('Opening follow-up booking...')">Book</button>
+              <div class="doc-apts">88 cases</div>
             </div>
           </div>
         </div>
 
-        <!-- Box 3: My Published Reviews -->
+        <!-- Box 3: Facility Reviews -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">My Published Reviews</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="openPatientModal('reviewModal')">Write New</a>
+            <h2 class="box-title">Recent Facility Reviews</h2>
+            <a class="view-all-link" href="javascript:void(0)" onclick="switchHospitalTab('reviews')">View All</a>
           </div>
           <div>
             <div class="rev-row">
               <div class="rev-head">
                 <div class="rev-user">
-                  <div class="rev-avatar">🩺</div>
-                  <span>Dr. Ahmed Khan</span>
+                  <div class="rev-avatar">SJ</div>
+                  <span>Sarah Johnson</span>
                 </div>
                 <div class="rev-stars">★★★★★</div>
               </div>
-              <p class="rev-text">"Dr. Ahmed answered every question regarding our IVF cycle with extreme kindness and clarity. Highly recommended."</p>
-              <div class="rev-time">Yesterday • Verified Review</div>
+              <p class="rev-text">"State of the art OT and IVF labs at King's College Hospital. The care team and nursing staff were compassionate and ultra-professional."</p>
+              <div class="rev-time">Yesterday • Verified Patient</div>
             </div>
 
             <div class="rev-row">
               <div class="rev-head">
                 <div class="rev-user">
-                  <div class="rev-avatar">🏥</div>
-                  <span>King's College Hospital</span>
+                  <div class="rev-avatar">MB</div>
+                  <span>Michael Brown</span>
                 </div>
                 <div class="rev-stars">★★★★★</div>
               </div>
-              <p class="rev-text">"Pristine facilities and swift lab turnaround. The nursing team made our day surgery completely calm."</p>
-              <div class="rev-time">1 week ago • Verified Review</div>
+              <p class="rev-text">"Seamless admission protocol and instant lab results delivered through the patient portal. Highly recommend Dr. Partha Sarathi."</p>
+              <div class="rev-time">3 days ago • Verified Patient</div>
             </div>
 
             <div class="rev-row">
               <div class="rev-head">
                 <div class="rev-user">
-                  <div class="rev-avatar">🔬</div>
-                  <span>Al Borg Diagnostic Lab</span>
+                  <div class="rev-avatar">ED</div>
+                  <span>Emily Davis</span>
                 </div>
                 <div class="rev-stars">★★★★★</div>
               </div>
-              <p class="rev-text">"Home sample technician arrived promptly and results were uploaded within 6 hours."</p>
-              <div class="rev-time">2 weeks ago • Verified Review</div>
+              <p class="rev-text">"Clean, luxurious facility with private consultation suites in Dubai Hills. World-class medical standards."</p>
+              <div class="rev-time">5 days ago • Verified Patient</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Row: Diagnostic Reports, Care Guides, Patient Quick Actions -->
+      <!-- Bottom Row: Inpatient Admissions, Hospital Bulletins, Quick Actions -->
       <div class="bottom-grid">
-        <!-- Panel 1: Diagnostic Reports -->
+        <!-- Panel 1: Recent Admissions -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">Diagnostic Reports & Labs</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchPatientTab('labs')">View All</a>
+            <h2 class="box-title">Day-Surgery & Inpatient Beds</h2>
+            <a class="view-all-link" href="javascript:void(0)" onclick="switchHospitalTab('admissions')">View All</a>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Test Name</th>
-                <th>Lab</th>
-                <th>Date</th>
-                <th>Action</th>
+                <th>Patient</th>
+                <th>Suite / OT</th>
+                <th>Admitted</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>Comprehensive Blood Panel</b></td>
-                <td>Al Borg Lab</td>
+                <td><b>Fatima Noor</b></td>
+                <td>Suite 402 (Maternity)</td>
+                <td>Sep 27</td>
+                <td><span class="badge-status badge-confirmed">Active Inpatient</span></td>
+              </tr>
+              <tr>
+                <td><b>Rashid Al Maktoum</b></td>
+                <td>OT-3 (Laparoscopy)</td>
                 <td>Sep 28</td>
-                <td><a href="javascript:void(0)" onclick="downloadReport('Blood Panel')" style="color:var(--dash-accent-blue);font-weight:800">PDF ↓</a></td>
+                <td><span class="badge-status badge-pending">Scheduled</span></td>
               </tr>
               <tr>
-                <td><b>Anti-Müllerian Hormone (AMH)</b></td>
-                <td>King's Lab</td>
-                <td>Sep 25</td>
-                <td><a href="javascript:void(0)" onclick="downloadReport('AMH Test')" style="color:var(--dash-accent-blue);font-weight:800">PDF ↓</a></td>
+                <td><b>Zainab K.</b></td>
+                <td>Suite 208 (IVF Day Care)</td>
+                <td>Sep 28</td>
+                <td><span class="badge-status badge-confirmed">Recovery</span></td>
               </tr>
               <tr>
-                <td><b>Pelvic Ultrasound Scan</b></td>
-                <td>American Hosp</td>
-                <td>Sep 18</td>
-                <td><a href="javascript:void(0)" onclick="downloadReport('Ultrasound Scan')" style="color:var(--dash-accent-blue);font-weight:800">PDF ↓</a></td>
-              </tr>
-              <tr>
-                <td><b>Thyroid Function TSH</b></td>
-                <td>Al Borg Lab</td>
-                <td>Sep 10</td>
-                <td><a href="javascript:void(0)" onclick="downloadReport('Thyroid TSH')" style="color:var(--dash-accent-blue);font-weight:800">PDF ↓</a></td>
+                <td><b>David Chen</b></td>
+                <td>Suite 512 (Cardiac)</td>
+                <td>Sep 26</td>
+                <td><span class="badge-status badge-confirmed">Discharging</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Panel 2: Recommended Health Guides -->
+        <!-- Panel 2: Clinical Bulletins -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">Recommended Health Guides</h2>
-            <a class="view-all-link" href="javascript:void(0)" onclick="switchPatientTab('guides')">View All</a>
+            <h2 class="box-title">Hospital Bulletins & Protocols</h2>
+            <a class="view-all-link" href="javascript:void(0)" onclick="switchHospitalTab('bulletins')">View All</a>
           </div>
           <table class="dash-table">
             <thead>
               <tr>
-                <th>Guide Title</th>
-                <th>Category</th>
-                <th>Read</th>
+                <th>Bulletin Title</th>
+                <th>Scope</th>
+                <th>Updated</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><b>Understanding Your AMH Test in Dubai</b></td>
-                <td>Fertility</td>
-                <td><a href="fertility-treatment-cost-dubai.html" style="color:var(--dash-accent-blue);font-weight:800">Read →</a></td>
+                <td><b>DHA 2026 IVF Protocol Updates</b></td>
+                <td><span class="badge-status badge-confirmed">Published</span></td>
+                <td>Sep 20</td>
               </tr>
               <tr>
-                <td><b>Preparing for Video Telehealth in UAE</b></td>
-                <td>Telehealth</td>
-                <td><a href="fertility-treatment-cost-dubai.html" style="color:var(--dash-accent-blue);font-weight:800">Read →</a></td>
+                <td><b>Operation Theatre Sterility Audit</b></td>
+                <td><span class="badge-status badge-confirmed">Published</span></td>
+                <td>Sep 15</td>
               </tr>
               <tr>
-                <td><b>DHA Insurance Claims for Diagnostics</b></td>
-                <td>Billing</td>
-                <td><a href="fertility-treatment-cost-dubai.html" style="color:var(--dash-accent-blue);font-weight:800">Read →</a></td>
+                <td><b>Telemedicine Tariffs & Insurance Guide</b></td>
+                <td><span class="badge-status badge-confirmed">Published</span></td>
+                <td>Sep 10</td>
               </tr>
               <tr>
-                <td><b>Nutrition & Lifestyle Protocols for PCOS</b></td>
-                <td>Wellness</td>
-                <td><a href="fertility-treatment-cost-dubai.html" style="color:var(--dash-accent-blue);font-weight:800">Read →</a></td>
+                <td><b>Diagnostic Lab ISO-15189 Renewal</b></td>
+                <td><span class="badge-status badge-confirmed">Published</span></td>
+                <td>Sep 05</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Panel 3: Patient Quick Actions -->
+        <!-- Panel 3: Quick Actions -->
         <div class="dash-box">
           <div class="box-head">
-            <h2 class="box-title">Patient Quick Actions</h2>
+            <h2 class="box-title">Facility Quick Actions</h2>
           </div>
           <div class="actions-grid">
-            <button type="button" class="action-btn-tile" onclick="openPatientModal('bookDoctorModal')">
-              <span class="action-ico">🩺</span>
-              <span>Book Specialist</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('addDoctorModal')">
+              <span class="action-ico">👨‍⚕️</span>
+              <span>Add Resident Doctor</span>
             </button>
-            <button type="button" class="action-btn-tile" onclick="openPatientModal('homeSampleModal')">
-              <span class="action-ico">🔬</span>
-              <span>Home Lab Sample</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('bookOTModal')">
+              <span class="action-ico">🏥</span>
+              <span>Book OT / Suite</span>
             </button>
-            <button type="button" class="action-btn-tile" onclick="downloadReport('Latest Complete Medical Summary')">
-              <span class="action-ico">📄</span>
-              <span>Download Health PDF</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('addServiceModal')">
+              <span class="action-ico">➕</span>
+              <span>Add Department</span>
             </button>
-            <button type="button" class="action-btn-tile" onclick="joinVideoConsult('On-Call Consultant')">
-              <span class="action-ico">📹</span>
-              <span>Consult Online Now</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('manageBranchesModal')">
+              <span class="action-ico">🏢</span>
+              <span>Manage Branches</span>
             </button>
-            <button type="button" class="action-btn-tile" onclick="openPatientModal('reviewModal')">
-              <span class="action-ico">⭐</span>
-              <span>Submit Review</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('uploadTariffModal')">
+              <span class="action-ico">📑</span>
+              <span>Upload Tariffs</span>
             </button>
-            <button type="button" class="action-btn-tile" onclick="openPatientModal('uploadDocModal')">
-              <span class="action-ico">📁</span>
-              <span>Upload Document</span>
+            <button type="button" class="action-btn-tile" onclick="openHospitalModal('exportBillingModal')">
+              <span class="action-ico">💳</span>
+              <span>Export Billing</span>
             </button>
           </div>
         </div>
@@ -1425,194 +1451,108 @@
   </main>
 
   <!-- ========================================================================
-       Interactive Modals for Patient Quick Actions
+       Interactive Modals for Hospital Quick Actions
        ======================================================================== -->
 
-  <!-- Modal 1: Book Specialist Doctor -->
-  <div class="ff-modal-overlay" id="bookDoctorModal">
+  <!-- Modal 1: Add Resident Doctor -->
+  <div class="ff-modal-overlay" id="addDoctorModal">
     <div class="ff-modal-card">
       <div class="ff-modal-header">
-        <h3>Book Specialist Consultation</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('bookDoctorModal')">✕</button>
+        <h3>Add Resident Doctor / Consultant</h3>
+        <button type="button" class="icon-btn" onclick="closeHospitalModal('addDoctorModal')">✕</button>
       </div>
-      <form onsubmit="handleFormSubmit(event, 'Appointment request confirmed with specialist doctor')">
+      <form onsubmit="handleFormSubmit(event, 'Resident doctor added and verified with DHA')">
         <div class="ff-modal-body">
-          <select name="selected_specialist" required>
-            <option>Select Specialist Doctor</option>
-            <option>Dr. Ahmed Khan (Cardiology & Reproductive)</option>
-            <option>Dr. Farida Al Hosani (Cardiology)</option>
-            <option>Dr. Partha Sarathi (IVF Specialist)</option>
-            <option>Dr. Tariq Mansoor (Orthopedics)</option>
-            <option>Dr. Aisha Patel (Maternity & Obstetrics)</option>
+          <input type="text" name="doctor_name" placeholder="Doctor Full Name" required>
+          <input type="text" name="doctor_specialty" placeholder="Clinical Specialty" required>
+          <input type="text" name="dha_license" placeholder="DHA License Number" required>
+          <select name="department">
+            <option>Select Hospital Department</option>
+            <option>IVF & Reproductive Medicine</option>
+            <option>Cardiology & Heart Care</option>
+            <option>Orthopedics & Sports Medicine</option>
+            <option>Maternity & Obstetrics</option>
+            <option>Clinical Pathology & Genetics</option>
           </select>
-          <select name="consult_type">
-            <option>In-Clinic Face-to-Face Visit</option>
-            <option>Video Telehealth Consultation</option>
-            <option>Doctor at Home Check</option>
-          </select>
-          <input type="date" name="preferred_date" required>
-          <select name="time_slot">
-            <option>Morning (09:00 AM - 12:00 PM)</option>
-            <option>Afternoon (12:00 PM - 04:00 PM)</option>
-            <option>Evening (04:00 PM - 08:00 PM)</option>
-          </select>
-          <textarea name="notes" placeholder="Reason for consultation" rows="2"></textarea>
+          <input type="email" name="doctor_email" placeholder="Doctor Hospital Email" required>
         </div>
         <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closePatientModal('bookDoctorModal')">Cancel</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeHospitalModal('addDoctorModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Add Resident Doctor →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Book OT / Suite -->
+  <div class="ff-modal-overlay" id="bookOTModal">
+    <div class="ff-modal-card">
+      <div class="ff-modal-header">
+        <h3>Schedule Operation Theatre / Bed Suite</h3>
+        <button type="button" class="icon-btn" onclick="closeHospitalModal('bookOTModal')">✕</button>
+      </div>
+      <form onsubmit="handleFormSubmit(event, 'OT Suite reservation confirmed')">
+        <div class="ff-modal-body">
+          <input type="text" name="patient_name" placeholder="Patient Full Name" required>
+          <select name="ot_room">
+            <option>Select OT / Suite</option>
+            <option>OT-1 (General Surgery)</option>
+            <option>OT-2 (Laparoscopy Suite)</option>
+            <option>OT-3 (IVF Oocyte Retrieval Suite)</option>
+            <option>Maternity Private Suite 401</option>
+            <option>Day Care Recovery Bay A</option>
+          </select>
+          <input type="text" name="lead_surgeon" placeholder="Lead Surgeon Name" required>
+          <input type="datetime-local" name="procedure_datetime" required>
+        </div>
+        <div class="ff-modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeHospitalModal('bookOTModal')">Cancel</button>
           <button type="submit" class="btn btn-primary btn-sm">Confirm Booking →</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Modal 2: Home Lab Sample Request -->
-  <div class="ff-modal-overlay" id="homeSampleModal">
-    <div class="ff-modal-card">
-      <div class="ff-modal-header">
-        <h3>Request Home Sample Collection</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('homeSampleModal')">✕</button>
-      </div>
-      <form onsubmit="handleFormSubmit(event, 'DHA licensed phlebotomist scheduled for home collection')">
-        <div class="ff-modal-body">
-          <input type="text" name="delivery_address" placeholder="Dubai Home Address" required>
-          <select name="test_package">
-            <option>Complete Blood & Metabolic Panel</option>
-            <option>Fertility Hormone Panel (AMH, FSH, LH, E2)</option>
-            <option>Thyroid Full Profile (TSH, FT3, FT4)</option>
-            <option>Vitamin D3 & B12 Test</option>
-          </select>
-          <input type="datetime-local" name="collection_slot" required>
-          <input type="tel" name="contact_phone" placeholder="Contact Mobile Number" value="+971 50 123 4567" required>
-        </div>
-        <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closePatientModal('homeSampleModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm">Schedule Collection →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal 3: Submit Doctor Review -->
-  <div class="ff-modal-overlay" id="reviewModal">
-    <div class="ff-modal-card">
-      <div class="ff-modal-header">
-        <h3>Submit Doctor / Facility Review</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('reviewModal')">✕</button>
-      </div>
-      <form onsubmit="handleFormSubmit(event, 'Review submitted successfully and sent for moderation')">
-        <div class="ff-modal-body">
-          <select name="review_target" required>
-            <option>Select Doctor or Hospital</option>
-            <option>Dr. Ahmed Khan (Cardiology)</option>
-            <option>Dr. Farida Al Hosani (Cardiology)</option>
-            <option>Dr. Partha Sarathi (IVF DHCC)</option>
-            <option>King's College Hospital Dubai</option>
-            <option>American Hospital Dubai</option>
-          </select>
-          <select name="star_rating">
-            <option>⭐⭐⭐⭐⭐ (5.0 Excellent)</option>
-            <option>⭐⭐⭐⭐ (4.0 Very Good)</option>
-            <option>⭐⭐⭐ (3.0 Good)</option>
-          </select>
-          <textarea name="review_comment" placeholder="Write your experience" rows="4" required></textarea>
-        </div>
-        <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closePatientModal('reviewModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm">Publish Review →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal 4: Upload Medical Document -->
-  <div class="ff-modal-overlay" id="uploadDocModal">
-    <div class="ff-modal-card">
-      <div class="ff-modal-header">
-        <h3>Upload Medical Document / Lab</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('uploadDocModal')">✕</button>
-      </div>
-      <form onsubmit="handleFormSubmit(event, 'Medical record encrypted and saved to your health chart')">
-        <div class="ff-modal-body">
-          <input type="text" name="doc_title" placeholder="Document Title" required>
-          <select name="doc_category">
-            <option>Diagnostic Lab Result</option>
-            <option>Radiology & Ultrasound</option>
-            <option>Physician Prescription</option>
-            <option>Insurance Pre-authorization</option>
-          </select>
-          <input type="file" name="doc_file" required>
-        </div>
-        <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closePatientModal('uploadDocModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm">Upload Record →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal 5: Reschedule Appointment -->
-  <div class="ff-modal-overlay" id="rescheduleModal">
-    <div class="ff-modal-card">
-      <div class="ff-modal-header">
-        <h3>Manage Care Appointment</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('rescheduleModal')">✕</button>
-      </div>
-      <form onsubmit="handleFormSubmit(event, 'Appointment slot updated')">
-        <div class="ff-modal-body">
-          <p style="font-size:12px;color:var(--dash-sub);margin:0">Choose a new date and time for your consultation.</p>
-          <input type="date" name="new_date" required>
-          <select name="new_slot">
-            <option>10:00 AM - 10:30 AM</option>
-            <option>02:00 PM - 02:30 PM</option>
-            <option>04:30 PM - 05:00 PM</option>
-          </select>
-        </div>
-        <div class="ff-modal-footer">
-          <button type="button" class="btn btn-outline btn-sm" onclick="closePatientModal('rescheduleModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm">Reschedule Slot →</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal 6: Notifications Modal -->
+  <!-- Modal 3: Notifications Modal -->
   <div class="ff-modal-overlay" id="notifModal">
     <div class="ff-modal-card">
       <div class="ff-modal-header">
-        <h3>Patient Notifications</h3>
-        <button type="button" class="icon-btn" onclick="closePatientModal('notifModal')">✕</button>
+        <h3>Hospital Facility Notifications</h3>
+        <button type="button" class="icon-btn" onclick="closeHospitalModal('notifModal')">✕</button>
       </div>
       <div class="ff-modal-body">
         <div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
-          <b>📅 Appointment Reminder:</b> Video consult with Dr. Ahmed Khan tomorrow at 10:00 AM.
+          <b>🏥 New Patient Booking:</b> Sarah Johnson booked IVF Consultation for Sep 28, 10:00 AM.
         </div>
         <div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
-          <b>🧪 Lab Alert:</b> Blood Panel test completed by Al Borg Laboratory. PDF ready for download.
+          <b>🔬 Lab Result Ready:</b> Hormone panel for Patient #DXB-881920 processed.
+        </div>
+        <div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+          <b>📋 DHA Inspection:</b> Annual accreditation audit scheduled for Nov 14, 2026.
         </div>
       </div>
       <div class="ff-modal-footer">
-        <button type="button" class="btn btn-primary btn-sm" onclick="closePatientModal('notifModal')">Mark All Read</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeHospitalModal('notifModal')">Mark All Read</button>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification Container -->
-  <div id="patToast" style="position:fixed;bottom:24px;right:24px;background:#102244;color:#ffffff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;display:none;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,0.2)"></div>
+  <div id="hospToast" style="position:fixed;bottom:24px;right:24px;background:#102244;color:#ffffff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:700;display:none;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,0.2)"></div>
 
   <script>
-    function openPatientModal(modalId) {
+    function openHospitalModal(modalId) {
       const modal = document.getElementById(modalId);
       if (modal) modal.classList.add('active');
     }
 
-    function closePatientModal(modalId) {
+    function closeHospitalModal(modalId) {
       const modal = document.getElementById(modalId);
       if (modal) modal.classList.remove('active');
     }
 
     function showToast(msg) {
-      const toast = document.getElementById('patToast');
+      const toast = document.getElementById('hospToast');
       if (toast) {
         toast.textContent = msg;
         toast.style.display = 'block';
@@ -1627,26 +1567,18 @@
       showToast(successMsg);
     }
 
-    function switchPatientTab(tab) {
-      showToast(`Loading your ${tab.toUpperCase()} records...`);
-    }
-
-    function joinVideoConsult(doctor) {
-      showToast(`Launching encrypted video consult with ${doctor}...`);
-    }
-
-    function downloadReport(reportName) {
-      showToast(`Generating DHA verified PDF for "${reportName}"... Download starting.`);
+    function switchHospitalTab(tab) {
+      showToast(`Navigating to ${tab.toUpperCase()} module...`);
     }
 
     function handleSearch(val) {
       if (val.length > 2) {
-        showToast(`Searching patient health records for: "${val}"`);
+        showToast(`Searching facility records for: "${val}"`);
       }
     }
 
-    function handlePatientLogout() {
-      if (confirm('Log out from Patient Health Portal?')) {
+    function handleHospitalLogout() {
+      if (confirm('Log out from Hospital & Clinic Facility Portal?')) {
         window.location.href = 'auth.html';
       }
     }

@@ -134,11 +134,12 @@
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;padding:13px">Log In to Account →</button>
 
-            <div class="demo-auth-strip">
-              <span>Quick Role Access:</span>
-              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Doctor Portal</button>
+            <div class="demo-auth-strip" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0">
+              <span style="font-size:11px;font-weight:750;color:var(--muted)">Quick 4-Role Access:</span>
+              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">👑 Super Admin</a>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('hospital')">🏥 Hospital & Clinic</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('doctor')">🩺 Doctor Specialist</button>
               <button type="button" class="btn btn-outline btn-xs" onclick="demoLogin('patient')">👤 Patient Portal</button>
-              <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">👑 Admin Center</a>
             </div>
 
             <p style="text-align:center;font-size:12px;color:var(--muted);margin:16px 0 0">
@@ -383,21 +384,25 @@
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim().toLowerCase();
       let role = 'patient';
-      let name = 'Mariam Al Falasi';
+      let name = 'Sarah Johnson';
       let targetUrl = 'dashboard-patient.html';
 
       if (email.includes('admin')) {
         role = 'admin';
-        name = 'Directory Admin';
+        name = 'Super Admin';
         targetUrl = 'admin.html';
-      } else if (email.includes('clinic') || email.includes('dr') || email.includes('doctor') || email.includes('hospital') || email.includes('lab')) {
+      } else if (email.includes('hospital') || email.includes('clinic') || email.includes('facility')) {
+        role = 'hospital';
+        name = "King's College Hospital";
+        targetUrl = 'dashboard-hospital.html';
+      } else if (email.includes('dr') || email.includes('doctor') || email.includes('specialist')) {
         role = 'doctor';
-        name = 'Dr. Partha Sarathi (DHCC)';
+        name = 'Dr. Ahmed Khan';
         targetUrl = 'dashboard-doctor.html';
       }
 
       localStorage.setItem('ff_user', JSON.stringify({ name, email, role, loggedInAt: new Date().toISOString() }));
-      FertiFind.toast(`Welcome back, ${name}! Redirecting to dashboard...`);
+      FertiFind.toast(`Welcome back, ${name}! Redirecting to ${role.toUpperCase()} dashboard...`);
       setTimeout(() => { window.location.href = targetUrl; }, 800);
     }
 
@@ -421,10 +426,15 @@
       }
       localStorage.setItem('ff_user', JSON.stringify(userData));
 
-      if (role === 'doctor' || role === 'clinic' || role === 'hospital') {
-        FertiFind.toast(`Account created for ${name}! Please submit your practice details.`, 4000);
+      if (role === 'doctor') {
+        FertiFind.toast(`Doctor account created for ${name}! Please complete credential submission.`, 4000);
         setTimeout(() => {
-          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}&mobile=${encodeURIComponent(mobile)}`;
+          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=doctor&mobile=${encodeURIComponent(mobile)}`;
+        }, 800);
+      } else if (role === 'clinic' || role === 'hospital') {
+        FertiFind.toast(`Facility account created for ${name}! Please submit facility licensure.`, 4000);
+        setTimeout(() => {
+          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=clinic&mobile=${encodeURIComponent(mobile)}`;
         }, 800);
       } else {
         FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
@@ -439,27 +449,38 @@
     }
 
     function demoLogin(role) {
-      if (role === 'doctor') {
+      if (role === 'hospital') {
         const user = {
-          name: 'Dr. Partha Sarathi Das',
-          email: 'dr.das@orchidfertility.ae',
-          role: 'doctor',
-          facility: 'Orchid Fertility Clinic (DHCC)',
+          name: "King's College Hospital Dubai",
+          email: 'admin@kingscollegehospital.ae',
+          role: 'hospital',
+          facility: "King's College Hospital (Dubai Hills & Marina)",
           loggedInAt: new Date().toISOString()
         };
         localStorage.setItem('ff_user', JSON.stringify(user));
-        FertiFind.toast(`Signed in as Dr. Partha Sarathi Das (Doctor)`);
+        FertiFind.toast(`Signed in as King's College Hospital (Facility Director)`);
+        setTimeout(() => { window.location.href = 'dashboard-hospital.html'; }, 600);
+      } else if (role === 'doctor') {
+        const user = {
+          name: 'Dr. Ahmed Khan',
+          email: 'dr.ahmed.khan@kingscollegehospital.ae',
+          role: 'doctor',
+          facility: 'King\'s College Hospital & Dubai Hills Clinic',
+          loggedInAt: new Date().toISOString()
+        };
+        localStorage.setItem('ff_user', JSON.stringify(user));
+        FertiFind.toast(`Signed in as Dr. Ahmed Khan (Consultant Specialist)`);
         setTimeout(() => { window.location.href = 'dashboard-doctor.html'; }, 600);
       } else if (role === 'patient') {
         const user = {
-          name: 'Mariam Al Hashemi',
-          email: 'mariam.hashemi@example.ae',
+          name: 'Sarah Johnson',
+          email: 'sarah.johnson@example.ae',
           role: 'patient',
           dhaId: 'DXB-PAT-881920',
           loggedInAt: new Date().toISOString()
         };
         localStorage.setItem('ff_user', JSON.stringify(user));
-        FertiFind.toast(`Signed in as Mariam Al Hashemi (Patient)`);
+        FertiFind.toast(`Signed in as Sarah Johnson (Verified Patient)`);
         setTimeout(() => { window.location.href = 'dashboard-patient.html'; }, 600);
       } else if (role === 'admin') {
         window.location.href = 'admin.html';

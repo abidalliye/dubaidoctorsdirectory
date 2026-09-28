@@ -259,8 +259,8 @@
     .bi-role-switcher {
       display: flex;
       align-items: center;
-      background: #fbf5e6;
-      border: 1px solid #e8d7ad;
+      background: #eef5ff;
+      border: 1px solid #d4e4fc;
       border-radius: 30px;
       padding: 3px 4px;
       gap: 3px;
@@ -919,16 +919,19 @@
         <input type="text" id="globalSearch" name="global_search" placeholder="Search Directory Records" oninput="handleGlobalSearch(this.value)">
       </div>
 
-      <!-- Multi-Role BI Switcher -->
+      <!-- Multi-Role Switcher -->
       <nav class="bi-role-switcher" aria-label="Portal Mode">
+        <a class="bi-role-btn active" href="admin.html">
+          <span>👑</span> Admin Center
+        </a>
+        <a class="bi-role-btn" href="dashboard-hospital.html">
+          <span>🏥</span> Hospital & Clinic
+        </a>
         <a class="bi-role-btn" href="dashboard-doctor.html">
-          <span>🩺</span> Doctor & Clinic BI
+          <span>🩺</span> Doctor Specialist
         </a>
         <a class="bi-role-btn" href="dashboard-patient.html">
-          <span>👤</span> Patient Health BI
-        </a>
-        <a class="bi-role-btn active" href="admin.html">
-          <span>👑</span> Admin BI Center
+          <span>👤</span> Patient Portal
         </a>
       </nav>
 
