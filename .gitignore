@@ -16,3 +16,6 @@ npm-debug.log
 
 # Surge local domain cache
 CNAME
+
+# Temporary scratch scripts
+scratch/
