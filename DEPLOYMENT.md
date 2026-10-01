@@ -8,7 +8,7 @@
 - The initial schema and 12 legacy provider listings have been imported. All listings are unverified.
 - The database connection is stored as a Netlify secret, not in this repository.
 
-Use Netlify Free for the Next.js frontend and the NestJS API in Netlify Functions, plus Neon Free for PostgreSQL/PostGIS. No AWS account, always-running server, Redis instance or Typesense subscription is required for the initial directory. Existing Redis/Typesense and Docker support remain optional paths for growth.
+Use Netlify Free for the original HTML frontend and the NestJS API in Netlify Functions, plus Neon Free for PostgreSQL/PostGIS. No AWS account, always-running server, Redis instance or Typesense subscription is required for the initial directory. Existing Redis/Typesense and Docker support remain optional paths for growth.
 
 Netlify supports Next.js SSR/App Router through its automatic adapter: https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
 Free hosting has usage allowances and can pause when exhausted: https://www.netlify.com/pricing/
@@ -32,21 +32,21 @@ For future schema changes, use versioned migrations. Do not treat `db:init` as a
 
 ## 2. Connect the repository to Netlify
 
-Import the Git repository in Netlify. Select the Free plan. Keep the base directory at repository root, and select `apps/web` as the package directory in the Netlify UI so its Next.js adapter detects the workspace. The root `netlify.toml` specifies:
+Import the Git repository in Netlify. Select the Free plan. Keep the base directory at repository root, leave the package directory empty and remove the Next.js runtime. The root `netlify.toml` specifies:
 
-- Build command: `npm run build` (compiles NestJS before Next.js).
-- Publish directory: `apps/web/.next`.
+- Build command: `npm run build:site` (compiles NestJS and copies original public website assets).
+- Publish directory: `dist/site`.
 - Functions directory: `netlify/functions`.
 - Node version: 22.
 - API rewrite: `/v1/*` to the NestJS serverless function.
 
-Use automatic Next.js framework detection; do not choose a static HTML deployment or add an SPA catch-all redirect.
+The published frontend is the original multi-page HTML site; do not select `apps/web`, install the Next.js runtime or add an SPA catch-all redirect. Only allowlisted website assets and public directory data are published. Private fixture JSON files are excluded.
 
 ## 3. Set runtime environment variables
 
 Add `DATABASE_URL` and `DB_POOL_SIZE=2` in Netlify's environment-variable settings, available to Functions/runtime. Use the pooled Neon URL. Never prefix database credentials with `NEXT_PUBLIC_`.
 
-Leave `API_URL` unset: server-rendered pages use the current Netlify deploy URL to reach its API. Set `WEB_ORIGIN` to the site's public origin if a browser client later calls the API directly. Current pages make API calls on the server.
+Leave `API_URL` unset. The directory calls `/v1/providers` on the same origin. Set `WEB_ORIGIN` to the site's public origin for cross-origin clients. Existing demo authentication and dashboard writes are not migrated to Neon.
 
 Leave `REDIS_URL` and `TYPESENSE_API_KEY` unset for the initial free setup. PostgreSQL handles search and geo queries. Do not copy local Docker secrets or localhost database URLs into Netlify.
 

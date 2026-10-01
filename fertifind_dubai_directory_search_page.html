@@ -2094,9 +2094,10 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/site.js"></script>
+  <script src="js/directory-api.js"></script>
   <script>
     // --- Live Filter Logic & URL Parameter Parser ---
-    (function () {
+    (async function () {
       const cardsWrap = document.getElementById('cards');
 
       // Dynamically load submitted listings from localStorage so newly registered providers appear immediately
@@ -2129,7 +2130,7 @@
               <div class="card-info">
                 <span class="type-badge">${item.category || 'Provider'}</span>
                 <span class="badge badge-mint">✓ ${item.dhaLicense || 'DHA Verified'}</span>
-                <h3><a href="${item.type === \'hospital\' || item.type === \'clinic\' ? \'fertifind_hospital_profile_page.html\' : item.type === \'lab\' ? \'fertifind_labs_profile_page.html\' : \'fertifind_doctor_profile_page.html\'}?name=${encodeURIComponent(item.name)}">${item.name}</a></h3>
+                <h3><a href="${item.type === 'hospital' || item.type === 'clinic' ? 'fertifind_hospital_profile_page.html' : item.type === 'lab' ? 'fertifind_labs_profile_page.html' : 'fertifind_doctor_profile_page.html'}?name=${encodeURIComponent(item.name)}">${item.name}</a></h3>
                 <div class="card-sub">${item.leadDoctor || 'Lead Specialist'} • ${item.address || item.area || 'Dubai'}</div>
                 <div class="card-rating"><span class="stars">★★★★★</span> <b>5.0</b> <span class="muted">(New Verified Listing)</span></div>
                 <div class="card-location">📍 <b>${item.area || 'Dubai'}</b> • ${item.yearsInDubai || '1+'} Yrs Established</div>
@@ -2155,7 +2156,7 @@
               </div>
               <div class="card-actions">
                 <button class="btn btn-outline" onclick="FertiFind.openReview('${item.name}')">Review</button>
-                <a class="btn btn-soft" href="${item.type === \'hospital\' || item.type === \'clinic\' ? \'fertifind_hospital_profile_page.html\' : item.type === \'lab\' ? \'fertifind_labs_profile_page.html\' : \'fertifind_doctor_profile_page.html\'}?name=${encodeURIComponent(item.name)}">View Profile →</a>
+                <a class="btn btn-soft" href="${item.type === 'hospital' || item.type === 'clinic' ? 'fertifind_hospital_profile_page.html' : item.type === 'lab' ? 'fertifind_labs_profile_page.html' : 'fertifind_doctor_profile_page.html'}?name=${encodeURIComponent(item.name)}">View Profile →</a>
                 <button class="btn btn-primary" onclick="FertiFind.openBooking('${item.name}','Consultation')">Book</button>
               </div>
             </div>
@@ -2170,6 +2171,7 @@
         });
       }
 
+      if (window.loadDirectoryProviders) await window.loadDirectoryProviders(cardsWrap);
       const cards = [...document.querySelectorAll('.provider')];
       const q = document.getElementById('q'), type = document.getElementById('type'), area = document.getElementById('area');
       const resultCount = document.getElementById('resultCount'), resultTitle = document.getElementById('resultTitle'), empty = document.getElementById('empty');

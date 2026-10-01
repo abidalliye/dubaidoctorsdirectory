@@ -5,6 +5,7 @@
     "apps/*"
   ],
   "scripts": {
+    "build:site": "npm run build -w @fertifind/api && node scripts/build-site.mjs",
     "dev:web": "npm run dev -w @fertifind/web",
     "dev:api": "npm run dev -w @fertifind/api",
     "build": "npm run build --workspaces",
