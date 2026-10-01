@@ -189,6 +189,7 @@
                   <span>Hospital/Lab</span>
                 </div>
               </div>
+              <div class="role-picker"><button type="button" class="role-chip" id="p-chip-lab" onclick="selectPageRole('lab')">Lab</button><button type="button" class="role-chip" id="p-chip-surgeon" onclick="selectPageRole('surgeon')">Surgeon</button><button type="button" class="role-chip" id="p-chip-technician" onclick="selectPageRole('technician')">Technician</button></div>
               <input type="hidden" id="pRegRole" name="role" value="patient">
             </div>
 
@@ -357,7 +358,7 @@
     }
 
     function selectPageRole(role) {
-      ['patient', 'doctor', 'clinic', 'hospital'].forEach(r => {
+      ['patient', 'doctor', 'clinic', 'hospital', 'lab', 'surgeon', 'technician'].forEach(r => {
         const chip = document.getElementById('p-chip-' + r);
         if (chip) chip.classList.toggle('active', r === role);
       });
@@ -367,11 +368,11 @@
       const nameInput = document.getElementById('pRegName');
       const submitBtn = document.getElementById('pRegSubmitBtn');
 
-      if (role === 'doctor') {
+      if (['doctor','surgeon','technician'].includes(role)) {
         if (notice) notice.style.display = 'flex';
         if (nameInput) nameInput.placeholder = 'Doctor Full Name';
         if (submitBtn) submitBtn.textContent = 'Register Doctor & Continue →';
-      } else if (role === 'clinic' || role === 'hospital') {
+      } else if (['clinic','hospital','lab'].includes(role)) {
         if (notice) notice.style.display = 'flex';
         if (nameInput) nameInput.placeholder = 'Facility Name';
         if (submitBtn) submitBtn.textContent = 'Register Practice & Continue →';
@@ -437,16 +438,7 @@
       const params = new URLSearchParams(window.location.search);
       const redirect = params.get('redirect');
 
-      let targetUrl = 'dashboard-patient.html';
-      if (user.role === 'admin') {
-        targetUrl = 'admin.html';
-      } else if (user.role === 'hospital' || user.role === 'clinic') {
-        targetUrl = 'dashboard-hospital.html';
-      } else if (user.role === 'doctor') {
-        targetUrl = 'dashboard-doctor.html';
-      } else if (user.role === 'patient') {
-        targetUrl = 'dashboard-patient.html';
-      }
+      const targetUrl = AuthGuard.portal(user.role);
 
       setTimeout(() => {
         window.location.href = targetUrl;

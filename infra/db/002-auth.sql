@@ -4,7 +4,7 @@ ALTER TABLE providers ADD CONSTRAINT providers_kind_check CHECK(kind IN ('doctor
 CREATE TABLE IF NOT EXISTS app_users (
  id uuid PRIMARY KEY, email text UNIQUE NOT NULL, password_hash text NOT NULL,
  name text NOT NULL, phone text NOT NULL DEFAULT '',
- role text NOT NULL CHECK(role IN ('patient','doctor','clinic','hospital','admin')),
+ role text NOT NULL CHECK(role IN ('patient','doctor','clinic','hospital','lab','surgeon','technician','admin')),
  status text NOT NULL CHECK(status IN ('active','pending','disabled')),
  email_verified boolean NOT NULL DEFAULT false,
  profile jsonb NOT NULL DEFAULT '{}',

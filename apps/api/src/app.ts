@@ -179,7 +179,7 @@ class Providers implements OnModuleDestroy {
   async detail(slug: string) {
     try {
       const result = await db.query(
-        `SELECT ${columns} FROM providers WHERE slug=$1 AND published=true`,
+        `SELECT ${columns},COALESCE((SELECT jsonb_agg(jsonb_build_object('id',f.id,'name',f.name,'slug',f.slug)) FROM provider_affiliations a JOIN providers f ON f.id=a.facility_id WHERE a.provider_id=providers.id AND f.published),'[]') AS affiliations FROM providers WHERE slug=$1 AND published=true`,
         [slug],
       );
       if (!result.rows[0]) throw new NotFoundException();
@@ -221,11 +221,12 @@ class HealthController {
 class AppModule {}
 export async function createApplication() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule,{bodyParser:false});
+  app.use(require('express').json({limit:'2mb'}));
   app.use(helmet());
   app.useGlobalFilters(new SafeErrors());
   app.use((request: any, response: any, next: () => void) => {
-    if (/^\/v1\/(auth|account|admin)(\/|$)/.test(request.path)) response.setHeader('Cache-Control','no-store');
+    if (/^\/v1\/(auth|account|admin|dashboard)(\/|$)/.test(request.path)) response.setHeader('Cache-Control','no-store');
     next();
   });
   app.setGlobalPrefix("v1");

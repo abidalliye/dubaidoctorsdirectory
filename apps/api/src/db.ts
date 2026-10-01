@@ -7,4 +7,4 @@ export const db = new Pool({
   connectionTimeoutMillis: 5000,
   statement_timeout: 5000,
 });
-export const columns = `id, slug, name, kind, specialty, area, address, services, phone, website, verified`;
+export const columns = `id, slug, name, kind, specialty, area, address, services, phone, website, verified, details`;

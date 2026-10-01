@@ -3,6 +3,8 @@ import { Body, Controller, Get, Patch, Post, Param, Query, Req, Res, Injectable,
   Module, UseGuards, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException,
   BadRequestException, ConflictException, NotFoundException, ServiceUnavailableException, HttpException } from '@nestjs/common';
 import { db, columns } from './db';
+import {roles,providerKinds,profileSteps,listingFields,modules,settingFields} from './dashboard-schema';
+import {saveProfile,saveListing,listListings,validateFields,moduleFor,recordSave} from './dashboard-data';
 import { bodyObject, field, emailAddress, validatePassword, passwordHash, checkPassword,
   hashToken, newToken, sameOrigin, cookie, setSessionCookies, publicUser } from './security';
 
@@ -80,7 +82,7 @@ class AuthController {
     sameOrigin(request);
     const body = bodyObject(input), email = emailAddress(body.email), name = field(body.name,120,true);
     const password = validatePassword(body.password), role = body.role || 'patient';
-    if (!['patient','doctor','clinic','hospital'].includes(role)) throw new BadRequestException('Invalid registration role');
+    if (!roles.filter(r=>r!=='admin').includes(role)) throw new BadRequestException('Invalid registration role');
     await this.accounts.limit('register:' + this.accounts.ip(request),20,3600);
     const id = randomUUID();
     let user;
@@ -183,71 +185,39 @@ class AuthController {
   }
 }
 
-const profileKeys = ['specialty','facility','dhaLicense','area','address','bio','website'];
-function profileFields(body: Record<string, any>) {
-  const profile: Record<string,string> = {};
-  for (const key of profileKeys) if (body[key] !== undefined) profile[key] = field(body[key],key === 'bio' ? 2000 : 250);
-  if (profile.website) {
-    try {if (!['https:','http:'].includes(new URL(profile.website).protocol)) throw new Error();}
-    catch {throw new BadRequestException('Invalid website URL');}
-  }
-  return profile;
-}
 @Controller('account') @UseGuards(SessionGuard)
 class ProfileController {
-  @Get('profile') profile(@Req() request: any) {return {user:publicUser(request.account)};}
-  @Patch('profile') async update(@Body() input: unknown, @Req() request: any) {
-    const body = bodyObject(input);
-    if (Object.keys(body).some(key => !['name','phone',...profileKeys].includes(key)))
-      throw new BadRequestException('This field cannot be changed here');
-    const result = await db.query(`UPDATE app_users SET name=COALESCE($1,name),phone=COALESCE($2,phone),
-      profile=profile || $3::jsonb,updated_at=now() WHERE id=$4 RETURNING *`,
-      [body.name === undefined ? null : field(body.name,120,true),body.phone === undefined ? null : field(body.phone,40),
-        JSON.stringify(profileFields(body)),request.account.id]);
-    return {success:true,user:publicUser(result.rows[0])};
-  }
-  @Get('providers') async providers(@Req() request: any) {
-    const result = await db.query(`SELECT p.* FROM providers p JOIN provider_memberships m ON m.provider_id=p.id WHERE m.user_id=$1 ORDER BY p.name`,[request.account.id]);
-    return {items:result.rows};
-  }
-  @Post('providers') async create(@Body() input: unknown, @Req() request: any) {
-    if (!['doctor','clinic','hospital'].includes(request.account.role)) throw new ForbiddenException('Provider account required');
-    const body = bodyObject(input), name = field(body.name,120,true), id = randomUUID();
-    const client = await db.connect();
-    try {
-      await client.query('BEGIN');
-      await client.query('SELECT id FROM app_users WHERE id=$1 FOR UPDATE',[request.account.id]);
-      const count = await client.query('SELECT count(*)::int AS count FROM provider_memberships WHERE user_id=$1',[request.account.id]);
-      if (count.rows[0].count >= 10) throw new BadRequestException('Provider profile limit reached');
-      const result = await client.query(`INSERT INTO providers(id,slug,name,kind,specialty,area,address,phone,website,published,verified)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,false,false) RETURNING *`,
-        [id,name.toLowerCase().replace(/[^a-z0-9]+/g,'-') + '-' + id,name,
-          request.account.role,field(body.specialty || '',200),field(body.area || '',100),
-          field(body.address || '',250),field(body.phone || '',40),profileFields(body).website || '']);
-      await client.query('INSERT INTO provider_memberships(provider_id,user_id) VALUES($1,$2)',[id,request.account.id]);
-      await client.query('COMMIT');
-      return {success:true,provider:result.rows[0]};
-    } catch(error) {await client.query('ROLLBACK'); throw error;} finally {client.release();}
-  }
-  @Patch('providers/:id') async updateProvider(@Param('id') id: string, @Body() input: unknown, @Req() request: any) {
-    if (!['doctor','clinic','hospital','admin'].includes(request.account.role)) throw new ForbiddenException();
-    const body = bodyObject(input), allowed = ['name','specialty','area','address','phone','website','services'];
-    if (!Object.keys(body).length || Object.keys(body).some(key => !allowed.includes(key))) throw new BadRequestException('Invalid provider fields');
-    const values: any[] = [], changes: string[] = [];
-    for (const key of Object.keys(body)) {
-      let value: any;
-      if (key === 'services') {
-        if (!Array.isArray(body.services) || body.services.length > 30) throw new BadRequestException('Invalid services');
-        value = body.services.map((s: unknown) => field(s,100,true));
-      } else value = key === 'website' ? profileFields(body).website : field(body[key],key === 'address' ? 250 : 200,key === 'name');
-      values.push(value); changes.push(`${key}=$${values.length}`);
-    }
-    values.push(id,request.account.id,request.account.role);
-    const result = await db.query(`UPDATE providers p SET ${changes.join(',')},verified=false,published=false,updated_at=now()
-      WHERE p.id=$${values.length-2} AND ($${values.length}='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$${values.length-1})) RETURNING p.*`,values);
-    if (!result.rows[0]) throw new NotFoundException('Provider profile not found');
-    return {success:true,provider:result.rows[0]};
-  }
+ @Get('profile') profile(@Req() request:any){return {user:publicUser(request.account)};}
+ @Patch('profile') async update(@Body() input:unknown,@Req() request:any){return {success:true,user:publicUser(await saveProfile(request.account.id,input))};}
+ @Get('providers') async providers(@Req() request:any){return {items:await listListings(request.account)};}
+ @Post('providers') async create(@Body() input:unknown,@Req() request:any){const body=bodyObject(input);return {success:true,provider:await saveListing(request.account,{...body,kind:body.kind||request.account.role})};}
+ @Patch('providers/:id') async updateProvider(@Param('id') id:string,@Body() input:unknown,@Req() request:any){return {success:true,provider:await saveListing(request.account,input,id)};}
+}
+@Controller('dashboard') @UseGuards(SessionGuard)
+class DashboardController {
+ @Get('schema') schema(){return {roles,providerKinds,profileSteps,listingFields,modules,settingFields};}
+ @Get('facilities') async facilities(@Req() request:any){return {items:(await db.query(`SELECT id,name,kind FROM providers p WHERE kind IN ('hospital','clinic') AND (published OR $2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$1)) ORDER BY name LIMIT 500`,[request.account.id,request.account.role==='admin'])).rows};}
+ @Get('records/:module') async records(@Param('module') key:string,@Req() request:any,@Query('page') page='1'){
+  moduleFor(key,request.account);const p=Number(page);if(!Number.isInteger(p)||p<1||p>10000)throw new BadRequestException();
+  return {items:(await db.query(`SELECT * FROM dashboard_${key} WHERE (owner_id=$1 OR $2) AND NOT archived ORDER BY updated_at DESC LIMIT 50 OFFSET $3`,[request.account.id,request.account.role==='admin',(p-1)*50])).rows,page:p};
+ }
+ @Post('records/:module') async create(@Param('module') key:string,@Body() input:unknown,@Req() request:any){return {record:await recordSave(key,request.account,input)};}
+ @Patch('records/:module/:id') async update(@Param('module') key:string,@Param('id') id:string,@Body() input:unknown,@Req() request:any){if(!/^[a-f0-9-]{36}$/.test(id))throw new BadRequestException();return {record:await recordSave(key,request.account,input,id)};}
+ @Post('records/:module/:id/archive') async archive(@Param('module') key:string,@Param('id') id:string,@Req() request:any){
+  moduleFor(key,request.account,true);if(!/^[a-f0-9-]{36}$/.test(id))throw new BadRequestException();
+  const found=await db.query(`UPDATE dashboard_${key} SET archived=true,updated_at=now() WHERE id=$1 AND (owner_id=$2 OR $3) RETURNING id`,[id,request.account.id,request.account.role==='admin']);if(!found.rows[0])throw new NotFoundException();return {success:true};
+ }
+ @Post('files') async upload(@Body() input:unknown,@Req() request:any){
+  const b=bodyObject(input),name=field(b.name,150,true),type=field(b.type,50,true);
+  if(!['application/pdf','image/png','image/jpeg'].includes(type)||typeof b.content!=='string'||b.content.length>1400000||!/^[A-Za-z0-9+/]+={0,2}$/.test(b.content))throw new BadRequestException('Upload a PDF, PNG or JPEG up to 1 MB');
+  const content=Buffer.from(b.content,'base64');if(!content.length||content.length>1048576)throw new BadRequestException('File exceeds 1 MB');
+  const valid=type==='application/pdf'?content.subarray(0,5).toString()==='%PDF-':type==='image/png'?content.subarray(0,8).toString('hex')==='89504e470d0a1a0a':content.subarray(0,3).toString('hex')==='ffd8ff';if(!valid)throw new BadRequestException('File content does not match its type');
+  const count=await db.query('SELECT count(*)::int count FROM account_files WHERE owner_id=$1',[request.account.id]);if(count.rows[0].count>=100)throw new BadRequestException('Document limit reached');
+  const id=randomUUID();await db.query('INSERT INTO account_files(id,owner_id,name,content_type,content) VALUES($1,$2,$3,$4,$5)',[id,request.account.id,name,type,content]);return {id,name};
+ }
+ @Get('files/:id') async download(@Param('id') id:string,@Req() request:any,@Res() response:any){
+  if(!/^[a-f0-9-]{36}$/.test(id))throw new BadRequestException();const result=await db.query('SELECT * FROM account_files WHERE id=$1 AND (owner_id=$2 OR $3)',[id,request.account.id,request.account.role==='admin']);const file=result.rows[0];if(!file)throw new NotFoundException();response.setHeader('Content-Type',file.content_type);response.setHeader('Content-Disposition','attachment; filename="'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_')+'"');response.setHeader('Cache-Control','no-store');response.send(file.content);
+ }
 }
 
 @Controller('admin') @UseGuards(SessionGuard,AdminGuard)
@@ -262,7 +232,7 @@ class AdminController {
     if (!/^[a-f0-9-]{36}$/.test(id)) throw new BadRequestException();
     const body = bodyObject(input);
     if (Object.keys(body).some(k => !['role','status'].includes(k)) || !Object.keys(body).length) throw new BadRequestException();
-    if (body.role && !['patient','doctor','clinic','hospital','admin'].includes(body.role)) throw new BadRequestException('Invalid role');
+    if (body.role && !roles.includes(body.role)) throw new BadRequestException('Invalid role');
     if (body.status && !['active','pending','disabled'].includes(body.status)) throw new BadRequestException('Invalid status');
     const client = await db.connect();
     try {
@@ -276,15 +246,16 @@ class AdminController {
         if (count.rows[0].count <= 1) throw new BadRequestException('Cannot remove the last active administrator');
       }
       const result = await client.query('UPDATE app_users SET role=COALESCE($1,role),status=COALESCE($2,status),updated_at=now() WHERE id=$3 RETURNING *',[body.role || null,body.status || null,id]);
-      await client.query('DELETE FROM app_sessions WHERE user_id=$1',[id]);
+      if((body.role&&body.role!==found.rows[0].role)||(body.status&&body.status!==found.rows[0].status))await client.query('DELETE FROM app_sessions WHERE user_id=$1',[id]);
       await client.query('INSERT INTO account_audit(actor_id,action,target_id) VALUES($1,$2,$3)',[request.account.id,'user.permissions.updated',id]);
       await client.query('COMMIT');
       return {success:true,user:publicUser(result.rows[0])};
     } catch(error) {await client.query('ROLLBACK'); throw error;} finally {client.release();}
   }
-  @Get('providers') async providers() {
-    return {items:(await db.query('SELECT * FROM providers ORDER BY updated_at DESC LIMIT 200')).rows};
-  }
+  @Get('providers') async providers(@Req() request:any) {return {items:await listListings(request.account,true)};}
+  @Patch('profiles/:id') async editProfile(@Param('id') id:string,@Body() input:unknown){if(!/^[a-f0-9-]{36}$/.test(id))throw new BadRequestException();const user=await saveProfile(id,input);if(!user)throw new NotFoundException();return {user:publicUser(user)};}
+  @Get('settings') async settings(){return {data:(await db.query("SELECT data FROM site_settings WHERE id='site'")).rows[0].data};}
+  @Patch('settings') async saveSettings(@Body() input:unknown){const data=validateFields(input,settingFields);return {data:(await db.query("UPDATE site_settings SET data=data||$1::jsonb,updated_at=now() WHERE id='site' RETURNING data",[data])).rows[0].data};}
   @Patch('providers/:id') async provider(@Param('id') id: string, @Body() input: unknown, @Req() request: any) {
     const body = bodyObject(input);
     if (Object.keys(body).some(k => !['published','verified','ownerId'].includes(k))) throw new BadRequestException();
@@ -296,7 +267,7 @@ class AdminController {
       if (!found.rows[0]) throw new NotFoundException();
       if (body.ownerId !== undefined) {
         if (typeof body.ownerId !== 'string' || !/^[a-f0-9-]{36}$/.test(body.ownerId)) throw new BadRequestException('Invalid owner');
-        const owner = await client.query("SELECT id FROM app_users WHERE id=$1 AND role IN ('doctor','clinic','hospital') AND status='active'",[body.ownerId]);
+        const owner = await client.query("SELECT id FROM app_users WHERE id=$1 AND role IN ('doctor','clinic','hospital','lab','surgeon','technician') AND status='active'",[body.ownerId]);
         if (!owner.rows[0]) throw new BadRequestException('Assign an approved provider account');
         await client.query('DELETE FROM provider_memberships WHERE provider_id=$1',[id]);
         await client.query('INSERT INTO provider_memberships(provider_id,user_id) VALUES($1,$2)',[id,body.ownerId]);
@@ -311,5 +282,5 @@ class AdminController {
     return {items:(await db.query('SELECT * FROM account_audit ORDER BY id DESC LIMIT 100')).rows};
   }
 }
-@Module({controllers:[AuthController,ProfileController,AdminController],providers:[Accounts,SessionGuard,AdminGuard]})
+@Module({controllers:[AuthController,ProfileController,AdminController,DashboardController],providers:[Accounts,SessionGuard,AdminGuard]})
 export class AccountsModule {}

@@ -39,6 +39,7 @@
           const badge = card.querySelector('.badge-mint');
           if (badge) badge.textContent = provider.verified ? 'Verified listing' : 'Verification pending';
           card.dataset.source = 'database';
+          const profile=card.querySelector('.card-actions a');if(profile){profile.href='provider-profile.html?slug='+encodeURIComponent(provider.slug);profile.textContent='View profile';}
           continue;
         }
         card = text('article', 'provider-card provider', '');
@@ -60,6 +61,7 @@
         const services = text('div', 'card-services', '');
         for (const service of provider.services || []) services.append(text('span', 'service-tag', service));
         const actions = text('div', 'card-actions', '');
+        const profile = text('a', 'btn btn-primary', 'View profile');profile.href='provider-profile.html?slug='+encodeURIComponent(provider.slug);actions.append(profile);
         if (provider.phone) {
           const phone = text('a', 'btn btn-outline', 'Call ' + provider.phone);
           phone.href = 'tel:' + provider.phone.replace(/[^+0-9]/g, '');

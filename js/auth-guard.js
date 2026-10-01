@@ -1,8 +1,9 @@
 /* Browser state is never authorization: NestJS verifies every session. */
 (function () {
   'use strict';
+  if(location.protocol==='file:'&&/(auth|admin|dashboard-[^/]+)\.html$/.test(location.pathname)){location.replace('https://fertifind-dubai.netlify.app/'+location.pathname.split('/').pop()+location.search+location.hash);}
   let user = null;
-  const portal = role => role === 'admin' ? 'admin.html' : ['hospital','clinic'].includes(role) ? 'dashboard-hospital.html' : role === 'doctor' ? 'dashboard-doctor.html' : 'dashboard-patient.html';
+  const portal = role => role === 'admin' ? 'admin.html' : ['hospital','clinic','lab'].includes(role) ? 'dashboard-hospital.html' : ['doctor','surgeon','technician'].includes(role) ? 'dashboard-doctor.html' : 'dashboard-patient.html';
   async function api(path,method='GET',body) {
     if (location.protocol === 'file:') throw new Error('Open the live website to sign in. File previews have no backend.');
     const csrf = document.cookie.split(';').map(x=>x.trim()).find(x=>x.startsWith('ff_csrf='))?.slice(8) || '';
@@ -26,7 +27,7 @@
       document.documentElement.style.visibility='hidden';
       const current=await AuthGuard.refresh();
       if(!current){location.replace('auth.html?required_role='+encodeURIComponent(role)+'&error=unauthenticated');return null;}
-      if(!(current.role==='admin'||current.role===role||role==='hospital'&&current.role==='clinic')){location.replace(portal(current.role));return null;}
+      if(!(current.role==='admin'||current.role===role||role==='hospital'&&['clinic','lab'].includes(current.role)||role==='doctor'&&['surgeon','technician'].includes(current.role))){location.replace(portal(current.role));return null;}
       const populate=()=>{AuthGuard.populateUserUI(current);document.documentElement.style.visibility='';window.dispatchEvent(new CustomEvent('ff-authenticated',{detail:current}));};
       if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',populate,{once:true});else populate();
       return current;

@@ -1,75 +1,95 @@
-/* Account/profile and administrator controls within the existing dashboards. */
-(function () {
-  'use strict';
-  const make=(tag,text='',cls='')=>{const el=document.createElement(tag);el.textContent=text;el.className=cls;return el;};
-  const notify=message=>window.showToast?showToast(message):window.FertiFind?FertiFind.toast(message):alert(message);
-  const button=(label,action)=>{const el=make('button',label,'btn btn-outline');el.type='button';el.onclick=async()=>{el.disabled=true;try{await action();}catch(error){notify(error.message);}finally{el.disabled=false;}};return el;};
-  function input(form,key,value='',type='text') {
-    const label=make('label',key+' ');label.style.cssText='display:grid;gap:4px';
-    const control=make('input','','input-field');control.name=key;control.type=type;control.value=value;control.maxLength=250;
-    label.append(control);form.append(label);return control;
-  }
-  function formStyle(form){form.style.cssText='display:grid;gap:12px;margin:16px 0;padding:16px;border:1px solid #dce5ef;border-radius:10px';}
-  if(!/(?:admin|dashboard-(?:doctor|hospital|patient))(?:\.html)?$/.test(location.pathname))return;
-  window.addEventListener('ff-authenticated',async event=>{
-    const user=event.detail,values={...user.profile,name:user.name,phone:user.phone};
-    document.querySelectorAll('.dash-view').forEach(view=>{
-      if(!['view-profile','view-settings'].includes(view.id))view.replaceChildren(make('div','This section is not connected yet. No records have been saved here.','dash-box'));
-    });
-    const panel=make('section','','dash-box');panel.style.cssText='margin:20px;padding:24px;background:white;border:1px solid #dce5ef;border-radius:14px;max-width:900px';
-    panel.append(make('h2','Your account'),make('p',user.email+' · '+user.role+' · '+user.status));
-    const accountForm=make('form');formStyle(accountForm);
-    const keys=['name','phone','area',...(['doctor','clinic','hospital'].includes(user.role)?['specialty','facility','dhaLicense','address','website','bio']:[])];
-    for(const key of keys){const el=input(accountForm,key,values[key]||'');if(key==='name'){el.required=true;el.maxLength=120;}if(key==='bio')el.maxLength=2000;}
-    accountForm.append(make('button','Save account profile','btn btn-primary'));
-    accountForm.onsubmit=async e=>{e.preventDefault();try{await AuthGuard.api('account/profile','PATCH',Object.fromEntries(new FormData(accountForm)));await AuthGuard.refresh();notify('Profile saved');}catch(error){notify(error.message);}};
-    panel.append(accountForm);
-    const passwordForm=make('form');formStyle(passwordForm);passwordForm.append(make('h3','Change password'));
-    for(const key of ['currentPassword','password']){const el=input(passwordForm,key,'','password');el.required=true;el.maxLength=128;el.autocomplete=key==='password'?'new-password':'current-password';if(key==='password')el.minLength=12;}
-    passwordForm.append(make('button','Change password','btn btn-outline'));
-    passwordForm.onsubmit=async e=>{e.preventDefault();try{await AuthGuard.api('auth/password','POST',Object.fromEntries(new FormData(passwordForm)));passwordForm.reset();notify('Password changed. Other sessions signed out.');}catch(error){notify(error.message);}};panel.append(passwordForm);
-    if(!user.emailVerified)panel.append(button('Send email verification link',async()=>{await AuthGuard.api('auth/verification','POST',{});notify('Verification link sent');}));
-    (document.querySelector('main')||document.body).prepend(panel);
-    const mapping={doc_full_name:'name',pat_full_name:'name',facility_legal_name:'name',doc_phone:'phone',pat_phone:'phone',emergency_phone:'phone',doc_specialty:'specialty',dha_lic_num:'dhaLicense',dha_facility_license:'dhaLicense',affiliated_clinic:'facility',facility_address:'address'};
-    document.querySelectorAll('#view-profile form,#view-settings form').forEach(original=>{
-      original.querySelectorAll('input,textarea,select').forEach(el=>{if(mapping[el.name])el.value=values[mapping[el.name]]||'';else{el.value=/email/.test(el.name)?user.email:'';el.disabled=true;el.required=false;}});
-      original.onsubmit=async e=>{e.preventDefault();const payload={};for(const [key,value]of new FormData(original))if(mapping[key])payload[mapping[key]]=value;if(!Object.keys(payload).length){notify('Use the account form above to update your profile.');return;}try{await AuthGuard.api('account/profile','PATCH',payload);notify('Profile saved');}catch(error){notify(error.message);}};
-    });
-    try {
-      if(['doctor','clinic','hospital'].includes(user.role))await providerControls(panel,user);
-      if(user.role==='admin')await adminControls(panel);
-    }catch(error){notify(error.message);}
-  });
-  async function providerControls(panel,user){
-    const section=make('section');section.append(make('h3','Your directory profiles'),make('p','Drafts and changes require administrator approval before publication.'));panel.append(section);
-    const list=make('div');section.append(list);
-    const render=async()=>{list.replaceChildren();for(const provider of (await AuthGuard.api('account/providers')).items){
-      const form=make('form');formStyle(form);form.append(make('p',provider.published?'Published':'Draft · awaiting review'));
-      for(const key of ['name','specialty','area','address','phone','website'])input(form,key,provider[key]||'');
-      form.append(make('button','Save directory profile','btn btn-primary'));
-      form.onsubmit=async e=>{e.preventDefault();try{await AuthGuard.api('account/providers/'+encodeURIComponent(provider.id),'PATCH',Object.fromEntries(new FormData(form)));notify('Changes saved for review');await render();}catch(error){notify(error.message);}};list.append(form);
-    }};
-    section.append(button('Create a draft directory profile',async()=>{await AuthGuard.api('account/providers','POST',{name:user.name,...user.profile,phone:user.phone});await render();}));await render();
-  }
-  async function adminControls(panel){
-    const section=make('section');section.append(make('h2','Users, roles and permissions'));panel.append(section);
-    const list=make('div');section.append(list);let page=1;
-    const render=async()=>{list.replaceChildren();for(const user of (await AuthGuard.api('admin/users?page='+page)).items){
-      const form=make('form');formStyle(form);form.append(make('p',user.name+' · '+user.email),make('small','Account ID: '+user.id));
-      for(const [key,options]of [['role',['patient','doctor','clinic','hospital','admin']],['status',['active','pending','disabled']]]){
-        const label=make('label',key+' '),select=make('select');select.name=key;for(const value of options){const option=make('option',value);option.value=value;select.append(option);}select.value=user[key];label.append(select);form.append(label);
-      }
-      form.append(make('button','Save permissions','btn btn-outline'));
-      form.onsubmit=async e=>{e.preventDefault();try{await AuthGuard.api('admin/users/'+user.id,'PATCH',Object.fromEntries(new FormData(form)));notify('Permissions updated. User must sign in again.');await render();}catch(error){notify(error.message);}};list.append(form);
-    }};
-    section.append(button('Previous',async()=>{page=Math.max(1,page-1);await render();}),button('Next',async()=>{page++;await render();}));await render();
-    section.append(make('h2','Directory approval and ownership'));
-    for(const provider of (await AuthGuard.api('admin/providers')).items){
-      const form=make('form');formStyle(form);form.append(make('h3',provider.name));
-      for(const key of ['published','verified']){const label=make('label',key+' '),control=make('input');control.type='checkbox';control.name=key;control.checked=provider[key];label.append(control);form.append(label);}
-      const owner=input(form,'ownerId');owner.placeholder='Approved provider account ID (optional)';
-      form.append(make('button','Save listing','btn btn-outline'));
-      form.onsubmit=async e=>{e.preventDefault();try{await AuthGuard.api('admin/providers/'+encodeURIComponent(provider.id),'PATCH',{published:form.elements.published.checked,verified:form.elements.verified.checked,...(owner.value.trim()?{ownerId:owner.value.trim()}:{} )});notify('Listing updated');}catch(error){notify(error.message);}};section.append(form);
-    }
-  }
+/* Database-backed dashboards. All forms use the server schema and authenticated APIs. */
+(function(){
+'use strict';
+const el=(tag,text='',cls='')=>{const n=document.createElement(tag);n.textContent=text;n.className=cls;return n;};
+let user,schema,facilities=[],active='overview',query='',requestId=0;
+const api=(...args)=>AuthGuard.api(...args);
+function message(text,error=false){const n=document.getElementById('ff-message');n.textContent=text;n.className='ff-message'+(error?' error':'');n.hidden=false;}
+function action(label,fn,cls='btn btn-outline'){const b=el('button',label,cls);b.type='button';b.onclick=async()=>{b.disabled=true;try{await fn();}catch(e){message(e.message,true);}finally{b.disabled=false;}};return b;}
+function heading(target,title,subtitle=''){target.append(el('h2',title));if(subtitle)target.append(el('p',subtitle,'ff-muted'));}
+function dataForm(fields,values={}){
+ const form=el('form','','ff-form');
+ for(const spec of fields){const label=el('label',spec.label,'ff-field');let input;
+  if(spec.type==='affiliations'){input=el('select');input.multiple=true;for(const f of facilities){const option=el('option',f.name+' · '+f.kind);option.value=f.id;option.selected=(values[spec.key]||[]).includes(f.id);input.append(option);}label.append(el('small','Optional. Leave blank to operate independently. Hold Ctrl to select multiple facilities.'));}
+  else if(spec.type==='select'){input=el('select');for(const value of spec.options){const option=el('option',value||'Choose…');option.value=value;input.append(option);}input.value=values[spec.key]??spec.options[0];}
+  else if(spec.type==='textarea'){input=el('textarea');input.rows=4;input.value=values[spec.key]||'';}
+  else{input=el('input');input.type=spec.type==='file'?'file':spec.type||'text';if(input.type==='file')input.accept='.pdf,.png,.jpg,.jpeg';else input.value=values[spec.key]??'';if(input.type==='number'){input.min='0';input.step='any';}}
+  input.name=spec.key;input.required=!!spec.required&&!(spec.type==='file'&&values[spec.key]);input.maxLength=spec.max||(spec.type==='textarea'?12000:500);input.className='input-field';label.append(input);form.append(label);
+  if(spec.type==='file'&&values[spec.key]){const link=el('a','Download saved document');link.href='/v1/dashboard/files/'+encodeURIComponent(values[spec.key]);label.append(link);input.dataset.saved=values[spec.key];}
+ }
+ return form;
+}
+async function payload(form,fields){const result={};for(const f of fields){const input=form.elements.namedItem(f.key);if(!input)continue;
+ if(f.type==='affiliations')result[f.key]=[...input.selectedOptions].map(o=>o.value);
+ else if(f.type==='file'){if(input.files[0]){const file=input.files[0];if(file.size>1048576)throw Error('Please choose a document up to 1 MB');const content=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result.split(',')[1]);r.onerror=reject;r.readAsDataURL(file);});result[f.key]=(await api('dashboard/files','POST',{name:file.name,type:file.type,content})).id;}else result[f.key]=input.dataset.saved||'';}
+ else result[f.key]=input.value;
+ }return result;}
+function modal(title){const dialog=el('dialog','','ff-dialog');const header=el('header','','ff-dialog-head');header.append(el('h2',title),action('Close',()=>dialog.close()));dialog.append(header);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();return dialog;}
+function bindSave(form,fields,save,after,label='Save to database'){
+ const footer=el('div','','ff-form-actions'),submit=el('button',label,'btn btn-primary');submit.type='submit';footer.append(submit);form.append(footer);
+ form.onsubmit=async e=>{e.preventDefault();submit.disabled=true;try{await save(await payload(form,fields));message('Saved to database');if(after)await after();}catch(err){message(err.message,true);const error=form.querySelector('.ff-form-error')||el('p','','ff-form-error');error.textContent=err.message;form.append(error);}finally{submit.disabled=false;}};
+}
+async function profileWizard(target=user,adminEdit=false){
+ let step=0,values={...target.profile,name:target.name,phone:target.phone};
+ const steps=target.role==='patient'?schema.profileSteps.patient:schema.profileSteps.business;
+ const dialog=modal(adminEdit?'Edit '+target.name:'Complete your '+(target.role==='patient'?'patient':'business')+' profile');
+ const progress=el('div','','ff-progress'),body=el('div');dialog.append(progress,body);
+ const draw=()=>{progress.replaceChildren();steps.forEach((s,i)=>{const n=el('span',(i+1)+'. '+s.title,i===step?'current':i<step?'done':'');progress.append(n);});body.replaceChildren();heading(body,steps[step].title,target.role==='patient'?'These details are private to your account and administrators.':'Build a complete directory profile. Affiliation is optional.');
+ const form=dataForm(steps[step].fields,values);body.append(form);const footer=el('div','','ff-form-actions');
+ if(step>0)footer.append(action('Back',()=>{for(const f of steps[step].fields)values[f.key]=form.elements[f.key].value;step--;draw();}));
+ const next=el('button',step===steps.length-1?'Complete profile':'Save & continue','btn btn-primary');next.type='submit';footer.append(next);form.append(footer);
+ form.onsubmit=async e=>{e.preventDefault();next.disabled=true;try{const data=await payload(form,steps[step].fields);Object.assign(values,data);const endpoint=adminEdit?'admin/profiles/'+target.id:'account/profile';
+ await api(endpoint,'PATCH',{...data,...(step===steps.length-1?{profileComplete:'yes'}:{})});
+ if(step<steps.length-1){step++;draw();}else{
+ if(!adminEdit){user=await AuthGuard.refresh();if(schema.providerKinds.includes(user.role)){
+ const owned=(await api('account/providers')).items;const primary=owned.find(p=>p.kind===user.role&&p.name===target.name);
+ const business={kind:user.role};for(const f of schema.listingFields)if(values[f.key]!==undefined)business[f.key]=values[f.key];
+ if(primary)await api('account/providers/'+primary.id,'PATCH',business);else await api('account/providers','POST',business);
+ }}dialog.close();message('Profile saved'+(schema.providerKinds.includes(target.role)&&!adminEdit?'. Directory draft submitted for review.':'.'));await render();}
+ }catch(err){const n=form.querySelector('.ff-form-error')||el('p','','ff-form-error');n.textContent=err.message;form.append(n);}finally{next.disabled=false;}};
+ };draw();
+}
+async function listingEditor(provider){
+ const dialog=modal(provider?'Edit directory profile':'Add an independent directory profile');
+ heading(dialog,'Business details','Doctors, labs and facilities may be independent. Optional affiliations never replace ownership. Changes go to administrator review.');
+ const values=provider?{...provider.details,...provider,services:(provider.services||[]).join(', ')}:{kind:schema.providerKinds.includes(user.role)?user.role:'doctor'};
+ const form=dataForm(schema.listingFields,values);dialog.append(form);
+ bindSave(form,schema.listingFields,data=>api('account/providers'+(provider?'/'+provider.id:''),provider?'PATCH':'POST',data),async()=>{dialog.close();await render();});
+}
+async function recordEditor(key,record){const m=schema.modules[key],dialog=modal((record?'Edit ':'Add ')+m.label);const form=dataForm(m.fields,record?.data||{});dialog.append(form);
+ bindSave(form,m.fields,data=>api('dashboard/records/'+key+(record?'/'+record.id:''),record?'PATCH':'POST',data),async()=>{dialog.close();await render();});}
+function card(title,description){const n=el('article','','ff-card');n.append(el('h3',title),el('p',description,'ff-muted'));return n;}
+async function records(target,key){const m=schema.modules[key];heading(target,m.label,'Records are stored in PostgreSQL. You see your own records; administrators can manage all records.');
+ if(key==='payments')target.append(el('p','This records invoices and payment status. It does not charge a card.','ff-muted'));
+ if(key==='prescriptions')target.append(el('p','Recordkeeping only; saving a record does not send or dispense medication.','ff-muted'));
+ if(m.roles.includes(user.role))target.append(action('Add record',()=>recordEditor(key), 'btn btn-primary'));
+ let page=1;const list=el('div','','ff-grid');target.append(list);const load=async()=>{const data=await api('dashboard/records/'+key+'?page='+page);list.replaceChildren();for(const r of data.items){const text=Object.values(r.data).join(' ').toLowerCase();if(query&&!text.includes(query))continue;const c=card(r.data.title||r.data.patientName||r.data.name||r.data.target||r.data.providerName||m.label,'Updated '+new Date(r.updated_at).toLocaleString());for(const f of m.fields){if(f.type==='file'){if(r.data[f.key]){const link=el('a','Download '+f.label);link.href='/v1/dashboard/files/'+r.data[f.key];c.append(link);}}else c.append(el('p',f.label+': '+(r.data[f.key]||'—')));}if(m.roles.includes(user.role))c.append(action('Edit',()=>recordEditor(key,r)),action('Archive',async()=>{await api('dashboard/records/'+key+'/'+r.id+'/archive','POST',{});await load();}));list.append(c);}if(!list.children.length)list.append(el('p','No records on this page.'));};
+ target.append(action('Previous',async()=>{page=Math.max(1,page-1);await load();}),action('Next',async()=>{page++;await load();}));await load();}
+async function listings(target){heading(target,'Directory profiles','Create doctors, clinics, hospitals, labs, surgeons or technicians independently, or link them to an existing facility.');
+ target.append(action('Add profile',()=>listingEditor(), 'btn btn-primary'));const data=await api(user.role==='admin'?'admin/providers':'account/providers');const grid=el('div','','ff-grid');target.append(grid);
+ for(const p of data.items){if(query&&!JSON.stringify(p).toLowerCase().includes(query))continue;const c=card(p.name,p.kind+' · '+(p.published?'Published':'Draft / review pending'));c.append(el('p',p.specialty+' · '+p.area),action('Edit all details',()=>listingEditor(p)));
+ const preview=el('a','View profile','btn btn-outline');preview.href='provider-profile.html?slug='+encodeURIComponent(p.slug);c.append(preview);
+ if(user.role==='admin'){
+ const form=el('form','','ff-form');for(const key of ['published','verified']){const label=el('label',key==='published'?'Publish listing':'Verified listing');const input=el('input');input.type='checkbox';input.name=key;input.checked=p[key];label.prepend(input);form.append(label);}const owner=dataForm([{key:'ownerId',label:'Owner account ID (optional)'}]);form.append(...owner.children);const save=el('button','Save approval','btn btn-primary');save.type='submit';form.append(save);form.onsubmit=async e=>{e.preventDefault();save.disabled=true;try{await api('admin/providers/'+p.id,'PATCH',{published:form.elements.published.checked,verified:form.elements.verified.checked,...(form.elements.ownerId.value.trim()?{ownerId:form.elements.ownerId.value.trim()}:{})});message('Approval saved');await render();}catch(err){message(err.message,true);}finally{save.disabled=false;}};c.append(form);
+ }grid.append(c);}if(!grid.children.length)grid.append(el('p','No profiles yet.'));}
+async function users(target,patientsOnly=false){heading(target,patientsOnly?'Patient accounts':'Users and permissions','Edit profile details or manage roles. Role changes require the affected user to sign in again.');let page=1;const grid=el('div','','ff-grid');target.append(grid);
+ const load=async()=>{grid.replaceChildren();for(const u of (await api('admin/users?page='+page)).items){if(patientsOnly&&u.role!=='patient'||query&&!JSON.stringify(u).toLowerCase().includes(query))continue;const c=card(u.name,u.email+' · '+u.role+' · '+u.status);c.append(el('small','Account ID: '+u.id),action('Edit profile',()=>profileWizard(u,true)));const fields=[{key:'role',label:'Role',type:'select',options:schema.roles},{key:'status',label:'Status',type:'select',options:['active','pending','disabled']}];const form=dataForm(fields,u);bindSave(form,fields,data=>api('admin/users/'+u.id,'PATCH',data),async()=>{if(u.id===user.id){const refreshed=await AuthGuard.refresh();if(!refreshed){location.href='auth.html';return;}}await load();});c.append(form);grid.append(c);}if(!grid.children.length)grid.append(el('p','No users on this page.'));};target.append(action('Previous',async()=>{page=Math.max(1,page-1);await load();}),action('Next',async()=>{page++;await load();}));await load();}
+async function settings(target){heading(target,'Account security');const fields=[{key:'currentPassword',label:'Current password',type:'password',required:true},{key:'password',label:'New password (12+ characters)',type:'password',required:true}];const form=dataForm(fields);form.elements.password.minLength=12;form.elements.password.maxLength=128;form.elements.currentPassword.maxLength=128;bindSave(form,fields,data=>api('auth/password','POST',data),()=>form.reset(),'Change password');target.append(form);
+ if(user.role==='admin'){heading(target,'Website settings','Secrets are managed in Netlify, never in browser forms.');const data=(await api('admin/settings')).data;const f=dataForm(schema.settingFields,data);bindSave(f,schema.settingFields,data=>api('admin/settings','PATCH',data));target.append(f);}}
+async function overview(target){heading(target,'Welcome, '+user.name,'Your '+user.role+' dashboard is connected to PostgreSQL.');const grid=el('div','','ff-grid');target.append(grid);
+ const p=card('Profile completion',user.profile?.profileComplete==='yes'?'Completed — update your details any time':'Complete your details in three guided steps');p.append(action('Complete / update profile',()=>profileWizard(),'btn btn-primary'));grid.append(p);
+ if(user.role!=='patient'){const data=await api(user.role==='admin'?'admin/providers':'account/providers');const c=card('Directory profiles',data.items.length+' profiles · '+data.items.filter(x=>x.published).length+' published');c.append(action('Manage profiles',()=>navigate('listings')));grid.append(c);}
+ for(const [key,m] of Object.entries(schema.modules)){if(!m.roles.includes(user.role))continue;const data=await api('dashboard/records/'+key);const c=card(m.label,data.items.length+' recent records');c.append(action('Open',()=>navigate(key)));grid.append(c);}}
+async function render(){const id=++requestId,target=document.getElementById('ff-content');target.replaceChildren(el('p','Loading records…'));const staging=el('div');try{
+ if(active==='overview')await overview(staging);else if(active==='profile'){heading(staging,'Your profile',user.email);staging.append(action('Complete / edit profile',()=>profileWizard(),'btn btn-primary'));for(const [key,value] of Object.entries({...user.profile,name:user.name,phone:user.phone}))if(key!=='profileComplete')staging.append(el('p',key+': '+value));}
+ else if(active==='settings')await settings(staging);else if(active==='listings')await listings(staging);else if(active==='users')await users(staging);else if(active==='patient_accounts')await users(staging,true);else if(active==='audit'){heading(staging,'Audit log');for(const r of (await api('admin/audit')).items)staging.append(el('p',r.created_at+' · '+r.action+' · '+r.target_id));}else await records(staging,active);
+ if(id===requestId)target.replaceChildren(staging);
+ }catch(e){if(id===requestId){target.replaceChildren(el('p',e.message,'ff-form-error'),action('Retry',render));}}}
+async function navigate(key){active=key;document.querySelectorAll('[data-section]').forEach(b=>b.classList.toggle('active',b.dataset.section===key));await render();}
+window.addEventListener('ff-authenticated',async event=>{user=event.detail;try{schema=await api('dashboard/schema');facilities=(await api('dashboard/facilities')).items;
+ const sidebar=document.querySelector('.sidebar-nav');sidebar.replaceChildren();const nav=(key,label)=>{const b=action(label,()=>navigate(key),'nav-item');b.dataset.section=key;sidebar.append(b);};nav('overview','Overview');nav('profile','My profile');if(user.role!=='patient')nav('listings','Doctors, labs & facilities');if(user.role==='admin'){nav('users','Users & roles');nav('patient_accounts','Patient accounts');}
+ for(const [key,m]of Object.entries(schema.modules))if(m.roles.includes(user.role))nav(key,m.label);
+ if(user.role==='admin')nav('audit','Audit log');nav('settings','Settings & security');sidebar.append(action('Sign out',()=>AuthGuard.logout(),'nav-item'));
+ document.getElementById('ff-name').textContent=user.name+' · '+user.role;document.getElementById('ff-complete').onclick=()=>profileWizard();let timer;document.getElementById('ff-search').oninput=e=>{query=e.target.value.toLowerCase();clearTimeout(timer);timer=setTimeout(render,250);};await navigate('overview');if(user.profile?.profileComplete!=='yes'&&user.role!=='admin')await profileWizard();
+ }catch(e){message(e.message,true);}});
 })();
