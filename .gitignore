@@ -12,6 +12,14 @@ $RECYCLE.BIN/
 
 # Node
 node_modules/
+.next/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+!.env.netlify.example
+.netlify/
 npm-debug.log
 
 # Surge local domain cache

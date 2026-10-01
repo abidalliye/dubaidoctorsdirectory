@@ -1,5 +1,11 @@
 # FertiFind Dubai - IVF & Fertility Healthcare Directory
 
+## New full-stack application
+
+Initial hosting target: **Netlify Free + Neon Free**, with PostgreSQL search and no required Redis/Typesense hosting. See [DEPLOYMENT.md](DEPLOYMENT.md).
+
+The Next.js/React/TypeScript/Tailwind frontend is in `apps/web`; the NestJS backend is in `apps/api`. PostgreSQL/PostGIS, Redis and Typesense are defined in `compose.yaml`. See [ARCHITECTURE.md](ARCHITECTURE.md) for setup, API routes, migration status and production integration requirements. The HTML files below remain the legacy static implementation.
+
 FertiFind Dubai is a comprehensive, responsive healthcare directory and patient discovery platform for fertility specialists, IVF clinics, women's hospitals, and diagnostic genetics laboratories across Dubai, UAE.
 
 All provider details, clinic locations, and clinical services are enriched with verified research data from the Dubai Health Authority (DHA) registry.

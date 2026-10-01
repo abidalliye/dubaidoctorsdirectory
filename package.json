@@ -1,0 +1,25 @@
+{
+  "name": "fertifind",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w @fertifind/web",
+    "dev:api": "npm run dev -w @fertifind/api",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
+    "seed": "npm run seed -w @fertifind/api",
+    "db:init": "npm run db:init -w @fertifind/api",
+    "package:functions": "npm run build -w @fertifind/api && node scripts/package-functions.mjs",
+    "index:search": "npm run index:search -w @fertifind/api"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@netlify/zip-it-and-ship-it": "^16.2.3",
+    "prettier": "^3.9.9"
+  }
+}

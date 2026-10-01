@@ -1,0 +1,19 @@
+[build]
+  base = "."
+  command = "npm run build"
+  publish = "apps/web/.next"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@nestjs/common", "@nestjs/core", "@nestjs/platform-express", "pg", "ioredis", "typesense", "helmet", "reflect-metadata", "rxjs"]
+
+[[redirects]]
+  from = "/v1/*"
+  to = "/.netlify/functions/api/v1/:splat"
+  status = 200
+  force = true
