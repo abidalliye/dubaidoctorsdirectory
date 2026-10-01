@@ -11,6 +11,7 @@ import {
   Query,
   ServiceUnavailableException,
   OnModuleDestroy,
+  Logger,
 } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import helmet from "helmet";
@@ -203,7 +204,9 @@ class HealthController {
     try {
       await db.query("SELECT 1");
       return { status: "ok" };
-    } catch {
+    } catch (error) {
+      const code = (error as { code?: string }).code || "UNKNOWN";
+      Logger.error(`Database health query failed (${code})`, "DatabaseHealth");
       throw new ServiceUnavailableException("Database unavailable");
     }
   }

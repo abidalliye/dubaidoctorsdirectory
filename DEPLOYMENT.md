@@ -1,5 +1,13 @@
 # Free initial deployment: Netlify + Neon
 
+## Current deployment
+
+- Site: https://fertifind-dubai.netlify.app
+- GitHub deployment branch: `codex/netlify-launch`.
+- Neon project: `fertifind-directory` (`delicate-hall-44906306`), production branch `br-shiny-flower-b4i59u41`.
+- The initial schema and 12 legacy provider listings have been imported. All listings are unverified.
+- The database connection is stored as a Netlify secret, not in this repository.
+
 Use Netlify Free for the Next.js frontend and the NestJS API in Netlify Functions, plus Neon Free for PostgreSQL/PostGIS. No AWS account, always-running server, Redis instance or Typesense subscription is required for the initial directory. Existing Redis/Typesense and Docker support remain optional paths for growth.
 
 Netlify supports Next.js SSR/App Router through its automatic adapter: https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/
