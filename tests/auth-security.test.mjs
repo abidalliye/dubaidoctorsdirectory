@@ -15,6 +15,9 @@ test('Password hashing uses independent salts, preserves spaces, and rejects wro
   assert.equal(await security.checkPassword('wrong password',a),false);
   assert.equal(await security.checkPassword(password),false);
   assert.throws(()=>security.validatePassword('short'));
+  const cookies=[];
+  security.setSessionCookies({setHeader:(name,value)=>cookies.push(...value)},'opaque','csrf');
+  assert.ok(cookies.every(cookie=>cookie.includes('; Secure')),'Secure cookies must not rely on a build-time NETLIFY flag');
 });
 
 test('Server rejects forged sessions, cross-site mutations, and admin registration without database access',async()=>{

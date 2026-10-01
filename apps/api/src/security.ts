@@ -50,7 +50,10 @@ export function cookie(request: any, name: string): string {
   return match ? match.slice(name.length + 1) : '';
 }
 export function setSessionCookies(response: any, token: string, csrf: string, clear = false) {
-  const secure = process.env.NETLIFY || process.env.NODE_ENV === 'production' ? '; Secure' : '';
+  // Netlify's NETLIFY/NODE_ENV build flags are not necessarily function runtime
+  // variables. Default to Secure; only explicitly local development may omit it.
+  const localOrigin = process.env.WEB_ORIGIN || process.env.URL || '';
+  const secure = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(localOrigin) && process.env.NODE_ENV !== 'production' ? '' : '; Secure';
   const common = `; Path=/; SameSite=Lax; Max-Age=${clear ? 0 : 604800}${secure}`;
   response.setHeader('Set-Cookie', [`ff_session=${token}${common}; HttpOnly`, `ff_csrf=${csrf}${common}`]);
 }

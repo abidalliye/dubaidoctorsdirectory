@@ -2,7 +2,7 @@
 
 The current deployment target is **Netlify Free + Neon Free**. See [DEPLOYMENT.md](DEPLOYMENT.md) for the serverless API, database setup and free-tier deployment path. AWS below is a future growth option.
 
-The legacy static site remains available while `apps/web` (Next.js App Router, React, TypeScript, Tailwind) and `apps/api` (NestJS) replace its directory discovery flow. The new site includes landing, search/filter/pagination, and provider profiles. PostgreSQL is the source of truth; PostGIS supports radius queries. Redis caches directory results for 60 seconds. Listings are imported as unverified, without ratings or verification claims from the legacy dataset.
+The original HTML website is the published frontend. `apps/web` contains an unpublished Next.js prototype. `apps/api` provides the live NestJS directory and account APIs. PostgreSQL is the source of truth; PostGIS supports radius queries. Optional Redis caches public directory results for 60 seconds. Imported database listings are unverified.
 
 ## Local development
 
@@ -28,7 +28,7 @@ The legacy static site remains available while `apps/web` (Next.js App Router, R
 - AWS: provision ECS/Fargate, ALB, managed PostgreSQL with PostGIS, ElastiCache and private Typesense service. Use Secrets Manager, TLS, backups, restore drills, and health-based rollout. Docker Compose is for local development.
 - Cloudflare: configure DNS, CDN/WAF and rate limits at the edge. Cache public content only; bypass any future authenticated routes.
 - S3/R2: add private buckets and signed uploads behind authenticated, authorized management APIs; validate file size/type and scan uploads before publishing.
-- Authentication and workflows: migrate doctor/clinic ownership, admin moderation, claims, appointment requests and reviews behind role/ownership checks. Existing static dashboards are not wired into this API.
+- Authentication: real login, account profiles, owned directory profiles, administrator role management and moderation are implemented; see [AUTHENTICATION.md](AUTHENTICATION.md). The original dashboards expose these controls. Clinical, appointment, billing and review modules remain future work.
 - Analytics: integrate GA4, Search Console and PostHog with consent and event allowlists; keep patient details and sensitive search strings out of analytics.
 - Sentry: configure server and client SDKs with PII scrubbing and secrets supplied at deploy time.
 

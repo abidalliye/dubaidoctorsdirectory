@@ -37,7 +37,7 @@ export class Accounts {
       throw new ForbiddenException('Invalid session token. Refresh the page');
   }
   ip(request: any) {
-    return process.env.NETLIFY ? String(request.headers['x-nf-client-connection-ip'] || 'unknown') : request.socket.remoteAddress;
+    return process.env.URL?.startsWith('https://') ? String(request.headers['x-nf-client-connection-ip'] || 'unknown') : request.socket.remoteAddress;
   }
   async mail(user: any, purpose: 'verify' | 'reset') {
     if (!process.env.RESEND_API_KEY || !process.env.EMAIL_FROM || !process.env.WEB_ORIGIN)

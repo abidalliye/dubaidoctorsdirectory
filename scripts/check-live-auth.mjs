@@ -16,7 +16,8 @@ async function register(role){
   const session={};const password=randomBytes(24).toString('hex'),email=`codex-check-${runId}-${role}@example.invalid`;
   const {response,result}=await ok('auth/register','POST',{email,password,name:'Deployment check '+role,role},session,201);
   assert.equal(result.user.role,role);assert.equal(result.user.status,role==='patient'?'active':'pending');assert.ok(!('password_hash' in result.user));
-  const raw=response.headers.getSetCookie().find(c=>c.startsWith('ff_session='));assert.match(raw,/HttpOnly/i);assert.match(raw,/Secure/i);assert.match(raw,/SameSite=Lax/i);
+  const raw=response.headers.getSetCookie().find(c=>c.startsWith('ff_session='));
+  assert.ok(/HttpOnly/i.test(raw),'Session must be HttpOnly');assert.ok(/Secure/i.test(raw),'Session must be Secure');assert.ok(/SameSite=Lax/i.test(raw),'Session must use SameSite');
   return {session,password,email,user:result.user};
 }
 const patient=await register('patient'),doctor=await register('doctor'),clinic=await register('clinic'),hospital=await register('hospital');
