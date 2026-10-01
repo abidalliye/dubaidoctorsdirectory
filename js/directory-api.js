@@ -30,7 +30,7 @@
       const existing = new Map([...container.querySelectorAll('.provider')]
         .map(card => [card.dataset.name.toLowerCase(), card]));
       for (const provider of items) {
-        if (!provider.name || !['doctor', 'clinic'].includes(provider.kind)) continue;
+        if (!provider.name || !['doctor', 'clinic', 'hospital', 'lab', 'surgeon', 'technician'].includes(provider.kind)) continue;
         let card = existing.get(provider.name.toLowerCase());
         if (card) {
           card.dataset.specialty += ' ' + (provider.specialty || '').toLowerCase();
@@ -51,7 +51,7 @@
         });
         const top = text('div', 'card-top', '');
         const info = text('div', 'card-info', '');
-        info.append(text('span', 'type-badge', provider.kind === 'doctor' ? 'Doctor' : 'Clinic'),
+        info.append(text('span', 'type-badge', provider.kind.charAt(0).toUpperCase() + provider.kind.slice(1)),
           text('span', 'badge badge-mint', provider.verified ? 'Verified listing' : 'Verification pending'),
           text('h3', '', provider.name), text('div', 'card-sub', provider.specialty),
           text('div', 'card-location', '📍 ' + (provider.address || provider.area || 'Dubai')));

@@ -1,4 +1,6 @@
 BEGIN;
+ALTER TABLE providers DROP CONSTRAINT IF EXISTS providers_kind_check;
+ALTER TABLE providers ADD CONSTRAINT providers_kind_check CHECK(kind IN ('doctor','clinic','hospital','lab','surgeon','technician'));
 CREATE TABLE IF NOT EXISTS app_users (
  id uuid PRIMARY KEY, email text UNIQUE NOT NULL, password_hash text NOT NULL,
  name text NOT NULL, phone text NOT NULL DEFAULT '',

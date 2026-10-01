@@ -65,7 +65,7 @@ class Providers implements OnModuleDestroy {
       limit > 50
     )
       throw new BadRequestException("Invalid pagination");
-    if (query.kind && !["doctor", "clinic"].includes(query.kind))
+    if (query.kind && !["doctor", "clinic", "hospital", "lab", "surgeon", "technician"].includes(query.kind))
       throw new BadRequestException("Invalid provider type");
     if ((query.q?.length || 0) > 200 || (query.area?.length || 0) > 100)
       throw new BadRequestException("Search too long");

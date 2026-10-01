@@ -222,7 +222,7 @@ class ProfileController {
       const result = await client.query(`INSERT INTO providers(id,slug,name,kind,specialty,area,address,phone,website,published,verified)
         VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,false,false) RETURNING *`,
         [id,name.toLowerCase().replace(/[^a-z0-9]+/g,'-') + '-' + id,name,
-          request.account.role === 'doctor' ? 'doctor' : 'clinic',field(body.specialty || '',200),field(body.area || '',100),
+          request.account.role,field(body.specialty || '',200),field(body.area || '',100),
           field(body.address || '',250),field(body.phone || '',40),profileFields(body).website || '']);
       await client.query('INSERT INTO provider_memberships(provider_id,user_id) VALUES($1,$2)',[id,request.account.id]);
       await client.query('COMMIT');
