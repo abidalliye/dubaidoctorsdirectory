@@ -6,7 +6,7 @@ Initial hosting target: **Netlify Free + Neon Free**, with PostgreSQL search and
 
 Netlify publishes the original HTML website below, preserving its design, navigation, profiles and dashboard pages. Run `npm run build:site` to build the site and NestJS backend. The directory reads public provider records from the NestJS API backed by Neon PostgreSQL, alongside existing page listings; offline/local-file previews retain the original listings.
 
-`apps/web` contains the separate Next.js prototype and is not the published frontend. The NestJS backend is in `apps/api`. PostgreSQL/PostGIS, Redis and Typesense are defined in `compose.yaml`. See [ARCHITECTURE.md](ARCHITECTURE.md) for setup and API routes. Authentication, bookings, reviews, submissions and dashboard writes still use the original demo/local-storage integrations and are not connected to Neon. Patient, appointment and user fixture JSONs are excluded from the website build.
+`apps/web` contains the separate Next.js prototype and is not the published frontend. The NestJS backend is in `apps/api`. PostgreSQL/PostGIS, Redis and Typesense are defined in `compose.yaml`. See [ARCHITECTURE.md](ARCHITECTURE.md) for directory setup and [AUTHENTICATION.md](AUTHENTICATION.md) for real accounts, roles, sessions, profile ownership and administration. Account and directory-profile edits persist in Neon. Clinical, billing and appointment modules remain unimplemented and are marked unavailable in dashboards. Patient, appointment and user fixture JSONs are excluded from the website build.
 
 FertiFind Dubai is a comprehensive, responsive healthcare directory and patient discovery platform for fertility specialists, IVF clinics, women's hospitals, and diagnostic genetics laboratories across Dubai, UAE.
 

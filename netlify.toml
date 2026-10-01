@@ -6,6 +6,7 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  WEB_ORIGIN = "https://fertifind-dubai.netlify.app"
 
 [functions]
   node_bundler = "esbuild"

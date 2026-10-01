@@ -20,8 +20,10 @@ for (const file of ['doctors.json', 'clinics.json', 'blogs.json', 'dha_services.
 }
 const home = await readFile(resolve(output, 'index.html'), 'utf8');
 if (!home.includes('Find Doctor Dubai')) throw new Error('Original homepage missing');
-const directory = await readFile(resolve(output, 'fertifind_dubai_directory_search_page.html'), 'utf8');
-for (const match of directory.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) {
-  if (match[1].trim()) new Script(match[1]);
+for (const file of (await readdir(output)).filter(file => file.endsWith('.html'))) {
+  const html = await readFile(resolve(output,file),'utf8');
+  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    if (match[2].trim() && !match[1].includes('application/ld+json')) new Script(match[2], {filename:file});
+  }
 }
 console.log('Built original Find Doctor Dubai website and NestJS API.');

@@ -18,6 +18,8 @@ import helmet from "helmet";
 import Redis from "ioredis";
 import Typesense from "typesense";
 import { columns, db } from "./db";
+import { AccountsModule } from './accounts';
+import { SafeErrors } from './errors';
 @Injectable()
 class Providers implements OnModuleDestroy {
   private searchClient = process.env.TYPESENSE_API_KEY
@@ -212,6 +214,7 @@ class HealthController {
   }
 }
 @Module({
+  imports: [AccountsModule],
   controllers: [DirectoryController, HealthController],
   providers: [Providers],
 })
@@ -220,6 +223,11 @@ export async function createApplication() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
+  app.useGlobalFilters(new SafeErrors());
+  app.use((request: any, response: any, next: () => void) => {
+    if (/^\/v1\/(auth|account|admin)(\/|$)/.test(request.path)) response.setHeader('Cache-Control','no-store');
+    next();
+  });
   app.setGlobalPrefix("v1");
   app.enableCors({ origin: process.env.WEB_ORIGIN || "http://localhost:3000" });
   return app;

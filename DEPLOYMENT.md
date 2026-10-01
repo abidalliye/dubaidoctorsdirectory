@@ -46,7 +46,7 @@ The published frontend is the original multi-page HTML site; do not select `apps
 
 Add `DATABASE_URL` and `DB_POOL_SIZE=2` in Netlify's environment-variable settings, available to Functions/runtime. Use the pooled Neon URL. Never prefix database credentials with `NEXT_PUBLIC_`.
 
-Leave `API_URL` unset. The directory calls `/v1/providers` on the same origin. Set `WEB_ORIGIN` to the site's public origin for cross-origin clients. Existing demo authentication and dashboard writes are not migrated to Neon.
+Leave `API_URL` unset. The directory calls `/v1/providers` on the same origin. `WEB_ORIGIN` is configured in netlify.toml for authentication origin checks. Real accounts and profile edits use Neon after applying migration 002. See [AUTHENTICATION.md](AUTHENTICATION.md) for first-admin provisioning and optional email delivery configuration.
 
 Leave `REDIS_URL` and `TYPESENSE_API_KEY` unset for the initial free setup. PostgreSQL handles search and geo queries. Do not copy local Docker secrets or localhost database URLs into Netlify.
 

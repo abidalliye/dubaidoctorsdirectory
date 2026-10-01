@@ -13,6 +13,7 @@
     "test": "node --test --test-isolation=none tests/*.test.mjs",
     "seed": "npm run seed -w @fertifind/api",
     "db:init": "npm run db:init -w @fertifind/api",
+    "db:migrate": "npm run db:migrate -w @fertifind/api",
     "package:functions": "npm run build -w @fertifind/api && node scripts/package-functions.mjs",
     "index:search": "npm run index:search -w @fertifind/api"
   },

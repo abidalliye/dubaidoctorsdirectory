@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "seed": "tsx src/seed.ts",
     "db:init": "tsx src/init-db.ts",
+    "db:migrate": "tsx src/migrate.ts",
     "index:search": "tsx src/index-search.ts"
   },
   "dependencies": {

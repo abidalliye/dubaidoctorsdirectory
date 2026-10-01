@@ -233,7 +233,7 @@
 
               <div class="demo-auth-strip">
                 <span>Quick Access:</span>
-                <button type="button" class="btn btn-outline btn-xs" onclick="FertiFind.demoLogin('doctor')">🩺 Demo Doctor</button>
+
                 <a href="admin.html" class="btn btn-outline btn-xs" style="color:var(--blue);text-decoration:none">⚡ Admin Dashboard</a>
               </div>
 
@@ -673,123 +673,38 @@
       }
     },
 
-    submitLogin: function (e) {
-      if (e) e.preventDefault();
-      const emailInput = document.getElementById('ffLoginEmail');
-      const email = emailInput ? emailInput.value.trim() : '';
-      const passInput = document.getElementById('ffLoginPass');
-      const pass = passInput ? passInput.value : '';
-
-      if (!email || !pass) {
-        alert('Please enter your email and password.');
-        return;
-      }
-
-      let role = email.includes('clinic') || email.includes('dr') || email.includes('doctor') ? 'doctor' : 'patient';
-      let name = role === 'doctor' ? 'Dr. Partha Sarathi (DHCC)' : email.split('@')[0];
-
-      const user = { name, email, role, loggedInAt: new Date().toISOString() };
-      localStorage.setItem('ff_user', JSON.stringify(user));
-
-      this.closeModal('ffAuthModal');
-      this.updateAuthUI();
-      this.toast(`Welcome back, ${name}! Signed in successfully.`);
+    submitLogin: async function (e) {
+      if(e)e.preventDefault();
+      const result=await AuthGuard.login(document.getElementById('ffLoginEmail').value.trim(),document.getElementById('ffLoginPass').value);
+      if(!result.success){alert(result.error);return;}
+      this.closeModal('ffAuthModal');this.updateAuthUI();location.href=AuthGuard.portal(result.user.role);
     },
-
-    submitRegister: function (e) {
-      if (e) e.preventDefault();
-      const name = document.getElementById('ffRegName').value.trim();
-      const email = document.getElementById('ffRegEmail').value.trim();
-      const mobile = document.getElementById('ffRegMobile').value.trim();
-      const role = document.getElementById('ffRegRole').value;
-      const pass = document.getElementById('ffRegPass').value;
-      const passConf = document.getElementById('ffRegPassConf').value;
-
-      if (pass !== passConf) {
-        alert('Passwords do not match. Please verify your password confirmation.');
-        return;
-      }
-
-      const user = { name, email, mobile, role, loggedInAt: new Date().toISOString() };
-      if (window.FertiFirebase) {
-        FertiFirebase.registerUser(user);
-      }
-      localStorage.setItem('ff_user', JSON.stringify(user));
-
-      this.closeModal('ffAuthModal');
-      this.updateAuthUI();
-
-      if (role === 'doctor' || role === 'clinic' || role === 'hospital') {
-        this.toast(`Account created for ${name}! Please submit your practice details.`, 4000);
-        setTimeout(() => {
-          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}&mobile=${encodeURIComponent(mobile)}`;
-        }, 1200);
-      } else {
-        this.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
-      }
+    submitRegister: async function(e){
+      if(e)e.preventDefault();
+      const password=document.getElementById('ffRegPass').value;
+      if(password!==document.getElementById('ffRegPassConf').value){alert('Passwords do not match');return;}
+      const result=await AuthGuard.register({name:document.getElementById('ffRegName').value.trim(),
+        email:document.getElementById('ffRegEmail').value.trim(),phone:document.getElementById('ffRegMobile').value.trim(),
+        role:document.getElementById('ffRegRole').value,password});
+      if(!result.success){alert(result.error);return;}
+      this.closeModal('ffAuthModal');location.href=AuthGuard.portal(result.user.role);
     },
-
-    submitForgot: function (e) {
-      if (e) e.preventDefault();
-      const contact = document.getElementById('ffForgotContact').value.trim();
-      if (!contact) return;
-      this.closeModal('ffAuthModal');
-      this.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
+    submitForgot: async function(e){
+      if(e)e.preventDefault();const result=await AuthGuard.forgot(document.getElementById('ffForgotContact').value.trim());
+      if(!result.success){alert(result.error);return;}this.toast(result.message);
     },
-
-    demoLogin: function (role) {
-      const user = {
-        name: 'Dr. Partha Sarathi Das',
-        email: 'dr.das@orchidfertility.ae',
-        role: 'doctor',
-        loggedInAt: new Date().toISOString()
-      };
-      localStorage.setItem('ff_user', JSON.stringify(user));
-      this.closeModal('ffAuthModal');
-      this.updateAuthUI();
-      this.toast(`Logged in as ${user.name} (DOCTOR)`);
-    },
-
-    logout: function () {
-      localStorage.removeItem('ff_user');
-      this.updateAuthUI();
-      this.toast('You have been signed out.');
-    },
-
-    checkAuth: function () {
-      this.updateAuthUI();
-    },
-
-    updateAuthUI: function () {
-      const userStr = localStorage.getItem('ff_user');
-      const user = userStr ? JSON.parse(userStr) : null;
-
-      // Update nav-actions across desktop
-      document.querySelectorAll('.nav-actions').forEach(nav => {
-        let authBtn = nav.querySelector('.btn-signin, .user-badge-nav, button[onclick*="openAuth"]');
-        if (user) {
-          const badgeHtml = `
-            <div class="user-badge-nav">
-              <span>${user.role === 'doctor' || user.role === 'clinic' || user.role === 'hospital' ? '🩺' : '👤'} ${user.name.split(' ')[0]}</span>
-              <span class="logout-link" onclick="FertiFind.logout()" title="Sign out">✕</span>
-            </div>
-          `;
-          if (authBtn) {
-            authBtn.outerHTML = badgeHtml;
-          } else {
-            const wrap = document.createElement('div');
-            wrap.innerHTML = badgeHtml;
-            nav.insertBefore(wrap.firstElementChild, nav.firstChild);
-          }
-        } else {
-          const existingSignIn = nav.querySelector('.btn-signin, button[onclick*="openAuth"]');
-          if (existingSignIn) {
-            existingSignIn.classList.add('btn-signin');
-          } else if (authBtn && authBtn.classList.contains('user-badge-nav')) {
-            const signInHtml = `<button type="button" class="btn btn-outline btn-signin" onclick="FertiFind.openAuth('login')" style="padding:8px 12px;font-size:12px">Sign In</button>`;
-            authBtn.outerHTML = signInHtml;
-          }
-        }
+    demoLogin: function(){alert('Demo sign-in has been removed. Use your own account.');},
+    logout: function(){return AuthGuard.logout();},
+    checkAuth: async function(){await AuthGuard.refresh();this.updateAuthUI();},
+    updateAuthUI: function(){
+      const user=AuthGuard.getCurrentUser();
+      document.querySelectorAll('.nav-actions').forEach(nav=>{
+        const existing=nav.querySelector('.btn-signin,.user-badge-nav,button[onclick*="openAuth"]');
+        const wrapper=document.createElement('div');wrapper.className=user?'user-badge-nav':'btn-signin';
+        const button=document.createElement('button');button.className='btn btn-outline';button.type='button';
+        button.textContent=user?user.name:'Sign In';button.onclick=()=>user?location.assign(AuthGuard.portal(user.role)):this.openAuth('login');wrapper.append(button);
+        if(user){const logout=document.createElement('button');logout.textContent='Sign out';logout.type='button';logout.onclick=()=>AuthGuard.logout();wrapper.append(logout);}
+        if(existing)existing.replaceWith(wrapper);else nav.prepend(wrapper);
       });
     },
 

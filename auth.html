@@ -116,36 +116,7 @@
           <span id="noticeMsgText">Authentication is required to view this portal. Please log in with an authorized account below.</span>
         </div>
 
-        <!-- 19 Registered Users Status Card -->
-        <div class="registry-summary-card" style="background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:18px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <span style="font-size:12px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:6px">
-              <span>🛡️ Platform Authentication Registry</span>
-              <span class="badge badge-mint" style="font-size:10px">19 Verified</span>
-            </span>
-            <button type="button" onclick="toggleAccountsModal()" style="background:none;border:none;color:var(--blue);font-size:11px;font-weight:700;cursor:pointer;padding:0">All 19 Accounts ▾</button>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;font-size:11px">
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
-              <div style="font-weight:800;color:var(--blue);font-size:13px">1</div>
-              <div style="color:var(--muted);font-size:10px">👑 Admin</div>
-            </div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
-              <div style="font-weight:800;color:var(--blue);font-size:13px">6</div>
-              <div style="color:var(--muted);font-size:10px">🏥 Hospital</div>
-            </div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
-              <div style="font-weight:800;color:var(--blue);font-size:13px">7</div>
-              <div style="color:var(--muted);font-size:10px">🩺 Doctor</div>
-            </div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:6px;padding:6px 2px">
-              <div style="font-weight:800;color:var(--blue);font-size:13px">5</div>
-              <div style="color:var(--muted);font-size:10px">👤 Patient</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Auth Tabs -->
+        <p>Use your own account. Provider accounts require administrator approval.</p>        <!-- Auth Tabs -->
         <div class="auth-tabs" style="justify-content:center">
           <button type="button" class="auth-tab active" id="tabLogin" onclick="switchPageTab('login')">Log In</button>
           <button type="button" class="auth-tab" id="tabRegister" onclick="switchPageTab('register')">Create Account</button>
@@ -182,10 +153,10 @@
                 <span style="font-size:10px;color:var(--muted)">Signs in & sets auth session</span>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('admin')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">👑 Super Admin</button>
-                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('hospital')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">🏥 Hospital & Clinic</button>
-                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('doctor')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">🩺 Doctor Specialist</button>
-                <button type="button" class="btn btn-outline btn-xs" onclick="quickFillAndLogin('patient')" style="background:#ffffff;justify-content:flex-start;padding:6px 10px;font-size:11px;color:var(--navy)">👤 Patient Portal</button>
+
+
+
+
               </div>
             </div>
 
@@ -246,7 +217,7 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div>
                 <div class="input-pass-wrap">
-                  <input type="password" id="pRegPass" name="password" required placeholder="Create Password">
+                  <input type="password" minlength="12" maxlength="128" id="pRegPass" name="password" required placeholder="Create Password">
                   <button type="button" class="pass-toggle-btn" onclick="togglePass('pRegPass', this)">👁</button>
                 </div>
               </div>
@@ -275,7 +246,7 @@
         <div class="auth-view" id="viewForgot">
           <form class="ff-form" onsubmit="handleForgot(event)">
             <div style="background:#f8fbff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;font-size:12px;color:#455a7a;line-height:1.5">
-              🔑 Enter your registered email address or mobile phone number. We will send a secure password reset link and 6-digit verification code.
+              🔑 Enter your registered email address. Password reset links are sent by email when email delivery is configured.
             </div>
             <div>
               <input type="text" id="forgotContact" name="contact" required placeholder="Email or Mobile">
@@ -291,41 +262,6 @@
       </div>
     </div>
   </main>
-
-  <!-- 19 Registered Accounts Interactive Modal -->
-  <div id="accountsModal" style="display:none;position:fixed;inset:0;background:rgba(16,34,68,0.55);z-index:9999;align-items:center;justify-content:center;padding:16px">
-    <div style="background:#ffffff;border-radius:14px;max-width:620px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 48px rgba(0,0,0,0.2);overflow:hidden;border:1px solid var(--line)">
-      <div style="padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:#f8fafc">
-        <div>
-          <div style="font-size:16px;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:6px">
-            <span>🛡️ 19 Registered Platform Accounts</span>
-            <span class="badge badge-mint" style="font-size:10px">Live Database</span>
-          </div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px">Click "Login As" on any role to immediately authenticate and access its portal</div>
-        </div>
-        <button type="button" onclick="toggleAccountsModal()" style="border:none;background:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1">×</button>
-      </div>
-
-      <!-- Role Filters -->
-      <div style="padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:6px;background:#ffffff;flex-wrap:wrap">
-        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('all')" id="modalFilter-all" style="border-radius:16px;background:#eef5ff;color:var(--blue);font-weight:800">All (19)</button>
-        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('admin')" id="modalFilter-admin" style="border-radius:16px">👑 Admin (1)</button>
-        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('hospital')" id="modalFilter-hospital" style="border-radius:16px">🏥 Hospitals (6)</button>
-        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('doctor')" id="modalFilter-doctor" style="border-radius:16px">🩺 Doctors (7)</button>
-        <button type="button" class="btn btn-outline btn-xs" onclick="filterModalAccounts('patient')" id="modalFilter-patient" style="border-radius:16px">👤 Patients (5)</button>
-      </div>
-
-      <!-- Accounts List Container -->
-      <div id="accountsListContainer" style="padding:14px 16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:8px">
-        <!-- Rendered dynamically -->
-      </div>
-
-      <div style="padding:12px 18px;border-top:1px solid var(--line);background:#f8fafc;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:11px;color:var(--muted)">All passwords follow standard secure convention (Role + 2026!)</span>
-        <button type="button" class="btn btn-outline btn-xs" onclick="toggleAccountsModal()">Close Window</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Unified Footer -->
   <footer>
@@ -393,12 +329,6 @@
 
   <!-- Google Firebase SDKs & Integration -->
   <!-- Supabase & Firebase Database SDKs -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="js/firebase-config.js"></script>
   <script src="js/auth-guard.js"></script>
   <script src="js/site.js"></script>
   <script>
@@ -421,7 +351,7 @@
         window.location.hash = 'register';
       } else if (tab === 'forgot') {
         title.textContent = 'Reset Password';
-        sub.textContent = 'Recover access to your account via email or SMS';
+        sub.textContent = 'Recover access to your account by email';
         window.location.hash = 'forgot';
       }
     }
@@ -463,111 +393,6 @@
       }
     }
 
-    let currentModalFilter = 'all';
-
-    function toggleAccountsModal() {
-      const modal = document.getElementById('accountsModal');
-      if (!modal) return;
-      const isOpen = modal.style.display === 'flex';
-      modal.style.display = isOpen ? 'none' : 'flex';
-      if (!isOpen) {
-        renderModalAccounts(currentModalFilter);
-      }
-    }
-
-    function filterModalAccounts(role) {
-      currentModalFilter = role;
-      ['all', 'admin', 'hospital', 'doctor', 'patient'].forEach(r => {
-        const btn = document.getElementById('modalFilter-' + r);
-        if (btn) {
-          if (r === role) {
-            btn.style.background = '#eef5ff';
-            btn.style.color = 'var(--blue)';
-            btn.style.fontWeight = '800';
-          } else {
-            btn.style.background = '#ffffff';
-            btn.style.color = 'var(--navy)';
-            btn.style.fontWeight = '600';
-          }
-        }
-      });
-      renderModalAccounts(role);
-    }
-
-    function renderModalAccounts(filterRole = 'all') {
-      const container = document.getElementById('accountsListContainer');
-      if (!container) return;
-      const users = window.AuthGuard ? window.AuthGuard.getUsers() : [];
-      const filtered = filterRole === 'all' 
-        ? users 
-        : users.filter(u => {
-            if (filterRole === 'hospital') return u.role === 'hospital' || u.role === 'clinic';
-            return u.role === filterRole;
-          });
-
-      if (filtered.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:12px">No registered accounts in this category.</div>';
-        return;
-      }
-
-      let html = '';
-      filtered.forEach(u => {
-        const roleIcon = u.role === 'admin' ? '👑' : (u.role === 'hospital' || u.role === 'clinic') ? '🏥' : u.role === 'doctor' ? '🩺' : '👤';
-        const roleBadge = u.role === 'admin' ? 'badge-primary' : (u.role === 'hospital' || u.role === 'clinic') ? 'badge-blue' : u.role === 'doctor' ? 'badge-mint' : 'badge-slate';
-        const metaText = u.facility || u.specialty || (u.dhaId ? 'DHA: ' + u.dhaId : 'Verified Account');
-
-        html += `
-          <div style="background:#ffffff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px">
-            <div style="min-width:0;flex:1">
-              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                <span style="font-size:13px;font-weight:800;color:var(--navy)">${roleIcon} ${u.name}</span>
-                <span class="badge ${roleBadge}" style="font-size:10px;text-transform:uppercase">${u.role}</span>
-              </div>
-              <div style="font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
-                <span>${metaText}</span> • <span style="color:var(--navy);font-family:monospace">${u.email}</span>
-              </div>
-              <div style="font-size:11px;color:#0284c7;font-family:monospace;margin-top:2px">
-                Pass: <b>${u.password || '••••••••'}</b>
-              </div>
-            </div>
-            <button type="button" class="btn btn-outline btn-xs" onclick="selectAccountAndLogin('${u.email}', '${u.password || ''}')" style="white-space:nowrap;padding:6px 12px;font-weight:800">
-              Login As →
-            </button>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    }
-
-    function selectAccountAndLogin(email, pass) {
-      toggleAccountsModal();
-      document.getElementById('loginEmail').value = email;
-      document.getElementById('loginPass').value = pass;
-      processLogin(email, pass);
-    }
-
-    function quickFillAndLogin(role) {
-      let email = '';
-      let pass = '';
-      if (role === 'admin') {
-        email = 'admin@dubaidoctorsdirectory.ae';
-        pass = 'Admin2026!';
-      } else if (role === 'hospital') {
-        email = 'admin@kingscollegehospital.ae';
-        pass = 'Hospital2026!';
-      } else if (role === 'doctor') {
-        email = 'dr.ahmed.khan@ahdubai.com';
-        pass = 'Doctor2026!';
-      } else if (role === 'patient') {
-        email = 'sarah.johnson@example.ae';
-        pass = 'Patient2026!';
-      }
-
-      document.getElementById('loginEmail').value = email;
-      document.getElementById('loginPass').value = pass;
-      processLogin(email, pass);
-    }
-
     async function processLogin(email, password) {
       const errBox = document.getElementById('loginErrorBox');
       const submitBtn = document.getElementById('loginSubmitBtn');
@@ -595,7 +420,7 @@
 
       if (!res.success) {
         if (errBox) {
-          errBox.innerHTML = `<b>Access Denied:</b> ${res.error}`;
+          errBox.textContent = 'Access denied: ' + res.error;
           errBox.style.display = 'block';
         } else {
           alert('Access Denied: ' + res.error);
@@ -623,14 +448,6 @@
         targetUrl = 'dashboard-patient.html';
       }
 
-      // If user came from a protected link and their role matches, return them there
-      if (redirect) {
-        if (redirect.includes('admin') && user.role === 'admin') targetUrl = redirect;
-        else if (redirect.includes('hospital') && (user.role === 'hospital' || user.role === 'clinic' || user.role === 'admin')) targetUrl = redirect;
-        else if (redirect.includes('doctor') && (user.role === 'doctor' || user.role === 'admin')) targetUrl = redirect;
-        else if (redirect.includes('patient') && (user.role === 'patient' || user.role === 'admin')) targetUrl = redirect;
-      }
-
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 500);
@@ -640,7 +457,7 @@
     function handleLogin(e) {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value.trim();
-      const pass = document.getElementById('loginPass').value.trim();
+      const pass = document.getElementById('loginPass').value;
       processLogin(email, pass);
     }
 
@@ -687,46 +504,12 @@
         return;
       }
 
-      if (window.FertiFirebase) {
-        FertiFirebase.registerUser(res.user);
-      }
-
-      if (role === 'doctor') {
-        if (window.FertiFind && FertiFind.toast) {
-          FertiFind.toast(`Doctor account created for ${name}! Please complete credential submission.`, 4000);
-        }
-        setTimeout(() => {
-          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=doctor&mobile=${encodeURIComponent(mobile)}`;
-        }, 600);
-      } else if (role === 'clinic' || role === 'hospital') {
-        if (window.FertiFind && FertiFind.toast) {
-          FertiFind.toast(`Facility account created for ${name}! Please submit facility licensure.`, 4000);
-        }
-        setTimeout(() => {
-          window.location.href = `submit-business.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&role=clinic&mobile=${encodeURIComponent(mobile)}`;
-        }, 600);
-      } else {
-        if (window.FertiFind && FertiFind.toast) {
-          FertiFind.toast(`Welcome to FertiFind, ${name}! Your patient account is ready.`);
-        }
-        setTimeout(() => { 
-          window.location.href = 'dashboard-patient.html'; 
-        }, 600);
-      }
+      window.location.href = AuthGuard.portal(res.user.role);
     }
 
-    function handleForgot(e) {
-      e.preventDefault();
-      const contact = document.getElementById('forgotContact').value.trim();
-      if (window.FertiFind && FertiFind.toast) {
-        FertiFind.toast(`Password reset code & OTP sent to ${contact}. Check your inbox or phone.`);
-      } else {
-        alert(`Password reset code sent to ${contact}.`);
-      }
-    }
-
-    function demoLogin(role) {
-      quickFillAndLogin(role);
+    async function handleForgot(e){
+      e.preventDefault();const result=await AuthGuard.forgot(document.getElementById('forgotContact').value.trim());
+      alert(result.success?result.message:result.error);
     }
 
     // Page Initialization & Auth Guard Query Inspector
@@ -760,8 +543,8 @@
       }
 
       // 3. Pre-render modal accounts list
-      renderModalAccounts('all');
     });
   </script>
+  <script src="js/auth-links.js"></script>
 </body>
 </html>

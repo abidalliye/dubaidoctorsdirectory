@@ -8,13 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Supabase & Firebase Database SDKs -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="js/firebase-config.js"></script>
-
   <!-- Enterprise RBAC Auth Guard -->
   <script src="js/auth-guard.js"></script>
   <script>
@@ -1903,7 +1896,7 @@
       if (window.FertiFirebase) await FertiFirebase.addDoctor(doc);
       closeAdminModal('modalAddDoctor');
       showToast(`Doctor ${doc.name} saved to Supabase & database!`);
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     async function handleCreatePatient(e) {
@@ -1919,7 +1912,7 @@
       if (window.FertiFirebase) await FertiFirebase.addPatient(pat);
       closeAdminModal('modalAddPatient');
       showToast(`Patient ${pat.name} saved to Supabase & database!`);
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     async function handleCreateAppointment(e) {
@@ -1936,7 +1929,7 @@
       if (window.FertiFirebase) await FertiFirebase.addAppointment(apt);
       closeAdminModal('modalBookAppointment');
       showToast(`Appointment confirmed for ${apt.patientName}!`);
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     async function handleCreateBlog(e) {
@@ -1951,14 +1944,14 @@
       if (window.FertiFirebase) await FertiFirebase.addBlog(blog);
       closeAdminModal('modalAddBlog');
       showToast(`Article "${blog.title}" published!`);
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     async function updateStatus(id, newStatus) {
       if (window.FertiSupabase) await FertiSupabase.updateAppointmentStatus(id, newStatus);
       if (window.FertiFirebase) await FertiFirebase.updateAppointmentStatus(id, newStatus);
       showToast(`Appointment #${id} updated to ${newStatus}`);
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     // Supabase Settings & Handlers
@@ -1985,9 +1978,9 @@
       const url = document.getElementById('cfgSupabaseUrl').value.trim();
       const key = document.getElementById('cfgSupabaseKey').value.trim();
       FertiSupabase.saveConfig(url, key);
-      loadSupabaseForm();
+      // Legacy database configuration removed.
       showToast('✓ Supabase credentials saved successfully!');
-      loadDashboardData();
+      // Legacy demo data loading removed.
     }
 
     async function testSupabaseLiveConnection() {
@@ -2011,7 +2004,7 @@
       const res = await FertiSupabase.seedAllData();
       if (res.success) {
         showToast(res.message);
-        loadDashboardData();
+        // Legacy demo data loading removed.
       } else {
         alert(res.message);
       }
@@ -2268,10 +2261,12 @@
 
     // Init on page load
     window.addEventListener('DOMContentLoaded', () => {
-      loadSupabaseForm();
-      loadFirebaseForm();
-      loadDashboardData();
+      // Legacy database configuration removed.
+      // Use server-managed Neon configuration.
+      // Legacy demo data loading removed.
     });
   </script>
+  <script src="js/account-ui.js"></script>
+  <script src="js/auth-links.js"></script>
 </body>
 </html>

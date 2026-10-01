@@ -1855,12 +1855,7 @@
       }
     }
 
-    function handleFormSubmit(e, successMsg) {
-      e.preventDefault();
-      const overlays = document.querySelectorAll('.ff-modal-overlay');
-      overlays.forEach(m => m.classList.remove('active'));
-      showToast(successMsg);
-    }
+    function handleFormSubmit(e){e.preventDefault();showToast('This action is not connected yet. No data was saved.');}
 
     function handleSearch(val) {
       if (val.length > 2) {
@@ -1872,5 +1867,7 @@
       AuthGuard.logout('auth.html');
     }
   </script>
+  <script src="js/account-ui.js"></script>
+  <script src="js/auth-links.js"></script>
 </body>
 </html>
