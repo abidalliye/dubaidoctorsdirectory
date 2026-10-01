@@ -24,6 +24,7 @@
     refresh:async()=>{try{user=(await api('auth/me')).user;}catch{user=null;}window.dispatchEvent(new Event('ff-auth-change'));return user;},
     logout:async redirect=>{try{await api('auth/logout','POST',{});user=null;location.href=redirect||'auth.html';}catch(error){alert(error.message);}},
     protect:async role=>{
+      if(location.protocol==='file:')return null;
       document.documentElement.style.visibility='hidden';
       const current=await AuthGuard.refresh();
       if(!current){location.replace('auth.html?required_role='+encodeURIComponent(role)+'&error=unauthenticated');return null;}

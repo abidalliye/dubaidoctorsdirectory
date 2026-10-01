@@ -67,7 +67,7 @@
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Confirm Booking Request →</button>
             <p style="font-size:11px;color:var(--muted);text-align:center;margin:6px 0 0">
-              🔒 Direct coordination with DHA-licensed clinic. No booking surcharge.
+              🔒 Your request is saved for review. Confirmation is required.
             </p>
           </form>
         </div>
@@ -116,7 +116,7 @@
               <input type="checkbox" name="verified_experience" required checked>
               <span>I confirm this review represents a genuine patient experience.</span>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Submit Verified Review →</button>
+            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;padding:13px">Submit Review →</button>
           </form>
         </div>
       </div>
@@ -359,118 +359,13 @@
       });
     });
 
-    const bookingForm = document.getElementById('ffBookingForm');
-    if (bookingForm) {
-      bookingForm.onsubmit = async function (e) {
-        e.preventDefault();
-        const ref = 'FF-DXB-' + Math.floor(100000 + Math.random() * 900000);
-        const name = (document.getElementById('ffBookingName') ? document.getElementById('ffBookingName').value.trim() : '') || 'Patient';
-        const provider = (document.getElementById('ffBookingProvider') ? document.getElementById('ffBookingProvider').value : '') || 'Specialist';
-        const service = (document.getElementById('ffBookingService') ? document.getElementById('ffBookingService').value : '') || 'Consultation';
-        const phone = (document.getElementById('ffBookingPhone') ? document.getElementById('ffBookingPhone').value.trim() : '');
-        const email = (document.getElementById('ffBookingEmail') ? document.getElementById('ffBookingEmail').value.trim() : '');
-        const date = (document.getElementById('ffBookingDate') ? document.getElementById('ffBookingDate').value : new Date().toISOString().split('T')[0]);
-        const slot = (document.getElementById('ffBookingSlot') ? document.getElementById('ffBookingSlot').value : 'Morning');
-        const notes = (document.getElementById('ffBookingNotes') ? document.getElementById('ffBookingNotes').value.trim() : '');
-
-        const bookingPayload = {
-          id: ref,
-          patientName: name,
-          doctorName: provider,
-          specialty: service,
-          service: service,
-          date: date,
-          slot: slot,
-          dateTime: date + ' (' + slot.split(' ')[0] + ')',
-          phone: phone,
-          email: email,
-          notes: notes,
-          status: 'Confirmed',
-          source: 'Website Appointment Booking Modal'
-        };
-
-        if (window.FertiSupabase) {
-          await FertiSupabase.bookAppointment(bookingPayload);
-        }
-        if (window.FertiFirebase) {
-          await FertiFirebase.addAppointment(bookingPayload);
-        }
-
-        FertiFind.closeModal('ffBookingModal');
-        FertiFind.toast(`Appointment confirmed! Reference #${ref}. Saved to Supabase database.`);
-        bookingForm.reset();
-      };
+    function connectForm(id,save,message){
+      const form=document.getElementById(id);if(!form)return;
+      form.onsubmit=async e=>{e.preventDefault();const button=form.querySelector('[type=submit]');button.disabled=true;try{if(!await AuthGuard.refresh())throw Error('Please sign in before submitting. Your form has not been saved.');await save(Object.fromEntries(new FormData(form)));FertiFind.closeModal(form.closest('.ff-modal').id);FertiFind.toast(message);form.reset();}catch(error){FertiFind.toast(error.message);}finally{button.disabled=false;}};
     }
-
-    const reviewForm = document.getElementById('ffReviewForm');
-    if (reviewForm) {
-      reviewForm.onsubmit = async function (e) {
-        e.preventDefault();
-        const reviewer = (document.getElementById('ffReviewName') ? document.getElementById('ffReviewName').value.trim() : '') || 'Verified Patient';
-        const provider = (document.getElementById('ffReviewProvider') ? document.getElementById('ffReviewProvider').value : '') || 'Healthcare Provider';
-        const treatment = (document.getElementById('ffReviewTreatment') ? document.getElementById('ffReviewTreatment').value : 'Consultation');
-        const comment = (document.getElementById('ffReviewComment') ? document.getElementById('ffReviewComment').value.trim() : '') || 'Great consultation and care.';
-        const rating = Number(document.getElementById('ffRatingValue') ? document.getElementById('ffRatingValue').value : 5) || 5;
-
-        const reviewPayload = {
-          patientName: reviewer,
-          doctorName: provider,
-          rating: rating,
-          treatment: treatment,
-          comment: comment,
-          date: new Date().toISOString().split('T')[0],
-          verified: true,
-          source: 'Patient Review Modal'
-        };
-
-        if (window.FertiSupabase) {
-          await FertiSupabase.submitReview(reviewPayload);
-        }
-        if (window.FertiFirebase) {
-          await FertiFirebase.addReview(reviewPayload);
-        }
-
-        FertiFind.closeModal('ffReviewModal');
-        FertiFind.toast('Thank you! Your verified patient review has been saved to Supabase.');
-        reviewForm.reset();
-      };
-    }
-
-    const listForm = document.getElementById('ffListForm');
-    if (listForm) {
-      listForm.onsubmit = async function (e) {
-        e.preventDefault();
-        const name = (document.getElementById('ffListName') ? document.getElementById('ffListName').value.trim() : '');
-        const type = (document.getElementById('ffListType') ? document.getElementById('ffListType').value : 'Clinic');
-        const area = (document.getElementById('ffListDistrict') ? document.getElementById('ffListDistrict').value : 'Dubai');
-        const license = (document.getElementById('ffListDhaLicense') ? document.getElementById('ffListDhaLicense').value.trim() : '');
-        const phone = (document.getElementById('ffListPhone') ? document.getElementById('ffListPhone').value.trim() : '');
-        const email = (document.getElementById('ffListEmail') ? document.getElementById('ffListEmail').value.trim() : '');
-        const services = (document.getElementById('ffListServices') ? document.getElementById('ffListServices').value.trim() : '');
-
-        const submissionPayload = {
-          name: name,
-          category: type,
-          area: area,
-          dhaLicense: license,
-          phone: phone,
-          email: email,
-          services: services ? services.split(',').map(s => s.trim()) : [],
-          source: 'Quick Practice Listing Modal'
-        };
-
-        if (window.FertiSupabase) {
-          await FertiSupabase.submitPractice(submissionPayload);
-        }
-        if (window.FertiFirebase) {
-          await FertiFirebase.recordSubmission(submissionPayload);
-        }
-
-        FertiFind.closeModal('ffListBusinessModal');
-        FertiFind.toast('Practice submission received and saved to Supabase database! DHA credentials under review.');
-        listForm.reset();
-      };
-    }
+    connectForm('ffBookingForm',d=>AuthGuard.api('dashboard/records/appointments','POST',{patientName:d.patient_name,doctorName:d.provider_name||document.getElementById('ffBookingProvider').value,service:d.service,specialty:d.service,phone:d.phone,email:d.email,date:d.date,timeSlot:d.time_slot,notes:d.notes,status:'Requested'}),'Appointment request saved. Awaiting provider confirmation.');
+    connectForm('ffReviewForm',d=>AuthGuard.api('dashboard/records/reviews','POST',{target:d.provider_name,rating:d.rating,patientName:d.patient_name,treatment:d.treatment,comment:d.comment,verifiedExperience:d.verified_experience?'yes':'no',status:'Pending'}),'Review saved for administrator moderation.');
+    connectForm('ffListForm',d=>AuthGuard.api('account/providers','POST',{name:d.practice_name,kind:d.provider_type==='Diagnostic Lab'?'lab':d.provider_type.toLowerCase(),area:d.district,dhaLicense:d.dha_license,phone:d.phone,professionalEmail:d.email,services:d.services}),'Directory profile saved for review. Manage its details from your dashboard.');
 
     const starSelector = document.getElementById('ffStarSelector');
     if (starSelector) {

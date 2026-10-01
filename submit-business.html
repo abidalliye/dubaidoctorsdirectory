@@ -711,77 +711,17 @@
       }
     });
 
-    async function handleBusinessSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('bizName').value;
-      const category = document.getElementById('bizCategory').value;
-      const leadDoctor = document.getElementById('bizLeadDoctor').value;
-      const years = document.getElementById('bizYears').value;
-      const accred = document.getElementById('bizAccred').value;
-      const district = document.getElementById('bizDistrict').value;
-      const unit = document.getElementById('bizUnit').value;
-      const street = document.getElementById('bizStreet').value;
-      const parking = document.getElementById('bizParking').value;
-      const license = document.getElementById('bizDhaLicense').value;
-      const whatsapp = document.getElementById('bizWhatsApp').value;
-      const phone = document.getElementById('bizPhone').value;
-      const email = document.getElementById('bizEmail').value;
-      const website = document.getElementById('bizWebsite').value;
-      const fee = document.getElementById('bizFee').value;
-      const insurance = document.getElementById('bizInsurance').value;
-      const planSel = document.getElementById('bizPlan');
-      const planText = planSel.options[planSel.selectedIndex].text.split('(')[0].trim();
-
-      const selectedServices = [...document.querySelectorAll('input[name="services"]:checked')].map(cb => cb.parentElement.textContent.trim());
-
-      const ref = 'FF-DHA-' + Math.floor(10000 + Math.random() * 90000);
-      document.getElementById('refCode').textContent = ref;
-      document.getElementById('confName').textContent = name;
-      document.getElementById('confLicense').textContent = license;
-      document.getElementById('confWhatsApp').textContent = whatsapp;
-      document.getElementById('confPlan').textContent = planText;
-
-      document.getElementById('submitFormLayout').style.display = 'none';
-      const successEl = document.getElementById('successView');
-      successEl.style.display = 'block';
-      successEl.scrollIntoView({ behavior: 'smooth' });
-
-      const submissionPayload = {
-        ref: ref,
-        name: name,
-        category: category,
-        leadDoctor: leadDoctor,
-        yearsInDubai: years,
-        accreditations: accred,
-        area: district,
-        address: unit + (street ? ', ' + street : ''),
-        parking: parking,
-        dhaLicense: license,
-        whatsapp: whatsapp,
-        phone: phone,
-        email: email,
-        website: website,
-        services: selectedServices,
-        fee: fee,
-        insurance: insurance,
-        plan: planText,
-        status: 'Pending Verification',
-        submittedAt: new Date().toISOString()
-      };
-
-      if (window.FertiFind && FertiFind.saveSubmittedListing) {
-        FertiFind.saveSubmittedListing(submissionPayload);
-      }
-
-      if (window.FertiSupabase) {
-        await FertiSupabase.submitPractice(submissionPayload);
-      }
-      if (window.FertiFirebase) {
-        await FertiFirebase.recordSubmission(submissionPayload);
-      }
-
-      FertiFind.toast(`Practice submission received & saved! Reference #${ref}`);
+    async function handleBusinessSubmit(e){
+      e.preventDefault();const form=e.target,button=form.querySelector('[type=submit]');button.disabled=true;
+      try{
+        const user=await AuthGuard.refresh();if(!user)throw Error('Please sign in with a business account before submitting. Your details have not been saved.');
+        const d=Object.fromEntries(new FormData(form)),services=new FormData(form).getAll('services').join(', ');
+        const result=await AuthGuard.api('account/providers','POST',{name:d.facility_name,kind:d.category==='fertility'?'clinic':d.category,leadDoctor:d.lead_doctor,yearsInDubai:d.years_in_dubai,accreditations:d.accreditations,area:d.area,unitNumber:d.unit_number,streetAddress:d.street_address,address:[d.unit_number,d.street_address].filter(Boolean).join(', '),parking:d.parking,dhaLicense:d.dha_license,whatsapp:d.whatsapp,phone:d.phone,professionalEmail:d.email,website:d.website,services,consultationFee:d.consultation_fee,insurance:d.insurance,plan:d.plan,dhaCertified:d.dha_certified?'yes':'no'});
+        document.getElementById('refCode').textContent=result.provider.id;document.getElementById('confName').textContent=result.provider.name;document.getElementById('confLicense').textContent=d.dha_license;document.getElementById('confWhatsApp').textContent=d.whatsapp;document.getElementById('confPlan').textContent=d.plan;
+        document.getElementById('submitFormLayout').style.display='none';document.getElementById('successView').style.display='block';document.getElementById('successView').scrollIntoView({behavior:'smooth'});FertiFind.toast('Saved to the database. Your profile awaits review; no payment was taken.');
+      }catch(error){FertiFind.toast(error.message);}finally{button.disabled=false;}
     }
+
   </script>
   <script src="js/auth-links.js"></script>
 </body>
