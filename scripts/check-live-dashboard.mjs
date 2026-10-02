@@ -157,6 +157,37 @@ assert.equal(
   403,
 );
 const pdf = Buffer.from("%PDF-1.4\nSynthetic test file\n%%EOF");
+const archivedProvider = providers[0];
+await ok(
+  "account/providers/" + archivedProvider.id + "/archive",
+  "POST",
+  { archived: true },
+  doctor.session,
+  201,
+);
+assert.ok(
+  !(await ok("account/providers", "GET", null, doctor.session)).items.some(
+    (p) => p.id === archivedProvider.id,
+  ),
+);
+assert.ok(
+  (
+    await ok("account/providers?archived=1", "GET", null, doctor.session)
+  ).items.find((p) => p.id === archivedProvider.id).archived,
+);
+await ok(
+  "account/providers/" + archivedProvider.id + "/archive",
+  "POST",
+  { archived: false },
+  doctor.session,
+  201,
+);
+assert.equal(
+  (await ok("account/providers", "GET", null, doctor.session)).items.find(
+    (p) => p.id === archivedProvider.id,
+  ).published,
+  false,
+);
 const file = await ok(
   "dashboard/files",
   "POST",
