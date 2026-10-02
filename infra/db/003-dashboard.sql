@@ -1,6 +1,7 @@
 BEGIN;
 ALTER TABLE app_users DROP CONSTRAINT IF EXISTS app_users_role_check;
 ALTER TABLE app_users ADD CONSTRAINT app_users_role_check CHECK(role IN ('patient','doctor','clinic','hospital','lab','surgeon','technician','admin'));
+ALTER TABLE providers ADD COLUMN IF NOT EXISTS archived boolean NOT NULL DEFAULT false;
 ALTER TABLE providers ADD COLUMN IF NOT EXISTS details jsonb NOT NULL DEFAULT '{}';
 CREATE TABLE IF NOT EXISTS provider_affiliations (
  provider_id text NOT NULL REFERENCES providers(id) ON DELETE CASCADE,

@@ -166,12 +166,18 @@
     };
   }
   async function profileWizard(target = user, adminEdit = false) {
+    const initialName = target.name;
     let step = 0,
       values = { ...target.profile, name: target.name, phone: target.phone };
     const steps =
       target.role === "patient"
         ? schema.profileSteps.patient
         : schema.profileSteps.business;
+    if (target.profile?.profileComplete !== "yes")
+      step = Math.min(
+        Number(target.profile?.profileStep) || 0,
+        steps.length - 1,
+      );
     const dialog = modal(
       adminEdit
         ? "Edit " + target.name
@@ -229,10 +235,13 @@
           const endpoint = adminEdit
             ? "admin/profiles/" + target.id
             : "account/profile";
-          await api(endpoint, "PATCH", {
+          const saved = await api(endpoint, "PATCH", {
             ...data,
+            profileStep: String(Math.min(step + 1, steps.length - 1)),
             ...(step === steps.length - 1 ? { profileComplete: "yes" } : {}),
           });
+          target = saved.user;
+          if (!adminEdit) user = saved.user;
           if (step < steps.length - 1) {
             step++;
             draw();
@@ -242,7 +251,7 @@
               if (schema.providerKinds.includes(user.role)) {
                 const owned = (await api("account/providers")).items;
                 const primary = owned.find(
-                  (p) => p.kind === user.role && p.name === target.name,
+                  (p) => p.kind === user.role && p.name === initialName,
                 );
                 const business = { kind: user.role };
                 for (const f of schema.listingFields)
@@ -424,6 +433,7 @@
     );
     await load();
   }
+  let includeArchived = false;
   async function listings(target) {
     heading(
       target,
@@ -433,8 +443,16 @@
     target.append(
       action("Add profile", () => listingEditor(), "btn btn-primary"),
     );
+    target.append(
+      action(includeArchived ? "Hide archived" : "Show archived", async () => {
+        includeArchived = !includeArchived;
+        await render();
+      }),
+    );
     const data = await api(
-      user.role === "admin" ? "admin/providers" : "account/providers",
+      (user.role === "admin" ? "admin/providers" : "account/providers") +
+        "?archived=" +
+        (includeArchived ? 1 : 0),
     );
     const grid = el("div", "", "ff-grid");
     target.append(grid);
@@ -442,7 +460,13 @@
       if (query && !JSON.stringify(p).toLowerCase().includes(query)) continue;
       const c = card(
         p.name,
-        p.kind + " · " + (p.published ? "Published" : "Draft / review pending"),
+        p.kind +
+          " · " +
+          (p.archived
+            ? "Archived"
+            : p.published
+              ? "Published"
+              : "Draft / review pending"),
       );
       c.append(
         el("p", p.specialty + " · " + p.area),
@@ -450,7 +474,18 @@
       );
       const preview = el("a", "View profile", "btn btn-outline");
       preview.href = "provider-profile.html?slug=" + encodeURIComponent(p.slug);
-      c.append(preview);
+      c.append(
+        preview,
+        action(p.archived ? "Restore profile" : "Archive profile", async () => {
+          await api("account/providers/" + p.id + "/archive", "POST", {
+            archived: !p.archived,
+          });
+          message(
+            p.archived ? "Profile restored as draft" : "Profile archived",
+          );
+          await render();
+        }),
+      );
       if (user.role === "admin") {
         const form = el("form", "", "ff-form");
         for (const key of ["published", "verified"]) {
@@ -615,7 +650,7 @@
       "Profile completion",
       user.profile?.profileComplete === "yes"
         ? "Completed — update your details any time"
-        : "Complete your details in three guided steps",
+        : "Complete your details in guided steps",
     );
     p.append(
       action(

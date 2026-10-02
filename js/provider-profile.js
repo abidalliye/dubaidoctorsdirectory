@@ -19,7 +19,8 @@
         throw Error("This profile is unavailable or awaiting publication");
       p = (
         await AuthGuard.api(
-          user.role === "admin" ? "admin/providers" : "account/providers",
+          (user.role === "admin" ? "admin/providers" : "account/providers") +
+            "?archived=1",
         )
       ).items.find((x) => x.slug === slug);
       if (!p) throw Error("Profile unavailable");

@@ -89,6 +89,20 @@ export const accountFields = [
     options: ["yes", "no"],
   },
 ];
+accountFields.push({
+  key: "profileStep",
+  label: "Profile step",
+  type: "select",
+  options: ["0", "1", "2", "3", "4"],
+});
+export async function archiveListing(user: any, id: string, archived: boolean) {
+  const result = await db.query(
+    `UPDATE providers p SET archived=$1,published=false,verified=false,updated_at=now() WHERE id=$2 AND ($4='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$3)) RETURNING id`,
+    [archived, id, user.id, user.role],
+  );
+  if (!result.rows[0]) throw new NotFoundException();
+  return { success: true };
+}
 export async function saveProfile(id: string, input: unknown) {
   const values = validateFields(input, accountFields),
     { name, phone, ...profile } = values;
@@ -210,11 +224,15 @@ export async function saveListing(user: any, input: unknown, id?: string) {
     client.release();
   }
 }
-export async function listListings(user: any, all = false) {
+export async function listListings(
+  user: any,
+  all = false,
+  includeArchived = false,
+) {
   return (
     await db.query(
-      `SELECT p.*,COALESCE((SELECT jsonb_agg(f.id) FROM provider_affiliations a JOIN providers f ON f.id=a.facility_id WHERE a.provider_id=p.id),'[]') AS "affiliationIds" FROM providers p WHERE $2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$1) ORDER BY updated_at DESC LIMIT 500`,
-      [user.id, all && user.role === "admin"],
+      `SELECT p.*,COALESCE((SELECT jsonb_agg(f.id) FROM provider_affiliations a JOIN providers f ON f.id=a.facility_id WHERE a.provider_id=p.id),'[]') AS "affiliationIds" FROM providers p WHERE ($3 OR NOT p.archived) AND ($2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$1)) ORDER BY updated_at DESC LIMIT 500`,
+      [user.id, all && user.role === "admin", includeArchived],
     )
   ).rows;
 }
@@ -234,7 +252,7 @@ export async function recordSave(
   const m = moduleFor(key, user, true),
     data = validateFields(input, m.fields, false);
   // A patient cannot publish their own review or manufacture completed appointments.
-  if (user.role === "patient" && key === "reviews") data.status = "Pending";
+  if (user.role !== "admin" && key === "reviews") data.status = "Pending";
   if (
     user.role === "patient" &&
     key === "appointments" &&
