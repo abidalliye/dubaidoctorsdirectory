@@ -67,7 +67,9 @@ export function validateFields(
       value &&
       ["date", "datetime-local"].includes(s.type || "") &&
       (!/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(value) ||
-        !Number.isFinite(Date.parse(value)))
+        !Number.isFinite(Date.parse(value)) ||
+        new Date(value.slice(0, 10)).toISOString().slice(0, 10) !==
+          value.slice(0, 10))
     )
       throw new BadRequestException("Invalid " + s.label);
     if (value && s.type === "file" && !/^[a-f0-9-]{36}$/.test(value))
@@ -251,6 +253,7 @@ export async function recordSave(
 ) {
   const m = moduleFor(key, user, true),
     data = validateFields(input, m.fields, false);
+  if (key === "articles" && user.role !== "admin") data.status = "Draft";
   // A patient cannot publish their own review or manufacture completed appointments.
   if (user.role !== "admin" && key === "reviews") data.status = "Pending";
   if (

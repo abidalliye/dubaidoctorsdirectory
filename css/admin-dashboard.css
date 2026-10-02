@@ -840,3 +840,77 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* Keep the overview compact and legible like the supplied reference. */
+.healthdir-admin .hd-panel {
+  line-height: 1.4;
+}
+.hd-system-row {
+  line-height: 1.4;
+  padding: 4px 0;
+}
+.hd-system-row small {
+  line-height: 1.4;
+}
+.hd-middle {
+  align-items: start;
+}
+.hd-chart svg {
+  height: 160px;
+}
+.hd-types {
+  min-height: 175px;
+}
+.hd-panel-head {
+  line-height: 1.3;
+}
+.hd-quick-button {
+  min-height: 42px;
+  padding: 7px 3px;
+  line-height: 1.3;
+}
+.hd-rank {
+  padding: 8px 0;
+  line-height: 1.4;
+}
+.hd-nav-group summary svg,
+.nav-item svg {
+  width: 17px;
+  height: 17px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.hd-metric-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.hd-quick-button svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  margin: 0 auto 5px;
+  color: #087cff;
+}
+.hd-bell svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.hd-legend {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  line-height: 1.3;
+}
+.hd-legend i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+@media (min-width: 1450px) {
+  .hd-chart svg {
+    height: 160px;
+  }
+}

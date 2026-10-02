@@ -353,6 +353,12 @@
     return n;
   }
   async function records(target, key) {
+    if (
+      user.role === "admin" &&
+      key === "notifications" &&
+      window.HealthDirAdmin
+    )
+      await HealthDirAdmin.refreshNotifications();
     const m = schema.modules[key];
     heading(
       target,
@@ -413,6 +419,9 @@
         if (query && !text.includes(query)) continue;
         const c = card(
           r.data.title ||
+            r.data.question ||
+            r.data.customer ||
+            r.data.reference ||
             r.data.patientName ||
             r.data.name ||
             r.data.target ||

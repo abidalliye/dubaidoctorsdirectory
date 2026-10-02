@@ -20,6 +20,29 @@ window.HealthDirAdmin = (() => {
     pages: "▥",
     settings: "⚙",
   };
+  function icon(type) {
+    const paths = {
+      overview: "M3 11 12 3l9 8M5 10v11h5v-7h4v7h5V10",
+      listings: "M4 21V6h10v15M14 10h6v11M7 9h4M7 13h4M7 17h4M17 13h1M17 17h1",
+      appointments:
+        "M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2ZM7 2v4M17 2v4M3 9h18M7 13h2M12 13h2M7 17h2M12 17h2",
+      payments: "M4 5h16v14H4ZM4 10h16M7 15h4",
+      articles: "M6 3h9l4 4v14H6ZM14 3v5h5M9 12h7M9 16h7",
+      users:
+        "M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-3a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v3Z",
+      lab: "M9 3h6M10 3v7L4 20h16l-6-10V3M8 15h8",
+      reviews: "m12 3 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z",
+      settings:
+        "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2",
+      bell: "M5 17h14l-2-3V8a5 5 0 0 0-10 0v6ZM10 20h4",
+    };
+    const n = c.el("span");
+    n.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' +
+      (paths[type] || paths.listings) +
+      '"/></svg>';
+    return n.firstChild;
+  }
   function go(key, filter = "") {
     c.setQuery(filter);
     return c.navigate(key);
@@ -31,6 +54,8 @@ window.HealthDirAdmin = (() => {
     nav.replaceChildren();
     function link(key, label, filter = "") {
       const b = action(label, () => go(key, filter), "nav-item");
+      b.textContent = label.replace(/^[^a-zA-Z]+/, "");
+      b.prepend(icon(key));
       b.dataset.section = key;
       nav.append(b);
       return b;
@@ -40,6 +65,8 @@ window.HealthDirAdmin = (() => {
       const details = el("details", "", "hd-nav-group");
       details.open = ["Listings", "Appointments"].includes(label);
       const summary = el("summary", (icons[key] || "▤") + "  " + label);
+      summary.textContent = label;
+      summary.prepend(icon(key));
       details.append(summary);
       for (const [section, title, filter] of items) {
         const b = action(
@@ -142,6 +169,9 @@ window.HealthDirAdmin = (() => {
     };
     document.getElementById("hd-notifications").onclick = () =>
       go("notifications");
+    document
+      .getElementById("hd-notifications")
+      .replaceChildren(icon("bell"), document.getElementById("hd-unread"));
     let timer;
     const search = document.getElementById("ff-search"),
       results = document.getElementById("hd-search-results");
@@ -304,8 +334,26 @@ window.HealthDirAdmin = (() => {
   async function overview(target) {
     const data = await c.api("admin/overview?from=" + from + "&to=" + to);
     latest = data;
-    document.getElementById("hd-unread").textContent =
-      data.notifications.length;
+    data.listings.sort(
+      (a, b) =>
+        [
+          "doctor",
+          "clinic",
+          "hospital",
+          "lab",
+          "surgeon",
+          "technician",
+        ].indexOf(a.kind) -
+        [
+          "doctor",
+          "clinic",
+          "hospital",
+          "lab",
+          "surgeon",
+          "technician",
+        ].indexOf(b.kind),
+    );
+    await refreshNotifications();
     const title = c.el("div", "", "hd-title"),
       copy = c.el("div");
     copy.append(
@@ -374,20 +422,29 @@ window.HealthDirAdmin = (() => {
         text = c.el("div");
       text.append(c.el("strong", value), c.el("span", label));
       b.append(icon, text, c.el("small", detail));
+      icon.replaceChildren(
+        window.HealthDirAdmin.makeIcon(key === "listings" ? "users" : key),
+      );
       metrics.append(b);
     }
     const charts = c.el("div", "", "hd-charts"),
       booking = panel("Bookings Overview"),
       rev = panel("Revenue Overview (AED)"),
       types = panel("Listings by Type");
-    booking.append(
-      c.el(
-        "p",
-        "● Confirmed   ● Requested   ● Cancelled   ● Completed",
-        "hd-legend",
-      ),
-      bars(data.trend),
-    );
+    const bookingLegend = c.el("p", "", "hd-legend");
+    for (const [label, color] of [
+      ["Confirmed", "#147cff"],
+      ["Requested", "#45baf5"],
+      ["Cancelled", "#fa4c87"],
+      ["Completed", "#00a578"],
+    ]) {
+      const item = c.el("span", label),
+        dot = c.el("i");
+      dot.style.background = color;
+      item.prepend(dot);
+      bookingLegend.append(item);
+    }
+    booking.append(bookingLegend, bars(data.trend));
     rev.append(
       c.el("p", "Paid records · selected period", "hd-legend"),
       line(data.revenue),
@@ -514,14 +571,18 @@ window.HealthDirAdmin = (() => {
       ["♧ Add Clinic", "clinic"],
       ["▥ Add Hospital", "hospital"],
       ["⚗ Add Lab", "lab"],
-    ])
-      grid.append(
-        c.action(
-          label,
-          () => c.listingEditor(undefined, kind),
-          "hd-quick-button",
-        ),
+    ]) {
+      const button = c.action(
+        label,
+        () => c.listingEditor(undefined, kind),
+        "hd-quick-button",
       );
+      button.textContent = label.replace(/^[^a-zA-Z]+/, "");
+      button.prepend(
+        icon(kind === "lab" ? "lab" : kind === "doctor" ? "users" : "listings"),
+      );
+      grid.append(button);
+    }
     grid.append(
       c.action(
         "▦ New Booking",
@@ -534,6 +595,13 @@ window.HealthDirAdmin = (() => {
         "hd-quick-button",
       ),
     );
+    for (const [button, type] of [
+      [grid.children[4], "appointments"],
+      [grid.children[5], "articles"],
+    ]) {
+      button.textContent = button.textContent.replace(/^[^a-zA-Z]+/, "");
+      button.prepend(icon(type));
+    }
     target.append(grid);
   }
   function rank(target, rows, key) {
@@ -593,5 +661,9 @@ window.HealthDirAdmin = (() => {
     }
     target.append(grid);
   }
-  return { setup, overview, calendar };
+  async function refreshNotifications() {
+    const data = await c.api("admin/notification-count");
+    document.getElementById("hd-unread").textContent = data.count;
+  }
+  return { setup, overview, calendar, makeIcon: icon, refreshNotifications };
 })();

@@ -586,6 +586,12 @@ class DashboardController {
 @Controller("admin")
 @UseGuards(SessionGuard, AdminGuard)
 class AdminController {
+  @Get("notification-count") async notificationCount() {
+    const result = await db.query(
+      "SELECT count(*)::int AS count FROM dashboard_notifications WHERE NOT archived AND data->>'status'='Unread'",
+    );
+    return result.rows[0];
+  }
   @Get("search") async search(@Query("q") q = "") {
     if (q.length < 2 || q.length > 100) return { items: [] };
     const term = "%" + q + "%";
@@ -616,6 +622,8 @@ class AdminController {
       !/^\d{4}-\d{2}-\d{2}$/.test(end) ||
       !Number.isFinite(Date.parse(start)) ||
       !Number.isFinite(Date.parse(end)) ||
+      new Date(start).toISOString().slice(0, 10) !== start ||
+      new Date(end).toISOString().slice(0, 10) !== end ||
       start > end ||
       Date.parse(end) - Date.parse(start) > 366 * 86400000
     )

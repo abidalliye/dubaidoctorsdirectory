@@ -32,6 +32,9 @@ test("Dashboard validates business types, optional affiliations and every profil
   assert.throws(() =>
     validateFields({ dateOfBirth: "tomorrow" }, accountFields),
   );
+  assert.throws(() =>
+    validateFields({ dateOfBirth: "2026-02-31" }, accountFields),
+  );
   assert.throws(() => validateFields({ experienceYears: "-1" }, accountFields));
   const profile = {
     name: "Test",
@@ -52,6 +55,18 @@ test("Dashboard schema rejects unknown tables and clinical writes by patients", 
   );
   for (const module of ["notes", "prescriptions", "payments", "admissions"])
     assert.throws(() => moduleFor(module, { role: "patient" }, true));
+  for (const module of [
+    "categories",
+    "tags",
+    "pages",
+    "banners",
+    "faqs",
+    "subscriptions",
+    "refunds",
+    "notifications",
+  ])
+    for (const role of ["patient", "doctor", "lab"])
+      assert.throws(() => moduleFor(module, { role }, true));
   assert.equal(
     moduleFor("lab_requests", { role: "lab" }, true).label,
     "Lab requests",
