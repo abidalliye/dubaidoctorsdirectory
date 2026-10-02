@@ -463,7 +463,7 @@ class DashboardController {
     return {
       items: (
         await db.query(
-          `SELECT id,name,kind FROM providers p WHERE kind IN ('hospital','clinic') AND (published OR $2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$1)) ORDER BY name LIMIT 500`,
+          `SELECT id,name,kind FROM providers p WHERE NOT p.archived AND kind IN ('hospital','clinic') AND (published OR $2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$1)) ORDER BY name LIMIT 500`,
           [request.account.id, request.account.role === "admin"],
         )
       ).rows,

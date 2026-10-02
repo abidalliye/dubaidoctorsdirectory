@@ -195,7 +195,7 @@ export async function saveListing(user: any, input: unknown, id?: string) {
     if (values.affiliationIds !== undefined) {
       for (const parent of values.affiliationIds) {
         const found = await client.query(
-          `SELECT id FROM providers p WHERE id=$1 AND kind IN ('clinic','hospital') AND id<>$2 AND (published OR $4='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$3))`,
+          `SELECT id FROM providers p WHERE id=$1 AND NOT p.archived AND kind IN ('clinic','hospital') AND id<>$2 AND (published OR $4='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$3))`,
           [parent, id, user.id, user.role],
         );
         if (!found.rows[0])
