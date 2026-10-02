@@ -473,6 +473,7 @@ class DashboardController {
     @Param("module") key: string,
     @Req() request: any,
     @Query("page") page = "1",
+    @Query("q") q = "",
   ) {
     moduleFor(key, request.account);
     const p = Number(page);
@@ -481,8 +482,13 @@ class DashboardController {
     return {
       items: (
         await db.query(
-          `SELECT * FROM dashboard_${key} WHERE (owner_id=$1 OR $2) AND NOT archived ORDER BY updated_at DESC LIMIT 50 OFFSET $3`,
-          [request.account.id, request.account.role === "admin", (p - 1) * 50],
+          `SELECT * FROM dashboard_${key} WHERE (owner_id=$1 OR $2) AND NOT archived AND data::text ILIKE $4 ORDER BY updated_at DESC LIMIT 50 OFFSET $3`,
+          [
+            request.account.id,
+            request.account.role === "admin",
+            (p - 1) * 50,
+            "%" + q.slice(0, 100) + "%",
+          ],
         )
       ).rows,
       page: p,
@@ -580,13 +586,146 @@ class DashboardController {
 @Controller("admin")
 @UseGuards(SessionGuard, AdminGuard)
 class AdminController {
-  @Get("users") async users(@Query("page") page = "1") {
+  @Get("search") async search(@Query("q") q = "") {
+    if (q.length < 2 || q.length > 100) return { items: [] };
+    const term = "%" + q + "%";
+    const [providers, records, users] = await Promise.all([
+      db.query(
+        "SELECT id,name AS label,kind AS detail,'listings' AS section FROM providers WHERE NOT archived AND (name ILIKE $1 OR specialty ILIKE $1 OR area ILIKE $1) LIMIT 8",
+        [term],
+      ),
+      db.query(
+        "SELECT id,COALESCE(data->>'patientName',data->>'doctorName','Booking') AS label,data->>'date' AS detail,'appointments' AS section FROM dashboard_appointments WHERE NOT archived AND data::text ILIKE $1 LIMIT 5",
+        [term],
+      ),
+      db.query(
+        "SELECT id,name AS label,role AS detail,'users' AS section FROM app_users WHERE (name ILIKE $1 OR email ILIKE $1) AND status<>'disabled' LIMIT 5",
+        [term],
+      ),
+    ]);
+    return { items: [...providers.rows, ...records.rows, ...users.rows] };
+  }
+  @Get("overview") async overview(
+    @Query("from") from?: string,
+    @Query("to") to?: string,
+  ) {
+    const end = to || new Date().toISOString().slice(0, 10);
+    const start = from || end.slice(0, 8) + "01";
+    if (
+      !/^\d{4}-\d{2}-\d{2}$/.test(start) ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(end) ||
+      !Number.isFinite(Date.parse(start)) ||
+      !Number.isFinite(Date.parse(end)) ||
+      start > end ||
+      Date.parse(end) - Date.parse(start) > 366 * 86400000
+    )
+      throw new BadRequestException(
+        "Choose a valid date range of up to one year",
+      );
+    const range = [start, end];
+    const [
+      listings,
+      bookings,
+      payments,
+      articles,
+      trend,
+      revenue,
+      recentBookings,
+      recentPayments,
+      recentArticles,
+      doctors,
+      locations,
+      notifications,
+    ] = await Promise.all([
+      db.query(
+        "SELECT kind,count(*)::int AS count FROM providers WHERE NOT archived GROUP BY kind",
+      ),
+      db.query(
+        "SELECT data->>'status' AS status,count(*)::int AS count FROM dashboard_appointments WHERE NOT archived AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date GROUP BY 1",
+        range,
+      ),
+      db.query(
+        "SELECT data->>'status' AS status,count(*)::int AS count,sum(COALESCE(NULLIF(data->>'amount',''),'0')::numeric) AS amount FROM dashboard_payments WHERE NOT archived AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date GROUP BY 1",
+        range,
+      ),
+      db.query(
+        "SELECT data->>'status' AS status,count(*)::int AS count FROM dashboard_articles WHERE NOT archived GROUP BY 1",
+      ),
+      db.query(
+        "SELECT COALESCE(NULLIF(data->>'date','')::date,created_at::date)::text AS date,data->>'status' AS status,count(*)::int AS count FROM dashboard_appointments WHERE NOT archived AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date GROUP BY 1,2 ORDER BY 1",
+        range,
+      ),
+      db.query(
+        "SELECT COALESCE(NULLIF(data->>'date','')::date,created_at::date)::text AS date,sum(COALESCE(NULLIF(data->>'amount',''),'0')::numeric) AS amount FROM dashboard_payments WHERE NOT archived AND data->>'status'='Paid' AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date GROUP BY 1 ORDER BY 1",
+        range,
+      ),
+      db.query(
+        "SELECT * FROM dashboard_appointments WHERE NOT archived AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date ORDER BY created_at DESC LIMIT 5",
+        range,
+      ),
+      db.query(
+        "SELECT * FROM dashboard_payments WHERE NOT archived AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date ORDER BY created_at DESC LIMIT 5",
+        range,
+      ),
+      db.query(
+        "SELECT * FROM dashboard_articles WHERE NOT archived ORDER BY created_at DESC LIMIT 5",
+      ),
+      db.query(
+        "SELECT data->>'doctorName' AS name,count(*)::int AS count FROM dashboard_appointments WHERE NOT archived AND NULLIF(data->>'doctorName','') IS NOT NULL AND COALESCE(NULLIF(data->>'date','')::date,created_at::date) BETWEEN $1::date AND $2::date GROUP BY 1 ORDER BY 2 DESC LIMIT 5",
+        range,
+      ),
+      db.query(
+        "SELECT COALESCE(NULLIF(area,''),'Unspecified') AS name,count(*)::int AS count FROM providers WHERE NOT archived GROUP BY 1 ORDER BY 2 DESC LIMIT 5",
+      ),
+      db.query(
+        "SELECT * FROM dashboard_notifications WHERE NOT archived AND COALESCE(data->>'status','Unread')='Unread' ORDER BY created_at DESC LIMIT 20",
+      ),
+    ]);
+    return {
+      from: start,
+      to: end,
+      listings: listings.rows,
+      bookings: bookings.rows,
+      payments: payments.rows,
+      articles: articles.rows,
+      trend: trend.rows,
+      revenue: revenue.rows,
+      recentBookings: recentBookings.rows,
+      recentPayments: recentPayments.rows,
+      recentArticles: recentArticles.rows,
+      doctors: doctors.rows,
+      locations: locations.rows,
+      notifications: notifications.rows,
+      system: [
+        { name: "Website & database", state: "Operational", ok: true },
+        { name: "Appointment records", state: "Connected", ok: true },
+        {
+          name: "Payment gateway",
+          state: process.env.STRIPE_SECRET_KEY
+            ? "Configured"
+            : "Not configured",
+          ok: !!process.env.STRIPE_SECRET_KEY,
+        },
+        {
+          name: "Email delivery",
+          state: process.env.RESEND_API_KEY ? "Configured" : "Not configured",
+          ok: !!process.env.RESEND_API_KEY,
+        },
+        { name: "Scheduled jobs", state: "Not configured", ok: false },
+      ],
+    };
+  }
+  @Get("users") async users(
+    @Query("page") page = "1",
+    @Query("q") q = "",
+    @Query("role") role = "",
+  ) {
     const p = Number(page);
     if (!Number.isInteger(p) || p < 1 || p > 10000)
       throw new BadRequestException();
     const result = await db.query(
-      `SELECT id,email,name,phone,role,status,email_verified,profile,created_at FROM app_users ORDER BY created_at DESC LIMIT 50 OFFSET $1`,
-      [(p - 1) * 50],
+      `SELECT id,email,name,phone,role,status,email_verified,profile,created_at FROM app_users WHERE (name ILIKE $2 OR email ILIKE $2 OR role ILIKE $2) AND ($3='' OR role=$3) ORDER BY created_at DESC LIMIT 50 OFFSET $1`,
+      [(p - 1) * 50, "%" + q.slice(0, 100) + "%", role],
     );
     return { items: result.rows.map(publicUser), page: p };
   }

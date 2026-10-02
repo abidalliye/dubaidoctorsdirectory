@@ -63,15 +63,17 @@ test("Dashboard schema rejects unknown tables and clinical writes by patients", 
         .map((f) => [
           f.key,
           f.options?.[0] ||
-            (f.type === "number"
-              ? "25"
-              : f.type === "date"
-                ? "2026-10-02"
-                : f.type === "datetime-local"
-                  ? "2026-10-02T10:30"
-                  : f.type === "file"
-                    ? "00000000-0000-0000-0000-000000000000"
-                    : "Test"),
+            (f.type === "url"
+              ? "https://example.invalid/image.png"
+              : f.type === "number"
+                ? "25"
+                : f.type === "date"
+                  ? "2026-10-02"
+                  : f.type === "datetime-local"
+                    ? "2026-10-02T10:30"
+                    : f.type === "file"
+                      ? "00000000-0000-0000-0000-000000000000"
+                      : "Test"),
         ]),
     );
     assert.doesNotThrow(() => validateFields(required, m.fields, false), key);

@@ -37,4 +37,10 @@ CREATE TABLE IF NOT EXISTS account_files (
  id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES app_users(id), name text NOT NULL,
  content_type text NOT NULL, content bytea NOT NULL CHECK(octet_length(content)<=1048576), created_at timestamptz NOT NULL DEFAULT now()
 );
+DO $$ DECLARE t text; BEGIN
+ FOREACH t IN ARRAY ARRAY['categories','tags','pages','banners','faqs','subscriptions','refunds','notifications'] LOOP
+  EXECUTE format('CREATE TABLE IF NOT EXISTS %I (LIKE dashboard_appointments INCLUDING ALL)', 'dashboard_'||t);
+  EXECUTE format('CREATE INDEX IF NOT EXISTS %I ON %I(owner_id,updated_at DESC)', 'dashboard_'||t||'_owner', 'dashboard_'||t);
+ END LOOP;
+END $$;
 COMMIT;

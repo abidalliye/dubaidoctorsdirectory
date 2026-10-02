@@ -18,8 +18,8 @@ import helmet from "helmet";
 import Redis from "ioredis";
 import Typesense from "typesense";
 import { columns, db } from "./db";
-import { AccountsModule } from './accounts';
-import { SafeErrors } from './errors';
+import { AccountsModule } from "./accounts";
+import { SafeErrors } from "./errors";
 @Injectable()
 class Providers implements OnModuleDestroy {
   private searchClient = process.env.TYPESENSE_API_KEY
@@ -65,7 +65,17 @@ class Providers implements OnModuleDestroy {
       limit > 50
     )
       throw new BadRequestException("Invalid pagination");
-    if (query.kind && !["doctor", "clinic", "hospital", "lab", "surgeon", "technician"].includes(query.kind))
+    if (
+      query.kind &&
+      ![
+        "doctor",
+        "clinic",
+        "hospital",
+        "lab",
+        "surgeon",
+        "technician",
+      ].includes(query.kind)
+    )
       throw new BadRequestException("Invalid provider type");
     if ((query.q?.length || 0) > 200 || (query.area?.length || 0) > 100)
       throw new BadRequestException("Search too long");
@@ -213,20 +223,36 @@ class HealthController {
     }
   }
 }
+@Controller("content")
+class ContentController {
+  @Get(":kind") async content(
+    @Param("kind") kind: string,
+    @Query("slug") slug?: string,
+  ) {
+    if (!["pages", "banners", "faqs", "articles"].includes(kind))
+      throw new NotFoundException();
+    const result = await db.query(
+      `SELECT id,data,updated_at FROM dashboard_${kind} WHERE NOT archived AND data->>'status'='Published' AND ($1::text IS NULL OR data->>'slug'=$1) ORDER BY updated_at DESC LIMIT 100`,
+      [slug || null],
+    );
+    return { items: result.rows };
+  }
+}
 @Module({
   imports: [AccountsModule],
-  controllers: [DirectoryController, HealthController],
+  controllers: [DirectoryController, HealthController, ContentController],
   providers: [Providers],
 })
 class AppModule {}
 export async function createApplication() {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
-  const app = await NestFactory.create(AppModule,{bodyParser:false});
-  app.use(require('express').json({limit:'2mb'}));
+  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  app.use(require("express").json({ limit: "2mb" }));
   app.use(helmet());
   app.useGlobalFilters(new SafeErrors());
   app.use((request: any, response: any, next: () => void) => {
-    if (/^\/v1\/(auth|account|admin|dashboard)(\/|$)/.test(request.path)) response.setHeader('Cache-Control','no-store');
+    if (/^\/v1\/(auth|account|admin|dashboard)(\/|$)/.test(request.path))
+      response.setHeader("Cache-Control", "no-store");
     next();
   });
   app.setGlobalPrefix("v1");

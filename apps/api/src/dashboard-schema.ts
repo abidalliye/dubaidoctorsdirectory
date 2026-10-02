@@ -200,6 +200,14 @@ export const modules: Record<
       f("date", "Date", "date"),
       status(["Draft", "Issued", "Paid", "Cancelled"]),
       f("description", "Description", "textarea"),
+      f("method", "Payment method", "select", false, [
+        "",
+        "Card",
+        "Cash",
+        "Bank transfer",
+        "Apple Pay",
+        "Other",
+      ]),
     ],
   },
   articles: {
@@ -218,6 +226,8 @@ export const modules: Record<
       f("author", "Author"),
       f("body", "Article content", "textarea", true),
       f("imageUrl", "Image URL", "url"),
+      f("category", "Category"),
+      f("tags", "Tags (comma separated)"),
       status(["Draft", "Published"]),
     ],
   },
@@ -327,6 +337,78 @@ export const modules: Record<
     ],
   },
 };
+for (const [key, label, fields] of [
+  [
+    "categories",
+    "Blog categories",
+    [
+      f("name", "Category name", "text", true),
+      f("description", "Description", "textarea"),
+    ],
+  ],
+  ["tags", "Blog tags", [f("name", "Tag name", "text", true)]],
+  [
+    "pages",
+    "CMS pages",
+    [
+      f("title", "Page title", "text", true),
+      f("slug", "Page slug", "text", true),
+      f("body", "Page content", "textarea", true),
+      status(["Draft", "Published"]),
+    ],
+  ],
+  [
+    "banners",
+    "CMS banners",
+    [
+      f("title", "Banner title", "text", true),
+      f("imageUrl", "Image URL", "url", true),
+      f("link", "Destination URL", "url"),
+      status(["Draft", "Published"]),
+    ],
+  ],
+  [
+    "faqs",
+    "CMS FAQ",
+    [
+      f("question", "Question", "text", true),
+      f("answer", "Answer", "textarea", true),
+      status(["Draft", "Published"]),
+    ],
+  ],
+  [
+    "subscriptions",
+    "Plans and subscriptions",
+    [
+      f("customer", "Customer / provider", "text", true),
+      f("plan", "Plan", "text", true),
+      f("amount", "Amount (AED)", "number", true),
+      f("renewalDate", "Renewal date", "date"),
+      status(["Active", "Expired", "Cancelled"]),
+    ],
+  ],
+  [
+    "refunds",
+    "Refund records",
+    [
+      f("reference", "Payment reference", "text", true),
+      f("amount", "Amount (AED)", "number", true),
+      f("reason", "Reason", "textarea"),
+      status(["Requested", "Approved", "Processed", "Rejected"]),
+    ],
+  ],
+  [
+    "notifications",
+    "Notifications",
+    [
+      f("title", "Title", "text", true),
+      f("message", "Message", "textarea", true),
+      f("recipient", "Recipient"),
+      status(["Unread", "Read"]),
+    ],
+  ],
+] as [string, string, FieldSpec[]][])
+  modules[key] = { label, roles: ["admin"], fields };
 export const settingFields = [
   f("siteName", "Site name"),
   f("supportEmail", "Support email", "email"),

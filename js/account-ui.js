@@ -288,7 +288,7 @@
     };
     draw();
   }
-  async function listingEditor(provider) {
+  async function listingEditor(provider, kind) {
     const dialog = modal(
       provider
         ? "Edit directory profile"
@@ -306,7 +306,9 @@
           services: (provider.services || []).join(", "),
         }
       : {
-          kind: schema.providerKinds.includes(user.role) ? user.role : "doctor",
+          kind:
+            kind ||
+            (schema.providerKinds.includes(user.role) ? user.role : "doctor"),
         };
     const form = dataForm(schema.listingFields, values);
     dialog.append(form);
@@ -365,6 +367,22 @@
           "ff-muted",
         ),
       );
+    if (["refunds", "subscriptions"].includes(key))
+      target.append(
+        el(
+          "p",
+          "Financial records only. Saving does not process a charge, refund or recurring payment.",
+          "ff-muted",
+        ),
+      );
+    if (key === "notifications")
+      target.append(
+        el(
+          "p",
+          "Internal dashboard notifications. Email delivery requires a configured email service.",
+          "ff-muted",
+        ),
+      );
     if (key === "prescriptions")
       target.append(
         el(
@@ -381,7 +399,14 @@
     const list = el("div", "", "ff-grid");
     target.append(list);
     const load = async () => {
-      const data = await api("dashboard/records/" + key + "?page=" + page);
+      const data = await api(
+        "dashboard/records/" +
+          key +
+          "?page=" +
+          page +
+          "&q=" +
+          encodeURIComponent(query),
+      );
       list.replaceChildren();
       for (const r of data.items) {
         const text = Object.values(r.data).join(" ").toLowerCase();
@@ -403,6 +428,22 @@
               c.append(link);
             }
           } else c.append(el("p", f.label + ": " + (r.data[f.key] || "—")));
+        }
+        if (
+          ["pages", "articles"].includes(key) &&
+          r.data.status === "Published"
+        ) {
+          const preview = el("a", "View published content");
+          preview.href =
+            "content.html?kind=" +
+            key +
+            "&" +
+            (key === "pages"
+              ? "slug=" + encodeURIComponent(r.data.slug)
+              : "id=" + r.id);
+          preview.target = "_blank";
+          preview.rel = "noopener";
+          c.append(preview);
         }
         if (m.roles.includes(user.role))
           c.append(
@@ -457,6 +498,7 @@
     const grid = el("div", "", "ff-grid");
     target.append(grid);
     for (const p of data.items) {
+      if (schema.providerKinds.includes(query) && p.kind !== query) continue;
       if (query && !JSON.stringify(p).toLowerCase().includes(query)) continue;
       const c = card(
         p.name,
@@ -543,7 +585,15 @@
     target.append(grid);
     const load = async () => {
       grid.replaceChildren();
-      for (const u of (await api("admin/users?page=" + page)).items) {
+      for (const u of (
+        await api(
+          "admin/users?page=" +
+            page +
+            "&q=" +
+            encodeURIComponent(query) +
+            (patientsOnly ? "&role=patient" : ""),
+        )
+      ).items) {
         if (
           (patientsOnly && u.role !== "patient") ||
           (query && !JSON.stringify(u).toLowerCase().includes(query))
@@ -639,6 +689,8 @@
     }
   }
   async function overview(target) {
+    if (user.role === "admin" && window.HealthDirAdmin)
+      return HealthDirAdmin.overview(target);
     heading(
       target,
       "Welcome, " + user.name,
@@ -715,7 +767,9 @@
           staging.append(
             el("p", r.created_at + " · " + r.action + " · " + r.target_id),
           );
-      } else await records(staging, active);
+      } else if (user.role === "admin" && active === "calendar")
+        await HealthDirAdmin.calendar(staging);
+      else await records(staging, active);
       if (id === requestId) target.replaceChildren(staging);
     } catch (e) {
       if (id === requestId) {
@@ -767,6 +821,24 @@
         clearTimeout(timer);
         timer = setTimeout(render, 250);
       };
+      if (user.role === "admin" && window.HealthDirAdmin)
+        HealthDirAdmin.setup({
+          user,
+          schema,
+          api,
+          el,
+          action,
+          modal,
+          navigate,
+          recordEditor,
+          listingEditor,
+          profileWizard,
+          message,
+          setQuery: (value) => {
+            query = value.toLowerCase();
+            document.getElementById("ff-search").value = value;
+          },
+        });
       await navigate("overview");
       if (user.profile?.profileComplete !== "yes" && user.role !== "admin")
         await profileWizard();
