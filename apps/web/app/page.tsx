@@ -1,98 +1,37 @@
 import Link from "next/link";
-export default function Home() {
-  return (
-    <main>
-      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[1.4fr_1fr]">
-        <div>
-          <p className="mb-6 text-xs font-bold tracking-[.2em] text-teal-700">
-            YOUR NEXT CHAPTER STARTS HERE
-          </p>
-          <h1 className="max-w-2xl text-5xl font-semibold leading-tight tracking-tight md:text-6xl">
-            Find care for your
-            <br />
-            <span className="text-teal-600">fertility journey.</span>
-          </h1>
-          <p className="my-7 max-w-lg text-lg leading-8 text-slate-500">
-            Explore Dubai’s fertility doctors and clinics. Find the right
-            services, in the right place, at your own pace.
-          </p>
-          <form
-            action="/directory"
-            className="flex flex-wrap gap-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm"
-          >
-            <label className="sr-only" htmlFor="q">
-              Search providers
-            </label>
-            <input
-              id="q"
-              name="q"
-              placeholder="Doctor, clinic or treatment"
-              className="min-w-0 flex-1 rounded-xl px-4 py-3"
-            />
-            <button className="rounded-xl bg-teal-700 px-6 py-3 font-semibold text-white">
-              Find care →
-            </button>
-          </form>
-          <div className="mt-5 flex flex-wrap gap-2 text-sm text-slate-500">
-            Explore:{" "}
-            {["IVF", "ICSI", "Egg Freezing"].map((q) => (
-              <Link
-                key={q}
-                href={`/directory?q=${encodeURIComponent(q)}`}
-                className="rounded-full border border-slate-200 px-3 py-1 hover:bg-white"
-              >
-                {q}
-              </Link>
-            ))}
-          </div>
-        </div>
-        <aside className="flex flex-col justify-center rounded-[2rem] bg-[#e3f2ed] p-10">
-          <div className="mb-12 text-7xl text-teal-700" aria-hidden="true">
-            ✳
-          </div>
-          <p className="text-3xl font-medium leading-snug">
-            A little clarity.
-            <br />A little confidence.
-            <br />A step forward.
-          </p>
-          <p className="mt-6 leading-7 text-slate-600">
-            Thoughtfully organized provider information to make your search for
-            care feel simpler.
-          </p>
-        </aside>
-      </section>
-      <section className="mx-auto max-w-6xl px-6">
-        <p className="text-xs font-bold tracking-widest text-teal-700">
-          EXPLORE YOUR OPTIONS
-        </p>
-        <h2 className="mt-3 text-3xl font-semibold">
-          Care that meets you where you are
-        </h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {[
-            [
-              "doctor",
-              "Find a specialist",
-              "Explore doctors by specialty and location.",
-            ],
-            [
-              "clinic",
-              "Explore clinics",
-              "Compare fertility centres and their services.",
-            ],
-            ["", "Browse all care", "Discover providers across Dubai."],
-          ].map(([kind, title, description]) => (
-            <Link
-              key={title}
-              href={`/directory${kind ? `?kind=${kind}` : ""}`}
-              className="rounded-2xl border border-slate-200 bg-white p-7 hover:border-teal-600"
-            >
-              <h3 className="text-xl font-semibold">{title} ↗</h3>
-              <p className="mt-4 leading-7 text-slate-500">{description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
+import { list, publicData, Provider } from "../lib/api";
+import { getSiteBrand } from "../lib/server-brand";
+import { ProviderCard } from "../components/provider-card";
+import { HomeSearch, HomeProviders } from "../components/home-search";
+export const dynamic = "force-dynamic";
+const routes=["/doctors","/hospitals","/clinics","/laboratories"];
+const names=["Doctors","Hospitals","Clinics","Laboratories"];
+const icons=["♙","▥","✚","⚗"];
+export default async function Home(){
+  const brand=await getSiteBrand();
+  const results=await Promise.allSettled([...['doctor','hospital','clinic','lab'].map(kind=>list({kind,limit:'4'})),publicData('care/public/taxonomy'),publicData('content/articles'),publicData('content/faqs'),publicData('care/public/services'),publicData('content/pages')]);
+  const get=(i:number):any=>results[i].status==='fulfilled'?results[i].value:null;
+  const specialties=get(4)?.specialties||[];
+  const articles=get(5)?.items||[], faqs=get(6)?.items||[];
+  const tests=(get(7)?.items||[]).filter((s:any)=>s.kind==='lab').slice(0,4);
+  const conditions=(get(8)?.items||[]).filter((p:any)=>p.data.slug?.startsWith('condition-')).slice(0,8);
+  const heading=(title:string,href:string,label='View All')=><div className="section-head"><h2>{title}</h2><Link className="link" href={href}>{label} →</Link></div>;
+  const providers=(i:number)=><div className="grid four">{(get(i)?.items||[]).map((p:Provider)=><ProviderCard key={p.id} provider={p}/>)}</div>;
+  return <div className="reference-home">
+    <section className="home-hero"><div className="container home-hero-grid"><div className="home-hero-copy"><span className="eyebrow">Healthcare Directory in UAE</span><h1>Find the Right Doctor,<br/>Hospital, Clinic or Lab in Dubai</h1><p>Book appointments, find lab tests, read health articles and manage your healthcare needs — in one place.</p><HomeSearch specialties={specialties.map((s:any)=>s.name)}/></div><aside className="home-video card"><h3>Video Consultation</h3><ul className="check-list"><li>Care from wherever you are</li><li>Your consultation records</li><li>Private appointment access</li></ul><p className="muted">Video consultations are not available yet.</p><Link className="button small" href="/video-consultation">Explore Video Care →</Link></aside></div></section>
+    <div className="home-stat-strip"><div className="container stats">{names.map((name,i)=><Link href={routes[i]} className="stat" key={name}><span className={`icon-tile ${['','green','purple','orange'][i]}`}>{icons[i]}</span><div><strong>{get(i)?.total??'—'}</strong><small>{name}</small></div></Link>)}</div></div>
+    <main className="container">
+      <section className="home-section">{heading('Browse by Specialties','/specialties','View All Specialties')}<div className="specialty-rail">{specialties.slice(0,10).map((s:any,i:number)=><Link className="specialty-tile" key={s.name} href={`/specialties/${encodeURIComponent(s.name)}`}><span className={`icon-tile ${['','orange','purple','green'][i%4]}`}>{['✚','♡','♧','⚕','⊕'][i%5]}</span><strong>{s.name}</strong><small>{s.count} providers</small></Link>)}</div>{!specialties.length&&<Link className="empty" href="/directory">Explore provider specialties →</Link>}</section>
+      <section className="home-section">{heading('Find by Health Concerns','/conditions','View All Conditions')}<div className="concern-rail">{conditions.map((c:any)=><Link className="card concern-card" key={c.id} href={`/conditions/${c.data.slug||c.id}`}>{c.data.imageUrl&&<img src={c.data.imageUrl} alt=""/>}<strong>{c.data.title}</strong></Link>)}</div>{!conditions.length&&<div className="home-info-strip"><span className="icon-tile">♡</span><div><strong>Explore health concerns and related care</strong><p className="muted">Published health guides will appear here as they become available.</p></div><Link className="button secondary small" href="/conditions">Browse Conditions →</Link></div>}</section>
+      <HomeProviders groups={names.map((label,i)=>({label,href:routes[i],items:get(i)?.items||[],available:!!get(i)}))}/>
+      <section className="home-section home-hospitals">{heading('Hospitals in Dubai','/hospitals','View All Hospitals')}{providers(1)}{!get(1)?.items?.length&&<div className="empty">{get(1)?'No published hospitals yet.':'Hospital listings temporarily unavailable.'}</div>}</section>
+      <div className="home-clinic-tests"><section className="home-section">{heading('Clinics in Dubai','/clinics','View All Clinics')}{providers(2)}{!get(2)?.items?.length&&<div className="empty">{get(2)?'No published clinics yet.':'Clinic listings temporarily unavailable.'}</div>}</section><section className="home-section">{heading('Lab Tests in Dubai','/lab-tests','View All Tests')}<div className="card test-list">{tests.map((s:any)=><div className="test-row" key={s.id}><span className="icon-tile">⚗</span><Link href={`/lab-tests/${s.id}`}>{s.name}</Link><strong>AED {(s.price_minor/100).toFixed(0)}</strong><Link className="button small" href={`/book/${s.slug}`}>Book</Link></div>)}{!tests.length&&<p className="muted">{get(7)?'Published tests will appear here.':'Test catalog temporarily unavailable.'}</p>}</div></section></div>
+      <section className="home-process card"><h2>How It Works</h2><p className="muted">Get healthcare in 4 simple steps</p><div className="steps-grid">{[['⌕','Search','Find doctors, hospitals, clinics or tests.'],['▦','Book','Choose an available date and time.'],['✚','Consult','Visit your chosen care provider.'],['▤','Get Care','Access shared reports and follow-up.']].map(([icon,title,text],i)=><div key={title}><span className="icon-tile">{icon}</span><h3>{i+1}. {title}</h3><p>{text}</p></div>)}</div></section>
+      <section className="home-about grid two"><article className="card"><h2>Who We Are & What We Do</h2><h3>Your Healthcare Directory in Dubai</h3><p>Find healthcare providers, compare their services and request appointments. {brand} brings your bookings and shared care records together in one place.</p><Link className="button secondary small" href="/directory">Explore Healthcare →</Link></article><article className="card"><h2>Why {brand} is Helpful</h2><ul className="check-list"><li>Find doctors, hospitals, clinics and laboratories</li><li>Compare published services and prices</li><li>Request available appointment slots</li><li>Keep your shared care records together</li></ul><Link className="link" href="/dashboard">Open your personal dashboard →</Link></article></section>
+      <section className="home-section">{heading(`List Your Business on ${brand}`,'/list-your-business','Learn More')}<p className="muted">Build your healthcare profile and connect with patients.</p><div className="home-business-grid">{['Doctor','Hospital','Clinic','Lab'].map((name,i)=><article className={`business-tile tone-${i}`} key={name}><h3><span className="icon-tile">{icons[i]}</span>I'm a {name}{i===1||i===2?' Owner':''}</h3><ul className="check-list"><li>Create your profile</li><li>Showcase services and prices</li><li>Manage appointment requests</li><li>Keep your details up to date</li></ul><Link className="button small" href={`/auth?mode=register&role=${name.toLowerCase()}`}>List Your {name} →</Link></article>)}<aside className="card"><h3>Why List with Us?</h3><ul className="check-list"><li>Help patients discover your business</li><li>Manage your published information</li><li>Organize bookings and services</li></ul><Link className="button small" href="/list-your-business">Explore Business Listings →</Link></aside></div></section>
+      <section className="home-section">{heading('Latest Health Articles','/blog','View All Articles')}<div className="grid four">{articles.slice(0,4).map((a:any)=><Link className="card home-article" href={`/blog/${a.data.slug||a.id}`} key={a.id}>{a.data.imageUrl&&<img src={a.data.imageUrl} alt=""/>}<div><h3>{a.data.title}</h3><small>{a.data.category||'Health'} · {a.data.author}</small></div></Link>)}</div>{!articles.length&&<div className="empty">{get(5)?'Health articles will appear when published.':'Articles temporarily unavailable.'}</div>}</section>
+      <section className="home-section grid two"><div className="card">{heading('Frequently Asked Questions','/list-your-business','Business Information')}{faqs.map((f:any)=><details className="detail-item" key={f.id}><summary>{f.data.question}</summary><p>{f.data.answer}</p></details>)}{!faqs.length&&<p className="muted">Choose a provider to view services and available slots. Your dashboard keeps track of appointment requests.</p>}</div><div className="card"><h2>Find Care Near You</h2><div className="location-links">{(get(4)?.locations||[]).slice(0,8).map((a:any)=><Link key={a.name} href={`/locations/Dubai/${encodeURIComponent(a.name)}`}>⌖ {a.name}<span>{a.count} providers →</span></Link>)}</div><Link className="link" href="/locations">Explore all locations →</Link></div></section>
     </main>
-  );
+  </div>;
 }
+

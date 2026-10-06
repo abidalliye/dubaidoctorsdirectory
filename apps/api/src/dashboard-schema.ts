@@ -135,6 +135,7 @@ export const profileSteps = {
 export const listingFields: FieldSpec[] = [
   f("name", "Profile name", "text", true),
   f("kind", "Profile type", "select", true, providerKinds),
+  f("listingStep", "Listing step", "select", false, ["0", "1", "2"]),
   ...profileSteps.business
     .flatMap((s) => s.fields)
     .filter((x) => x.key !== "name"),

@@ -2,7 +2,7 @@ export type Provider = {
   id: string;
   slug: string;
   name: string;
-  kind: "doctor" | "clinic";
+  kind: "doctor" | "clinic" | "hospital" | "lab" | "surgeon" | "technician";
   specialty: string;
   area: string;
   address: string;
@@ -10,6 +10,8 @@ export type Provider = {
   phone: string;
   website: string;
   verified: boolean;
+  details: Record<string, string>;
+  affiliations?: { id: string; name: string; slug: string }[];
 };
 export type Results = {
   items: Provider[];
@@ -22,7 +24,15 @@ const base =
   process.env.API_URL ||
   process.env.DEPLOY_URL ||
   process.env.URL ||
-  "http://127.0.0.1:4000";
+  "https://fertifind-dubai.netlify.app";
+export async function publicData(path: string) {
+  const r = await fetch(`${base}/v1/${path}`, {
+    cache: "no-store",
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!r.ok) throw new Error("This service is temporarily unavailable");
+  return r.json();
+}
 export async function list(
   params: Record<string, string> = {},
 ): Promise<Results> {

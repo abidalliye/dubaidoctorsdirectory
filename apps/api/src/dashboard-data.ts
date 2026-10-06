@@ -99,7 +99,7 @@ accountFields.push({
 });
 export async function archiveListing(user: any, id: string, archived: boolean) {
   const result = await db.query(
-    `UPDATE providers p SET archived=$1,published=false,verified=false,updated_at=now() WHERE id=$2 AND ($4='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$3)) RETURNING id`,
+    `UPDATE providers p SET archived=$1,published=false,verified=false,updated_at=now() WHERE id=$2 AND ($4='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$3 AND m.permission IN ('owner','manager'))) RETURNING id`,
     [archived, id, user.id, user.role],
   );
   if (!result.rows[0]) throw new NotFoundException();
@@ -124,7 +124,7 @@ export async function saveListing(user: any, input: unknown, id?: string) {
     await client.query("BEGIN");
     if (id) {
       const found = await client.query(
-        `SELECT p.* FROM providers p WHERE p.id=$1 AND ($3='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$2)) FOR UPDATE`,
+        `SELECT p.* FROM providers p WHERE p.id=$1 AND ($3='admin' OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.provider_id=p.id AND m.user_id=$2 AND m.permission IN ('owner','manager'))) FOR UPDATE`,
         [id, user.id, user.role],
       );
       if (!found.rows[0]) throw new NotFoundException("Profile not found");

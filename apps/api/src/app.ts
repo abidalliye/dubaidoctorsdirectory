@@ -19,6 +19,7 @@ import Redis from "ioredis";
 import Typesense from "typesense";
 import { columns, db } from "./db";
 import { AccountsModule } from "./accounts";
+import { CareModule } from "./care";
 import { SafeErrors } from "./errors";
 @Injectable()
 class Providers implements OnModuleDestroy {
@@ -79,8 +80,9 @@ class Providers implements OnModuleDestroy {
       throw new BadRequestException("Invalid provider type");
     if ((query.q?.length || 0) > 200 || (query.area?.length || 0) > 100)
       throw new BadRequestException("Search too long");
+    if((query.insurance?.length||0)>150||(query.specialty?.length||0)>150||query.sort&&!['name','newest','fee'].includes(query.sort)||query.verified&&!['true','false'].includes(query.verified))throw new BadRequestException('Invalid search filter');
     const values: unknown[] = [];
-    const conditions = [`published = true`];
+    const conditions = [`published = true`, `NOT archived`];
     const add = (value: unknown, sql: string) => {
       values.push(value);
       conditions.push(sql.replaceAll("?", `$${values.length}`));
@@ -89,6 +91,22 @@ class Providers implements OnModuleDestroy {
       add(query.q, `search_vector @@ websearch_to_tsquery('english', ?)`);
     if (query.kind) add(query.kind, "kind = ?");
     if (query.area) add(`%${query.area}%`, "area ILIKE ?");
+    if(query.insurance)add(`%${query.insurance}%`,"COALESCE(details->>'insurance','') ILIKE ?");
+    if(query.specialty)add(`%${query.specialty}%`,"specialty ILIKE ?");
+    if(query.verified)add(query.verified==='true','verified = ?');
+    if (query.mode) {
+      if (!['In clinic','Home visit'].includes(query.mode)) throw new BadRequestException('Invalid consultation mode');
+      add(query.mode, "EXISTS(SELECT 1 FROM care_services s WHERE s.provider_id=providers.id AND s.active AND s.mode=?)");
+    }
+    if (query.maxFee) {
+      const fee = Number(query.maxFee);
+      if (!Number.isFinite(fee) || fee < 0 || fee > 100000) throw new BadRequestException('Invalid maximum fee');
+      add(Math.round(fee*100), 'EXISTS(SELECT 1 FROM care_services s WHERE s.provider_id=providers.id AND s.active AND s.price_minor<=?)');
+    }
+    if (query.available) {
+      if (query.available !== 'true') throw new BadRequestException('Invalid availability filter');
+      conditions.push("EXISTS(SELECT 1 FROM care_slots t JOIN care_services s ON s.id=t.service_id WHERE s.provider_id=providers.id AND s.active AND t.active AND t.starts_at>now() AND NOT EXISTS(SELECT 1 FROM care_appointments a WHERE a.slot_id=t.id AND a.status IN ('Requested','Confirmed','Completed')))");
+    }
     if (
       query.lat !== undefined ||
       query.lng !== undefined ||
@@ -116,15 +134,18 @@ class Providers implements OnModuleDestroy {
         `ST_DWithin(location, ST_SetSRID(ST_MakePoint($${values.length - 2},$${values.length - 1}),4326)::geography,$${values.length})`,
       );
     }
-    const key = `directory:v1:${JSON.stringify({ conditions, values, page, limit })}`;
+    const key = `directory:v1:${JSON.stringify({ conditions, values, page, limit, sort: query.sort || "name" })}`;
+    const liveServices=!!(query.available||query.mode||query.maxFee||query.sort==='fee');
     try {
-      const hit = await this.cache?.get(key);
+      const hit = liveServices ? null : await this.cache?.get(key);
       if (hit) return JSON.parse(hit);
     } catch {}
     if (
       this.searchClient &&
       query.q &&
       !query.area &&
+      !query.insurance && !query.specialty && !query.sort && !query.verified &&
+      !query.mode && !query.maxFee && !query.available &&
       query.lat === undefined &&
       query.lng === undefined
     ) {
@@ -142,7 +163,7 @@ class Providers implements OnModuleDestroy {
         const ids = (matches.hits || []).map((hit) => hit.document.id);
         if (matches.found > 0) {
           const rows = await db.query(
-            `SELECT ${columns} FROM providers WHERE published=true AND id=ANY($1::text[]) ORDER BY array_position($1::text[],id)`,
+            `SELECT ${columns} FROM providers WHERE published=true AND NOT archived AND id=ANY($1::text[]) ORDER BY array_position($1::text[],id)`,
             [ids],
           );
           if (rows.rows.length === ids.length) {
@@ -167,7 +188,7 @@ class Providers implements OnModuleDestroy {
         values,
       );
       const rows = await db.query(
-        `SELECT ${columns} FROM providers WHERE ${where} ORDER BY name,id LIMIT $${values.length + 1} OFFSET $${values.length + 2}`,
+        `SELECT ${columns} FROM providers WHERE ${where} ORDER BY ${query.sort==='newest'?'created_at DESC':query.sort==='fee'?"(SELECT min(price_minor) FROM care_services s WHERE s.provider_id=providers.id AND s.active) NULLS LAST":'name'},id LIMIT $${values.length + 1} OFFSET $${values.length + 2}`,
         [...values, limit, (page - 1) * limit],
       );
       const result = {
@@ -177,7 +198,7 @@ class Providers implements OnModuleDestroy {
         limit,
       };
       try {
-        await this.cache?.set(key, JSON.stringify(result), "EX", 60);
+        if(!liveServices)await this.cache?.set(key, JSON.stringify(result), "EX", 60);
       } catch {}
       return result;
     } catch {
@@ -189,7 +210,7 @@ class Providers implements OnModuleDestroy {
   async detail(slug: string) {
     try {
       const result = await db.query(
-        `SELECT ${columns},COALESCE((SELECT jsonb_agg(jsonb_build_object('id',f.id,'name',f.name,'slug',f.slug)) FROM provider_affiliations a JOIN providers f ON f.id=a.facility_id WHERE a.provider_id=providers.id AND f.published),'[]') AS affiliations FROM providers WHERE slug=$1 AND published=true`,
+        `SELECT ${columns},COALESCE((SELECT jsonb_agg(jsonb_build_object('id',f.id,'name',f.name,'slug',f.slug)) FROM provider_affiliations a JOIN providers f ON f.id=a.facility_id WHERE a.provider_id=providers.id AND f.published AND NOT f.archived),'[]') AS affiliations FROM providers WHERE slug=$1 AND published=true AND NOT archived`,
         [slug],
       );
       if (!result.rows[0]) throw new NotFoundException();
@@ -239,7 +260,7 @@ class ContentController {
   }
 }
 @Module({
-  imports: [AccountsModule],
+  imports: [AccountsModule, CareModule],
   controllers: [DirectoryController, HealthController, ContentController],
   providers: [Providers],
 })
@@ -251,7 +272,7 @@ export async function createApplication() {
   app.use(helmet());
   app.useGlobalFilters(new SafeErrors());
   app.use((request: any, response: any, next: () => void) => {
-    if (/^\/v1\/(auth|account|admin|dashboard)(\/|$)/.test(request.path))
+    if (/^\/v1\/(auth|account|admin|dashboard)(\/|$)/.test(request.path) || /^\/v1\/care(?!\/public(?:\/|$))(\/|$)/.test(request.path))
       response.setHeader("Cache-Control", "no-store");
     next();
   });

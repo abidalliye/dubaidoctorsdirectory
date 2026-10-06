@@ -1,12 +1,15 @@
 [build]
   base = "."
-  command = "npm run build:site"
-  publish = "dist/site"
+  command = "npm run build:release"
+  publish = "apps/web/.next"
   functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "22"
   WEB_ORIGIN = "https://fertifind-dubai.netlify.app"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [functions]
   node_bundler = "esbuild"

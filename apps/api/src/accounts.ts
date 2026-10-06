@@ -566,8 +566,8 @@ class DashboardController {
   ) {
     if (!/^[a-f0-9-]{36}$/.test(id)) throw new BadRequestException();
     const result = await db.query(
-      "SELECT * FROM account_files WHERE id=$1 AND (owner_id=$2 OR $3)",
-      [id, request.account.id, request.account.role === "admin"],
+      `SELECT f.* FROM account_files f WHERE f.id=$1 AND (f.owner_id=$2 OR $3 OR EXISTS(SELECT 1 FROM care_records r JOIN care_appointments a ON a.id=r.appointment_id WHERE r.file_id=f.id AND r.status<>'Draft' AND (a.patient_id=$2 OR EXISTS(SELECT 1 FROM provider_memberships m WHERE m.user_id=$2 AND m.provider_id=a.provider_id AND (r.kind='message' OR ($4 AND m.permission IN ('owner','doctor','technician')))) OR (r.kind IN ('lab_order','report') AND EXISTS(SELECT 1 FROM provider_memberships m WHERE m.user_id=$2 AND m.provider_id=r.lab_provider_id AND m.permission IN ('owner','manager','technician'))))))`,
+      [id, request.account.id, request.account.role === "admin",['doctor','surgeon','lab','technician'].includes(request.account.role)],
     );
     const file = result.rows[0];
     if (!file) throw new NotFoundException();
@@ -914,5 +914,6 @@ class AdminController {
     DashboardController,
   ],
   providers: [Accounts, SessionGuard, AdminGuard],
+  exports: [Accounts, SessionGuard],
 })
 export class AccountsModule {}
