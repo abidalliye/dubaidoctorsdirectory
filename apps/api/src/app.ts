@@ -9,6 +9,7 @@ import {
   NotFoundException,
   Param,
   Query,
+  Res,
   ServiceUnavailableException,
   OnModuleDestroy,
   Logger,
@@ -246,6 +247,14 @@ class HealthController {
 }
 @Controller("content")
 class ContentController {
+  @Get('articles/:id/image') async articleImage(@Param('id') id:string,@Res() response:any) {
+    if(!/^[a-f0-9-]{36}$/.test(id))throw new NotFoundException();
+    const result=await db.query(`SELECT f.content,f.content_type FROM dashboard_articles a JOIN account_files f ON f.id::text=a.data->>'imageId' WHERE a.id=$1 AND NOT a.archived AND a.data->>'status'='Published' AND f.content_type IN ('image/png','image/jpeg') AND NOT EXISTS(SELECT 1 FROM care_records r WHERE r.file_id=f.id)`,[id]);
+    if(!result.rows[0])throw new NotFoundException();
+    response.setHeader('Content-Type',result.rows[0].content_type);
+    response.setHeader('Cache-Control','no-store');
+    response.send(result.rows[0].content);
+  }
   @Get(":kind") async content(
     @Param("kind") kind: string,
     @Query("slug") slug?: string,

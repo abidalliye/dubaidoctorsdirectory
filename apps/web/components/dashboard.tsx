@@ -10,6 +10,7 @@ import { ListingWizard } from "./listing-wizard";
 import { AdminNavigation } from "./admin-navigation";
 import { RoleOverview } from "./role-overview";
 import { AdminOverview } from "./admin-overview";
+import { BlogWorkspace } from "./blog-workspace";
 import { BusinessDetails } from "./business-details";
 const badge = (s: string) => (
   <span
@@ -61,6 +62,8 @@ export function Dashboard() {
     [to, setTo] = useState(""),
     [toast, setToast] = useState("");
   const [overview,setOverview]=useState<any>(null);
+  const [newPost,setNewPost]=useState(false);
+  useEffect(()=>{const q=new URLSearchParams(window.location.search);if(q.get('tab')==='posts'){setTab('cms:articles');setNewPost(q.get('new')==='1')}},[]);
   useEffect(()=>{let active=true;setOverview(null);if(user)api('care/overview?'+new URLSearchParams({from,to})).then(r=>{if(active)setOverview(r)}).catch(e=>{if(active)setError(e.message)});return()=>{active=false}},[user,from,to,data.appointments]);
   const load = useCallback(async () => {
     setError("");
@@ -137,6 +140,7 @@ export function Dashboard() {
     }
   }
   function open(kind: string, row?: any) {
+    if(kind==='cms:articles'&&!row){setTab('cms:articles');setNewPost(true);return}
     let fields: Field[] = [];
     let opts: Record<string, any[]> = {};
     let path = "care/" + kind;
@@ -374,7 +378,7 @@ export function Dashboard() {
         <div className="card">
           <h1>Sign in to your dashboard</h1>
           <p className="error">{error}</p>
-          <Link className="button" href="/auth">
+          <Link className="button" href={'/auth?next='+encodeURIComponent('/dashboard'+(tab==='cms:articles'?'?tab=posts'+(newPost?'&new=1':''):''))}>
             Sign In
           </Link>
         </div>
@@ -565,7 +569,7 @@ export function Dashboard() {
             <small>Healthcare Directory</small>
           </span>
         </Link>
-        {admin && <AdminNavigation active={tab} kind={providerKind} onSelect={(key,kind="")=>{setTab(key);setProviderKind(kind);setQuery('');setMobile(false)}}/>}
+        {admin && <AdminNavigation active={tab} kind={providerKind} onSelect={(key,kind="")=>{if(key==='blog:new'){setTab('cms:articles');setNewPost(true)}else setTab(key);setProviderKind(kind);setQuery('');setMobile(false)}}/>}
         {!admin && <><div className="menu-heading">{user.role} workspace</div>
         {menus.map(([key, icon, label]) => (
           <button
@@ -1271,7 +1275,8 @@ export function Dashboard() {
               </form>
             </section>
           )}
-          {tab.startsWith("cms:") && (
+          {tab==='cms:articles' && <BlogWorkspace user={user} startNew={newPost} onStarted={()=>setNewPost(false)}/>}
+          {tab.startsWith("cms:") && tab!=='cms:articles' && (
             <section className="card">
               <div className="card-head">
                 <h3>{schema.modules[tab.slice(4)].label}</h3>

@@ -253,7 +253,11 @@ export async function recordSave(
 ) {
   const m = moduleFor(key, user, true),
     data = validateFields(input, m.fields, false);
-  if (key === "articles" && user.role !== "admin") data.status = "Draft";
+  if (key === "articles" && user.role !== "admin" && data.status === "Published") data.status = "Pending";
+  if (key === "articles" && data.imageId) {
+    const image = await db.query(`SELECT f.id FROM account_files f WHERE f.id=$1 AND f.content_type IN ('image/png','image/jpeg') AND (f.owner_id=$2 OR EXISTS(SELECT 1 FROM dashboard_articles a WHERE a.id=$3 AND a.data->>'imageId'=f.id::text AND (a.owner_id=$2 OR $4))) AND NOT EXISTS(SELECT 1 FROM care_records r WHERE r.file_id=f.id)`, [data.imageId,user.id,id||null,user.role==='admin']);
+    if (!image.rows[0]) throw new BadRequestException('Upload a dedicated PNG or JPEG cover image');
+  }
   // A patient cannot publish their own review or manufacture completed appointments.
   if (user.role !== "admin" && key === "reviews") data.status = "Pending";
   if (

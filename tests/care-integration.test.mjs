@@ -104,6 +104,25 @@ test("Connected care persists across roles and rejects unauthorized, duplicate a
         user: login.data.user,
       };
     }
+    // Blog drafts, uploaded covers, moderation, ownership and public visibility.
+    const cover=await ok(doctor,'dashboard/files','POST',{name:'cover.png',type:'image/png',content:'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aS9sAAAAASUVORK5CYII='});
+    const postData={title:'Preview article',author:'Test author',body:'## A heading\n\nA **formatted** paragraph.',excerpt:'Short summary',category:'Healthy Living',tags:'wellbeing',imageId:cover.id,imageAlt:'Test cover',featured:'yes',status:'Draft'};
+    const post=(await ok(doctor,'dashboard/records/articles','POST',postData)).record;
+    assert.equal((await request(null,'content/articles/'+post.id+'/image')).status,404);
+    assert.ok(!(await ok(null,'content/articles')).items.some(p=>p.id===post.id));
+    assert.equal((await request(lab,'dashboard/records/articles/'+post.id,'PATCH',{...postData,imageId:''})).status,404);
+    assert.equal((await request(patient,'dashboard/records/articles','POST',postData)).status,403);
+    assert.equal((await request(lab,'dashboard/records/articles','POST',postData)).status,400);
+    const submitted=(await ok(doctor,'dashboard/records/articles/'+post.id,'PATCH',{...postData,status:'Published'})).record;
+    assert.equal(submitted.data.status,'Pending');
+    assert.ok(!(await ok(null,'content/articles')).items.some(p=>p.id===post.id));
+    await ok(admin,'dashboard/records/articles/'+post.id,'PATCH',{...postData,status:'Published'});
+    assert.ok((await ok(null,'content/articles')).items.some(p=>p.id===post.id&&p.data.excerpt==='Short summary'));
+    const publicCover=await fetch('http://127.0.0.1:14403/v1/content/articles/'+post.id+'/image');
+    assert.equal(publicCover.status,200);assert.equal(publicCover.headers.get('content-type'),'image/png');assert.ok((await publicCover.arrayBuffer()).byteLength>0);
+    await ok(admin,'dashboard/records/articles/'+post.id,'PATCH',postData);
+    assert.equal((await request(null,'content/articles/'+post.id+'/image')).status,404);
+    await ok(admin,'dashboard/records/articles/'+post.id+'/archive','POST',{});
     await ok(patient, "account/profile", "PATCH", {
       phone: "+971500000001",
       area: "Dubai",

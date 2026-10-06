@@ -1,4 +1,7 @@
 import Link from "next/link";
+import {BlogIndex} from "../../components/blog-index";
+import {ArticleContent} from "../../components/article-content";
+import {postImage,readingTime} from "../../lib/blog";
 import { notFound, redirect } from "next/navigation";
 import { DirectoryView } from "../../components/directory";
 import { BusinessForm, ClaimForm } from "../../components/business-page";
@@ -282,102 +285,13 @@ export default async function Page({
     );
   }
   if (section === "blog") {
-    let records: any[] = [];
-    let error = "";
-    try {
-      records = (await publicData("content/articles")).items;
-    } catch {
-      error = "Articles temporarily unavailable";
-    }
-    const article = slug
-      ? records.find((a) => a.id === slug || a.data.slug === slug)
-      : null;
-    if (slug && !article && !error) notFound();
-    return (
-      <>
-        <section className="page-intro">
-          <div className="container">
-            <p className="breadcrumb">
-              <Link href="/">Home</Link> › Health Articles
-            </p>
-            <h1>{article?.data.title || titles.blog}</h1>
-            <p>
-              {article
-                ? article.data.category || "Health information"
-                : "Published articles from our healthcare community."}
-            </p>
-          </div>
-        </section>
-        <main className="container section">
-          {error && <div className="error">{error}</div>}
-          {article ? (
-            <div className="profile-layout">
-              <article className="card">
-                <p className="muted">
-                  By {article.data.author || "Editorial team"} ·{" "}
-                  {new Date(article.updated_at).toLocaleDateString("en-AE")}
-                </p>
-                {article.data.imageUrl && (
-                  <img
-                    src={article.data.imageUrl}
-                    alt=""
-                    style={{ width: "100%", borderRadius: 10, marginTop: 22 }}
-                  />
-                )}
-                <div className="article-body" style={{ marginTop: 25 }}>
-                  {article.data.body}
-                </div>
-              </article>
-              <aside className="card">
-                <h2>Related Articles</h2>
-                {records
-                  .filter((a) => a.id !== article.id)
-                  .slice(0, 5)
-                  .map((a) => (
-                    <Link
-                      className="detail-item row link"
-                      href={"/blog/" + a.id}
-                      key={a.id}
-                    >
-                      {a.data.title} →
-                    </Link>
-                  ))}
-              </aside>
-            </div>
-          ) : (
-            <>
-              <div className="grid three">
-                {records.map((a) => (
-                  <Link className="card" href={"/blog/" + a.id} key={a.id}>
-                    {a.data.imageUrl && (
-                      <img
-                        src={a.data.imageUrl}
-                        alt=""
-                        style={{
-                          width: "100%",
-                          height: 170,
-                          objectFit: "cover",
-                          borderRadius: 8,
-                          marginBottom: 15,
-                        }}
-                      />
-                    )}
-                    <span className="tag">{a.data.category || "Health"}</span>
-                    <h2 style={{ margin: "14px 0" }}>{a.data.title}</h2>
-                    <p className="muted">{a.data.author}</p>
-                  </Link>
-                ))}
-              </div>
-              {!records.length && !error && (
-                <div className="empty">
-                  Articles will appear here when published.
-                </div>
-              )}
-            </>
-          )}
-        </main>
-      </>
-    );
+    let records:any[]=[];let error='';
+    try {records=(await publicData('content/articles')).items} catch {error='Articles temporarily unavailable'}
+    if(!slug)return <BlogIndex posts={records} error={error} initialQuery={typeof raw.q==='string'?raw.q:''}/>;
+    const article=records.find(a=>a.id===slug||a.data.slug===slug);
+    if(!article&&!error)notFound();
+    if(!article)return <main className="container section"><p className="error">{error}</p></main>;
+    return <main className="container section"><p className="breadcrumb"><Link href="/">Home</Link> › <Link href="/blog">Health Articles</Link> › {article.data.category||'Health'}</p><div className="blog-article-layout"><article className="blog-panel"><span className="tag">{article.data.category||'Health'}</span><h1>{article.data.title}</h1><p className="muted">By {article.data.author||'Editorial team'} · {new Date(article.updated_at).toLocaleDateString('en-AE')} · {readingTime(article)} min read</p>{postImage(article)&&<img className="post-cover" src={postImage(article)} alt={article.data.imageAlt||''}/>}<p>{article.data.excerpt}</p><ArticleContent body={article.data.body}/><div className="row">{(article.data.tags||'').split(',').filter(Boolean).map((t:string)=><Link className="tag" href={'/blog?q='+encodeURIComponent(t.trim())} key={t}>{t.trim()}</Link>)}</div></article><aside className="blog-panel"><h2>Related Articles</h2>{records.filter(a=>a.id!==article.id).slice(0,5).map(a=><Link href={'/blog/'+a.id} key={a.id}>{a.data.title} →</Link>)}<Link href="/blog">Browse all articles →</Link><Link href="/doctors">Find a healthcare provider →</Link></aside></div></main>;
   }
   if (
     [

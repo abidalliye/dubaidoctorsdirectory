@@ -1,3 +1,4 @@
+import {postImage} from '../lib/blog';
 import Link from "next/link";
 import { list, publicData, Provider } from "../lib/api";
 import { Avatar, ProviderCard } from "./provider-card";
@@ -479,7 +480,7 @@ export async function DirectoryView({
               <div className="directory-articles">
                 {articles.items.slice(0, 3).map((r: any) => (
                   <Link key={r.id} href={"/blog/" + r.data.slug}>
-                    {r.data.imageUrl && <img src={r.data.imageUrl} alt="" />}
+                    {postImage(r) && <img src={postImage(r)} alt={r.data.imageAlt||""} />}
                     <strong>{r.data.title}</strong>
                     <small>{r.data.category}</small>
                   </Link>

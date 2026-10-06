@@ -212,7 +212,7 @@ export const modules: Record<
     ],
   },
   articles: {
-    label: "Articles and bulletins",
+    label: "Blog Posts",
     roles: [
       "admin",
       "doctor",
@@ -225,11 +225,15 @@ export const modules: Record<
     fields: [
       f("title", "Title", "text", true),
       f("author", "Author"),
+      f("excerpt", "Short summary", "textarea"),
       f("body", "Article content", "textarea", true),
       f("imageUrl", "Image URL", "url"),
+      f("imageId", "Cover image", "file"),
+      f("imageAlt", "Image description"),
       f("category", "Category"),
       f("tags", "Tags (comma separated)"),
-      status(["Draft", "Published"]),
+      f("featured", "Featured post", "select", false, ["yes", "no"]),
+      status(["Draft", "Pending", "Published"]),
     ],
   },
   admissions: {

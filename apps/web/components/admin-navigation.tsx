@@ -36,6 +36,7 @@ const groups = [
     icon: "file",
     items: [
       ["cms:articles", "All Posts"],
+      ["blog:new", "Add Blog Post"],
       ["cms:categories", "Categories"],
       ["cms:tags", "Tags"],
     ],

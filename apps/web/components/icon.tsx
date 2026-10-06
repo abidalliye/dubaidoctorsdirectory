@@ -1,5 +1,15 @@
 import type {CSSProperties} from 'react';
 const paths:Record<string,string>={
+ clock:'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0 M12 6v6l4 2',
+ chevron:'m9 5 7 7-7 7',
+ shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6Z M8 12l3 3 5-6',
+ pill:'m8 16 8-8 M4 20a5 5 0 0 1 0-7l9-9a5 5 0 0 1 7 7l-9 9a5 5 0 0 1-7 0Z',
+ medicine:'M7 3h10v4H7Z M6 7h12v14H6Z M9 14h6 M12 11v6',
+ lungs:'M12 3v7 M12 7 8 10 M12 7l4 3 M8 8C3 9 2 16 3 20c1 3 6 1 6-2V9 M16 8c5 1 6 8 5 12-1 3-6 1-6-2V9',
+ baby:'M20 13a8 8 0 1 1-16 0 8 8 0 0 1 16 0 M9 3c0-3 6-2 3 1 M8 12h1 M15 12h1 M9 16q3 3 6 0',
+ brain:'M12 4c-5-5-10 2-7 5-5 3-3 9 1 9 0 4 6 5 6 1V4 M12 4c5-5 10 2 7 5 5 3 3 9-1 9 0 4-6 5-6 1 M7 8l2 3 M17 8l-2 3 M6 16l3-2 M18 16l-3-2',
+ nutrition:'M12 7c-9-8-13 9-4 14l4-1 4 1c9-5 5-22-4-14 M12 7V3 M12 4c2-4 6-3 6-3-1 4-4 4-6 3',
+ tooth:'M12 5C1-4 2 11 5 16s2 7 4 3l3-7 3 7c2 4 2 2 4-3s4-20-7-11',
  home:'m3 10 9-7 9 7 M5 9v12h5v-7h4v7h5V9',
  user:'M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M4 21v-2a8 8 0 0 1 16 0v2Z',
  hospital:'M4 21V5h16v16 M9 21v-5h6v5 M9 8h6 M12 5v6 M7 13h2 M15 13h2',

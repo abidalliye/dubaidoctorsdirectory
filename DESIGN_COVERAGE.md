@@ -46,7 +46,7 @@ All entries: inspected ✓; implementation and responsive verification pending u
 | Healthcareocationpage | /locations/[city]/[area] | Area hero/tabs; description/map split; providers/search split; nearby-area rail | T,P,S,F |
 | InsurancePage | /insurance | Insurer rail; plan-type cards; comparison table; coverage tabs | T,C,P,I |
 | emergencycaredubaipage | /emergency-care | Dark emergency hero; verified call action; red warning tiles; care-option comparison and map | C,P,T |
-| Blog | /blog/[slug] | Article image hero/author; contents rail; article/table body; related care/sidebar; comments | C,P,S,R |
+| blog.png | /blog | Consultation photo hero/search; 16 topic icon tiles; featured/related article image cards; latest articles; topic lists; closing care banner | C,P |
 | LoginPage | /auth | Join hero; role cards; account form; profile step; benefits sidebar | A,D |
 | listyourbusinesspage | /list-your-business | Practice hero; role/billing toggles; pricing cards/table; onboarding steps | P,C,I |
 | submitlisting | /listings/new | Hero with compact starter form; business-type photo cards; process/benefits | A,P |
@@ -106,3 +106,8 @@ Email sender credentials/domain; payment merchant/webhook setup; video appointme
 - Added an original promotional Dubai healthcare banner with the built-in image generator: apps/web/public/images/dubai-care-hero.png. Fictional promotional people are not used as provider identities. Source prompt recorded in the adjacent asset notes.
 - Typecheck passes. Latest complete test run: 7 tests passed, 0 failed (5 October). One preceding run missed the smoke-test startup deadline while development services were starting; a full rerun passed without relaxing the test.
 - Current production build still needs rerunning after these changes. Existing Netlify deployment and production database remain unchanged. These checkpoints do not mark the 37-design rebuild complete.
+
+## 6 October: blog submission priority
+Dedicated dashboard editor now supports drafts, cover uploads (PNG/JPEG, 1 MB), alternative image URLs, image descriptions, author, summary, category, tags, featured placement, formatted headings/bold/lists, preview and publishing. Business authors submit for admin review; administrators publish. Draft covers are private and covers linked to clinical records are excluded from public serving. No migration required.
+The blog index now follows blog.png's hero, topic tiles, bordered article panels and image cards, with hover states and reduced-motion support. Article count and content are database-backed; newsletter and most-read claims were not fabricated. Production contains no synthetic posts. Remaining source-design corrections outside the blog are still pending.
+Verification: seven integration/security tests pass, production build passes, isolated browser upload/draft/publish/search flow passes, editor and blog have no horizontal overflow at 390 px. Screenshots are in scratch/review.
