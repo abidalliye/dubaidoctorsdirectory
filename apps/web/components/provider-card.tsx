@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {Icon} from "./icon";
 import { Provider } from "../lib/api";
 export function Avatar({
   name,
@@ -22,9 +23,9 @@ export function Avatar({
     </span>
   );
 }
-export function ProviderCard({ provider: p }: { provider: Provider }) {
+export function ProviderCard({ provider: p, compact=false }: { provider: Provider; compact?:boolean }) {
   return (
-    <article className="card provider-card">
+    <article className={`card provider-card ${compact?"home-provider-card":""} ${p.kind!=="doctor"?"facility-card":""}`}>
       <div className="row">
         <Avatar name={p.name} url={p.details?.photoUrl} />
         <div>
@@ -36,7 +37,7 @@ export function ProviderCard({ provider: p }: { provider: Provider }) {
       </div>
       <p>⌖ {p.area || "Location not supplied"}</p>
       {p.verified && <span className="badge">Verified listing</span>}
-      <div className="row">
+      <div className="row provider-services">
         {p.services.slice(0, 3).map((s) => (
           <span className="tag" key={s}>
             {s}
@@ -44,7 +45,7 @@ export function ProviderCard({ provider: p }: { provider: Provider }) {
         ))}
       </div>
       <Link className="button small" href={`/providers/${p.slug}`}>
-        View Profile & Book
+        {compact?"View & Book Appointment":"View Profile & Book"}
       </Link>
     </article>
   );

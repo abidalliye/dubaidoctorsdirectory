@@ -9,3 +9,5 @@ Prompt: Use case: ads-marketing. Asset type: CareAtlas healthcare directory webs
 File: blog-consultation-hero.png
 Generated with the built-in imagegen tool on 6 October 2026. Fictional promotional consultation scene, not a directory provider photograph. Original retained in Codex generated_images.
 Prompt: Photorealistic ultra-wide 3:1 editorial healthcare photograph. Fictional female doctor with dark brown hair, white coat and teal scrubs consulting an adult woman in a bright modern clinic. Figures on the right half; empty pale icy blue clinic wall on the left for overlaid heading and search. Calm, natural daylight; no text, logos or watermark.
+
+7 October 2026: home-health-concerns.png — generated fictional stock-photo CSS atlas, 4 columns by 2 rows, fever/skin/stomach/child/women/stress/weight/hair topics. No real provider identities. Rendered with CSS background positioning; original retained in Codex generated_images.

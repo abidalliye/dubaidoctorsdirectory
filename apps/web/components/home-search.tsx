@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import {Icon} from "./icon";
 import { Provider } from "../lib/api";
 import { ProviderCard } from "./provider-card";
 
 export function HomeSearch({ specialties }: { specialties: string[] }) {
   const [kind, setKind] = useState("doctor");
   return <div className="home-search">
-    <div className="tabs" aria-label="Search category">{[["doctor","Find Doctor"],["hospital","Find Hospital"],["clinic","Find Clinic"],["lab","Find Lab Test"]].map(([value,label]) => <button key={value} type="button" aria-pressed={kind === value} className={kind === value ? "active" : ""} onClick={() => setKind(value)}>{label}</button>)}<Link href="/video-consultation">Video Consult</Link></div>
+    <div className="tabs" aria-label="Search category">{[["doctor","Find Doctor"],["hospital","Find Hospital"],["clinic","Find Clinic"],["lab","Find Lab Test"]].map(([value,label]) => <button key={value} type="button" aria-pressed={kind === value} className={kind === value ? "active" : ""} onClick={() => setKind(value)}><Icon name={{doctor:"stethoscope",hospital:"hospital",clinic:"medicine",lab:"lab"}[value]||"search"} size={14}/>{label}</button>)}<Link href="/video-consultation"><Icon name="video" size={14}/>Video Consult</Link></div>
     <form action="/directory" className="search-grid">
       <input type="hidden" name="kind" value={kind}/>
       <input className="field" name="q" aria-label="Name or specialty" placeholder="Name or specialty" list="home-specialties"/>
@@ -22,5 +23,5 @@ export function HomeSearch({ specialties }: { specialties: string[] }) {
 export function HomeProviders({ groups }: { groups: {label:string;href:string;items:Provider[];available:boolean}[] }) {
   const [active,setActive]=useState(0);
   const group=groups[active];
-  return <section className="home-section"><div className="section-head"><div className="tabs provider-tabs">{groups.map((g,i)=><button key={g.label} aria-pressed={active===i} className={active===i?"active":""} onClick={()=>setActive(i)}>{g.label}</button>)}</div><Link className="link" href={group.href}>View All →</Link></div><div className="grid four">{group.items.map(p=><ProviderCard key={p.id} provider={p}/>)}</div>{!group.items.length&&<div className="empty">{group.available?"No published providers in this category yet.":"Listings temporarily unavailable."}</div>}</section>;
+  return <section className="home-section"><div className="section-head"><div className="tabs provider-tabs">{groups.map((g,i)=><button key={g.label} aria-pressed={active===i} className={active===i?"active":""} onClick={()=>setActive(i)}>{["Top Doctors","Top Hospitals","Top Clinics","Top Labs"][i]}</button>)}</div><Link className="link" href={group.href}>View All →</Link></div><div className="grid four">{group.items.map(p=><ProviderCard key={p.id} provider={p} compact/>)}</div>{!group.items.length&&<div className="empty">{group.available?"No published providers in this category yet.":"Listings temporarily unavailable."}</div>}</section>;
 }
