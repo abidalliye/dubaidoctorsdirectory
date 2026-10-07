@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Icon } from "./icon";
-import { blogTopics, BlogPost, postImage, readingTime } from "../lib/blog";
+import {articleText} from "../lib/article-document";
+import { blogTopics, BlogPost, postImage, readingTime, coverPosition } from "../lib/blog";
 const topicIcons = [
   "heart",
   "user",
@@ -24,7 +25,7 @@ const topicIcons = [
 function PostImage({ post }: { post: BlogPost }) {
   const src = postImage(post);
   return src ? (
-    <img src={src} alt={post.data.imageAlt || ""} loading="lazy" />
+    <img src={src} alt={post.data.imageAlt || ""} loading="lazy" style={{objectPosition:coverPosition(post.data.imagePosition)}} />
   ) : (
     <div className="blog-image-placeholder">
       <Icon name="file" size={38} />
@@ -71,7 +72,7 @@ export function BlogIndex({
   const results = posts.filter(
     (p) =>
       (!topic || p.data.category === topic) &&
-      `${p.data.title} ${p.data.excerpt || ""} ${p.data.tags || ""} ${p.data.body}`
+      `${p.data.title} ${p.data.excerpt || ""} ${p.data.tags || ""} ${articleText(p.data.body||"",p.data.bodyFormat)}`
         .toLowerCase()
         .includes(search.toLowerCase()),
   );
@@ -212,7 +213,7 @@ export function BlogIndex({
                   <span className="tag">{lead.data.category || "Health"}</span>
                   <h2>{lead.data.title}</h2>
                   <p>
-                    {lead.data.excerpt || lead.data.body.slice(0, 170) + "…"}
+                    {lead.data.excerpt || articleText(lead.data.body||"",lead.data.bodyFormat).slice(0, 170) + "…"}
                   </p>
                   <Meta post={lead} />
                 </Link>

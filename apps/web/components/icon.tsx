@@ -1,5 +1,6 @@
 import type {CSSProperties} from 'react';
 const paths:Record<string,string>={
+ image:'M3 3h18v18H3Z M7 8h.01 M3 17l6-6 4 4 3-3 5 5',
  clock:'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0 M12 6v6l4 2',
  chevron:'m9 5 7 7-7 7',
  shield:'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6Z M8 12l3 3 5-6',

@@ -1,3 +1,4 @@
+import {articleText} from './article-document';
 export const blogTopics = [
   "Health Conditions",
   "Symptoms",
@@ -24,4 +25,5 @@ export type BlogPost = {
 export const postImage = (p: BlogPost) =>
   p.data.imageId ? `/v1/content/articles/${p.id}/image` : p.data.imageUrl || "";
 export const readingTime = (p: BlogPost) =>
-  Math.max(1, Math.ceil((p.data.body || "").split(/\s+/).length / 200));
+  Math.max(1, Math.ceil(articleText(p.data.body||'',p.data.bodyFormat).split(/\s+/).length / 200));
+export const coverPosition=(value?:string)=>['center','top','bottom','left','right'].includes(value||'')?value:'center';

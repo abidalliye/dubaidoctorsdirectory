@@ -120,6 +120,15 @@ test("Connected care persists across roles and rejects unauthorized, duplicate a
     assert.ok((await ok(null,'content/articles')).items.some(p=>p.id===post.id&&p.data.excerpt==='Short summary'));
     const publicCover=await fetch('http://127.0.0.1:14403/v1/content/articles/'+post.id+'/image');
     assert.equal(publicCover.status,200);assert.equal(publicCover.headers.get('content-type'),'image/png');assert.ok((await publicCover.arrayBuffer()).byteLength>0);
+    const richDocument={type:'doc',content:[{type:'heading',attrs:{level:2,textAlign:'center'},content:[{type:'text',text:'Formatted heading'}]},{type:'paragraph',content:[{type:'text',text:'A bold sentence',marks:[{type:'bold'}]},{type:'text',text:' with a link',marks:[{type:'link',attrs:{href:'https://example.com/guide'}}]}]},{type:'orderedList',attrs:{start:1},content:[{type:'listItem',content:[{type:'paragraph',content:[{type:'text',text:'A list item'}]}]}]}]};
+    const rich=(await ok(admin,'dashboard/records/articles/'+post.id,'PATCH',{...postData,status:'Published',body:JSON.stringify(richDocument),bodyFormat:'richtext',imagePosition:'top'})).record;
+    assert.equal(rich.data.imagePosition,'top');assert.equal(rich.data.bodyFormat,'richtext');assert.equal(JSON.parse(rich.data.body).content[1].content[0].marks[0].type,'bold');
+    const publishedRich=(await ok(null,'content/articles')).items.find(p=>p.id===post.id);
+    assert.equal(JSON.parse(publishedRich.data.body).content[0].attrs.textAlign,'center');
+    const badLink={type:'doc',content:[{type:'paragraph',content:[{type:'text',text:'Unsafe',marks:[{type:'link',attrs:{href:'javascript:alert(1)'}}]}]}]};
+    assert.equal((await request(admin,'dashboard/records/articles/'+post.id,'PATCH',{...postData,bodyFormat:'richtext',body:JSON.stringify(badLink)})).status,400);
+    assert.equal((await request(admin,'dashboard/records/articles/'+post.id,'PATCH',{...postData,bodyFormat:'richtext',body:JSON.stringify({type:'doc',content:[{type:'script',text:'unsafe'}]})})).status,400);
+    assert.equal((await request(admin,'dashboard/records/articles/'+post.id,'PATCH',{...postData,imagePosition:'invalid'})).status,400);
     await ok(admin,'dashboard/records/articles/'+post.id,'PATCH',postData);
     assert.equal((await request(null,'content/articles/'+post.id+'/image')).status,404);
     await ok(admin,'dashboard/records/articles/'+post.id+'/archive','POST',{});

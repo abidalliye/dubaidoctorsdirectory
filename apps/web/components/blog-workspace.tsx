@@ -5,6 +5,9 @@ import { api, User } from "../lib/client-api";
 import { Icon } from "./icon";
 import { ArticleContent } from "./article-content";
 import { blogTopics } from "../lib/blog";
+import {RichTextEditor} from "./rich-text-editor";
+import {CoverPhoto} from "./cover-photo";
+import {articleText} from "../lib/article-document";
 type Post = { id: string; data: Record<string, string>; updated_at: string };
 export function BlogWorkspace({
   user,
@@ -27,8 +30,7 @@ export function BlogWorkspace({
     [preview, setPreview] = useState(false),
     [dirty, setDirty] = useState(false),
     [cover, setCover] = useState("");
-  const bodyRef = useRef<HTMLTextAreaElement>(null),
-    uploadRef = useRef<HTMLInputElement>(null);
+  const uploadRef = useRef<HTMLInputElement>(null);
   const admin = user.role === "admin";
   const load = async () => {
     try {
@@ -63,6 +65,8 @@ export function BlogWorkspace({
             title: "",
             author: user.name,
             body: "",
+            bodyFormat: "plain",
+            imagePosition: "center",
             excerpt: "",
             category: "",
             tags: "",
@@ -95,7 +99,7 @@ export function BlogWorkspace({
   }
   async function save(status: string) {
     if (!draft) return;
-    if (!draft.title?.trim() || !draft.body?.trim()) {
+    if (!draft.title?.trim() || !articleText(draft.body||"",draft.bodyFormat).trim()) {
       setError("Enter a title and article content before saving.");
       return;
     }
@@ -157,23 +161,6 @@ export function BlogWorkspace({
       setBusy(false);
       if (uploadRef.current) uploadRef.current.value = "";
     }
-  }
-  function format(before: string, after = "") {
-    const field = bodyRef.current;
-    if (!field || !draft) return;
-    const { selectionStart: start, selectionEnd: end } = field;
-    change(
-      "body",
-      draft.body.slice(0, start) +
-        before +
-        draft.body.slice(start, end) +
-        after +
-        draft.body.slice(end),
-    );
-    requestAnimationFrame(() => {
-      field.focus();
-      field.setSelectionRange(start + before.length, end + before.length);
-    });
   }
   const shown = posts.filter(
     (p) =>
@@ -347,14 +334,11 @@ export function BlogWorkspace({
                     </button>
                   </div>
                 </div>
+                {!preview&&<div className="post-featured-cover">{cover?<CoverPhoto key={cover} src={cover} alt={draft.imageAlt||''} position={draft.imagePosition}/>:<button className="post-cover-empty" onClick={()=>uploadRef.current?.click()}><Icon name="image" size={32}/><strong>Add a featured image</strong><span>Choose a landscape photo for your article cover</span></button>}{cover&&<div className="post-cover-actions"><span>Featured image</span><button onClick={()=>uploadRef.current?.click()}>Change photo</button></div>}</div>}
                 {preview ? (
                   <article className="post-preview">
                     {cover && (
-                      <img
-                        className="post-cover"
-                        src={cover}
-                        alt={draft.imageAlt || ""}
-                      />
+                      <CoverPhoto key={cover} src={cover} alt={draft.imageAlt||''} position={draft.imagePosition}/>
                     )}
                     <span className="tag">{draft.category || "Health"}</span>
                     <h1>{draft.title || "Your article title"}</h1>
@@ -362,6 +346,7 @@ export function BlogWorkspace({
                     <p>{draft.excerpt}</p>
                     <ArticleContent
                       body={draft.body || "Your article preview appears here."}
+                      format={draft.bodyFormat}
                     />
                   </article>
                 ) : (
@@ -383,46 +368,7 @@ export function BlogWorkspace({
                       value={draft.excerpt || ""}
                       onChange={(e) => change("excerpt", e.target.value)}
                     />
-                    <div className="post-toolbar" aria-label="Text formatting">
-                      <button
-                        onClick={() => format("**", "**")}
-                        title="Bold text"
-                      >
-                        <strong>B</strong>
-                      </button>
-                      <button
-                        onClick={() => format("\n\n## ")}
-                        title="Section heading"
-                      >
-                        H2
-                      </button>
-                      <button
-                        onClick={() => format("\n\n- ")}
-                        title="Bullet list"
-                      >
-                        • List
-                      </button>
-                      <span>
-                        {
-                          (draft.body || "").trim().split(/\s+/).filter(Boolean)
-                            .length
-                        }{" "}
-                        words
-                      </span>
-                    </div>
-                    <textarea
-                      ref={bodyRef}
-                      className="field post-body-input"
-                      aria-label="Article content"
-                      placeholder="Write your article"
-                      maxLength={12000}
-                      value={draft.body || ""}
-                      onChange={(e) => change("body", e.target.value)}
-                    />
-                    <p className="muted small">
-                      Use blank lines for paragraphs, ## for headings, and
-                      **bold** for emphasis.
-                    </p>
+                    <RichTextEditor key={id||'new'} value={draft.body||''} format={draft.bodyFormat} onChange={body=>{setDraft(d=>({...d,body,bodyFormat:'richtext'}));setDirty(true)}}/>
                   </>
                 )}
               </section>
@@ -473,21 +419,8 @@ export function BlogWorkspace({
               </section>
               <section className="card">
                 <h3>Cover Image</h3>
-                <button
-                  className="post-cover-picker"
-                  disabled={busy}
-                  onClick={() => uploadRef.current?.click()}
-                >
-                  {cover ? (
-                    <img src={cover} alt={draft.imageAlt || "Selected cover"} />
-                  ) : (
-                    <>
-                      <Icon name="file" />
-                      <span>Upload cover image</span>
-                      <small>PNG or JPEG · up to 1 MB</small>
-                    </>
-                  )}
-                </button>
+                <button className="button secondary" disabled={busy} onClick={()=>uploadRef.current?.click()}>{cover?'Replace Cover Photo':'Upload Cover Photo'}</button><p className="muted small">PNG or JPEG · up to 1 MB. Landscape photos work best.</p>
+                <select className="field" aria-label="Cover crop position" value={draft.imagePosition||'center'} onChange={e=>change('imagePosition',e.target.value)}><option value="center">Crop: center</option><option value="top">Crop: top</option><option value="bottom">Crop: bottom</option><option value="left">Crop: left</option><option value="right">Crop: right</option></select>
                 <input
                   ref={uploadRef}
                   type="file"

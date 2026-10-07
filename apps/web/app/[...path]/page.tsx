@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {BlogIndex} from "../../components/blog-index";
 import {ArticleContent} from "../../components/article-content";
+import {CoverPhoto} from "../../components/cover-photo";
 import {postImage,readingTime} from "../../lib/blog";
 import { notFound, redirect } from "next/navigation";
 import { DirectoryView } from "../../components/directory";
@@ -291,7 +292,7 @@ export default async function Page({
     const article=records.find(a=>a.id===slug||a.data.slug===slug);
     if(!article&&!error)notFound();
     if(!article)return <main className="container section"><p className="error">{error}</p></main>;
-    return <main className="container section"><p className="breadcrumb"><Link href="/">Home</Link> › <Link href="/blog">Health Articles</Link> › {article.data.category||'Health'}</p><div className="blog-article-layout"><article className="blog-panel"><span className="tag">{article.data.category||'Health'}</span><h1>{article.data.title}</h1><p className="muted">By {article.data.author||'Editorial team'} · {new Date(article.updated_at).toLocaleDateString('en-AE')} · {readingTime(article)} min read</p>{postImage(article)&&<img className="post-cover" src={postImage(article)} alt={article.data.imageAlt||''}/>}<p>{article.data.excerpt}</p><ArticleContent body={article.data.body}/><div className="row">{(article.data.tags||'').split(',').filter(Boolean).map((t:string)=><Link className="tag" href={'/blog?q='+encodeURIComponent(t.trim())} key={t}>{t.trim()}</Link>)}</div></article><aside className="blog-panel"><h2>Related Articles</h2>{records.filter(a=>a.id!==article.id).slice(0,5).map(a=><Link href={'/blog/'+a.id} key={a.id}>{a.data.title} →</Link>)}<Link href="/blog">Browse all articles →</Link><Link href="/doctors">Find a healthcare provider →</Link></aside></div></main>;
+    return <main className="container section"><p className="breadcrumb"><Link href="/">Home</Link> › <Link href="/blog">Health Articles</Link> › {article.data.category||'Health'}</p><div className="blog-article-layout"><article className="blog-panel"><span className="tag">{article.data.category||'Health'}</span><h1>{article.data.title}</h1><p className="muted">By {article.data.author||'Editorial team'} · {new Date(article.updated_at).toLocaleDateString('en-AE')} · {readingTime(article)} min read</p>{postImage(article)&&<CoverPhoto src={postImage(article)} alt={article.data.imageAlt||''} position={article.data.imagePosition}/>}<p>{article.data.excerpt}</p><ArticleContent body={article.data.body} format={article.data.bodyFormat}/><div className="row">{(article.data.tags||'').split(',').filter(Boolean).map((t:string)=><Link className="tag" href={'/blog?q='+encodeURIComponent(t.trim())} key={t}>{t.trim()}</Link>)}</div></article><aside className="blog-panel"><h2>Related Articles</h2>{records.filter(a=>a.id!==article.id).slice(0,5).map(a=><Link href={'/blog/'+a.id} key={a.id}>{a.data.title} →</Link>)}<Link href="/blog">Browse all articles →</Link><Link href="/doctors">Find a healthcare provider →</Link></aside></div></main>;
   }
   if (
     [
