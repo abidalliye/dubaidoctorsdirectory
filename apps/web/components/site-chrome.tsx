@@ -17,7 +17,7 @@ export function SiteChrome({
   const [menuOpen,setMenuOpen]=useState(false);
   useEffect(()=>setMenuOpen(false),[path]);
   const brand=useBrand()||initialBrand;
-  if (path.startsWith("/dashboard")) return <>{children}</>;
+  if (path === "/" || path.startsWith("/dashboard")) return <>{children}</>;
   return (
     <>
       <header className="site-header">

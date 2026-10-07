@@ -1,5 +1,6 @@
 import type {CSSProperties} from 'react';
 const paths:Record<string,string>={
+ menu:'M3 6h18 M3 12h18 M3 18h18',
  stomach:'M9 2v5c0 3 4 1 6 1 7 0 8 11 2 13-5 2-7-3-9-4-2-1-4 0-4 3 M5 2v8c0 4 3 5 5 5',
  skin:'M12 3c-3 5-7 8-7 12a7 7 0 0 0 14 0c0-4-4-7-7-12 M8 15h.01 M12 12h.01 M15 17h.01',
  quote:'M4 5h6v8H4V5 M4 13c0 5 6 6 6 6 M14 5h6v8h-6V5 M14 13c0 5 6 6 6 6',
